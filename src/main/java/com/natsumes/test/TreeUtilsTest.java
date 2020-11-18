@@ -13,10 +13,13 @@ public class TreeUtilsTest {
         TreeNode<Integer> node = btt.insert(10).insert(8).insert(11).insert(7).insert(9).insert(12)
                 .build();
 
+        System.out.println("============preOrderTraversal============");
         TreeUtils.preOrderTraversal(node);
-        System.out.println("========================");
+        System.out.println("============inOrderTraversal============");
         TreeUtils.inOrderTraversal(node);
-        System.out.println("========================");
+        System.out.println("===========postOrderTraversal=============");
         TreeUtils.postOrderTraversal(node);
+        System.out.println("===========levelOrderTraversal=============");
+        TreeUtils.levelOrderTraversal(node);
     }
 }

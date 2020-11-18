@@ -1,5 +1,8 @@
 package com.natsumes.tree;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
  * @author hetengjiao
  */
@@ -38,5 +41,27 @@ public class TreeUtils {
         postOrderTraversal(node.leftChild);
         postOrderTraversal(node.rightChild);
         System.out.println(node.data);
+    }
+
+    /**
+     * 广度优先遍历 -- 层序遍历
+     */
+    public static void levelOrderTraversal(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            TreeNode node = queue.poll();
+            System.out.println(node.data);
+            if (node.leftChild != null) {
+                queue.offer(node.leftChild);
+            }
+            if (node.rightChild != null) {
+                queue.offer(node.rightChild);
+            }
+        }
+
     }
 }
