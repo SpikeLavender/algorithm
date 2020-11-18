@@ -712,6 +712,21 @@ public class DynamicProgramming {
         return f[m][n];
     }
 
+    /**
+     * 找出最少的硬币——组成所有的面值
+     *
+     * 给定不同面额的硬币 coins 和一个总金额 amount。编写一个函数来计算可以凑成[1, amount]中所有面值所需的最少的硬币个数。
+     * 如果没有任何一种硬币组合能组成总金额，返回 -1。（你可以认为每种硬币的数量是无限的。
+     *
+     * @param coins coins
+     * @param amount amount
+     * @return res
+     */
+    private static int findMinCoins(int[] coins, int amount) {
+        //todo:
+        return 0;
+    }
+
     public static void main(String[] args) {
         System.out.println(waysToStep(5));
 
@@ -771,4 +786,5 @@ public class DynamicProgramming {
         String[] array2 = {"10", "0", "1"};
         System.out.println(findMaxForm(array2, 1, 1));
     }
+
 }
