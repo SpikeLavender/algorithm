@@ -1,4 +1,4 @@
-package com.natsumes;
+package com.natsumes.common;
 
 import java.util.HashSet;
 import java.util.Scanner;

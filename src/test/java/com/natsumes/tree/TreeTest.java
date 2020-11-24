@@ -1,18 +1,14 @@
-package com.natsumes.test;
+package com.natsumes.tree;
 
-import com.natsumes.tree.*;
+import org.junit.Test;
 
 /**
  * @author hetengjiao
  */
 public class TreeTest {
-    public static void main(String[] args) {
-        testBinaryTree();
 
-        testRedBlackTree();
-    }
-
-    private static void testBinaryTree() {
+    @Test
+    public void testBinaryTree() {
         BinaryTree<Integer> btt = new BinaryTree<>(Integer::compareTo);
         TreeNode<Integer> node = btt.insert(10).insert(8).insert(11).insert(7).insert(9).insert(12)
                 .build();
@@ -27,7 +23,8 @@ public class TreeTest {
         TreeUtils.levelOrderTraversal(node);
     }
 
-    private static void testRedBlackTree() {
+    @Test
+    public void testRedBlackTree() {
         System.out.println("============testRedBlackTree============");
         RedBlackTree<Integer> rb = new RedBlackTree<>(Integer::compareTo);
         RedBlackTreeNode<Integer> blackTreeNode = rb.insert(10).insert(5).insert(9).insert(3).insert(6).insert(7)

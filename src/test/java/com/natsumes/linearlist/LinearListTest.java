@@ -1,26 +1,15 @@
-package com.natsumes.test;
+package com.natsumes.linearlist;
 
 import com.natsumes.linearlist.*;
+import org.junit.Test;
 
 /**
  * @author hetengjiao
  */
 public class LinearListTest {
-    public static void main(String[] args) {
-        System.out.println("===============testLinkedStack===================");
-        testLinkedStack();
 
-        System.out.println("==================testArrayStack================");
-        testArrayStack();
-
-        System.out.println("===============testLinkedQueue===================");
-        testLinkedQueue();
-
-        System.out.println("==================testArrayQueue================");
-        testArrayQueue();
-    }
-
-    private static void testLinkedStack() {
+    @Test
+    public void testLinkedStack() {
         Stack<Integer> ls = new LinkedStack<>();
         ls.push(3);
         ls.push(1);
@@ -33,7 +22,8 @@ public class LinearListTest {
         System.out.println(ls.pop());
     }
 
-    private static void testArrayStack() {
+    @Test
+    public void testArrayStack() {
         Stack<Integer> as = new ArrayStack<>(8);
         as.push(3);
         as.push(5);
@@ -45,7 +35,8 @@ public class LinearListTest {
         System.out.println(as.pop());
     }
 
-    private static void testLinkedQueue() {
+    @Test
+    public void testLinkedQueue() {
         Queue<Integer> ls = new LinkedQueue<>();
         ls.enqueue(3);
         ls.enqueue(1);
@@ -58,7 +49,8 @@ public class LinearListTest {
         System.out.println(ls.dequeue());
     }
 
-    private static void testArrayQueue() {
+    @Test
+    public void testArrayQueue() {
         Queue<Integer> as = new ArrayQueue<>(8);
         as.enqueue(3);
         as.enqueue(5);
