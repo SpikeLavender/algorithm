@@ -1,4 +1,4 @@
-package com.natsumes.common;
+package com.natsumes.alth.dp;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -30,14 +30,18 @@ public class DynamicProgramming {
      * @param n     台阶数
      * @return 走法
      */
-    private static int waysToStep(int n) {
+    public static int waysToStep(int n) {
         int mod = 1000000007;
         int[] f = new int[n + 1];
         f[0] = 1;
         for (int i = 1; i <= n; i++) {
             f[i] = f[i - 1];
-            if (i >= 2) f[i] = (f[i] + f[i - 2]) % mod;
-            if (i >= 3) f[i] = (f[i] + f[i - 3]) % mod;
+            if (i >= 2) {
+                f[i] = (f[i] + f[i - 2]) % mod;
+            }
+            if (i >= 3) {
+                f[i] = (f[i] + f[i - 3]) % mod;
+            }
         }
         return f[n];
     }
@@ -63,15 +67,21 @@ public class DynamicProgramming {
      * @param grid     二维数组
      * @return sums
      */
-    private static int minPathSum(int[][] grid) {
+    public static int minPathSum(int[][] grid) {
         int m = grid.length;
         int n = grid[0].length;
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
-                if (i == 0 && j == 0) continue;
+                if (i == 0 && j == 0) {
+                    continue;
+                }
                 int tp = Integer.MAX_VALUE;
-                if (i > 0) tp = Math.min(tp, grid[i - 1][j]);
-                if (j > 0) tp = Math.min(tp, grid[i][j - 1]);
+                if (i > 0) {
+                    tp = Math.min(tp, grid[i - 1][j]);
+                }
+                if (j > 0) {
+                    tp = Math.min(tp, grid[i][j - 1]);
+                }
                 grid[i][j] += tp;
             }
         }
@@ -100,7 +110,7 @@ public class DynamicProgramming {
      * @param nums  整数数组
      * @return res
      */
-    private static int maxProduct(int[] nums) {
+    public static int maxProduct(int[] nums) {
         int n = nums.length;
         int ans = nums[0];
         int[] maxn = new int[n];
@@ -133,7 +143,7 @@ public class DynamicProgramming {
      * @param nums  nums
      * @return  length
      */
-    private static int lengthOfLIS(int[] nums) {
+    public static int lengthOfLIS(int[] nums) {
         int n = nums.length;
         int ans = 0;
         int[] f = new int[n];
@@ -185,7 +195,7 @@ public class DynamicProgramming {
      * @param str2 str2
      * @return ans
      */
-    private static int longestCommonSubSequence(String str1, String str2) {
+    public static int longestCommonSubSequence(String str1, String str2) {
         int len1 = str1.length();
         int len2 = str2.length();
         int[][] f = new int[len1 + 1][len2 + 1];
@@ -220,7 +230,7 @@ public class DynamicProgramming {
      * @param triangle triangle
      * @return ans
      */
-    private static int minimumTotal(int[][] triangle) {
+    public static int minimumTotal(int[][] triangle) {
         int len = triangle.length;
         int ans = Integer.MAX_VALUE;
         int[] f = new int[len + 1];
@@ -270,9 +280,11 @@ public class DynamicProgramming {
      * @param nums nums
      * @return res
      */
-    private static int rob(int[] nums) {
+    public static int rob(int[] nums) {
         int len = nums.length;
-        if (len == 0) return 0;
+        if (len == 0) {
+            return 0;
+        }
 
         int[] f = new int[len];
 
@@ -310,7 +322,7 @@ public class DynamicProgramming {
      * @param envelopes envelopes
      * @return res
      */
-    private static int maxEnvelopes(int[][] envelopes) {
+    public static int maxEnvelopes(int[][] envelopes) {
         Arrays.sort(envelopes, Comparator.comparingInt(o -> o[0]));
         int n = envelopes.length;
         int ans = 0;
@@ -367,7 +379,7 @@ public class DynamicProgramming {
      * @param word2 word 2
      * @return res
      */
-    private static int minDistance(String word1, String word2) {
+    public static int minDistance(String word1, String word2) {
         int n = word1.length();
         int m = word2.length();
         int[][] f = new int[n + 1][m + 1];
@@ -407,7 +419,7 @@ public class DynamicProgramming {
      * @param w values
      * @return res
      */
-    private static int zeroOneKnapsack(int n, int m, int[] v, int[] w) {
+    public static int zeroOneKnapsack(int n, int m, int[] v, int[] w) {
         int[][] f = new int[n + 1][m + 1];
         for (int j = 1; j <= m; j++) {
             f[0][j] = (int) Double.NEGATIVE_INFINITY;
@@ -445,7 +457,7 @@ public class DynamicProgramming {
      * @param w values
      * @return res
      */
-    private static int zeroOneKnapsackUpdate(int n, int m, int[] v, int[] w) {
+    public static int zeroOneKnapsackUpdate(int n, int m, int[] v, int[] w) {
         int[] f = new int[m + 1];
         for (int j = 1; j <= m; j++) {
             f[j] = (int) Double.NEGATIVE_INFINITY;
@@ -495,12 +507,14 @@ public class DynamicProgramming {
      * @param nums nums
      * @return res
      */
-    private static boolean canPartition(int[] nums) {
+    public static boolean canPartition(int[] nums) {
         int sum = 0;
         for (int num : nums) {
             sum += num;
         }
-        if (sum % 2 != 0) return false;
+        if (sum % 2 != 0) {
+            return false;
+        }
         sum /= 2;
         boolean[] f = new boolean[sum + 1];
         f[0] = true;
@@ -549,12 +563,14 @@ public class DynamicProgramming {
      * @param s    s
      * @return sums
      */
-    private static int findTargetSumWays(int[] nums, int s) {
+    public static int findTargetSumWays(int[] nums, int s) {
         int sum = 0;
         for (int num : nums) {
             sum += num;
         }
-        if (s < -sum || s > sum || (sum + s) % 2 != 0) return 0;
+        if (s < -sum || s > sum || (sum + s) % 2 != 0) {
+            return 0;
+        }
 
         int a = (sum + s) / 2;
         int[] f = new int[a + 1];
@@ -595,7 +611,7 @@ public class DynamicProgramming {
      * @param amount    amount
      * @return int
      */
-    private static int coinChange(int[] coins, int amount) {
+    public static int coinChange(int[] coins, int amount) {
         int[] f = new int[amount + 1];
         int inf = Integer.MAX_VALUE - 1;
         for (int i = 1; i <= amount; i++) {
@@ -644,7 +660,7 @@ public class DynamicProgramming {
      * @param amount    amount
      * @return int
      */
-    private static int coinChange2(int[] coins, int amount) {
+    public static int coinChange2(int[] coins, int amount) {
         int[] f = new int[amount + 1];
         f[0] = 1;
         for (int i = 0; i < coins.length; i++) {
@@ -697,10 +713,11 @@ public class DynamicProgramming {
             int a = 0, b = 0;
             char[] chars = str[i].toCharArray();
             for (char c : chars) {
-                if (c == '0')
+                if (c == '0') {
                     a++;
-                else
+                } else {
                     b++;
+                }
             }
             for (int j = m; j >= a ; j--) {
                 for (int k = n; k >= b; k--) {
@@ -722,69 +739,8 @@ public class DynamicProgramming {
      * @param amount amount
      * @return res
      */
-    private static int findMinCoins(int[] coins, int amount) {
+    public static int findMinCoins(int[] coins, int amount) {
         //todo:
         return 0;
     }
-
-    public static void main(String[] args) {
-        System.out.println(waysToStep(5));
-
-        int[][] grid = {{1, 3, 1},{1, 5, 1},{4, 2, 1}};
-
-        int minPathSum = minPathSum(grid);
-        System.out.println(minPathSum);
-
-        int[] nums1 = {2,3,-2,4};
-        System.out.println(maxProduct(nums1));
-
-        int[] nums2 = {-2,0,-1};
-        System.out.println(maxProduct(nums2));
-
-        int[] nums3 = {10,9,2,5,3,7,101,18};
-        System.out.println(lengthOfLIS(nums3));
-
-        System.out.println(longestCommonSubSequence("abcde", "ace"));
-        System.out.println(longestCommonSubSequence("abc", "def"));
-
-        int[][] triangle = {{2}, {3, 4}, {6, 5, 7}, {4, 1, 8, 3}};
-        System.out.println(minimumTotal(triangle));
-
-        int[] robs1 = {1,2,3,1};
-        System.out.println(rob(robs1));
-        int[] robs2 = {2,7,9,3,1};
-        System.out.println(rob(robs2));
-
-        int[][] envelopes = {{5, 4}, {6, 4}, {6, 7}, {2, 3}};
-        System.out.println(maxEnvelopes(envelopes));
-
-        System.out.println(minDistance("horse", "ros"));
-        System.out.println(minDistance("intention", "execution"));
-
-        int[] nums4 = {1, 5, 11, 5};
-        System.out.println(canPartition(nums4));
-        int[] nums5 = {1, 2, 3, 5};
-        System.out.println(canPartition(nums5));
-
-        int[] nums6 = {1, 1, 1, 1, 1};
-        System.out.println(findTargetSumWays(nums6, 3));
-
-        int[] coins1 = {1, 2, 5};
-        System.out.println(coinChange(coins1, 11));
-        int[] coins2 = {2};
-        System.out.println(coinChange(coins2, 3));
-
-        int[] coins3 = {1, 2, 5};
-        System.out.println(coinChange2(coins3, 5));
-        int[] coins4 = {2};
-        System.out.println(coinChange2(coins4, 3));
-        int[] coins5 = {10};
-        System.out.println(coinChange2(coins5, 10));
-
-        String[] array1 = {"10", "0001", "111001", "1", "0"};
-        System.out.println(findMaxForm(array1, 5, 3));
-        String[] array2 = {"10", "0", "1"};
-        System.out.println(findMaxForm(array2, 1, 1));
-    }
-
 }
