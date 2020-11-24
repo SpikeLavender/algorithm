@@ -1,0 +1,25 @@
+group = 'com.natsumes'
+version = '1.0-SNAPSHOT'
+
+
+apply plugin: 'java'
+apply plugin: 'idea'
+
+repositories {
+    maven {
+        url = 'http://maven.aliyun.com/nexus/content/groups/public/'
+    }
+    jcenter()
+    mavenCentral()
+}
+//指定编码格式
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+sourceCompatibility = '11'
+targetCompatibility = '11'
+
+dependencies {
+    testCompile('junit:junit:4.5')
+}
