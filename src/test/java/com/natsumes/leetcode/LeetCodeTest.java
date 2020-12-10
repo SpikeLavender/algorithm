@@ -91,4 +91,37 @@ public class LeetCodeTest {
         TreeNode deserialize = codec.deserialize(serialize);
         System.out.println(deserialize);
     }
+
+
+    /**
+     *     3
+     *    / \
+     *   9  20
+     *     /  \
+     *    15   7
+     */
+    @Test
+    public void buildTree() {
+        int[] preorder = new int[]{3, 9, 20, 15, 7};
+        int[] inorder = new int[]{9, 3, 15, 20, 7};
+        TreeNode treeNode = lt.buildTree01(preorder, inorder);
+
+        System.out.println(treeNode.toString());
+    }
+
+    /**
+     *     3
+     *    / \
+     *   9  20
+     *     /  \
+     *    15   7
+     */
+    @Test
+    public void buildTree02() {
+        int[] postorder = new int[]{9, 15, 7, 20, 3};
+        int[] inorder = new int[]{9, 3, 15, 20, 7};
+        TreeNode treeNode = lt.buildTree02(inorder, postorder);
+
+        System.out.println(treeNode.toString());
+    }
 }

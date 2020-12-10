@@ -152,6 +152,103 @@ public class LeetCode {
     /* ==================================== 树相关专题 ======================================== */
 
     /**
+     * 105. 从前序与中序遍历序列构造二叉树
+     *
+     * 根据一棵树的前序遍历与中序遍历构造二叉树。
+     *
+     * 注意:
+     * 你可以假设树中没有重复的元素。
+     *
+     * 例如，给出
+     *
+     * 前序遍历 preorder = [3,9,20,15,7]
+     * 中序遍历 inorder = [9,3,15,20,7]
+     * 返回如下的二叉树：
+     *
+     *     3
+     *    / \
+     *   9  20
+     *     /  \
+     *    15   7
+     *
+     * 来源：力扣（LeetCode）
+     * 链接：https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal
+     * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+     *
+     * @param preorder  pre
+     * @param inorder   in
+     * @return
+     */
+    public TreeNode buildTree01(int[] preorder, int[] inorder) {
+        return build(preorder, 0, preorder.length - 1, inorder, 0, inorder.length - 1);
+    }
+
+    private TreeNode build(int[] preorder, int pStart, int pEnd, int[] inorder, int iStart, int iEnd) {
+        if (pStart > pEnd) {
+            return null;
+        }
+        int rootVal = preorder[pStart];
+        int index = 0;
+        for (int i = iStart; i <= iEnd; i++) {
+            if (rootVal == inorder[i]) {
+                index = i;
+                break;
+            }
+        }
+        int leftSize = index - iStart;
+        TreeNode root = new TreeNode(rootVal);
+        root.left = build(preorder,pStart + 1, pStart + leftSize, inorder, iStart, index - 1);
+        root.right = build(preorder, pStart + leftSize + 1, pEnd, inorder, index + 1, iEnd);
+        return root;
+    }
+
+    /**
+     * 106. 从中序与后序遍历序列构造二叉树
+     *
+     * 根据一棵树的中序遍历与后序遍历构造二叉树。
+     *
+     * 注意:
+     * 你可以假设树中没有重复的元素。
+     *
+     * 例如，给出
+     *
+     * 中序遍历 inorder = [9,3,15,20,7]
+     * 后序遍历 postorder = [9,15,7,20,3]
+     * 返回如下的二叉树：
+     *
+     *     3
+     *    / \
+     *   9  20
+     *     /  \
+     *    15   7
+     *
+     * 来源：力扣（LeetCode）
+     * 链接：https://leetcode-cn.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal
+     * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+     */
+    public TreeNode buildTree02(int[] inorder, int[] postorder) {
+        return build02(inorder, 0, inorder.length - 1, postorder, 0, postorder.length - 1);
+    }
+
+    private TreeNode build02(int[] inorder, int inStart, int inEnd, int[] postorder, int postStart, int postEnd) {
+        if (inStart > inEnd) {
+            return null;
+        }
+        int index = 0;
+        int rootVal = postorder[postEnd];
+        for (int i = inStart; i <= inEnd; i++) {
+            if (rootVal == inorder[i]) {
+                index = i;
+                break;
+            }
+        }
+        TreeNode root = new TreeNode(rootVal);
+        int leftSize = index - inStart;
+        root.left = build02(inorder, inStart, index - 1, postorder, postStart, postStart + leftSize - 1);
+        root.right = build02(inorder, index + 1, inEnd, postorder, postStart + leftSize, postEnd - 1);
+        return root;
+    }
+    /**
      * 297. 二叉树的序列化与反序列化
      *
      * 序列化是将一个数据结构或者对象转换为连续的比特位的操作，进而可以将转换后的数据存储在一个文件或者内存中，同时也可以通过网络传输到另一个计算机环境，采取相反方式重构得到原数据。
