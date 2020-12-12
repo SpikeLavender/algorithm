@@ -208,4 +208,28 @@ public class LeetCodeTest {
         System.out.println(i);
         Assert.assertEquals(3, i);
     }
+
+    @Test
+    public void isSymmetric() {
+        TreeNode root = new TreeNode(1);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(2);
+        root.left.left = new TreeNode(3);
+        root.left.right = new TreeNode(4);
+        root.right.left = new TreeNode(4);
+        root.right.right = new TreeNode(3);
+        boolean i = lt.isSymmetric(root);
+        System.out.println(i);
+        Assert.assertTrue(i);
+
+
+        root = new TreeNode(1);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(2);
+        root.left.right = new TreeNode(3);
+        root.right.right = new TreeNode(3);
+        i = lt.isSymmetric(root);
+        System.out.println(i);
+        Assert.assertFalse(i);
+    }
 }

@@ -596,6 +596,7 @@ public class LeetCode {
      * 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
      */
     public boolean isSymmetric(TreeNode root) {
+        //return isSymmetric4Recursion(root);
         return isSymmetric4Iteration(root);
     }
 
@@ -603,13 +604,50 @@ public class LeetCode {
      * 递归
      */
     private boolean isSymmetric4Recursion(TreeNode root) {
-        return true;
+        if (root == null) {
+            return true;
+        }
+        return recursion(root.left, root.right);
+    }
+
+    private boolean recursion(TreeNode left, TreeNode right) {
+        if (left == null && right == null) {
+            return true;
+        }
+
+        if (left == null || right == null || left.val != right.val) {
+            return false;
+        }
+
+        return recursion(left.left, right.right) && recursion(left.right, right.left);
     }
 
     /**
      * 迭代
      */
     private boolean isSymmetric4Iteration(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root.left);
+        queue.offer(root.right);
+        while (!queue.isEmpty()) {
+            TreeNode leftNode = queue.poll();
+            TreeNode rightNode = queue.poll();
+            if (leftNode == null && rightNode == null) {
+                continue;
+            }
+            if (leftNode == null || rightNode == null || leftNode.val != rightNode.val) {
+                return false;
+            }
+            queue.offer(leftNode.left);
+            queue.offer(rightNode.right);
+            queue.offer(leftNode.right);
+            queue.offer(rightNode.left);
+        }
+
         return true;
     }
 
