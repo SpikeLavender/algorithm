@@ -1,5 +1,6 @@
 package com.natsumes.leetcode;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.List;
@@ -123,5 +124,88 @@ public class LeetCodeTest {
         TreeNode treeNode = lt.buildTree02(inorder, postorder);
 
         System.out.println(treeNode.toString());
+    }
+
+    /**
+     * 1 / \ 2   5 / \   \ 3   4   6
+     */
+    @Test
+    public void flatten() {
+        TreeNode root = new TreeNode(1);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(5);
+        root.left.left = new TreeNode(3);
+        root.left.right = new TreeNode(4);
+        root.right.right = new TreeNode(6);
+        lt.flatten(root);
+        System.out.println(root);
+    }
+
+    @Test
+    public void maxPathSum() {
+        TreeNode root = new TreeNode(-10);
+        root.left = new TreeNode(9);
+        root.right = new TreeNode(20);
+        root.right.left = new TreeNode(15);
+        root.right.right = new TreeNode(7);
+        int i = lt.maxPathSum(root);
+        System.out.println(i);
+    }
+
+    @Test
+    public void preorderTraversal() {
+        TreeNode root = new TreeNode(10);
+        root.left = new TreeNode(9);
+        root.right = new TreeNode(20);
+        root.right.left = new TreeNode(15);
+        root.right.right = new TreeNode(7);
+        List<Integer> list = lt.preorderTraversal(root);
+        System.out.println(list);
+    }
+
+    @Test
+    public void inorderTraversal() {
+        TreeNode root = new TreeNode(10);
+        root.left = new TreeNode(9);
+        root.right = new TreeNode(20);
+        root.right.left = new TreeNode(15);
+        root.right.right = new TreeNode(7);
+        List<Integer> list = lt.inorderTraversal(root);
+        System.out.println(list);
+    }
+
+    @Test
+    public void postorderTraversal() {
+        TreeNode root = new TreeNode(10);
+        root.left = new TreeNode(9);
+        root.right = new TreeNode(20);
+        root.right.left = new TreeNode(15);
+        root.right.right = new TreeNode(7);
+        List<Integer> list = lt.postorderTraversal(root);
+        System.out.println(list);
+    }
+
+
+    @Test
+    public void levelOrder() {
+        TreeNode root = new TreeNode(10);
+        root.left = new TreeNode(9);
+        root.right = new TreeNode(20);
+        root.right.left = new TreeNode(15);
+        root.right.right = new TreeNode(7);
+        List<List<Integer>> lists = lt.levelOrder(root);
+        System.out.println(lists);
+    }
+
+    @Test
+    public void maxDepth() {
+        TreeNode root = new TreeNode(10);
+        root.left = new TreeNode(9);
+        root.right = new TreeNode(20);
+        root.right.left = new TreeNode(15);
+        root.right.right = new TreeNode(7);
+        int i = lt.maxDepth(root);
+        System.out.println(i);
+        Assert.assertEquals(3, i);
     }
 }
