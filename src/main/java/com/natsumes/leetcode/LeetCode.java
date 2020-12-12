@@ -151,71 +151,42 @@ public class LeetCode {
 
     /* ==================================== 二叉树相关专题 ======================================== */
 
-    /**
-     * LC 二叉树的最大深度
-     * <p>
-     * 给定一个二叉树，找出其最大深度。
-     * <p>
-     * 二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。
-     * <p>
-     * 说明: 叶子节点是指没有子节点的节点。
-     * <p>
-     * 示例： 给定二叉树 [3,9,20,null,null,15,7]，
-     * <p>
-     * 3 / \ 9  20 /  \ 15   7 返回它的最大深度 3
-     * <p>
-     * 作者：力扣 (LeetCode) 链接：https://leetcode-cn.com/leetbook/read/data-structure-binary-tree/xoh1zg/ 来源：力扣（LeetCode）
-     * 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
-     */
-    private int answer = 0;
-    /**
-     * 124. 二叉树中的最大路径和 给定一个非空二叉树，返回其最大路径和。
-     * <p>
-     * 本题中，路径被定义为一条从树中任意节点出发，沿父节点-子节点连接，达到任意节点的序列。 该路径至少包含一个节点，且不一定经过根节点。
-     * <p>
-     *  
-     * <p>
-     * 示例 1：
-     * <p>
-     * 输入：[1,2,3]
-     * <p>
-     * 1 / \ 2   3
-     * <p>
-     * 输出：6 示例 2：
-     * <p>
-     * 输入：[-10,9,20,null,null,15,7]
-     * <p>
-     *    -10    / \   9  20     /  \    15   7
-     * <p>
-     * 输出：42
-     * <p>
-     * 来源：力扣（LeetCode） 链接：https://leetcode-cn.com/problems/binary-tree-maximum-path-sum
-     * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
-     */
-    private int ans = Integer.MIN_VALUE;
 
     /**
-     * LC 二叉树的前序遍历 给你二叉树的根节点 root ，返回它节点值的 前序 遍历。
-     * <p>
+     * LC 二叉树的前序遍历
+     * 给你二叉树的根节点 root ，返回它节点值的 前序 遍历。
+     *
      * 示例 1：
-     * <p>
-     * <p>
-     * 输入：root = [1,null,2,3] 输出：[1,2,3] 示例 2：
-     * <p>
-     * 输入：root = [] 输出：[] 示例 3：
-     * <p>
-     * 输入：root = [1] 输出：[1] 示例 4：
-     * <p>
-     * <p>
-     * 输入：root = [1,2] 输出：[1,2] 示例 5：
-     * <p>
-     * <p>
-     * 输入：root = [1,null,2] 输出：[1,2]  
-     * <p>
+     *
+     *
+     * 输入：root = [1,null,2,3]
+     * 输出：[1,2,3]
+     * 示例 2：
+     *
+     * 输入：root = []
+     * 输出：[]
+     * 示例 3：
+     *
+     * 输入：root = [1]
+     * 输出：[1]
+     * 示例 4：
+     *
+     *
+     * 输入：root = [1,2]
+     * 输出：[1,2]
+     * 示例 5：
+     *
+     *
+     * 输入：root = [1,null,2]
+     * 输出：[1,2]
+     *  
+     *
      * 提示：
-     * <p>
-     * 树中节点数目在范围 [0, 100] 内 -100 <= Node.val <= 100  
-     * <p>
+     *
+     * 树中节点数目在范围 [0, 100] 内
+     * -100 <= Node.val <= 100
+     *  
+     *
      * 进阶：递归算法很简单，你可以通过迭代算法完成吗？
      * <p>
      * 作者：力扣 (LeetCode) 链接：https://leetcode-cn.com/leetbook/read/data-structure-binary-tree/xeywh5/ 来源：力扣（LeetCode）
@@ -361,12 +332,20 @@ public class LeetCode {
      * LC 二叉树的后序遍历 给定一个二叉树，返回它的 后序 遍历。
      * <p>
      * 示例:
-     * <p>
-     * 输入: [1,null,2,3] 1 \ 2 / 3
-     * <p>
-     * 输出: [3,2,1] 进阶: 递归算法很简单，你可以通过迭代算法完成吗？
-     * <p>
-     * 作者：力扣 (LeetCode) 链接：https://leetcode-cn.com/leetbook/read/data-structure-binary-tree/xebrb2/ 来源：力扣（LeetCode）
+     *
+     * 输入: [1,null,2,3]
+     *    1
+     *     \
+     *      2
+     *     /
+     *    3
+     *
+     * 输出: [3,2,1]
+     * 进阶: 递归算法很简单，你可以通过迭代算法完成吗？
+     *
+     * 作者：力扣 (LeetCode)
+     * 链接：https://leetcode-cn.com/leetbook/read/data-structure-binary-tree/xebrb2/
+     * 来源：力扣（LeetCode）
      * 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
      */
     public List<Integer> postorderTraversal(TreeNode root) {
@@ -529,6 +508,33 @@ public class LeetCode {
         doLevelOrder02(root.right, res, num + 1);
     }
 
+
+    private int answer = 0;
+
+    /**
+     * LC 二叉树的最大深度
+     * <p>
+     * 给定一个二叉树，找出其最大深度。
+     * <p>
+     * 二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。
+     * <p>
+     * 说明: 叶子节点是指没有子节点的节点。
+     *
+     * 示例：
+     * 给定二叉树 [3,9,20,null,null,15,7]，
+     *
+     *     3
+     *    / \
+     *   9  20
+     *     /  \
+     *    15   7
+     * 返回它的最大深度 3
+     *
+     * 作者：力扣 (LeetCode)
+     * 链接：https://leetcode-cn.com/leetbook/read/data-structure-binary-tree/xoh1zg/
+     * 来源：力扣（LeetCode）
+     * 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+     */
     public int maxDepth(TreeNode root) {
         //maxDepthTop(root, 1);
         //return answer;
@@ -563,18 +569,30 @@ public class LeetCode {
      * <p>
      * <p>
      * 例如，二叉树 [1,2,2,3,4,4,3] 是对称的。
-     * <p>
-     * 1 / \ 2   2 / \ / \ 3  4 4  3  
-     * <p>
+     *
+     *     1
+     *    / \
+     *   2   2
+     *  / \ / \
+     * 3  4 4  3
+     *  
+     *
      * 但是下面这个 [1,2,2,null,3,null,3] 则不是镜像对称的:
-     * <p>
-     * 1 / \ 2   2 \   \ 3    3  
-     * <p>
+     *
+     *     1
+     *    / \
+     *   2   2
+     *    \   \
+     *    3    3
+     *  
+     *
      * 进阶：
      * <p>
      * 你可以运用递归和迭代两种方法解决这个问题吗？
-     * <p>
-     * 作者：力扣 (LeetCode) 链接：https://leetcode-cn.com/leetbook/read/data-structure-binary-tree/xoxzgv/ 来源：力扣（LeetCode）
+     *
+     * 作者：力扣 (LeetCode)
+     * 链接：https://leetcode-cn.com/leetbook/read/data-structure-binary-tree/xoxzgv/
+     * 来源：力扣（LeetCode）
      * 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
      */
     public boolean isSymmetric(TreeNode root) {
@@ -596,25 +614,34 @@ public class LeetCode {
     }
 
     /**
-     * 99. 恢复二叉搜索树 给你二叉搜索树的根节点 root ，该树中的两个节点被错误地交换。请在不改变其结构的情况下，恢复这棵树。
-     * <p>
+     * 99. 恢复二叉搜索树
+     * 给你二叉搜索树的根节点 root ，该树中的两个节点被错误地交换。请在不改变其结构的情况下，恢复这棵树。
+     *
      * 进阶：使用 O(n) 空间复杂度的解法很容易实现。你能想出一个只使用常数空间的解决方案吗？
-     * <p>
+     *
      *  
-     * <p>
+     *
      * 示例 1：
-     * <p>
-     * <p>
-     * 输入：root = [1,3,null,null,2] 输出：[3,1,null,null,2] 解释：3 不能是 1 左孩子，因为 3 > 1 。交换 1 和 3 使二叉搜索树有效。 示例 2：
-     * <p>
-     * <p>
-     * 输入：root = [3,1,4,null,null,2] 输出：[2,1,4,null,null,3] 解释：2 不能在 3 的右子树中，因为 2 < 3 。交换 2 和 3 使二叉搜索树有效。  
-     * <p>
+     *
+     *
+     * 输入：root = [1,3,null,null,2]
+     * 输出：[3,1,null,null,2]
+     * 解释：3 不能是 1 左孩子，因为 3 > 1 。交换 1 和 3 使二叉搜索树有效。
+     * 示例 2：
+     *
+     *
+     * 输入：root = [3,1,4,null,null,2]
+     * 输出：[2,1,4,null,null,3]
+     * 解释：2 不能在 3 的右子树中，因为 2 < 3 。交换 2 和 3 使二叉搜索树有效。
+     *  
+     *
      * 提示：
-     * <p>
-     * 树上节点的数目在范围 [2, 1000] 内 -231 <= Node.val <= 231 - 1
-     * <p>
-     * 来源：力扣（LeetCode） 链接：https://leetcode-cn.com/problems/recover-binary-search-tree
+     *
+     * 树上节点的数目在范围 [2, 1000] 内
+     * -231 <= Node.val <= 231 - 1
+     *
+     * 来源：力扣（LeetCode）
+     * 链接：https://leetcode-cn.com/problems/recover-binary-search-tree
      * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
      */
     public void recoverTree(TreeNode root) {
@@ -695,12 +722,19 @@ public class LeetCode {
      * 注意: 你可以假设树中没有重复的元素。
      * <p>
      * 例如，给出
-     * <p>
-     * 前序遍历 preorder = [3,9,20,15,7] 中序遍历 inorder = [9,3,15,20,7] 返回如下的二叉树：
-     * <p>
-     * 3 / \ 9  20 /  \ 15   7
-     * <p>
-     * 来源：力扣（LeetCode） 链接：https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal
+     *
+     * 前序遍历 preorder = [3,9,20,15,7]
+     * 中序遍历 inorder = [9,3,15,20,7]
+     * 返回如下的二叉树：
+     *
+     *     3
+     *    / \
+     *   9  20
+     *     /  \
+     *    15   7
+     *
+     * 来源：力扣（LeetCode）
+     * 链接：https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal
      * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
      *
      * @param preorder pre
@@ -713,15 +747,33 @@ public class LeetCode {
     }
 
     /**
-     * 114. 二叉树展开为链表 给定一个二叉树，原地将它展开为一个单链表。  
-     * <p>
+     * 114. 二叉树展开为链表
+     * 给定一个二叉树，原地将它展开为一个单链表。
+     * 
+     *
      * 例如，给定二叉树
-     * <p>
-     * 1 / \ 2   5 / \   \ 3   4   6 将其展开为：
-     * <p>
-     * 1 \ 2 \ 3 \ 4 \ 5 \ 6
-     * <p>
-     * 来源：力扣（LeetCode） 链接：https://leetcode-cn.com/problems/flatten-binary-tree-to-linked-list
+     *
+     *     1
+     *    / \
+     *   2   5
+     *  / \   \
+     * 3   4   6
+     * 将其展开为：
+     *
+     * 1
+     *  \
+     *   2
+     *    \
+     *     3
+     *      \
+     *       4
+     *        \
+     *         5
+     *          \
+     *           6
+     *
+     * 来源：力扣（LeetCode）
+     * 链接：https://leetcode-cn.com/problems/flatten-binary-tree-to-linked-list
      * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
      */
     public void flatten(TreeNode root) {
@@ -745,26 +797,37 @@ public class LeetCode {
      * 116. 填充每个节点的下一个右侧节点指针
      * <p>
      * 给定一个 完美二叉树 ，其所有叶子节点都在同一层，每个父节点都有两个子节点。二叉树定义如下：
-     * <p>
-     * struct Node { int val; Node *left; Node *right; Node *next; } 填充它的每个 next 指针，让这个指针指向其下一个右侧节点。如果找不到下一个右侧节点，则将 next
-     * 指针设置为 NULL。
-     * <p>
+     *
+     * struct Node {
+     *   int val;
+     *   Node *left;
+     *   Node *right;
+     *   Node *next;
+     * }
+     * 填充它的每个 next 指针，让这个指针指向其下一个右侧节点。如果找不到下一个右侧节点，则将 next 指针设置为 NULL。
+     *
      * 初始状态下，所有 next 指针都被设置为 NULL。
-     * <p>
-     * <p>
+     *
+     *
      * 进阶：
-     * <p>
-     * 你只能使用常量级额外空间。 使用递归解题也符合要求，本题中递归程序占用的栈空间不算做额外的空间复杂度。
-     * <p>
-     * 输入：root = [1,2,3,4,5,6,7] 输出：[1,#,2,3,#,4,5,6,7,#]
-     * <p>
-     * 解释：给定二叉树如图 A 所示，你的函数应该填充它的每个 next 指针，以指向其下一个右侧节点，如图 B 所示。 序列化的输出按层序遍历排列，同一层节点由 next 指针连接，'#' 标志着每一层的结束。  
-     * <p>
+     *
+     * 你只能使用常量级额外空间。
+     * 使用递归解题也符合要求，本题中递归程序占用的栈空间不算做额外的空间复杂度。
+     *
+     * 输入：root = [1,2,3,4,5,6,7]
+     * 输出：[1,#,2,3,#,4,5,6,7,#]
+     *
+     * 解释：给定二叉树如图 A 所示，你的函数应该填充它的每个 next 指针，以指向其下一个右侧节点，如图 B 所示。
+     * 序列化的输出按层序遍历排列，同一层节点由 next 指针连接，'#' 标志着每一层的结束。
+     *  
+     *
      * 提示：
-     * <p>
-     * 树中节点的数量少于 4096 -1000 <= node.val <= 1000
-     * <p>
-     * 来源：力扣（LeetCode） 链接：https://leetcode-cn.com/problems/populating-next-right-pointers-in-each-node
+     *
+     * 树中节点的数量少于 4096
+     * -1000 <= node.val <= 1000
+     *
+     * 来源：力扣（LeetCode）
+     * 链接：https://leetcode-cn.com/problems/populating-next-right-pointers-in-each-node
      * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
      */
     public Node connect(Node root) {
@@ -774,6 +837,38 @@ public class LeetCode {
         return null;
     }
 
+    private int ans = Integer.MIN_VALUE;
+    /**
+     * 124. 二叉树中的最大路径和 给定一个非空二叉树，返回其最大路径和。
+     * <p>
+     * 本题中，路径被定义为一条从树中任意节点出发，沿父节点-子节点连接，达到任意节点的序列。 该路径至少包含一个节点，且不一定经过根节点。
+     * <p>
+     *  
+     * <p>
+     * 示例 1：
+     * <p>
+     * 输入：[1,2,3]
+     *
+     *        1
+     *       / \
+     *      2   3
+     *
+     * 输出：6
+     * 示例 2：
+     *
+     * 输入：[-10,9,20,null,null,15,7]
+     *
+     *    -10
+     *    / \
+     *   9  20
+     *     /  \
+     *    15   7
+     *
+     * 输出：42
+     * <p>
+     * 来源：力扣（LeetCode） 链接：https://leetcode-cn.com/problems/binary-tree-maximum-path-sum
+     * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+     */
     public int maxPathSum(TreeNode root) {
         oneSideMax(root);
         return ans;
