@@ -5,63 +5,26 @@ package com.natsumes.tree;
  */
 public class RedBlackTreeNode<V> {
 
-    private V value;
+    V value;
 
-    private boolean isBlack;
+    boolean isBlack;
 
-    private RedBlackTreeNode<V> left;
+    int num = 1;
 
-    private RedBlackTreeNode<V> right;
+    RedBlackTreeNode<V> left;
 
-    private RedBlackTreeNode<V> parent;
+    RedBlackTreeNode<V> right;
+
+    RedBlackTreeNode<V> parent;
 
     public RedBlackTreeNode(V value) {
         this.value = value;
         this.isBlack = false;
     }
 
-    public V getValue() {
-        return value;
-    }
-
-    public void setValue(V value) {
-        this.value = value;
-    }
-
-    public boolean isBlack() {
-        return isBlack;
-    }
-
-    public void setBlack(boolean black) {
-        isBlack = black;
-    }
-
-    public RedBlackTreeNode<V> getLeft() {
-        return left;
-    }
-
-    public void setLeft(RedBlackTreeNode<V> left) {
-        this.left = left;
-    }
-
-    public RedBlackTreeNode<V> getRight() {
-        return right;
-    }
-
-    public void setRight(RedBlackTreeNode<V> right) {
-        this.right = right;
-    }
-
-    public RedBlackTreeNode<V> getParent() {
-        return parent;
-    }
-
-    public void setParent(RedBlackTreeNode<V> parent) {
-        this.parent = parent;
-    }
-
     @Override
     public String toString() {
-        return "RedBlackTreeNode{" + "value=" + value + ", color=" + (isBlack ? "BLACK" : "RED") + '}';
+        return "RedBlackTreeNode{" + "value=" + value + ", num = " + num
+                + ", color=" + (isBlack ? "BLACK" : "RED") + '}';
     }
 }
