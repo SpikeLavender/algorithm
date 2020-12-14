@@ -196,13 +196,54 @@ public class RedBlackTree<V> {
         node.isBlack = false;
     }
 
+    public void list() {
+        System.out.print("[");
+        list(root);
+        System.out.println("]");
+    }
+
     public void list(RedBlackTreeNode<V> node) {
         if (node == null) {
             return;
         }
 
         list(node.left);
-        System.out.println(node);
+        System.out.print(node.value + " : " + node.num + ", ");
         list(node.right);
+    }
+
+
+    // todo: 改造为线程安全的
+    private V topNum;
+
+    private long curNum;
+
+    private boolean isBreak;
+
+    public V getNstValue(long num) {
+        topNum = null;
+        curNum = num;
+        isBreak = false;
+        getByNum(root);
+        return topNum;
+    }
+
+    private boolean getByNum(RedBlackTreeNode<V> node) {
+        if (isBreak) {
+            return true;
+        }
+        if (node == null) {
+            return false;
+        }
+        isBreak = getByNum(node.left);
+
+        // 单例
+        curNum -= node.num;
+        if (curNum <= 0 && !isBreak) {
+            topNum = node.value;
+            return true;
+        }
+        isBreak |= getByNum(node.right);
+        return isBreak;
     }
 }

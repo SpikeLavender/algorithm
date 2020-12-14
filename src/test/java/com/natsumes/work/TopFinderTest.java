@@ -18,9 +18,11 @@ public class TopFinderTest {
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
             int in = sc.nextInt();
-            int num = finder.addNum(in);
-            //double median = finder.addNum();
-            System.out.println("median number is: " + num);
+            finder.addNum(in);
+            finder.list();
+            System.out.println("top number is: [" + finder.getTop(0.5) + ", "
+                    + finder.getTop(0.9) + ", "
+                    + finder.getTop(0.99) + "]");
         }
     }
 }
