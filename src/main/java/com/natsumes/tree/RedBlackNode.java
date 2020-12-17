@@ -3,7 +3,7 @@ package com.natsumes.tree;
 /**
  * @author hetengjiao
  */
-public class RedBlackTreeNode<V> {
+public class RedBlackNode<V> {
 
     V value;
 
@@ -11,20 +11,20 @@ public class RedBlackTreeNode<V> {
 
     int num = 1;
 
-    RedBlackTreeNode<V> left;
+    RedBlackNode<V> left;
 
-    RedBlackTreeNode<V> right;
+    RedBlackNode<V> right;
 
-    RedBlackTreeNode<V> parent;
+    RedBlackNode<V> parent;
 
-    public RedBlackTreeNode(V value) {
+    public RedBlackNode(V value) {
         this.value = value;
         this.isBlack = false;
     }
 
     @Override
     public String toString() {
-        return "RedBlackTreeNode{" + "value=" + value + ", num = " + num
+        return "RedBlackNode{" + "value=" + value + ", num = " + num
                 + ", color=" + (isBlack ? "BLACK" : "RED") + '}';
     }
 }

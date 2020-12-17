@@ -27,7 +27,7 @@ public class TreeTest {
     public void testRedBlackTree() {
         System.out.println("============testRedBlackTree============");
         RedBlackTree<Integer> rb = new RedBlackTree<>(Integer::compareTo);
-        RedBlackTreeNode<Integer> blackTreeNode = rb.insert(10).insert(5).insert(5).insert(9).insert(3).insert(6).insert(7)
+        RedBlackNode<Integer> blackTreeNode = rb.insert(10).insert(5).insert(5).insert(9).insert(3).insert(6).insert(7)
                 .insert(19).insert(32).insert(24).insert(17).insert(9).insert(32).build();
         rb.list(blackTreeNode);
     }

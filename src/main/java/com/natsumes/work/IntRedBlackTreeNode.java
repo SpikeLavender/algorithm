@@ -24,7 +24,7 @@ public class IntRedBlackTreeNode {
 
     @Override
     public String toString() {
-        return "RedBlackTreeNode{" + "value=" + value + ", num = " + num
+        return "RedBlackNode{" + "value=" + value + ", num = " + num
                 + ", color=" + (isBlack ? "BLACK" : "RED") + '}';
     }
 }
