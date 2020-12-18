@@ -9,13 +9,24 @@ package com.natsumes.tree;
  * 每次对伸展树进行操作后，它均会通过旋转的方法把被访问节点旋转到树根的位置。
  *
  * 为了将当前被访问节点旋转到树根，我们通常将节点自底向上旋转，直至该节点成为树根为止。
- * “旋转”的巧妙之处就是在不打乱数列中数据大小关系（指中序遍历结果是全序的）情况下，所有基本操作的平摊复杂度仍为O（log n）。
+ * “旋转”的巧妙之处就是在不打乱数列中数据大小关系（指中序遍历结果是全序的）情况下，所有基本操作的平摊复杂度仍为 O(log n)。
  *
  * @author hetengjiao
  */
-public class SplayTree<V> {
+public class SplayTree<V> implements Tree<V> {
 
     Node<V> root;
+
+    @Override
+    public void insert(V value) {
+
+    }
+
+    @Override
+    public boolean remove(V value) {
+        return true;
+    }
+
 
     /**
      * 左旋

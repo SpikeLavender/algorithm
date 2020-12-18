@@ -30,12 +30,12 @@ public class AVLTree<V> implements Tree<V> {
 
     @Override
     public void insert(V value) {
-        root = insert(root, value);
+        insert(root, value);
     }
 
     @Override
-    public void remove(V value) {
-        remove(root, value);
+    public boolean remove(V value) {
+        return delete(value);
     }
 
     /**
@@ -340,7 +340,7 @@ public class AVLTree<V> implements Tree<V> {
         return node;
     }
 
-    public boolean delete(V value) {
+    private boolean delete(V value) {
         Node<V> node = getNode(value);
         if (node == null) {
             return false;
@@ -416,6 +416,18 @@ public class AVLTree<V> implements Tree<V> {
     }
 
     /**
+     *                  15
+     *                /    \
+     *              (5)     16
+     *            /   \      \
+     *           3    12     20
+     *               /  \   /  \
+     *             10   13 18   23
+     *            /
+     *           6 - successor
+     *            \
+     *             7
+     *
      * 算法导论中实现
      */
     public boolean remove02(V value) {
@@ -423,6 +435,7 @@ public class AVLTree<V> implements Tree<V> {
         if (node == null) {
             return false;
         }
+        // 左节点为空，则可能两个节点都不存在或者只存在右节点
         if (node.left == null) {
             transplant(node, node.right);
         } else if (node.right == null) {
@@ -430,6 +443,7 @@ public class AVLTree<V> implements Tree<V> {
         } else {
             Node<V> successor = getSuccessor(node);
             if (successor.parent != node) {
+                // 如果在右子树中
                 transplant(successor, successor.right);
                 successor.right = node.right;
                 successor.right.parent = successor;
@@ -438,23 +452,25 @@ public class AVLTree<V> implements Tree<V> {
             successor.left = node.left;
             successor.left.parent = successor;
         }
+        // 最后将node设置为null，交给垃圾回收器处理
+        node = null;
         return true;
     }
 
     /**
      * 将child节点替换node节点
+     *
+     *  1、先判断 node是否存在父节点
+     *     1、不存在，则child替换为根节点
+     *     2、存在，则继续下一步
+     *  2、判断node节点是父节点的那个孩子(即判断出 node是右节点还是左节点)，
+     *     得出结果后，将child节点替换node节点 ，即若node节点是左节点 则child替换后 也为左节点，否则为右节点
+     *  3、将node节点的父节点置为child节点的父节点
+     *
      * @param node    要删除的节点
      * @param child   node节点的子节点
      */
     private void transplant(Node<V> node, Node<V> child){
-        /**
-         * 1、先判断 node是否存在父节点
-         *    1、不存在，则child替换为根节点
-         *    2、存在，则继续下一步
-         * 2、判断node节点是父节点的那个孩子(即判断出 node是右节点还是左节点)，
-         *    得出结果后，将child节点替换node节点 ，即若node节点是左节点 则child替换后 也为左节点，否则为右节点
-         * 3、将node节点的父节点置为child节点的父节点
-         */
         if (node.parent == null) {
             this.root = child;
         } else if (node.parent.left == node) {
