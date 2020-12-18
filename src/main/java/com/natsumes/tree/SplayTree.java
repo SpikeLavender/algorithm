@@ -13,18 +13,18 @@ package com.natsumes.tree;
  *
  * @author hetengjiao
  */
-public class SplayTree {
+public class SplayTree<V> {
 
-    SplayNode root;
+    Node<V> root;
 
     /**
      * 左旋
      * RR
      * @return 新根节点
      */
-    SplayNode leftRotate(SplayNode node) {
-        SplayNode parent = node.parent;
-        SplayNode son = node.right;
+    Node<V> leftRotate(Node<V> node) {
+        Node<V> parent = node.parent;
+        Node<V> son = node.right;
 
         if (son.left != null) {
             son.left.parent = node;
@@ -49,10 +49,10 @@ public class SplayTree {
      * LL
      * @return 新根节点
      */
-    SplayNode rightRotate(SplayNode node) {
+    Node<V> rightRotate(Node<V> node) {
 
-        SplayNode parent = node.parent;
-        SplayNode son = node.left;
+        Node<V> parent = node.parent;
+        Node<V> son = node.left;
         if (son.right != null) {
             son.right.parent = node;
         }
@@ -69,5 +69,40 @@ public class SplayTree {
             parent.left = son;
         }
         return son;
+    }
+
+    /**
+     * 寻找后继节点
+     */
+    private Node<V> getSuccessor(Node<V> node) {
+        if (node.right != null) {
+            Node<V> right = node.right;
+            while (right.left  != null) {
+                right = right.left;
+            }
+            return right;
+        }
+
+        Node<V> parent = node.parent;
+        while (parent != null && node == parent.right) {
+            node = parent;
+            parent = parent.parent;
+        }
+        return parent;
+    }
+
+    static class Node<V> {
+
+        V value;
+
+        Node<V> parent;
+
+        Node<V> left;
+
+        Node<V> right;
+
+        public Node(V value) {
+            this.value = value;
+        }
     }
 }

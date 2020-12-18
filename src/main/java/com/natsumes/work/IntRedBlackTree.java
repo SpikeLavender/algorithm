@@ -8,7 +8,7 @@ import java.util.concurrent.atomic.AtomicLong;
  */
 public class IntRedBlackTree {
 
-    private IntRedBlackTreeNode root;
+    private IntRedBlackNode root;
 
     private AtomicLong totalSize;
 
@@ -21,7 +21,7 @@ public class IntRedBlackTree {
 
     public void insert(int value) {
         totalSize.addAndGet(1);
-        IntRedBlackTreeNode node = new IntRedBlackTreeNode(value);
+        IntRedBlackNode node = new IntRedBlackNode(value);
         // 如果根节点为空，直接设为为根节点，并设置为黑色
         if (root == null) {
             node.isBlack = true;
@@ -30,8 +30,8 @@ public class IntRedBlackTree {
         }
 
         // 如果根节点不为空，查找插入的位置
-        IntRedBlackTreeNode parent = root;
-        IntRedBlackTreeNode son;
+        IntRedBlackNode parent = root;
+        IntRedBlackNode son;
         if (value < parent.value) {
             son = parent.left;
         } else if (value == parent.value) {
@@ -66,8 +66,8 @@ public class IntRedBlackTree {
     /**
      * 自平衡
      */
-    private void balanceInsert(IntRedBlackTreeNode node) {
-        IntRedBlackTreeNode father, grandFather;
+    private void balanceInsert(IntRedBlackNode node) {
+        IntRedBlackNode father, grandFather;
         // 如果是根节点 setBlack
         // 如果不是根节点，父节点为黑，则不需要平衡
         // 如果不是根节点，而且父节点为红，进入平衡过程
@@ -76,7 +76,7 @@ public class IntRedBlackTree {
             // 如果父节点为祖父节点的左节点
             if (grandFather.left == father) {
                 // 如果叔叔节点存在且为红
-                IntRedBlackTreeNode uncle = grandFather.right;
+                IntRedBlackNode uncle = grandFather.right;
                 if (uncle != null && !uncle.isBlack) {
                     // 将父节点和叔叔节点调整为黑，祖父节点调整为红
                     setBlack(father);
@@ -90,7 +90,7 @@ public class IntRedBlackTree {
                     // 以父节点为轴左旋，使新节点成为父节点
                     leftRotate(father);
                     // 交换父节点和子节点位置
-                    IntRedBlackTreeNode tmp = node;
+                    IntRedBlackNode tmp = node;
                     node = father;
                     father = tmp;
                     // 进入下一种情况 00
@@ -102,7 +102,7 @@ public class IntRedBlackTree {
                 setRed(grandFather);
             } else { // 如果父节点为祖父节点的右节点
                 // 如果叔叔节点存在且为红
-                IntRedBlackTreeNode uncle = grandFather.left;
+                IntRedBlackNode uncle = grandFather.left;
                 if (uncle != null && !uncle.isBlack) {
                     // 将父节点和叔叔节点调整为黑，祖父节点调整为红
                     setBlack(father);
@@ -116,7 +116,7 @@ public class IntRedBlackTree {
                     // 以父节点为轴右旋，使新节点成为父节点
                     rightRotate(father);
                     // 交换父节点和子节点位置
-                    IntRedBlackTreeNode tmp = node;
+                    IntRedBlackNode tmp = node;
                     node = father;
                     father = tmp;
                     // 进入下一种情况 00
@@ -134,9 +134,9 @@ public class IntRedBlackTree {
     /**
      * 左旋: 逆时针旋转红黑树的两个结点，使得父结点被自己的右孩子取代，而自己成为自己的左孩子
      */
-    private void leftRotate(IntRedBlackTreeNode node) {
-        IntRedBlackTreeNode parent = node.parent;
-        IntRedBlackTreeNode right = node.right;
+    private void leftRotate(IntRedBlackNode node) {
+        IntRedBlackNode parent = node.parent;
+        IntRedBlackNode right = node.right;
 
         // 如果为根节点，直接交换位置
         handleRotate(parent, right, node);
@@ -155,9 +155,9 @@ public class IntRedBlackTree {
     /**
      * 右旋: 顺时针旋转红黑树的两个结点，使得父结点被自己的左孩子取代，而自己成为自己的右孩子
      */
-    private void rightRotate(IntRedBlackTreeNode node) {
-        IntRedBlackTreeNode parent = node.parent;
-        IntRedBlackTreeNode left = node.left;
+    private void rightRotate(IntRedBlackNode node) {
+        IntRedBlackNode parent = node.parent;
+        IntRedBlackNode left = node.left;
         // 如果为根节点，直接交换位置
         handleRotate(parent, left, node);
         // 将自己挂到交换后的节点下
@@ -172,7 +172,7 @@ public class IntRedBlackTree {
         left.right = node;
     }
 
-    private void handleRotate(IntRedBlackTreeNode oldParent, IntRedBlackTreeNode newParent, IntRedBlackTreeNode node) {
+    private void handleRotate(IntRedBlackNode oldParent, IntRedBlackNode newParent, IntRedBlackNode node) {
         // 如果为根节点，直接交换位置
         if (oldParent == null) {
             root = newParent;
@@ -189,11 +189,11 @@ public class IntRedBlackTree {
 
     }
 
-    private void setBlack(IntRedBlackTreeNode node) {
+    private void setBlack(IntRedBlackNode node) {
         node.isBlack = true;
     }
 
-    private void setRed(IntRedBlackTreeNode node) {
+    private void setRed(IntRedBlackNode node) {
         node.isBlack = false;
     }
 
@@ -203,7 +203,7 @@ public class IntRedBlackTree {
         System.out.println("]");
     }
 
-    public void list(IntRedBlackTreeNode node) {
+    public void list(IntRedBlackNode node) {
         if (node == null) {
             return;
         }
@@ -228,7 +228,7 @@ public class IntRedBlackTree {
         doUpdateNstValue(root, nums);
     }
 
-    private void doUpdateNstValue(IntRedBlackTreeNode node, int[] nums) {
+    private void doUpdateNstValue(IntRedBlackNode node, int[] nums) {
         if (node == null) {
             return;
         }

@@ -14,7 +14,19 @@ package com.natsumes.tree;
  *
  * @author hetengjiao
  */
-public class Treap {
+public class Treap<V> {
 
 
+    static class Node<V> {
+
+        private V value;
+
+        private int num;
+
+        private Node<V> left;
+
+        private Node<V> right;
+
+        private Node<V> parent;
+    }
 }

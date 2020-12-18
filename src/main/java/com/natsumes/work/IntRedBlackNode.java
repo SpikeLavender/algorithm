@@ -1,30 +1,30 @@
-package com.natsumes.tree;
+package com.natsumes.work;
 
 /**
  * @author hetengjiao
  */
-public class RedBlackNode<V> {
+public class IntRedBlackNode {
 
-    V value;
+    int value;
 
     boolean isBlack;
 
     int num = 1;
 
-    RedBlackNode<V> left;
+    IntRedBlackNode left;
 
-    RedBlackNode<V> right;
+    IntRedBlackNode right;
 
-    RedBlackNode<V> parent;
+    IntRedBlackNode parent;
 
-    public RedBlackNode(V value) {
+    public IntRedBlackNode(int value) {
         this.value = value;
         this.isBlack = false;
     }
 
     @Override
     public String toString() {
-        return "RedBlackNode{" + "value=" + value + ", num = " + num
+        return "Node{" + "value=" + value + ", num = " + num
                 + ", color=" + (isBlack ? "BLACK" : "RED") + '}';
     }
 }
