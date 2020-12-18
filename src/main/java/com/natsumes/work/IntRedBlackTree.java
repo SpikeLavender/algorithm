@@ -26,12 +26,15 @@ public class IntRedBlackTree {
         if (root == null) {
             node.isBlack = true;
             root = node;
+
             return;
         }
 
         // 如果根节点不为空，查找插入的位置
+        //root.nodeNum++;
         Node parent = root;
         Node son;
+
         if (value < parent.value) {
             son = parent.left;
         } else if (value == parent.value) {
@@ -44,10 +47,12 @@ public class IntRedBlackTree {
         // 递归查找插入的位置
         while (son != null) {
             parent = son;
+            //parent.nodeNum++;
             if (value < parent.value) {
                 son = parent.left;
             }else if (value == parent.value) {
                 parent.num++;
+                updateNodeNum(parent);
                 return;
             } else {
                 son = parent.right;
@@ -131,6 +136,21 @@ public class IntRedBlackTree {
         setBlack(root);
     }
 
+    private void updateNodeNum(Node node) {
+        if (node == null) {
+            return;
+        }
+        int leftNum = 0;
+        int rightNum = 0;
+        if (node.left != null) {
+            leftNum = node.left.nodeNum;
+        }
+        if (node.right != null) {
+            rightNum = node.right.nodeNum;
+        }
+        node.nodeNum = leftNum + rightNum + node.num;
+    }
+
     /**
      * 左旋: 逆时针旋转红黑树的两个结点，使得父结点被自己的右孩子取代，而自己成为自己的左孩子
      */
@@ -150,6 +170,8 @@ public class IntRedBlackTree {
         }
         // 将自己挂到交换后的节点下
         right.left = node;
+        updateNodeNum(node);
+        updateNodeNum(parent);
     }
 
     /**
@@ -170,6 +192,8 @@ public class IntRedBlackTree {
         }
         // 将自己挂到交换后的节点下
         left.right = node;
+        updateNodeNum(node);
+        updateNodeNum(parent);
     }
 
     private void handleRotate(Node oldParent, Node newParent, Node node) {
@@ -182,6 +206,7 @@ public class IntRedBlackTree {
         // 进入旋转
         if (oldParent.left != null && oldParent.left == node){
             oldParent.left = newParent;
+
         } else {
             oldParent.right = newParent;
         }
@@ -264,6 +289,11 @@ public class IntRedBlackTree {
 
         boolean isBlack;
 
+        /**
+         * 节点的个数
+         */
+        int nodeNum;
+
         int num = 1;
 
         Node left;
@@ -275,11 +305,12 @@ public class IntRedBlackTree {
         Node(int value) {
             this.value = value;
             this.isBlack = false;
+            this.nodeNum = 1;
         }
 
         @Override
         public String toString() {
-            return "Node{" + "value=" + value + ", num = " + num
+            return "Node{" + "value=" + value + ", nodeNum = " + nodeNum
                     + ", color=" + (isBlack ? "BLACK" : "RED") + '}';
         }
     }

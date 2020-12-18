@@ -340,6 +340,9 @@ public class AVLTree<V> implements Tree<V> {
         return node;
     }
 
+    /**
+     * 为了不使树向一边偏沉,我们可以随机地选取是用后继还是前驱代替它, 并保证两种选择的概率均等。
+     */
     private boolean delete(V value) {
         Node<V> node = getNode(value);
         if (node == null) {

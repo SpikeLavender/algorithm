@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 /**
- * 二叉搜索树
+ * BST 二叉查找树
  * @author hetengjiao
  */
 public class BinaryTree<V> {

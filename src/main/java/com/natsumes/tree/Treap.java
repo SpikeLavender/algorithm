@@ -14,19 +14,17 @@ package com.natsumes.tree;
  *
  * @author hetengjiao
  */
-public class Treap<V> {
+public class Treap<V> extends AbstractTree implements Tree<V> {
 
 
-    static class Node<V> {
+    @Override
+    public void insert(V value) {
 
-        private V value;
-
-        private int num;
-
-        private Node<V> left;
-
-        private Node<V> right;
-
-        private Node<V> parent;
     }
+
+    @Override
+    public boolean remove(V value) {
+        return false;
+    }
+
 }

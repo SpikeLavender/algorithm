@@ -13,9 +13,9 @@ package com.natsumes.tree;
  *
  * @author hetengjiao
  */
-public class SplayTree<V> implements Tree<V> {
+public class SplayTree<V> extends AbstractTree implements Tree<V> {
 
-    Node<V> root;
+    Node root;
 
     @Override
     public void insert(V value) {
@@ -27,93 +27,4 @@ public class SplayTree<V> implements Tree<V> {
         return true;
     }
 
-
-    /**
-     * 左旋
-     * RR
-     * @return 新根节点
-     */
-    Node<V> leftRotate(Node<V> node) {
-        Node<V> parent = node.parent;
-        Node<V> son = node.right;
-
-        if (son.left != null) {
-            son.left.parent = node;
-        }
-        node.right = son.left;
-        son.left = node;
-        node.parent = son;
-        son.parent = parent;
-        if (parent == null) {
-            return son;
-        }
-        if (parent.left == node) {
-            parent.left = son;
-        } else {
-            parent.right = son;
-        }
-        return son;
-    }
-
-    /**
-     * 右旋
-     * LL
-     * @return 新根节点
-     */
-    Node<V> rightRotate(Node<V> node) {
-
-        Node<V> parent = node.parent;
-        Node<V> son = node.left;
-        if (son.right != null) {
-            son.right.parent = node;
-        }
-        node.left = son.right;
-        son.right = node;
-        node.parent =son;
-        son.parent = parent;
-        if (parent == null) {
-            return son;
-        }
-        if (parent.right == node) {
-            parent.right = son;
-        } else {
-            parent.left = son;
-        }
-        return son;
-    }
-
-    /**
-     * 寻找后继节点
-     */
-    private Node<V> getSuccessor(Node<V> node) {
-        if (node.right != null) {
-            Node<V> right = node.right;
-            while (right.left  != null) {
-                right = right.left;
-            }
-            return right;
-        }
-
-        Node<V> parent = node.parent;
-        while (parent != null && node == parent.right) {
-            node = parent;
-            parent = parent.parent;
-        }
-        return parent;
-    }
-
-    static class Node<V> {
-
-        V value;
-
-        Node<V> parent;
-
-        Node<V> left;
-
-        Node<V> right;
-
-        public Node(V value) {
-            this.value = value;
-        }
-    }
 }
