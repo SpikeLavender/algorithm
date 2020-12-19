@@ -60,7 +60,7 @@ public abstract class AbstractTree<V extends Comparable<V>> {
     }
 
     /**
-     * 寻找后继节点
+     * 寻找后继节点 predecessor
      */
     private Node getSuccessor(Node node) {
         if (node.right != null) {

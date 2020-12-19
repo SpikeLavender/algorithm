@@ -1,7 +1,6 @@
 package com.natsumes.alth.dp;
 
 import java.util.Arrays;
-import java.util.Comparator;
 
 /**
  * 动态规划问题大全
@@ -323,7 +322,7 @@ public class DynamicProgramming {
      * @return res
      */
     public static int maxEnvelopes(int[][] envelopes) {
-        Arrays.sort(envelopes, Comparator.comparingInt(o -> o[0]));
+        Arrays.sort(envelopes, (o1, o2) -> o1[0] == o2[0] ? o2[1] - o1[1] : o1[0] - o2[0]);
         int n = envelopes.length;
         int ans = 0;
         int[] f = new int[n];
