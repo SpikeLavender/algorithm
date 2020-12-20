@@ -290,7 +290,7 @@ public class IntRedBlackTree {
         boolean isBlack;
 
         /**
-         * 节点的个数
+         * 节点的个数，用来实现top值的查找
          */
         int nodeNum;
 
