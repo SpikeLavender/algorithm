@@ -14,7 +14,7 @@ public interface Tree<V> {
     /**
      * 删除元素
      * @param value 值
-     * @return old value
+     * @return old data
      */
     boolean remove(V value);
 
