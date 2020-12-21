@@ -264,7 +264,7 @@ public class RedBlackTree<V> {
 
         @Override
         public String toString() {
-            return "Node{" + "value=" + value + ", num = " + num
+            return "Node{" + "data=" + value + ", num = " + num
                     + ", color=" + (isBlack ? "BLACK" : "RED") + '}';
         }
     }

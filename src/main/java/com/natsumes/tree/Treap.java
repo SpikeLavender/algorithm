@@ -1,5 +1,7 @@
 package com.natsumes.tree;
 
+import java.util.Random;
+
 /**
  * 树堆（Treap）
  *
@@ -14,17 +16,271 @@ package com.natsumes.tree;
  *
  * @author hetengjiao
  */
-public class Treap<V> extends AbstractTree implements Tree<V> {
+public class Treap<T extends Comparable<T>> implements Tree<T> {
 
+    private Node root;
 
-    @Override
-    public void insert(V value) {
+    private Random rd = new Random();
 
+    private static final int DEFAULT_RD = 1 << 10;
+
+    public Treap() {
+        root = null;
+    }
+
+    public Treap(T data) {
+        root = new Node(data, rd.nextInt(DEFAULT_RD));
+    }
+
+    public Treap(T data, int priority) {
+        root = new Node(data, priority);
     }
 
     @Override
-    public boolean remove(V value) {
+    public void insert(T data) {
+        add(data, rd.nextInt(DEFAULT_RD));
+    }
+
+    private void add(T data, int priority) {
+        Node newNode = new Node(data, priority);
+        if (root == null) {
+            root = newNode;
+            return;
+        }
+        Node current = root;
+        Node parent = current;
+        int result = 0;
+        while (current != null) {
+            parent = current;
+            result = data.compareTo(current.data);
+            if (result > 0) {
+                current = current.right;
+            } else if (result < 0){
+                current = current.left;
+            } else {
+                current.num++;
+                parent.nodeNum++;
+                return;
+            }
+            parent.nodeNum++;
+        }
+        if (result > 0) {
+            parent.right = newNode;
+        } else {
+            parent.left = newNode;
+        }
+        newNode.parent = parent;
+        //updateNodeNum(parent);
+        // 自平衡
+        balanceInsert(newNode);
+    }
+
+    /**
+     * 给节点随机分配一个优先级，先和二叉搜索树的插入一样，先把要插入的点插入到一个叶子上，
+     * 然后 跟维护堆一样，
+     * 如果当前节点的优先级比根大就旋转，如果 当前节点是根的左儿子就右旋，
+     * 如果当前节点是根的右儿子就左旋
+     */
+    private void balanceInsert(Node node) {
+        if (node == null) {
+            return;
+        }
+        Node father = node.parent;
+        while (father != null) {
+
+            int result = father.priority - node.priority;
+            if (result >= 0) {
+                return;
+            }
+            if (node == father.left) {
+                //右旋
+                father = rRotate(node);
+
+            } else if (node == father.right){
+                //左旋
+                father = lRotate(node);
+            }
+        }
+    }
+
+
+    @Override
+    public boolean remove(T data) {
         return false;
+    }
+
+    /**
+     * 右旋 L
+     * @param node node
+     *
+     *
+     * 	  			 │			│
+     * 	  		   p─┘          └─l
+     * 	  		  ││     ->		  ││
+     * 	  		l─┘└  			 ─┘└─p
+     * 	  		││					 ││
+     * 	  	   ─┘└				    ─┘└
+     */
+    private Node rRotate(Node node) {
+        Node parent = node.parent;
+        node.parent = parent.parent;
+        if (parent.parent != null) {
+            if (parent == parent.parent.left) {
+                parent.parent.left = node;
+            } else {
+                parent.parent.right = node;
+            }
+        }
+        parent.left = node.right;
+        if (node.right != null) {
+            node.right.parent = parent;
+        }
+        node.right = parent;
+        parent.parent = node;
+        updateNodeNum(parent);
+        updateNodeNum(node);
+        if (root == parent) {
+            root = node;
+        }
+        return node;
+    }
+
+    private Node lRotate(Node node) {
+        Node parent = node.parent;
+        node.parent = parent.parent;
+        if (parent.parent != null) {
+            if (parent == parent.parent.right) {
+                parent.parent.right = node;
+            } else {
+                parent.parent.left = node;
+            }
+        }
+        parent.right = node.left;
+        if (node.left != null) {
+            node.left.parent = parent;
+        }
+        node.left = parent;
+        parent.parent = node;
+        updateNodeNum(parent);
+        updateNodeNum(node);
+        if (root == parent) {
+            root = node;
+        }
+        return node;
+    }
+
+    private void updateNodeNum(Node node) {
+        if (node == null) {
+            return;
+        }
+        int leftSize = node.left == null ? 0 : node.left.nodeNum;
+        int rightSize = node.right == null ? 0 : node.right.nodeNum;
+        node.nodeNum = leftSize + rightSize + node.num;
+    }
+
+    public T getMinData() {
+        Node node = root;
+        Node minNode = node;
+        while (node != null) {
+            minNode = node;
+            node = node.left;
+        }
+        if (minNode != null) {
+            return minNode.data;
+        }
+        return null;
+    }
+
+    public T getMaxData() {
+        Node node = root;
+        Node maxNode = node;
+        while (node != null) {
+            maxNode = node;
+            node = node.right;
+        }
+        if (maxNode != null) {
+            return maxNode.data;
+        }
+        return null;
+    }
+
+    public T getTopN(long n) {
+        if (n > root.nodeNum || n < 0) {
+            return null;
+        }
+        Node node = root;
+        while (node != null) {
+            if (n > node.nodeNum) {
+                node = node.right;
+            } else if (n <= node.nodeNum - node.num){
+                return node.data;
+            } else {
+                node = node.left;
+            }
+        }
+        return null;
+    }
+
+
+    public int getTotalSize() {
+        return root.nodeNum;
+    }
+
+    class Node {
+
+        T data;
+
+        /**
+         * 当前节点数
+         */
+        int num = 1;
+
+        /**
+         * 以当前节点为根子树的总节点个数
+         */
+        int nodeNum = 1;
+
+        transient int priority;
+
+        Node left;
+
+        Node right;
+
+        Node parent;
+
+        public Node(T data) {
+            this.data = data;
+        }
+
+        public Node(T data, Node left, Node right) {
+            this.data = data;
+            this.left = left;
+            this.right = right;
+            int leftSize = left == null ? 0 : left.nodeNum;
+            int rightSize = right == null ? 0 : right.nodeNum;
+            this.nodeNum = leftSize + rightSize + 1;
+        }
+
+        Node(T data, int priority) {
+            this.data = data;
+            this.priority = priority;
+        }
+
+        public Node(T data, int priority, Node left, Node right, Node parent) {
+            this.data = data;
+            this.priority = priority;
+            this.left = left;
+            this.right = right;
+            this.parent = parent;
+            int leftSize = left == null ? 0 : left.nodeNum;
+            int rightSize = right == null ? 0 : right.nodeNum;
+            this.nodeNum = leftSize + rightSize + 1;
+        }
+
+        @Override
+        public String toString() {
+            return "Node{" + "data=" + data + ", priority = " + priority + ", nodeNum = " + nodeNum + '}';
+        }
     }
 
 }

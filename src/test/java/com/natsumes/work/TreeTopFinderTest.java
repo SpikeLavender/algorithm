@@ -15,6 +15,8 @@ public class TreeTopFinderTest {
 
     private static CountTopFinder ctf = new CountTopFinder();
 
+    private static TreapFinder tf = new TreapFinder();
+
     @Test
     public void addNum() {
     }
@@ -66,6 +68,26 @@ public class TreeTopFinderTest {
         System.out.println("search time is: " + (System.currentTimeMillis() - start) + "ms");
         System.out.println("top number is: " + Arrays.toString(topNumArrCount));
         System.out.println("Heap size is: " + RamUsageEstimator.humanSizeOf(ctf));
+
+        start = System.currentTimeMillis();
+        for (int i = 0; i < 100000000; i++) {
+            Random random = new Random();
+            int i1 = random.nextInt(100) + 100;
+            tf.addNum(i1);
+        }
+        for (int i = 0; i < 1000; i++) {
+            Random random = new Random();
+            int i1 = random.nextInt(200000);
+            tf.addNum(i1);
+        }
+        System.out.println("insert time is: " + (System.currentTimeMillis() - start) + "ms");
+        //
+        Thread.sleep(1000);
+        start = System.currentTimeMillis();
+        Integer[] topNumTreapCount = tf.getTopNumArr();
+        System.out.println("search time is: " + (System.currentTimeMillis() - start) + "ms");
+        System.out.println("top number is: " + Arrays.toString(topNumTreapCount));
+        System.out.println("Heap size is: " + RamUsageEstimator.humanSizeOf(tf));
     }
 
     public static void main(String[] args) {

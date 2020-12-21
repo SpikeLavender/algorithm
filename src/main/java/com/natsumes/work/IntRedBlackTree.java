@@ -26,7 +26,6 @@ public class IntRedBlackTree {
         if (root == null) {
             node.isBlack = true;
             root = node;
-
             return;
         }
 
