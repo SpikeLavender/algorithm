@@ -83,7 +83,7 @@ public class AVLTree<T extends Comparable<T>> extends AbstractTree<T> implements
                 if (getBalance(node.left) > 0) {
                     // LL
                     node = llRotate(node);
-                } else {
+                } else if (getBalance(node.left) < 0){
                     // LR
                     node = lrRotate(node);
                 }
@@ -92,7 +92,7 @@ public class AVLTree<T extends Comparable<T>> extends AbstractTree<T> implements
                 if (getBalance(node.right) < 0) {
                     // RR
                     node = rrRotate(node);
-                } else {
+                } else if (getBalance(node.right) > 0){
                     // RL
                     node = rlRotate(node);
                 }
@@ -110,17 +110,6 @@ public class AVLTree<T extends Comparable<T>> extends AbstractTree<T> implements
     @Override
     public boolean remove(T value) {
         return delete(value);
-    }
-
-    /**
-     * LR型
-     * 先左旋再右旋
-     * @param node 旧节点
-     * @return 新的父节点
-     */
-    private Node lrRotate(Node node) {
-        rrRotate(node.left);
-        return llRotate(node);
     }
 
     /**
@@ -170,15 +159,6 @@ public class AVLTree<T extends Comparable<T>> extends AbstractTree<T> implements
         return son;
     }
 
-    private void updateDepth(Node node) {
-        if (node == null) {
-            return;
-        }
-        int leftDepth = getDepth(node.left);
-        int rightDepth = getDepth(node.right);
-        node.depth = Math.max(leftDepth, rightDepth) + 1;
-    }
-
     /**
      * RR型调整函数
      * @param node 离操作结点最近的失衡的结点
@@ -218,13 +198,33 @@ public class AVLTree<T extends Comparable<T>> extends AbstractTree<T> implements
 
     /**
      * LR型
+     * 先左旋再右旋
+     * @param node 旧节点
+     * @return 新的父节点
+     */
+    private Node lrRotate(Node node) {
+        node.left = rrRotate(node.left);
+        return llRotate(node);
+    }
+
+    /**
+     * RL型
      * 先右旋再左旋
      * @param node 旧节点
      * @return 新的父节点
      */
     private Node rlRotate(Node node) {
-        llRotate(node.left);
+        node.right = llRotate(node.right);
         return rrRotate(node);
+    }
+
+    private void updateDepth(Node node) {
+        if (node == null) {
+            return;
+        }
+        int leftDepth = getDepth(node.left);
+        int rightDepth = getDepth(node.right);
+        node.depth = Math.max(leftDepth, rightDepth) + 1;
     }
 
     /**
