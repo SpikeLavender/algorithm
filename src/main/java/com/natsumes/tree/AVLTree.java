@@ -18,8 +18,6 @@ package com.natsumes.tree;
  */
 public class AVLTree<T extends Comparable<T>> extends AbstractTree<T> implements Tree<T> {
 
-    private Node root;
-
     public AVLTree() {
         this.root = null;
     }
@@ -28,9 +26,85 @@ public class AVLTree<T extends Comparable<T>> extends AbstractTree<T> implements
         this.root = new Node(data);
     }
 
+    /**
+     * 插入节点
+     * @param data 值
+     */
     @Override
-    public void add(T value) {
-        insert(root, value);
+    public void add(T data) {
+        if (root == null) {
+            root = new Node(data);
+            return;
+        }
+        Node node = new Node(data);
+
+        Node temp = root;
+        Node parent = temp;
+
+        int res = 0;
+        while (temp != null) {
+            parent = temp;
+            parent.nodeNum++;
+            res = data.compareTo(temp.data);
+            if (res > 0) {
+                temp = temp.right;
+            } else if (res < 0) {
+                temp = temp.left;
+            } else {
+                temp.num++;
+                return;
+            }
+        }
+        if (res > 0) {
+            parent.right = node;
+        } else {
+            parent.left = node;
+        }
+        node.parent = parent;
+        balanceInsert(node);
+    }
+
+    /**
+     * 自平衡
+     * @param node 插入节点
+     */
+    private void balanceInsert(Node node) {
+        int balance;
+        while (node != null) {
+            updateDepth(node);
+            balance = getBalance(node);
+            if (balance >= -1 && balance <= 1) {
+                node = node.parent;
+                continue;
+            }
+
+            if (balance > 1) {
+                // 左子树高
+                if (getBalance(node.left) > 0) {
+                    // LL
+                    node = llRotate(node);
+                } else {
+                    // LR
+                    node = lrRotate(node);
+                }
+            } else {
+                // 右子树高
+                if (getBalance(node.right) < 0) {
+                    // RR
+                    node = rrRotate(node);
+                } else {
+                    // RL
+                    node = rlRotate(node);
+                }
+            }
+
+            if (node.parent == null) {
+                root = node;
+                break;
+            }
+
+            node = node.parent;
+        }
     }
 
     @Override
@@ -91,6 +165,8 @@ public class AVLTree<T extends Comparable<T>> extends AbstractTree<T> implements
         node.parent = son;
         //更新son结点的高度信息
         updateDepth(son);
+        updateNodeNum(node);
+        updateNodeNum(son);
         return son;
     }
 
@@ -135,6 +211,8 @@ public class AVLTree<T extends Comparable<T>> extends AbstractTree<T> implements
         }
         node.parent = son;
         updateDepth(son);
+        updateNodeNum(node);
+        updateNodeNum(son);
         return son;
     }
 
@@ -147,43 +225,6 @@ public class AVLTree<T extends Comparable<T>> extends AbstractTree<T> implements
     private Node rlRotate(Node node) {
         llRotate(node.left);
         return rrRotate(node);
-    }
-
-    /**
-     * 插入节点
-     *
-     * @param root 根节点
-     * @param value 值
-     * @return 插入后的根节点
-     */
-    public Node insert(Node root, T value) {
-        Node temp;
-        Node node = new Node(value);
-        temp = insertValue(root, node, null);
-        if (temp != null) {
-            updateDepth(temp);
-            root = balanceInsert(root, temp);
-        }
-        return root;
-    }
-
-    /**
-     * 插入节点
-     */
-    private Node insertValue(Node root, Node node, Node parent) {
-        if (root == null) {
-            root = node;
-            node.parent = parent;
-            return root;
-        }
-        if (node.data.compareTo(root.data) < 0) {
-            return insertValue(root.left, node, root);
-        }
-        if (node.data.compareTo(root.data) > 0) {
-            return insertValue(root.right, node, root);
-        }
-        root.num++;
-        return root;
     }
 
     /**
@@ -211,60 +252,13 @@ public class AVLTree<T extends Comparable<T>> extends AbstractTree<T> implements
     }
 
     /**
-     * 自平衡
-     * @param root 根节点
-     * @param node 插入节点
-     * @return 调整后的根节点
-     */
-    private Node balanceInsert(Node root, Node node) {
-        int balance;
-        while (node != null) {
-            updateDepth(node);
-            balance = getBalance(node);
-            if (balance >= -1 && balance <= 1) {
-                node = node.parent;
-                continue;
-            }
-
-            if (balance > 1) {
-                // 左子树高
-                if (getBalance(node.left) > 0) {
-                    // LL
-                   node = llRotate(node);
-                } else {
-                    // LR
-                    node = lrRotate(node);
-                }
-            } else {
-                // 右子树高
-                if (getBalance(node.right) < 0) {
-                    // RR
-                    node = rrRotate(node);
-                } else {
-                    // RL
-                    node = rlRotate(node);
-                }
-            }
-
-            if (node.parent == null) {
-                root = node;
-                break;
-            }
-
-            node = node.parent;
-        }
-        return root;
-    }
-
-    /**
      * 找到删除的结点，执行删除操作，并根据情况调整AVL树
      * @param root 根
      * @param value 需要删除的val
-     * @return 找到删除结点的情况则返回新根，否则返回NULL
      */
-    private Node remove(Node root, T value) {
+    private void remove(Node root, T value) {
         if (root == null) {
-            return null;
+            return;
         }
         Node temp = null;
         if (root.data.compareTo(value) < 0) {
@@ -278,11 +272,9 @@ public class AVLTree<T extends Comparable<T>> extends AbstractTree<T> implements
             //如果已经返回到最后一次（也就是root是真正的树根）
             if (root.parent != null) {
                 Node tmp = removeValue(temp);
-                return balanceInsert(root, tmp);
+                balanceInsert(tmp);
             }
-            return temp;
         }
-        return null;
     }
 
     /**

@@ -82,7 +82,7 @@ public abstract class AbstractTree<T extends Comparable<T>> {
          * 深度，这里计算每个节点的深度，通过深度的比较可得出是否平衡
          * used by AVL tree
          */
-        int depth = 0;
+        int depth = 1;
 
         int num = 1;
 
@@ -114,8 +114,11 @@ public abstract class AbstractTree<T extends Comparable<T>> {
 
         @Override
         public String toString() {
-            return "Node{" + "data=" + data + ", nodeNum = " + nodeNum + ", priority = " + priority
-                    + ", color=" + (isBlack ? "BLACK" : "RED") + '}';
+            return "Node{" + "data=" + data + ", nodeNum = " + nodeNum
+                    + ", depth = " + depth
+                    + ", priority = " + priority
+                    + ", color=" + (isBlack ? "BLACK" : "RED")
+                    + '}';
         }
 
     }
