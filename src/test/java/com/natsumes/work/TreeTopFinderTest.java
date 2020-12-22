@@ -8,6 +8,9 @@ import java.util.Random;
 import java.util.Scanner;
 
 /**
+ * 不同场景使用不同的方法
+ *     - 数据离散 -> 使用计数排序
+ *     - 数据集中在某个小区间内，使用平衡树  O(log n)
  * @author hetengjiao
  */
 public class TreeTopFinderTest {
@@ -22,7 +25,7 @@ public class TreeTopFinderTest {
 
     private final static long TEST_NUM = 1000000000;
 
-    private final static long TEST_NUM_PART = 1000;
+    private final static long TEST_NUM_PART = 2000;
 
     /**
      * 当数据量变大且离散的时候，红黑树明显要比数组占用的空间小
