@@ -16,9 +16,7 @@ import java.util.Random;
  *
  * @author hetengjiao
  */
-public class Treap<T extends Comparable<T>> implements Tree<T> {
-
-    private Node root;
+public class Treap<T extends Comparable<T>> extends AbstractTree<T> implements Tree<T> {
 
     private Random rd = new Random();
 
@@ -37,7 +35,7 @@ public class Treap<T extends Comparable<T>> implements Tree<T> {
     }
 
     @Override
-    public void insert(T data) {
+    public void add(T data) {
         add(data, rd.nextInt(DEFAULT_RD));
     }
 
@@ -169,118 +167,51 @@ public class Treap<T extends Comparable<T>> implements Tree<T> {
         return node;
     }
 
-    private void updateNodeNum(Node node) {
-        if (node == null) {
-            return;
-        }
-        int leftSize = node.left == null ? 0 : node.left.nodeNum;
-        int rightSize = node.right == null ? 0 : node.right.nodeNum;
-        node.nodeNum = leftSize + rightSize + node.num;
-    }
-
-    public T getMinData() {
-        Node node = root;
-        Node minNode = node;
-        while (node != null) {
-            minNode = node;
-            node = node.left;
-        }
-        if (minNode != null) {
-            return minNode.data;
-        }
-        return null;
-    }
-
-    public T getMaxData() {
-        Node node = root;
-        Node maxNode = node;
-        while (node != null) {
-            maxNode = node;
-            node = node.right;
-        }
-        if (maxNode != null) {
-            return maxNode.data;
-        }
-        return null;
-    }
-
-    public T getTopN(long n) {
-        if (n > root.nodeNum || n < 0) {
-            return null;
-        }
-        Node node = root;
-        while (node != null) {
-            if (n > node.nodeNum) {
-                node = node.right;
-            } else if (n <= node.nodeNum - node.num){
-                return node.data;
-            } else {
-                node = node.left;
-            }
-        }
-        return null;
-    }
 
 
-    public int getTotalSize() {
-        return root.nodeNum;
-    }
-
-    class Node {
-
-        T data;
-
-        /**
-         * 当前节点数
-         */
-        int num = 1;
-
-        /**
-         * 以当前节点为根子树的总节点个数
-         */
-        int nodeNum = 1;
-
-        transient int priority;
-
-        Node left;
-
-        Node right;
-
-        Node parent;
-
-        public Node(T data) {
-            this.data = data;
-        }
-
-        public Node(T data, Node left, Node right) {
-            this.data = data;
-            this.left = left;
-            this.right = right;
-            int leftSize = left == null ? 0 : left.nodeNum;
-            int rightSize = right == null ? 0 : right.nodeNum;
-            this.nodeNum = leftSize + rightSize + 1;
-        }
-
-        Node(T data, int priority) {
-            this.data = data;
-            this.priority = priority;
-        }
-
-        public Node(T data, int priority, Node left, Node right, Node parent) {
-            this.data = data;
-            this.priority = priority;
-            this.left = left;
-            this.right = right;
-            this.parent = parent;
-            int leftSize = left == null ? 0 : left.nodeNum;
-            int rightSize = right == null ? 0 : right.nodeNum;
-            this.nodeNum = leftSize + rightSize + 1;
-        }
-
-        @Override
-        public String toString() {
-            return "Node{" + "data=" + data + ", priority = " + priority + ", nodeNum = " + nodeNum + '}';
-        }
-    }
+//    class Node extends AbstractTree.Node {
+//
+//        transient int priority;
+//
+//        Node left;
+//
+//        Node right;
+//
+//        Node parent;
+//
+//        public Node(T data) {
+//            this.data = data;
+//        }
+//
+//        public Node(T data, Node left, Node right) {
+//            this.data = data;
+//            this.left = left;
+//            this.right = right;
+//            int leftSize = left == null ? 0 : left.nodeNum;
+//            int rightSize = right == null ? 0 : right.nodeNum;
+//            this.nodeNum = leftSize + rightSize + 1;
+//        }
+//
+//        Node(T data, int priority) {
+//            super(data);
+//            this.priority = priority;
+//        }
+//
+//        public Node(T data, int priority, Node left, Node right, Node parent) {
+//            this.data = data;
+//            this.priority = priority;
+//            this.left = left;
+//            this.right = right;
+//            this.parent = parent;
+//            int leftSize = left == null ? 0 : left.nodeNum;
+//            int rightSize = right == null ? 0 : right.nodeNum;
+//            this.nodeNum = leftSize + rightSize + 1;
+//        }
+//
+//        @Override
+//        public String toString() {
+//            return "Node{" + "data=" + data + ", priority = " + priority + ", nodeNum = " + nodeNum + '}';
+//        }
+//    }
 
 }

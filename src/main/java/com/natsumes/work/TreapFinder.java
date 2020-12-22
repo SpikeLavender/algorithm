@@ -14,7 +14,7 @@ public class TreapFinder {
     }
 
     public void addNum(int data) {
-        treap.insert(data);
+        treap.add(data);
     }
 
     public Integer[] getTopNumArr() {

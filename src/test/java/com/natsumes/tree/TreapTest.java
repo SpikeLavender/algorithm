@@ -22,14 +22,14 @@ public class TreapTest {
 
     @Test
     public void insert() {
-        treap.insert(3);
-        treap.insert(1);
-        treap.insert(5);
-        treap.insert(2);
-        treap.insert(4);
-        treap.insert(10);
-        treap.insert(7);
-        treap.insert(9);
+        treap.add(3);
+        treap.add(1);
+        treap.add(5);
+        treap.add(2);
+        treap.add(4);
+        treap.add(10);
+        treap.add(7);
+        treap.add(9);
         System.out.println("finished");
     }
 

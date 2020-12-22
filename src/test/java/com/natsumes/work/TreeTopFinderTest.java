@@ -11,15 +11,11 @@ import java.util.Scanner;
  * @author hetengjiao
  */
 public class TreeTopFinderTest {
-    private static TreeTopFinder finder = new TreeTopFinder();
+    private static RbTreeFinder finder = new RbTreeFinder();
 
     private static CountTopFinder ctf = new CountTopFinder();
 
     private static TreapFinder tf = new TreapFinder();
-
-    @Test
-    public void addNum() {
-    }
 
     /**
      * 当数据量变大且离散的时候，红黑树明显要比数组占用的空间小
@@ -28,7 +24,7 @@ public class TreeTopFinderTest {
     @Test
     public void compare() throws InterruptedException {
         long start = System.currentTimeMillis();
-        for (int i = 0; i < 100000000; i++) {
+        for (int i = 0; i < 1000000000; i++) {
             Random random = new Random();
             int i1 = random.nextInt(100) + 100;
             finder.addNum(i1);
@@ -39,18 +35,18 @@ public class TreeTopFinderTest {
             finder.addNum(i1);
         }
 
-        System.out.println("insert time is: " + (System.currentTimeMillis() - start) + "ms");
+        System.out.println("add time is: " + (System.currentTimeMillis() - start) + "ms");
         //
         Thread.sleep(1000);
         start = System.currentTimeMillis();
         //finder.list();
-        int[] topNumArr = finder.getTopNumArr();
+        Integer[] topNumArr = finder.getTopNumArr();
         System.out.println("search time is: " + (System.currentTimeMillis() - start) + "ms");
         System.out.println("top number is: " + Arrays.toString(topNumArr));
         System.out.println("Heap size is: " + RamUsageEstimator.humanSizeOf(finder));
 
         start = System.currentTimeMillis();
-        for (int i = 0; i < 100000000; i++) {
+        for (int i = 0; i < 1000000000; i++) {
             Random random = new Random();
             int i1 = random.nextInt(100) + 100;
             ctf.addNum(i1);
@@ -60,7 +56,7 @@ public class TreeTopFinderTest {
             int i1 = random.nextInt(200000);
             ctf.addNum(i1);
         }
-        System.out.println("insert time is: " + (System.currentTimeMillis() - start) + "ms");
+        System.out.println("add time is: " + (System.currentTimeMillis() - start) + "ms");
         //
         Thread.sleep(1000);
         start = System.currentTimeMillis();
@@ -70,7 +66,7 @@ public class TreeTopFinderTest {
         System.out.println("Heap size is: " + RamUsageEstimator.humanSizeOf(ctf));
 
         start = System.currentTimeMillis();
-        for (int i = 0; i < 100000000; i++) {
+        for (int i = 0; i < 1000000000; i++) {
             Random random = new Random();
             int i1 = random.nextInt(100) + 100;
             tf.addNum(i1);
@@ -80,7 +76,7 @@ public class TreeTopFinderTest {
             int i1 = random.nextInt(200000);
             tf.addNum(i1);
         }
-        System.out.println("insert time is: " + (System.currentTimeMillis() - start) + "ms");
+        System.out.println("add time is: " + (System.currentTimeMillis() - start) + "ms");
         //
         Thread.sleep(1000);
         start = System.currentTimeMillis();
@@ -94,9 +90,9 @@ public class TreeTopFinderTest {
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
             int in = sc.nextInt();
-            finder.addNum(in);
-            finder.list();
-            System.out.println("top number is: " + Arrays.toString(finder.getTopNumArr()));
+            tf.addNum(in);
+            //tf.list();
+            System.out.println("top number is: " + Arrays.toString(tf.getTopNumArr()));
         }
 
     }

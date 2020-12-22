@@ -3,19 +3,19 @@ package com.natsumes.tree;
 /**
  * @author hetengjiao
  */
-public interface Tree<V> {
+public interface Tree<T> {
 
     /**
      * 插入元素
-     * @param value 值
+     * @param data 值
      */
-    void insert(V value);
+    void add(T data);
 
     /**
      * 删除元素
-     * @param value 值
+     * @param data 值
      * @return old data
      */
-    boolean remove(V value);
+    boolean remove(T data);
 
 }

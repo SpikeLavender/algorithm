@@ -13,17 +13,15 @@ package com.natsumes.tree;
  *
  * @author hetengjiao
  */
-public class SplayTree<V> extends AbstractTree implements Tree<V> {
-
-    Node root;
+public class SplayTree<T extends Comparable<T>> extends AbstractTree<T> implements Tree<T> {
 
     @Override
-    public void insert(V value) {
+    public void add(T data) {
 
     }
 
     @Override
-    public boolean remove(V value) {
+    public boolean remove(T data) {
         return true;
     }
 

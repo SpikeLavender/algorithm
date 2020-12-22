@@ -1,7 +1,5 @@
 package com.natsumes.tree;
 
-import java.util.Comparator;
-
 /**
  * AVL树
  *
@@ -18,23 +16,25 @@ import java.util.Comparator;
  *
  * @author hetengjiao
  */
-public class AVLTree<V> implements Tree<V> {
+public class AVLTree<T extends Comparable<T>> extends AbstractTree<T> implements Tree<T> {
 
-    private Node<V> root;
+    private Node root;
 
-    private final Comparator<? super V> comparator;
+    public AVLTree() {
+        this.root = null;
+    }
 
-    public AVLTree(Comparator<? super V> comparator) {
-        this.comparator = comparator;
+    public AVLTree(T data) {
+        this.root = new Node(data);
     }
 
     @Override
-    public void insert(V value) {
+    public void add(T value) {
         insert(root, value);
     }
 
     @Override
-    public boolean remove(V value) {
+    public boolean remove(T value) {
         return delete(value);
     }
 
@@ -44,7 +44,7 @@ public class AVLTree<V> implements Tree<V> {
      * @param node 旧节点
      * @return 新的父节点
      */
-    private Node<V> lrRotate(Node<V> node) {
+    private Node lrRotate(Node node) {
         rrRotate(node.left);
         return llRotate(node);
     }
@@ -55,12 +55,12 @@ public class AVLTree<V> implements Tree<V> {
      * @param node 离操作结点最近的失衡的结点
      * @return 新父节点
      */
-    private Node<V> llRotate(Node<V> node) {
+    private Node llRotate(Node node) {
         // 获取失衡结点的父节点
-        Node<V> parent = node.parent;
+        Node parent = node.parent;
 
         //获取失衡结点的左孩子
-        Node<V> son = node.left;
+        Node son = node.left;
 
         //设置son结点右孩子的父指针
         if (son.right != null) {
@@ -94,7 +94,7 @@ public class AVLTree<V> implements Tree<V> {
         return son;
     }
 
-    private void updateDepth(Node<V> node) {
+    private void updateDepth(Node node) {
         if (node == null) {
             return;
         }
@@ -108,12 +108,12 @@ public class AVLTree<V> implements Tree<V> {
      * @param node 离操作结点最近的失衡的结点
      * @return 新父节点
      */
-    private Node<V> rrRotate(Node<V> node) {
+    private Node rrRotate(Node node) {
         // 获取失衡结点的父节点
-        Node<V> parent = node.parent;
+        Node parent = node.parent;
 
         //获取失衡结点的右孩子
-        Node<V> son = node.right;
+        Node son = node.right;
 
         // 设置son节点的左孩子的父指针
         if (son.left != null) {
@@ -144,7 +144,7 @@ public class AVLTree<V> implements Tree<V> {
      * @param node 旧节点
      * @return 新的父节点
      */
-    private Node<V> rlRotate(Node<V> node) {
+    private Node rlRotate(Node node) {
         llRotate(node.left);
         return rrRotate(node);
     }
@@ -156,9 +156,9 @@ public class AVLTree<V> implements Tree<V> {
      * @param value 值
      * @return 插入后的根节点
      */
-    public Node<V> insert(Node<V> root, V value) {
-        Node<V> temp;
-        Node<V> node = new Node<>(value);
+    public Node insert(Node root, T value) {
+        Node temp;
+        Node node = new Node(value);
         temp = insertValue(root, node, null);
         if (temp != null) {
             updateDepth(temp);
@@ -170,16 +170,16 @@ public class AVLTree<V> implements Tree<V> {
     /**
      * 插入节点
      */
-    private Node<V> insertValue(Node<V> root, Node<V> node, Node<V> parent) {
+    private Node insertValue(Node root, Node node, Node parent) {
         if (root == null) {
             root = node;
             node.parent = parent;
             return root;
         }
-        if (comparator.compare(node.value, root.value) < 0) {
+        if (node.data.compareTo(root.data) < 0) {
             return insertValue(root.left, node, root);
         }
-        if (comparator.compare(node.value, root.value) > 0) {
+        if (node.data.compareTo(root.data) > 0) {
             return insertValue(root.right, node, root);
         }
         root.num++;
@@ -191,7 +191,7 @@ public class AVLTree<V> implements Tree<V> {
      * @param node 节点
      * @return 当前节点深度
      */
-    private int getDepth(Node<V> node) {
+    private int getDepth(Node node) {
         if (node == null) {
             return 0;
         }
@@ -203,7 +203,7 @@ public class AVLTree<V> implements Tree<V> {
      * @param node 节点
      * @return 当前平衡因子
      */
-    private int getBalance(Node<V> node) {
+    private int getBalance(Node node) {
         if (node == null) {
             return 0;
         }
@@ -216,7 +216,7 @@ public class AVLTree<V> implements Tree<V> {
      * @param node 插入节点
      * @return 调整后的根节点
      */
-    private Node<V> balanceInsert(Node<V> root, Node<V> node) {
+    private Node balanceInsert(Node root, Node node) {
         int balance;
         while (node != null) {
             updateDepth(node);
@@ -262,14 +262,14 @@ public class AVLTree<V> implements Tree<V> {
      * @param value 需要删除的val
      * @return 找到删除结点的情况则返回新根，否则返回NULL
      */
-    private Node<V> remove(Node<V> root, V value) {
+    private Node remove(Node root, T value) {
         if (root == null) {
             return null;
         }
-        Node<V> temp = null;
-        if (comparator.compare(root.value, value) < 0) {
+        Node temp = null;
+        if (root.data.compareTo(value) < 0) {
             remove(root.right, value);
-        } else if (comparator.compare(root.value, value) > 0) {
+        } else if (root.data.compareTo(value) > 0) {
             remove(root.left, value);
         } else {
             temp = root;
@@ -277,7 +277,7 @@ public class AVLTree<V> implements Tree<V> {
         if (temp != null) {
             //如果已经返回到最后一次（也就是root是真正的树根）
             if (root.parent != null) {
-                Node<V> tmp = removeValue(temp);
+                Node tmp = removeValue(temp);
                 return balanceInsert(root, tmp);
             }
             return temp;
@@ -291,8 +291,8 @@ public class AVLTree<V> implements Tree<V> {
      * @param node 需要删除的节点
      * @return 删除节点的父节点
      */
-    private Node<V> removeValue(Node<V> node) {
-        Node<V> parent = node.parent;
+    private Node removeValue(Node node) {
+        Node parent = node.parent;
         if (parent == null) {
             return null;
         }
@@ -308,7 +308,7 @@ public class AVLTree<V> implements Tree<V> {
             return parent;
         }
 
-        Node<V> temp;
+        Node temp;
         if (node.right == null) {
             // 只有左孩子
             temp = node;
@@ -322,15 +322,15 @@ public class AVLTree<V> implements Tree<V> {
             updateDepth(node);
         } else {
             //既有左孩子也有右孩子，化繁为简
-            Node<V> tmp = getMin(node.right);
-            node.value = tmp.value;
+            Node tmp = getMin(node.right);
+            node.data = tmp.data;
             parent = tmp.parent;
             updateDepth(parent);
         }
         return parent;
     }
 
-    public Node<V> getMin(Node<V> node) {
+    public Node getMin(Node node) {
         if (node == null) {
             return null;
         }
@@ -343,14 +343,14 @@ public class AVLTree<V> implements Tree<V> {
     /**
      * 为了不使树向一边偏沉,我们可以随机地选取是用后继还是前驱代替它, 并保证两种选择的概率均等。
      */
-    private boolean delete(V value) {
-        Node<V> node = getNode(value);
+    private boolean delete(T value) {
+        Node node = getNode(value);
         if (node == null) {
             return false;
         }
-        Node<V> parent = node.parent;
-        Node<V> left = node.left;
-        Node<V> right = node.right;
+        Node parent = node.parent;
+        Node left = node.left;
+        Node right = node.right;
 
         if (left == null && right == null) {
             if (parent != null) {
@@ -373,11 +373,11 @@ public class AVLTree<V> implements Tree<V> {
             node = null;
             return true;
         } else {
-            Node<V> successor = getSuccessor(node);
-            V temp = successor.value;
+            Node successor = getSuccessor(node);
+            T temp = successor.data;
             boolean delete = delete(temp);
             if (delete) {
-                node.value = temp;
+                node.data = temp;
             }
             successor = null;
             return true;
@@ -389,17 +389,17 @@ public class AVLTree<V> implements Tree<V> {
      * 当然，也有可能不存在后继节点。
      * 一个节点在整棵树中的先驱节点必满足，小于该节点值得所有节点集合中值最大的那个节点，即为先驱节点
      */
-    private Node<V> getSuccessor(Node<V> node) {
+    private Node getSuccessor(Node node) {
         if (node.right != null) {
             //存在右子树，右子树的左节点为后继节点
-            Node<V> right = node.right;
+            Node right = node.right;
             while (right.left != null) {
                 right = right.left;
             }
             return right;
         }
         // 如果没有右子树，则去父节点找
-        Node<V> parent = node.parent;
+        Node parent = node.parent;
         while (parent != null && (node == parent.right)) {
             // 如果该节点是父节点的右节点，继续，直到找到第一个子节点为父节点的左节点
             node = parent;
@@ -408,10 +408,10 @@ public class AVLTree<V> implements Tree<V> {
         return parent;
     }
 
-    private void setParent(Node<V> parent, Node<V> node, V value) {
-        if (parent != null && comparator.compare(parent.value, value) > 0) {
+    private void setParent(Node parent, Node node, T value) {
+        if (parent != null && parent.data.compareTo(value) > 0) {
             parent.left = node;
-        } else if (parent != null && comparator.compare(parent.value, value) < 0) {
+        } else if (parent != null && parent.data.compareTo(value) < 0) {
             parent.right = node;
         } else {
             root = node;
@@ -433,8 +433,8 @@ public class AVLTree<V> implements Tree<V> {
      *
      * 算法导论中实现
      */
-    public boolean remove02(V value) {
-        Node<V> node = getNode(value);
+    public boolean remove02(T value) {
+        Node node = getNode(value);
         if (node == null) {
             return false;
         }
@@ -444,7 +444,7 @@ public class AVLTree<V> implements Tree<V> {
         } else if (node.right == null) {
             transplant(node, node.left);
         } else {
-            Node<V> successor = getSuccessor(node);
+            Node successor = getSuccessor(node);
             if (successor.parent != node) {
                 // 如果在右子树中
                 transplant(successor, successor.right);
@@ -473,7 +473,7 @@ public class AVLTree<V> implements Tree<V> {
      * @param node    要删除的节点
      * @param child   node节点的子节点
      */
-    private void transplant(Node<V> node, Node<V> child){
+    private void transplant(Node node, Node child){
         if (node.parent == null) {
             this.root = child;
         } else if (node.parent.left == node) {
@@ -487,47 +487,24 @@ public class AVLTree<V> implements Tree<V> {
         }
     }
 
-    public Node<V> getNode(V value) {
+    public Node getNode(T value) {
         if (root == null) {
             return null;
         }
         return getNode(root, value);
     }
 
-    private Node<V> getNode(Node<V> node, V value) {
+    private Node getNode(Node node, T value) {
         if (node == null) {
             return null;
         }
 
-        if (comparator.compare(value, node.value) == 0){
+        if (value.compareTo(node.data) == 0){
             return node;
-        } else if (comparator.compare(value, node.value) < 0) {
+        } else if (value.compareTo(node.data) < 0) {
             return getNode(node.left, value);
         } else {
             return getNode(node.right, value);
-        }
-    }
-
-    static class Node<V> {
-
-        /**
-         * 深度，这里计算每个节点的深度，通过深度的比较可得出是否平衡
-         */
-        int depth = 0;
-
-        Node<V> parent;
-
-        Node<V> left;
-
-        Node<V> right;
-
-        V value;
-
-        int num;
-
-        Node(V value) {
-            this.value = value;
-            this.num = 1;
         }
     }
 }

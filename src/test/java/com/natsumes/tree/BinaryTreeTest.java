@@ -37,8 +37,8 @@ public class BinaryTreeTest {
 //    public void testRedBlackTree() {
 //        System.out.println("============testRedBlackTree============");
 //        RedBlackTree<Integer> rb = new RedBlackTree<>(Integer::compareTo);
-//        Node<Integer> blackTreeNode = rb.insert(10).insert(5).insert(5).insert(9).insert(3).insert(6).insert(7)
-//                .insert(19).insert(32).insert(24).insert(17).insert(9).insert(32).build();
+//        Node<Integer> blackTreeNode = rb.add(10).add(5).add(5).add(9).add(3).add(6).add(7)
+//                .add(19).add(32).add(24).add(17).add(9).add(32).build();
 //        rb.list(blackTreeNode);
 //    }
 }

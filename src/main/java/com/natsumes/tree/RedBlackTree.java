@@ -1,41 +1,50 @@
 package com.natsumes.tree;
 
-import java.util.Comparator;
 
 /**
  * @author hetengjiao
  */
-public class RedBlackTree<V> {
+public class RedBlackTree <T extends Comparable<T>> extends AbstractTree<T> implements Tree<T>{
 
-    private Node<V> root;
-
-    private final Comparator<? super V> comparator;
-
-    public RedBlackTree(Comparator<? super V> comparator) {
-        this.comparator = comparator;
+    public RedBlackTree() {
+        root = null;
     }
 
-    public Node<V> build() {
+    public RedBlackTree(T data) {
+        root = new Node(data);
+        root.isBlack = true;
+    }
+
+    public Node build() {
         return root;
     }
 
-    public RedBlackTree<V> insert(V value) {
-        Node<V> node = new Node<>(value);
+    @Override
+    public boolean remove(T data) {
+        return false;
+    }
+
+    @Override
+    public void add(T data) {
+        Node node = new Node(data);
         // 如果根节点为空，直接设为为根节点，并设置为黑色
         if (root == null) {
             node.isBlack = true;
             root = node;
-            return this;
+            return;
         }
 
         // 如果根节点不为空，查找插入的位置
-        Node<V> parent = root;
-        Node<V> son;
-        if (comparator.compare(value, parent.value) < 0) {
-            son = parent.left;
-        } else if (comparator.compare(value, parent.value) == 0) {
+        Node parent = root;
+        Node son;
+        parent.nodeNum++;
+        if (data.compareTo(parent.data) == 0) {
             parent.num++;
-            return this;
+            return;
+        }
+
+        if (data.compareTo(parent.data) < 0) {
+            son = parent.left;
         } else {
             son = parent.right;
         }
@@ -43,31 +52,32 @@ public class RedBlackTree<V> {
         // 递归查找插入的位置
         while (son != null) {
             parent = son;
-            if (comparator.compare(value, parent.value) < 0) {
+            parent.nodeNum++;
+
+            if (data.compareTo(parent.data) < 0) {
                 son = parent.left;
-            }else if (comparator.compare(value, parent.value) == 0) {
+            } else if (data.compareTo(parent.data) == 0) {
                 parent.num++;
-                return this;
+                return;
             } else {
                 son = parent.right;
             }
         }
 
-        if (comparator.compare(value, parent.value) <= 0) {
+        if (data.compareTo(parent.data) <= 0) {
             parent.left = node;
         } else {
             parent.right = node;
         }
         node.parent = parent;
         balanceInsert(node);
-        return this;
     }
 
     /**
      * 自平衡
      */
-    private void balanceInsert(Node<V> node) {
-        Node<V> father, grandFather;
+    private void balanceInsert(Node node) {
+        Node father, grandFather;
         // 如果是根节点 setBlack
         // 如果不是根节点，父节点为黑，则不需要平衡
         // 如果不是根节点，而且父节点为红，进入平衡过程
@@ -76,7 +86,7 @@ public class RedBlackTree<V> {
             // 如果父节点为祖父节点的左节点
             if (grandFather.left == father) {
                 // 如果叔叔节点存在且为红
-                Node<V> uncle = grandFather.right;
+                Node uncle = grandFather.right;
                 if (uncle != null && !uncle.isBlack) {
                     // 将父节点和叔叔节点调整为黑，祖父节点调整为红
                     setBlack(father);
@@ -90,7 +100,7 @@ public class RedBlackTree<V> {
                     // 以父节点为轴左旋，使新节点成为父节点
                     leftRotate(father);
                     // 交换父节点和子节点位置
-                    Node<V> tmp = node;
+                    Node tmp = node;
                     node = father;
                     father = tmp;
                     // 进入下一种情况 00
@@ -102,7 +112,7 @@ public class RedBlackTree<V> {
                 setRed(grandFather);
             } else { // 如果父节点为祖父节点的右节点
                 // 如果叔叔节点存在且为红
-                Node<V> uncle = grandFather.left;
+                Node uncle = grandFather.left;
                 if (uncle != null && !uncle.isBlack) {
                     // 将父节点和叔叔节点调整为黑，祖父节点调整为红
                     setBlack(father);
@@ -116,7 +126,7 @@ public class RedBlackTree<V> {
                     // 以父节点为轴右旋，使新节点成为父节点
                     rightRotate(father);
                     // 交换父节点和子节点位置
-                    Node<V> tmp = node;
+                    Node tmp = node;
                     node = father;
                     father = tmp;
                     // 进入下一种情况 00
@@ -134,9 +144,9 @@ public class RedBlackTree<V> {
     /**
      * 左旋: 逆时针旋转红黑树的两个结点，使得父结点被自己的右孩子取代，而自己成为自己的左孩子
      */
-    private void leftRotate(Node<V> node) {
-        Node<V> parent = node.parent;
-        Node<V> right = node.right;
+    private void leftRotate(Node node) {
+        Node parent = node.parent;
+        Node right = node.right;
 
         // 如果为根节点，直接交换位置
         handleRotate(parent, right, node);
@@ -150,14 +160,16 @@ public class RedBlackTree<V> {
         }
         // 将自己挂到交换后的节点下
         right.left = node;
+        updateNodeNum(node);
+        updateNodeNum(right);
     }
 
     /**
      * 右旋: 顺时针旋转红黑树的两个结点，使得父结点被自己的左孩子取代，而自己成为自己的右孩子
      */
-    private void rightRotate(Node<V> node) {
-        Node<V> parent = node.parent;
-        Node<V> left = node.left;
+    private void rightRotate(Node node) {
+        Node parent = node.parent;
+        Node left = node.left;
         // 如果为根节点，直接交换位置
         handleRotate(parent, left, node);
         // 将自己挂到交换后的节点下
@@ -170,9 +182,11 @@ public class RedBlackTree<V> {
         }
         // 将自己挂到交换后的节点下
         left.right = node;
+        updateNodeNum(node);
+        updateNodeNum(left);
     }
 
-    private void handleRotate(Node<V> parent, Node<V> newParent, Node<V> node) {
+    private void handleRotate(Node parent, Node newParent, Node node) {
         // 如果为根节点，直接交换位置
         if (parent == null) {
             root = newParent;
@@ -188,11 +202,13 @@ public class RedBlackTree<V> {
         }
     }
 
-    private void setBlack(Node<V> node) {
+
+
+    private void setBlack(Node node) {
         node.isBlack = true;
     }
 
-    private void setRed(Node<V> node) {
+    private void setRed(Node node) {
         node.isBlack = false;
     }
 
@@ -202,70 +218,36 @@ public class RedBlackTree<V> {
         System.out.println("]");
     }
 
-    public void list(Node<V> node) {
+    public void list(Node node) {
         if (node == null) {
             return;
         }
 
         list(node.left);
-        System.out.print(node.value + " : " + node.num + ", ");
+        System.out.print(node.data + " : " + node.num + ", ");
         list(node.right);
     }
 
-    /**
-     *  todo: 改造为线程安全的
-     */
-    public V[] getAllNstValue(int[] nums, V[] topNumArr) {
-        getByNumArr(root, topNumArr, nums);
-        return topNumArr;
-    }
 
-    private void getByNumArr(Node<V> node, V[] topNumArr, int[] nums) {
-        if (node == null) {
-            return;
-        }
-        getByNumArr(node.left, topNumArr, nums);
-
-        // 单例
-        for (int i = 0; i < nums.length; i++) {
-            nums[i] = nums[i] - node.num;
-        }
-        if (nums[2] <= 0 && topNumArr[2] == null) {
-            topNumArr[2] = node.value;
-        }
-        if (nums[1] <= 0 && topNumArr[1] == null) {
-            topNumArr[1] = node.value;
-        }
-        if (nums[0] <= 0 && topNumArr[0] == null) {
-            topNumArr[0] = node.value;
-            return;
-        }
-        getByNumArr(node.right, topNumArr, nums);
-    }
-
-    static class Node<V> {
-
-        V value;
-
-        boolean isBlack;
-
-        int num = 1;
-
-        Node<V> left;
-
-        Node<V> right;
-
-        Node<V> parent;
-
-        Node(V value) {
-            this.value = value;
-            this.isBlack = false;
-        }
-
-        @Override
-        public String toString() {
-            return "Node{" + "data=" + value + ", num = " + num
-                    + ", color=" + (isBlack ? "BLACK" : "RED") + '}';
-        }
-    }
+//    class Node extends AbstractTree.Node {
+//
+//        transient boolean isBlack;
+//
+//        Node left;
+//
+//        Node right;
+//
+//        transient Node parent;
+//
+//        Node(T data) {
+//            super(data);
+//            this.isBlack = false;
+//        }
+//
+//        @Override
+//        public String toString() {
+//            return "Node{" + "data=" + data + ", nodeNum = " + nodeNum
+//                    + ", color=" + (isBlack ? "BLACK" : "RED") + '}';
+//        }
+//    }
 }
