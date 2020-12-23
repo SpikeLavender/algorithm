@@ -85,113 +85,8 @@ public class AVLTree<T extends Comparable<T>> extends AbstractTree<T> implements
         return delete(value);
     }
 
-    /**
-     * LL型调整函数
-     * 右旋
-     * @param node 离操作结点最近的失衡的结点
-     * @return 新父节点
-     */
-    private Node llRotate(Node node) {
-        // 获取失衡结点的父节点
-        Node parent = node.parent;
-
-        //获取失衡结点的左孩子
-        Node son = node.left;
-
-        //设置son结点右孩子的父指针
-        if (son.right != null) {
-            son.right.parent = node;
-        }
-
-        //失衡结点的左孩子变更为son的右孩子
-        node.left = son.right;
-
-        //更新失衡结点的高度信息
-        updateDepth(node);
-
-        //失衡结点变成son的右孩子
-        son.right = node;
-        //设置son的父结点为原失衡结点的父结点
-        son.parent = parent;
-        //如果失衡结点不是根结点，则开始更新父节点
-        if (parent != null) {
-            //如果父节点的左孩子是失衡结点，指向现在更新后的新孩子son
-            if (parent.left == node) {
-                parent.left = son;
-            } else {
-                //父节点的右孩子是失衡结点
-                parent.right = son;
-            }
-        }
-        //设置失衡结点的父亲
-        node.parent = son;
-        //更新son结点的高度信息
-        updateDepth(son);
-        updateNodeNum(node);
-        updateNodeNum(son);
-        return son;
-    }
-
-    /**
-     * RR型调整函数
-     * @param node 离操作结点最近的失衡的结点
-     * @return 新父节点
-     */
-    private Node rrRotate(Node node) {
-        // 获取失衡结点的父节点
-        Node parent = node.parent;
-
-        //获取失衡结点的右孩子
-        Node son = node.right;
-
-        // 设置son节点的左孩子的父指针
-        if (son.left != null) {
-            son.left.parent = node;
-        }
-        // son的左孩子成为失衡节点的右孩子
-        node.right = son.left;
-        updateDepth(node);
-
-        // 失衡节点成为son的左孩子
-        son.left = node;
-
-        son.parent = parent;
-
-        if (parent != null && parent.left == node) {
-            parent.left = son;
-        } else if (parent != null) {
-            parent.right = son;
-        }
-        node.parent = son;
-        updateDepth(son);
-        updateNodeNum(node);
-        updateNodeNum(son);
-        return son;
-    }
-
-    /**
-     * LR型
-     * 先左旋再右旋
-     * @param node 旧节点
-     * @return 新的父节点
-     */
-    private Node lrRotate(Node node) {
-        node.left = rrRotate(node.left);
-        return llRotate(node);
-    }
-
-    /**
-     * RL型
-     * 先右旋再左旋
-     * @param node 旧节点
-     * @return 新的父节点
-     */
-    private Node rlRotate(Node node) {
-        node.right = llRotate(node.right);
-        return rrRotate(node);
-    }
-
-    private void updateDepth(Node node) {
+    @Override
+    protected void updateDepth(Node node) {
         if (node == null) {
             return;
         }
@@ -211,6 +106,8 @@ public class AVLTree<T extends Comparable<T>> extends AbstractTree<T> implements
         }
         return node.depth;
     }
+
+
 
     /**
      * 返回当前平衡因子
