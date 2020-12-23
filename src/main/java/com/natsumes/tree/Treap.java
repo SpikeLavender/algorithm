@@ -35,42 +35,13 @@ public class Treap<T extends Comparable<T>> extends AbstractTree<T> implements T
     }
 
     @Override
-    public void add(T data) {
-        add(data, rd.nextInt(DEFAULT_RD));
+    protected Node initNode(T data) {
+        return new Node(data, rd.nextInt(DEFAULT_RD));
     }
 
-    private void add(T data, int priority) {
-        Node newNode = new Node(data, priority);
-        if (root == null) {
-            root = newNode;
-            return;
-        }
-        Node current = root;
-        Node parent = current;
-        int result = 0;
-        while (current != null) {
-            parent = current;
-            result = data.compareTo(current.data);
-            if (result > 0) {
-                current = current.right;
-            } else if (result < 0){
-                current = current.left;
-            } else {
-                current.num++;
-                parent.nodeNum++;
-                return;
-            }
-            parent.nodeNum++;
-        }
-        if (result > 0) {
-            parent.right = newNode;
-        } else {
-            parent.left = newNode;
-        }
-        newNode.parent = parent;
-        //updateNodeNum(parent);
-        // 自平衡
-        balanceInsert(newNode);
+    @Override
+    protected void afterAdd(Node node) {
+        balanceInsert(node);
     }
 
     /**

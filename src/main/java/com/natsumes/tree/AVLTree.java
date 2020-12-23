@@ -26,41 +26,14 @@ public class AVLTree<T extends Comparable<T>> extends AbstractTree<T> implements
         this.root = new Node(data);
     }
 
-    /**
-     * 插入节点
-     * @param data 值
-     */
+
     @Override
-    public void add(T data) {
-        if (root == null) {
-            root = new Node(data);
-            return;
-        }
-        Node node = new Node(data);
+    protected Node initNode(T data) {
+        return new Node(data);
+    }
 
-        Node temp = root;
-        Node parent = temp;
-
-        int res = 0;
-        while (temp != null) {
-            parent = temp;
-            parent.nodeNum++;
-            res = data.compareTo(temp.data);
-            if (res > 0) {
-                temp = temp.right;
-            } else if (res < 0) {
-                temp = temp.left;
-            } else {
-                temp.num++;
-                return;
-            }
-        }
-        if (res > 0) {
-            parent.right = node;
-        } else {
-            parent.left = node;
-        }
-        node.parent = parent;
+    @Override
+    protected void afterAdd(Node node) {
         balanceInsert(node);
     }
 

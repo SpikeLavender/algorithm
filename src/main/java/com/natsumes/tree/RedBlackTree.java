@@ -20,56 +20,15 @@ public class RedBlackTree <T extends Comparable<T>> extends AbstractTree<T> impl
     }
 
     @Override
-    public boolean remove(T data) {
-        return false;
+    protected Node initNode(T data) {
+        if (root == null) {
+            return new Node(data, true);
+        }
+        return new Node(data);
     }
 
     @Override
-    public void add(T data) {
-        Node node = new Node(data);
-        // 如果根节点为空，直接设为为根节点，并设置为黑色
-        if (root == null) {
-            node.isBlack = true;
-            root = node;
-            return;
-        }
-
-        // 如果根节点不为空，查找插入的位置
-        Node parent = root;
-        Node son;
-        parent.nodeNum++;
-        if (data.compareTo(parent.data) == 0) {
-            parent.num++;
-            return;
-        }
-
-        if (data.compareTo(parent.data) < 0) {
-            son = parent.left;
-        } else {
-            son = parent.right;
-        }
-
-        // 递归查找插入的位置
-        while (son != null) {
-            parent = son;
-            parent.nodeNum++;
-
-            if (data.compareTo(parent.data) < 0) {
-                son = parent.left;
-            } else if (data.compareTo(parent.data) == 0) {
-                parent.num++;
-                return;
-            } else {
-                son = parent.right;
-            }
-        }
-
-        if (data.compareTo(parent.data) <= 0) {
-            parent.left = node;
-        } else {
-            parent.right = node;
-        }
-        node.parent = parent;
+    protected void afterAdd(Node node) {
         balanceInsert(node);
     }
 

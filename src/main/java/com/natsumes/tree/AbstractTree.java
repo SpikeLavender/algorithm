@@ -3,9 +3,74 @@ package com.natsumes.tree;
 /**
  * @author hetengjiao
  */
-public abstract class AbstractTree<T extends Comparable<T>> {
+public abstract class AbstractTree<T extends Comparable<T>> implements Tree<T> {
 
     protected Node root;
+
+    @Override
+    public void add(T data) {
+        if (root == null) {
+            root = initNode(data);
+            return;
+        }
+        Node node = initNode(data);
+        if (doAdd(data, node) != null) {
+            afterAdd(node);
+        }
+    }
+
+    /**
+     * add之前构造新节点
+     * @param data 插入数据
+     * @return 新节点
+     */
+    protected abstract Node initNode(T data);
+
+    /**
+     * 执行插入
+     * @param data 插入的数据
+     * @param node 需要插入的节点
+     * @return 返回需要调整的节点
+     */
+    protected Node doAdd(T data, Node node) {
+        Node temp = root;
+        Node parent = temp;
+
+        int res = 0;
+        while (temp != null) {
+            parent = temp;
+            parent.nodeNum++;
+            res = data.compareTo(temp.data);
+            if (res > 0) {
+                temp = temp.right;
+            } else if (res < 0) {
+                temp = temp.left;
+            } else {
+                temp.num++;
+                return null;
+            }
+        }
+        if (res > 0) {
+            parent.right = node;
+        } else {
+            parent.left = node;
+        }
+        node.parent = parent;
+        return node;
+    }
+
+    /**
+     * 插入之后进行平衡操作
+     * @param node 需要处理的节点
+     */
+    protected abstract void afterAdd(Node node);
+
+    @Override
+    public boolean remove(T data) {
+        return false;
+    }
+
+
 
     protected void updateNodeNum(Node node) {
         if (node == null) {
@@ -112,6 +177,12 @@ public abstract class AbstractTree<T extends Comparable<T>> {
             this.priority = priority;
         }
 
+        public Node(T data, boolean isBlack) {
+            this.data = data;
+            this.isBlack = isBlack;
+            this.nodeNum = 1;
+        }
+
         @Override
         public String toString() {
             return "Node{" + "data=" + data + ", nodeNum = " + nodeNum
@@ -122,135 +193,4 @@ public abstract class AbstractTree<T extends Comparable<T>> {
         }
 
     }
-//
-//
-//    /**
-//     * private void rRotate(Node node) {
-//     *         Node parent = node.parent;
-//     *         Node son = node.left;
-//     *         if (son.right != null) {
-//     *             son.right.parent = node;
-//     *         }
-//     *         node.left = son.right;
-//     *         transplant(node, son, parent);
-//     *     }
-//     *
-//     *     private void lRotate(Node node) {
-//     *         Node parent = node.parent;
-//     *         Node son = node.right;
-//     *         if (son.left != null) {
-//     *             son.left.parent = node;
-//     *         }
-//     *         node.right = son.left;
-//     *         transplant(node, son, parent);
-//     *     }
-//     *
-//     *     private void transplant(Node node, Node son, Node parent) {
-//     *         node.parent = son;
-//     *         son.parent = parent;
-//     *         updateNodeNum(node);
-//     *         updateNodeNum(son);
-//     *         if (parent == null) {
-//     *             root = son;
-//     *             return;
-//     *         }
-//     *         if (parent.left == node) {
-//     *             parent.left = son;
-//     *         } else {
-//     *             parent.right = son;
-//     *         }
-//     *     }
-//     */
-
-    /**
-     * 左旋
-     * RR
-     * @return 新根节点
-     */
-//    @SuppressWarnings("unchecked")
-//    <T extends Node> T  leftRotate(T node) {
-//        Node parent = node.parent;
-//        Node son = node.right;
-//
-//        if (son.left != null) {
-//            son.left.parent = node;
-//        }
-//        node.right = son.left;
-//        son.left = node;
-//        node.parent = son;
-//        son.parent = parent;
-//        updateSize(node);
-//        updateSize(son);
-//
-//        if (parent == null) {
-//            return (T)son;
-//        }
-//        if (parent.left == node) {
-//            parent.left = son;
-//        } else {
-//            parent.right = son;
-//        }
-//        return (T)son;
-//    }
-//
-//    /**
-//     * 右旋
-//     * LL
-//     * @return 新根节点
-//     */
-//    @SuppressWarnings("unchecked")
-//    <T extends Node> T rightRotate (T node) {
-//
-//        Node parent = node.parent;
-//        Node son = node.left;
-//        if (son.right != null) {
-//            son.right.parent = node;
-//        }
-//        node.left = son.right;
-//        son.right = node;
-//        node.parent =son;
-//        son.parent = parent;
-//        updateSize(node);
-//        updateSize(son);
-//
-//        if (parent == null) {
-//            return (T)son;
-//        }
-//        if (parent.right == node) {
-//            parent.right = son;
-//        } else {
-//            parent.left = son;
-//        }
-//        return (T)son;
-//    }
-//
-//
-//
-//    private void updateSize(Node node) {
-//        node.size = node.left.size + node.right.size + node.num;
-//    }
-//
-//    /**
-//     * 寻找后继节点 predecessor
-//     */
-//    protected Node getSuccessor(Node node) {
-//        if (node.right != null) {
-//            Node right = node.right;
-//            while (right.left  != null) {
-//                right = right.left;
-//            }
-//            return right;
-//        }
-//
-//        Node parent = node.parent;
-//        while (parent != null && node == parent.right) {
-//            node = parent;
-//            parent = parent.parent;
-//        }
-//        return parent;
-//    }
-//
-//    public Node createNode(V data) {
-//        return new Node(data);
-//    }
 }

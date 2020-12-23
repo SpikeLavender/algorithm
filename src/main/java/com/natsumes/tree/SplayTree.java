@@ -15,8 +15,14 @@ package com.natsumes.tree;
  */
 public class SplayTree<T extends Comparable<T>> extends AbstractTree<T> implements Tree<T> {
 
+
     @Override
-    public void add(T data) {
+    protected Node initNode(T data) {
+        return null;
+    }
+
+    @Override
+    protected void afterAdd(Node node) {
 
     }
 

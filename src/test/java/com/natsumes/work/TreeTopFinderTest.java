@@ -23,7 +23,7 @@ public class TreeTopFinderTest {
 
     private static AvlFinder atf = new AvlFinder();
 
-    private final static long TEST_NUM = 1000000000;
+    private final static long TEST_NUM = 1000000;
 
     private final static long TEST_NUM_PART = 2000;
 

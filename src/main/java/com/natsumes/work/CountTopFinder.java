@@ -60,6 +60,7 @@ public class CountTopFinder {
     }
 
     public int[] getTopNumArr() {
+        updateTopValue();
         return topNumArr;
     }
 }
