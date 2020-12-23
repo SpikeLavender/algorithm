@@ -1,7 +1,6 @@
 package com.natsumes.work;
 
 import com.natsumes.tree.AbstractTree;
-import com.natsumes.tree.Tree;
 
 /**
  * @author hetengjiao

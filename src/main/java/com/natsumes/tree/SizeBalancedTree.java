@@ -1,7 +1,5 @@
 package com.natsumes.tree;
 
-import java.util.AbstractQueue;
-
 /**
  * SBT - Size Balanced Tree
  *

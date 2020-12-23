@@ -36,9 +36,11 @@ public class TreeTopFinderTest {
 
     private static TopFinder stf = new SizeBalanceFinder();
 
-    private static TopFinder sgtf = new ScapegoatFinder();
+    private static TopFinder sgf = new ScapegoatFinder();
 
-    private final static long TEST_NUM = 100000000;
+    private static TopFinder spf = new SplayFinder();
+
+    private final static long TEST_NUM = 1000000000;
 
     private final static long TEST_NUM_PART = 1000;
 
@@ -161,21 +163,42 @@ public class TreeTopFinderTest {
         for (int i = 0; i < TEST_NUM; i++) {
             Random random = new Random();
             int i1 = random.nextInt(100) + 100;
-            sgtf.addNum(i1);
+            sgf.addNum(i1);
         }
         for (int i = 0; i < TEST_NUM_PART; i++) {
             Random random = new Random();
             int i1 = random.nextInt(200000);
-            sgtf.addNum(i1);
+            sgf.addNum(i1);
         }
         System.out.println("Scapegoat Tree add time is: " + (System.currentTimeMillis() - start) + "ms");
         //
         Thread.sleep(1000);
         start = System.currentTimeMillis();
-        Integer[] topSgtCount = sgtf.getTopNumArr();
+        Integer[] topSgtCount = sgf.getTopNumArr();
         System.out.println("Scapegoat Tree search time is: " + (System.currentTimeMillis() - start) + "ms");
         System.out.println("Scapegoat Tree top number is: " + Arrays.toString(topSgtCount));
-        System.out.println("Scapegoat Tree heap size is: " + RamUsageEstimator.humanSizeOf(sgtf));
+        System.out.println("Scapegoat Tree heap size is: " + RamUsageEstimator.humanSizeOf(sgf));
+
+        System.out.println("============================== Splay Tree ====================================");
+        start = System.currentTimeMillis();
+        for (int i = 0; i < TEST_NUM; i++) {
+            Random random = new Random();
+            int i1 = random.nextInt(100) + 100;
+            spf.addNum(i1);
+        }
+        for (int i = 0; i < TEST_NUM_PART; i++) {
+            Random random = new Random();
+            int i1 = random.nextInt(200000);
+            spf.addNum(i1);
+        }
+        System.out.println("Splay Tree add time is: " + (System.currentTimeMillis() - start) + "ms");
+        //
+        Thread.sleep(1000);
+        start = System.currentTimeMillis();
+        Integer[] topSptCount = spf.getTopNumArr();
+        System.out.println("Splay Tree search time is: " + (System.currentTimeMillis() - start) + "ms");
+        System.out.println("Splay Tree top number is: " + Arrays.toString(topSptCount));
+        System.out.println("Splay Tree heap size is: " + RamUsageEstimator.humanSizeOf(spf));
         System.out.println("==================================================================");
     }
 
@@ -183,9 +206,9 @@ public class TreeTopFinderTest {
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
             int in = sc.nextInt();
-            sgtf.addNum(in);
+            sgf.addNum(in);
             //tf.list();
-            System.out.println("top number is: " + Arrays.toString(sgtf.getTopNumArr()));
+            System.out.println("top number is: " + Arrays.toString(sgf.getTopNumArr()));
         }
 
     }
