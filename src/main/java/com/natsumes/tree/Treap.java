@@ -16,7 +16,7 @@ import java.util.Random;
  *
  * @author hetengjiao
  */
-public class Treap<T extends Comparable<T>> extends AbstractTree<T> implements Tree<T> {
+public class Treap<T extends Comparable<T>> extends AbstractTree<T> {
 
     private Random rd = new Random();
 

@@ -4,7 +4,7 @@ package com.natsumes.tree;
 /**
  * @author hetengjiao
  */
-public class RedBlackTree <T extends Comparable<T>> extends AbstractTree<T> implements Tree<T>{
+public class RedBlackTree <T extends Comparable<T>> extends AbstractTree<T> {
 
     public RedBlackTree() {
         root = null;

@@ -151,9 +151,6 @@ public abstract class AbstractTree<T extends Comparable<T>> implements Tree<T> {
         updateNodeNum(son);
         updateSize(node);
         updateSize(son);
-//        if (son.parent == null) {
-//            root = son;
-//        }
     }
 
     /**
@@ -303,7 +300,7 @@ public abstract class AbstractTree<T extends Comparable<T>> implements Tree<T> {
             this.priority = priority;
         }
 
-        public Node(T data, boolean isBlack) {
+        Node(T data, boolean isBlack) {
             this.data = data;
             this.isBlack = isBlack;
             this.nodeNum = 1;

@@ -36,9 +36,11 @@ public class TreeTopFinderTest {
 
     private static TopFinder stf = new SizeBalanceFinder();
 
-    private final static long TEST_NUM = 10000000;
+    private static TopFinder sgtf = new ScapegoatFinder();
 
-    private final static long TEST_NUM_PART = 10000;
+    private final static long TEST_NUM = 100000000;
+
+    private final static long TEST_NUM_PART = 1000;
 
     /**
      * 当数据量变大且离散的时候，红黑树明显要比数组占用的空间小
@@ -46,7 +48,30 @@ public class TreeTopFinderTest {
      */
     @Test
     public void compare() throws InterruptedException {
+
+        System.out.println("============================== Count method ====================================");
         long start = System.currentTimeMillis();
+        for (int i = 0; i < TEST_NUM; i++) {
+            Random random = new Random();
+            int i1 = random.nextInt(100) + 100;
+            ctf.addNum(i1);
+        }
+        for (int i = 0; i < TEST_NUM_PART; i++) {
+            Random random = new Random();
+            int i1 = random.nextInt(200000);
+            ctf.addNum(i1);
+        }
+        System.out.println("Count method add time is: " + (System.currentTimeMillis() - start) + "ms");
+
+        Thread.sleep(1000);
+        start = System.currentTimeMillis();
+        int[] topNumArrCount = ctf.getTopNumArr();
+        System.out.println("Count method search time is: " + (System.currentTimeMillis() - start) + "ms");
+        System.out.println("Count method top number is: " + Arrays.toString(topNumArrCount));
+        System.out.println("Count method heap size is: " + RamUsageEstimator.humanSizeOf(ctf));
+
+        System.out.println("================================== Red-Black Tree ================================");
+        start = System.currentTimeMillis();
         for (int i = 0; i < TEST_NUM; i++) {
             Random random = new Random();
             int i1 = random.nextInt(100) + 100;
@@ -67,30 +92,8 @@ public class TreeTopFinderTest {
         System.out.println("Red-Black tree search time is: " + (System.currentTimeMillis() - start) + "ms");
         System.out.println("Red-Black tree top number is: " + Arrays.toString(topNumArr));
         System.out.println("Red-Black tree heap size is: " + RamUsageEstimator.humanSizeOf(finder));
-        System.out.println("==================================================================");
 
-        start = System.currentTimeMillis();
-        for (int i = 0; i < TEST_NUM; i++) {
-            Random random = new Random();
-            int i1 = random.nextInt(100) + 100;
-            ctf.addNum(i1);
-        }
-        for (int i = 0; i < TEST_NUM_PART; i++) {
-            Random random = new Random();
-            int i1 = random.nextInt(200000);
-            ctf.addNum(i1);
-        }
-        System.out.println("Count method add time is: " + (System.currentTimeMillis() - start) + "ms");
-        //
-        Thread.sleep(1000);
-        start = System.currentTimeMillis();
-        int[] topNumArrCount = ctf.getTopNumArr();
-        System.out.println("Count method search time is: " + (System.currentTimeMillis() - start) + "ms");
-        System.out.println("Count method top number is: " + Arrays.toString(topNumArrCount));
-        System.out.println("Count method heap size is: " + RamUsageEstimator.humanSizeOf(ctf));
-        System.out.println("==================================================================");
-
-
+        System.out.println("=============================== Treap ===================================");
         start = System.currentTimeMillis();
         for (int i = 0; i < TEST_NUM; i++) {
             Random random = new Random();
@@ -103,16 +106,15 @@ public class TreeTopFinderTest {
             tf.addNum(i1);
         }
         System.out.println("Treap add time is: " + (System.currentTimeMillis() - start) + "ms");
-        //
+
         Thread.sleep(1000);
         start = System.currentTimeMillis();
         Integer[] topNumTreapCount = tf.getTopNumArr();
         System.out.println("Treap search time is: " + (System.currentTimeMillis() - start) + "ms");
         System.out.println("Treap top number is: " + Arrays.toString(topNumTreapCount));
         System.out.println("Treap heap size is: " + RamUsageEstimator.humanSizeOf(tf));
-        System.out.println("==================================================================");
 
-
+        System.out.println("================================= AVL Tree =================================");
         start = System.currentTimeMillis();
         for (int i = 0; i < TEST_NUM; i++) {
             Random random = new Random();
@@ -125,15 +127,15 @@ public class TreeTopFinderTest {
             atf.addNum(i1);
         }
         System.out.println("AVL tree add time is: " + (System.currentTimeMillis() - start) + "ms");
-        //
+
         Thread.sleep(1000);
         start = System.currentTimeMillis();
         Integer[] topNumAVLCount = atf.getTopNumArr();
         System.out.println("AVL tree search time is: " + (System.currentTimeMillis() - start) + "ms");
         System.out.println("AVL tree top number is: " + Arrays.toString(topNumAVLCount));
         System.out.println("AVL tree heap size is: " + RamUsageEstimator.humanSizeOf(atf));
-        System.out.println("==================================================================");
 
+        System.out.println("================================ Size Balanced Tree ==================================");
         start = System.currentTimeMillis();
         for (int i = 0; i < TEST_NUM; i++) {
             Random random = new Random();
@@ -146,13 +148,34 @@ public class TreeTopFinderTest {
             stf.addNum(i1);
         }
         System.out.println("Size Balanced Tree add time is: " + (System.currentTimeMillis() - start) + "ms");
-        //
+
         Thread.sleep(1000);
         start = System.currentTimeMillis();
         Integer[] topSbtAVLCount = stf.getTopNumArr();
         System.out.println("Size Balanced Tree search time is: " + (System.currentTimeMillis() - start) + "ms");
         System.out.println("Size Balanced Tree top number is: " + Arrays.toString(topSbtAVLCount));
         System.out.println("Size Balanced Tree heap size is: " + RamUsageEstimator.humanSizeOf(stf));
+
+        System.out.println("============================= Scapegoat Tree =====================================");
+        start = System.currentTimeMillis();
+        for (int i = 0; i < TEST_NUM; i++) {
+            Random random = new Random();
+            int i1 = random.nextInt(100) + 100;
+            sgtf.addNum(i1);
+        }
+        for (int i = 0; i < TEST_NUM_PART; i++) {
+            Random random = new Random();
+            int i1 = random.nextInt(200000);
+            sgtf.addNum(i1);
+        }
+        System.out.println("Scapegoat Tree add time is: " + (System.currentTimeMillis() - start) + "ms");
+        //
+        Thread.sleep(1000);
+        start = System.currentTimeMillis();
+        Integer[] topSgtCount = sgtf.getTopNumArr();
+        System.out.println("Scapegoat Tree search time is: " + (System.currentTimeMillis() - start) + "ms");
+        System.out.println("Scapegoat Tree top number is: " + Arrays.toString(topSgtCount));
+        System.out.println("Scapegoat Tree heap size is: " + RamUsageEstimator.humanSizeOf(sgtf));
         System.out.println("==================================================================");
     }
 
@@ -160,9 +183,9 @@ public class TreeTopFinderTest {
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
             int in = sc.nextInt();
-            stf.addNum(in);
+            sgtf.addNum(in);
             //tf.list();
-            System.out.println("top number is: " + Arrays.toString(stf.getTopNumArr()));
+            System.out.println("top number is: " + Arrays.toString(sgtf.getTopNumArr()));
         }
 
     }

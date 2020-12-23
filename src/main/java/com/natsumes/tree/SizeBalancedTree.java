@@ -1,5 +1,7 @@
 package com.natsumes.tree;
 
+import java.util.AbstractQueue;
+
 /**
  * SBT - Size Balanced Tree
  *
@@ -12,7 +14,7 @@ package com.natsumes.tree;
  *
  * @author hetengjiao
  */
-public class SizeBalancedTree<T extends Comparable<T>> extends AbstractTree<T> implements Tree<T> {
+public class SizeBalancedTree<T extends Comparable<T>> extends AbstractTree<T> {
 
     public SizeBalancedTree() {
         root = null;

@@ -13,13 +13,10 @@ public class CountTopFinder {
 
     private volatile int[] topNumArr;
 
-    private int delta;
-
     public CountTopFinder() {
         nums = new int[200000];
         size = new AtomicLong(0);
         topNumArr = new int[]{-1, -1, -1};
-        delta = 1000;
     }
 
     public void addNum(int num) {
@@ -28,9 +25,6 @@ public class CountTopFinder {
         }
         nums[num] = nums[num] + 1;
         size.addAndGet(1);
-        if (System.currentTimeMillis() % delta == 0) {
-            updateTopValue();
-        }
     }
 
     private void updateTopValue() {

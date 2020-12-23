@@ -13,7 +13,7 @@ package com.natsumes.tree;
  *
  * @author hetengjiao
  */
-public class SplayTree<T extends Comparable<T>> extends AbstractTree<T> implements Tree<T> {
+public class SplayTree<T extends Comparable<T>> extends AbstractTree<T> {
 
 
     @Override

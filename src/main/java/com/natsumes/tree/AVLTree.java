@@ -16,7 +16,7 @@ package com.natsumes.tree;
  *
  * @author hetengjiao
  */
-public class AVLTree<T extends Comparable<T>> extends AbstractTree<T> implements Tree<T> {
+public class AVLTree<T extends Comparable<T>> extends AbstractTree<T> {
 
     public AVLTree() {
         this.root = null;
