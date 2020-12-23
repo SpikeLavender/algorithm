@@ -1,6 +1,7 @@
 package com.natsumes.tree;
 
 /**
+ * Segment Tree
  * 线段树(Segment Tree)也是一棵树，只不过元素的值代表一个区间。
  * 常用区间的统计操作，比如一个区间的最大值(max)，最小值(min)，和(sum)等等
  *
