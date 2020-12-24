@@ -1,7 +1,8 @@
 package com.natsumes.leetcode;
 
-import java.util.Deque;
-import java.util.LinkedList;
+import com.natsumes.tree.Tree;
+
+import java.util.*;
 
 /**
  * 二叉搜索树专题
@@ -59,13 +60,7 @@ public class BinarySearchTreeTopic {
         if (upper != null && val>= upper) {
             return false;
         }
-        if (!helper(node.right, val, upper)) {
-            return false;
-        }
-        if (!helper(node.left, lower, val)) {
-            return false;
-        }
-        return true;
+        return helper(node.left, lower, val) && helper(node.right, val, upper);
     }
 
     /**
@@ -121,21 +116,100 @@ public class BinarySearchTreeTopic {
      * 链接：https://leetcode-cn.com/leetbook/read/introduction-to-data-structure-binary-search-tree/xpg4qe/
      * 来源：力扣（LeetCode）
      * 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+     *
+     * 方法1：中序遍历，拍平二叉树, 时间复杂度符合，但是用了O(n)的内存，不符合要求
      */
-    class BSTIterator {
+    class BSTIterator1 {
 
-        private TreeNode root;
+        List<Integer> nodeSorted;
 
-        public BSTIterator(TreeNode root) {
-            this.root = root;
+        int index;
+
+        public BSTIterator1(TreeNode root) {
+            this.nodeSorted = new ArrayList<>();
+            this.index = -1;
+            this.inorder(root);
+        }
+
+        private void inorder(TreeNode root) {
+            if (root == null) {
+                return;
+            }
+            this.inorder(root.left);
+            this.nodeSorted.add(root.val);
+            this.inorder(root.right);
         }
 
         public int next() {
-            return -1;
+
+            return this.nodeSorted.get(++this.index);
         }
 
         public boolean hasNext() {
-            return true;
+            return this.index + 1 < this.nodeSorted.size();
+        }
+    }
+
+    /**
+     * 173. 二叉搜索树迭代器
+     * 实现一个二叉搜索树迭代器。你将使用二叉搜索树的根节点初始化迭代器。
+     *
+     * 调用 next() 将返回二叉搜索树中的下一个最小的数。
+     *
+     * 示例：
+     * BSTIterator iterator = new BSTIterator(root);
+     *
+     * iterator.next();    // 返回 3
+     * iterator.next();    // 返回 7
+     * iterator.hasNext(); // 返回 true
+     * iterator.next();    // 返回 9
+     * iterator.hasNext(); // 返回 true
+     * iterator.next();    // 返回 15
+     * iterator.hasNext(); // 返回 true
+     * iterator.next();    // 返回 20
+     * iterator.hasNext(); // 返回 false
+     *  
+     *
+     * 提示：
+     *
+     * next() 和 hasNext() 操作的时间复杂度是 O(1)，并使用 O(h) 内存，其中 h 是树的高度。
+     * 你可以假设 next() 调用总是有效的，也就是说，当调用 next() 时，BST 中至少存在一个下一个最小的数。
+     *
+     * 来源：力扣（LeetCode）
+     * 链接：https://leetcode-cn.com/problems/binary-search-tree-iterator
+     * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+     */
+    class BSTIterator {
+
+        Stack<TreeNode> stack;
+
+        public BSTIterator(TreeNode root) {
+            this.stack = new Stack<>();
+            this.leftInorder(root);
+        }
+
+        /**
+         *  For a given node, add all the elements in the leftmost branch of the tree under it to the stack.
+         */
+        private void leftInorder(TreeNode root) {
+            while (root != null) {
+                this.stack.push(root);
+                root = root.left;
+            }
+        }
+
+        public int next() {
+            TreeNode node = this.stack.pop();
+            if (node != null) {
+                this.leftInorder(node.right);
+            } else {
+                throw new IndexOutOfBoundsException("node is null");
+            }
+            return node.val;
+        }
+
+        public boolean hasNext() {
+            return this.stack.size() > 0;
         }
     }
 
@@ -169,8 +243,117 @@ public class BinarySearchTreeTopic {
      * 来源：力扣（LeetCode）
      * 链接：https://leetcode-cn.com/problems/recover-binary-search-tree
      * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+     *
+     * 方法一：显式中序遍历，但是空间为 O(N)
      */
     public void recoverTree(TreeNode root) {
+        doRecoverTree(root);
+    }
+
+    public void doRecoverTree1(TreeNode root) {
+        List<Integer> nums = new ArrayList<>();
+        inorder(root, nums);
+        int[] swapped = findTwoSwapped(nums);
+        recover(root, 2, swapped[0], swapped[1]);
+    }
+
+    private void recover(TreeNode root, int count, int x, int y) {
+        if (root != null) {
+            if (root.val == x || root.val == y) {
+                root.val = root.val == x ? y : y;
+                if (--count == 0) {
+                    return;
+                }
+            }
+            recover(root.left, count, x, y);
+            recover(root.right, count, x, y);
+        }
+    }
+
+    private void inorder(TreeNode root, List<Integer> nums) {
+        if (root == null) {
+            return;
+        }
+        inorder(root.left, nums);
+        nums.add(root.val);
+        inorder(root.right, nums);
+    }
+
+    private int[] findTwoSwapped(List<Integer> nums) {
+        int n = nums.size();
+        int x = -1, y = -1;
+        for (int i = 0; i < n - 1; i++) {
+            if (nums.get(i + 1) < nums.get(i)) {
+                y = nums.get(i + 1);
+                if (x == -1) {
+                    x = nums.get(i);
+                } else {
+                    break;
+                }
+            }
+        }
+        return new int[]{x, y};
+    }
+
+    /**
+     * 隐式中序遍历
+     * O(H)
+     */
+    public void doRecoverTree2(TreeNode root) {
+        Deque<TreeNode> stack = new ArrayDeque<>();
+        TreeNode x = null, y = null, pred = null;
+        while (!stack.isEmpty() || root != null) {
+            while (root != null) {
+                stack.push(root);
+                root = root.left;
+            }
+            root = stack.pop();
+            if (pred != null && root.val < pred.val) {
+                y = root;
+                if (x == null) {
+                    x = pred;
+                } else {
+                    break;
+                }
+            }
+            pred = root;
+            root = root.right;
+        }
+        swap(x, y);
+    }
+
+    private void swap(TreeNode x, TreeNode y) {
+        int temp = x.val;
+        x.val = y.val;
+        y.val = temp;
+    }
+
+    /**
+     * Morris 中序遍历
+     *
+     * 方法二中我们不再显示的用数组存储中序遍历的值序列，但是我们会发现我们仍需要 O(H)O(H) 的栈空间，无法满足题目的进阶要求，
+     * 那么该怎么办呢？这里向大家介绍一种不同于平常递归或迭代的遍历二叉树的方法：Morris 遍历算法，
+     * 该算法能将非递归的中序遍历空间复杂度降为 O(1)O(1)。
+     *
+     * Morris 遍历算法整体步骤如下（假设当前遍历到的节点为 xx）：
+     *
+     * 如果 xx 无左孩子，则访问 xx 的右孩子，即 x = x.\textit{right}x=x.right。
+     * 如果 xx 有左孩子，则找到 xx 左子树上最右的节点（即左子树中序遍历的最后一个节点，xx 在中序遍历中的前驱节点），
+     * 我们记为 \textit{predecessor}predecessor。根据 \textit{predecessor}predecessor 的右孩子是否为空，进行如下操作。
+     * 如果 \textit{predecessor}predecessor 的右孩子为空，则将其右孩子指向 xx，然后访问 xx 的左孩子，
+     * 即 x = x.\textit{left}x=x.left。
+     * 如果 \textit{predecessor}predecessor 的右孩子不为空，则此时其右孩子指向 xx，说明我们已经遍历完 xx 的左子树，
+     * 我们将 \textit{predecessor}predecessor 的右孩子置空，然后访问 xx 的右孩子，即 x = x.\textit{right}x=x.right。
+     * 重复上述操作，直至访问完整棵树。
+     * 其实整个过程我们就多做一步：将当前节点左子树中最右边的节点指向它，这样在左子树遍历完成后我们通过这个指向走回了 xx，
+     * 且能再通过这个知晓我们已经遍历完成了左子树，而不用再通过栈来维护，省去了栈的空间复杂度。
+     *
+     * 作者：LeetCode-Solution
+     * 链接：https://leetcode-cn.com/problems/recover-binary-search-tree/solution/huci-fu-er-cha-sou-suo-shu-by-leetcode-solution/
+     * 来源：力扣（LeetCode）
+     * 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+     */
+    public void doRecoverTree(TreeNode root) {
 
     }
 }
