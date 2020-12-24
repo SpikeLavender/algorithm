@@ -26,23 +26,23 @@ import java.util.Scanner;
  */
 public class TreeTopFinderTest {
 
-    private static TopFinder finder = new RbTreeFinder();
+    private static final TopFinder finder = new RbTreeFinder();
 
-    private static CountTopFinder ctf = new CountTopFinder();
+    private static final CountTopFinder ctf = new CountTopFinder();
 
-    private static TopFinder tf = new TreapFinder();
+    private static final TopFinder tf = new TreapFinder();
 
-    private static TopFinder atf = new AvlFinder();
+    private static final TopFinder atf = new AvlFinder();
 
-    private static TopFinder stf = new SizeBalanceFinder();
+    private static final TopFinder stf = new SizeBalanceFinder();
 
-    private static TopFinder sgf = new ScapegoatFinder();
+    private static final TopFinder sgf = new ScapegoatFinder();
 
-    private static TopFinder spf = new SplayFinder();
+    private static final TopFinder spf = new SplayFinder();
 
-    private final static long TEST_NUM = 1000000000;
+    private static final long TEST_NUM = 100000000;
 
-    private final static long TEST_NUM_PART = 1000;
+    private static final long TEST_NUM_PART = 1000;
 
     /**
      * 当数据量变大且离散的时候，红黑树明显要比数组占用的空间小
