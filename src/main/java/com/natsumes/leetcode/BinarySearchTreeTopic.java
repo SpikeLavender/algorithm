@@ -1,7 +1,5 @@
 package com.natsumes.leetcode;
 
-import com.natsumes.tree.Tree;
-
 import java.util.*;
 
 /**
