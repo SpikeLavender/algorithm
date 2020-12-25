@@ -119,7 +119,7 @@ public class BinarySearchTreeTopic {
      *
      * 方法1：中序遍历，拍平二叉树, 时间复杂度符合，但是用了O(n)的内存，不符合要求
      */
-    class BSTIterator1 {
+    static class BSTIterator1 {
 
         List<Integer> nodeSorted;
 
@@ -179,7 +179,7 @@ public class BinarySearchTreeTopic {
      * 链接：https://leetcode-cn.com/problems/binary-search-tree-iterator
      * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
      */
-    class BSTIterator {
+    static class BSTIterator {
 
         Stack<TreeNode> stack;
 
@@ -260,7 +260,7 @@ public class BinarySearchTreeTopic {
     private void recover(TreeNode root, int count, int x, int y) {
         if (root != null) {
             if (root.val == x || root.val == y) {
-                root.val = root.val == x ? y : y;
+                root.val = root.val == x ? y : x;
                 if (--count == 0) {
                     return;
                 }
@@ -323,6 +323,9 @@ public class BinarySearchTreeTopic {
     }
 
     private void swap(TreeNode x, TreeNode y) {
+        if (x == null || y == null) {
+            return;
+        }
         int temp = x.val;
         x.val = y.val;
         y.val = temp;
@@ -354,6 +357,45 @@ public class BinarySearchTreeTopic {
      * 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
      */
     public void doRecoverTree(TreeNode root) {
+        morrisInorder(root);
+    }
 
+    private void morrisInorder(TreeNode root) {
+        TreeNode x = null, y = null, pred = null, predecessor;
+
+        while (root != null) {
+            if (root.left != null) {
+                // 找root的前驱
+                predecessor = root.left;
+                while (predecessor.right != null && predecessor.right != root) {
+                    predecessor = predecessor.right;
+                }
+                if (predecessor.right == null) {
+                    predecessor.right = root;
+                    root = root.left;
+                    continue;
+                }
+                if (pred != null && pred.val > root.val) {
+                    y = root;
+                    if (x == null) {
+                        x = pred;
+                    }
+                }
+                pred = root;
+                predecessor.right = null;
+                root = root.right;
+
+            } else {
+                if (pred != null && root.val < pred.val) {
+                    y = root;
+                    if (x == null) {
+                        x = pred;
+                    }
+                }
+                pred = root;
+                root = root.right;
+            }
+        }
+        swap(x, y);
     }
 }
