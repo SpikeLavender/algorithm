@@ -69,4 +69,25 @@ public class BinarySearchTreeTopicTest {
         BST.doRecoverTree2(node);
         Assert.assertEquals(2, node.val);
     }
+
+    @Test
+    public void testSearchBST() {
+        TreeNode root = new TreeNode(2, new TreeNode(1), new TreeNode(3));
+        boolean validBST = BST.isValidBST(root);
+        System.out.println(validBST);
+        TreeNode treeNode = BST.searchBST(root, 3);
+        Assert.assertNotNull(treeNode);
+    }
+
+    @Test
+    public void testInsertIntoBST() {
+        TreeNode node;
+        node = BST.insertIntoBST(null, 4);
+        node = BST.insertIntoBST(node, 2);
+        node = BST.insertIntoBST(node, 1);
+        node = BST.insertIntoBST(node, 3);
+        node = BST.insertIntoBST(node, 7);
+        node = BST.insertIntoBST(node, 5);
+        System.out.println(node);
+    }
 }
