@@ -90,4 +90,34 @@ public class BinarySearchTreeTopicTest {
         node = BST.insertIntoBST(node, 5);
         System.out.println(node);
     }
+
+    @Test
+    public void deleteNode() {
+        TreeNode node;
+        node = BST.insertIntoBST(null, 4);
+        node = BST.insertIntoBST(node, 2);
+        node = BST.insertIntoBST(node, 1);
+        node = BST.insertIntoBST(node, 3);
+        node = BST.insertIntoBST(node, 7);
+        node = BST.insertIntoBST(node, 5);
+        System.out.println(node);
+        BST.deleteNode(node, 1);
+        System.out.println(node);
+    }
+
+    @Test
+    public void KthLargest() {
+        int[] nums = new int[] {4, 5, 8, 2};
+        BinarySearchTreeTopic.KthLargest kthLargest = new BinarySearchTreeTopic.KthLargest(3, nums);
+        int res = kthLargest.add(3);   // return 4
+        System.out.println(res);
+        res = kthLargest.add(5);   // return 5
+        System.out.println(res);
+        res = kthLargest.add(10);  // return 5
+        System.out.println(res);
+        res = kthLargest.add(9);   // return 8
+        System.out.println(res);
+        res = kthLargest.add(4);   // return 8
+        System.out.println(res);
+    }
 }

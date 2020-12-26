@@ -1,4 +1,4 @@
-package com.natsumes.alth.greedy;
+package com.natsumes.daily;
 
 import java.util.Arrays;
 

@@ -1,6 +1,9 @@
 package com.natsumes.common;
 
 
+/**
+ * @author cmcc
+ */
 public class BinarySearch {
 
     /**
