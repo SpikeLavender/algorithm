@@ -679,4 +679,123 @@ public class BinarySearchTreeTopic {
             }
         }
     }
+
+    /**
+     * LC 二叉搜索树的最近公共祖先
+     * 给定一个二叉搜索树, 找到该树中两个指定节点的最近公共祖先。
+     *
+     * 百度百科中最近公共祖先的定义为：“对于有根树 T 的两个结点 p、q，最近公共祖先表示为一个结点 x，
+     * 满足 x 是 p、q 的祖先且 x 的深度尽可能大（一个节点也可以是它自己的祖先）。”
+     *
+     * 例如，给定如下二叉搜索树:  root = [6,2,8,0,4,7,9,null,null,3,5]
+     *
+     *
+     *
+     *  
+     *
+     * 示例 1:
+     *
+     * 输入: root = [6,2,8,0,4,7,9,null,null,3,5], p = 2, q = 8
+     * 输出: 6
+     * 解释: 节点 2 和节点 8 的最近公共祖先是 6。
+     * 示例 2:
+     *
+     * 输入: root = [6,2,8,0,4,7,9,null,null,3,5], p = 2, q = 4
+     * 输出: 2
+     * 解释: 节点 2 和节点 4 的最近公共祖先是 2, 因为根据定义最近公共祖先节点可以为节点本身。
+     *  
+     *
+     * 说明:
+     *
+     * 所有节点的值都是唯一的。
+     * p、q 为不同节点且均存在于给定的二叉搜索树中。
+     *
+     * 作者：力扣 (LeetCode)
+     * 链接：https://leetcode-cn.com/leetbook/read/introduction-to-data-structure-binary-search-tree/xpf523/
+     * 来源：力扣（LeetCode）
+     * 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+     */
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if (root == null) {
+            return null;
+        }
+        if (root == p || root == q) {
+            return root;
+        }
+
+        TreeNode left = lowestCommonAncestor(root.left, p, q);
+        TreeNode right = lowestCommonAncestor(root.right, p, q);
+        if (left != null && right != null) {
+            return root;
+        }
+        if (left == null && right == null) {
+            return null;
+        }
+        return left == null ? right : left;
+    }
+
+    /**
+     *
+     * 平衡二叉树
+     * 给定一个二叉树，判断它是否是高度平衡的二叉树。
+     *
+     * 本题中，一棵高度平衡二叉树定义为：
+     *
+     * 一个二叉树每个节点 的左右两个子树的高度差的绝对值不超过 1 。
+     *
+     *  
+     *
+     * 示例 1：
+     *
+     *
+     * 输入：root = [3,9,20,null,null,15,7]
+     * 输出：true
+     * 示例 2：
+     *
+     *
+     * 输入：root = [1,2,2,3,3,null,null,4,4]
+     * 输出：false
+     * 示例 3：
+     *
+     * 输入：root = []
+     * 输出：true
+     *
+     * 作者：力扣 (LeetCode)
+     * 链接：https://leetcode-cn.com/leetbook/read/introduction-to-data-structure-binary-search-tree/xmx4r7/
+     * 来源：力扣（LeetCode）
+     * 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+     */
+    public boolean isBalanced01(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+        return Math.abs(getDepth(root.left) - getDepth(root.right)) <= 1
+                && isBalanced(root.left) && isBalanced(root.right);
+    }
+
+    private int getDepth(TreeNode node) {
+        if (node == null) {
+            return 0;
+        }
+        return Math.max(getDepth(node.left), getDepth(node.right)) + 1;
+    }
+
+    public boolean isBalanced(TreeNode root) {
+        return recur(root) != -1;
+    }
+
+    private int recur(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        int left = recur(root.left);
+        if(left == -1) {
+            return -1;
+        }
+        int right = recur(root.right);
+        if(right == -1) {
+            return -1;
+        }
+        return Math.abs(left - right) < 2 ? Math.max(left, right) + 1 : -1;
+    }
 }
