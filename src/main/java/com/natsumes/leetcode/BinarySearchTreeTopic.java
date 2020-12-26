@@ -563,7 +563,7 @@ public class BinarySearchTreeTopic {
     }
 
     /**
-     * LC 数据流中的第K大元素
+     * LC 数据流中的第K大元素 || 703. 数据流中的第 K 大元素
      * 设计一个找到数据流中第 k 大元素的类（class）。注意是排序后的第 k 大元素，不是第 k 个不同的元素。
      *
      * 请实现 KthLargest 类：
@@ -639,22 +639,23 @@ public class BinarySearchTreeTopic {
         }
 
         public int add(int val) {
-            addNum(root, val);
-            updateValue();
+            root = addNum(root, val);
+            updateValue(k);
             return value;
         }
 
-        private void updateValue() {
+        private void updateValue(int k) {
             if (root == null || k < 0 || k > root.nodeNum) {
                 return;
             }
             TreeNode node = root;
             while (node != null) {
-                int left = node.left == null ? 0 : node.left.nodeNum;
-                if (k <= left) {
-                    node = node.left;
-                } else if (k > left + node.nodeNum) {
+                int right = node.right == null ? 0 : node.right.nodeNum;
+                if (k <= right) {
                     node = node.right;
+                } else if (k > right + node.num) {
+                    k = k - right - node.num;
+                    node = node.left;
                 } else {
                     value = node.val;
                     return;
@@ -675,12 +676,6 @@ public class BinarySearchTreeTopic {
 
             TreeNode(int x) {
                 val = x;
-            }
-
-            public TreeNode(int val, TreeNode left, TreeNode right) {
-                this.val = val;
-                this.left = left;
-                this.right = right;
             }
         }
     }

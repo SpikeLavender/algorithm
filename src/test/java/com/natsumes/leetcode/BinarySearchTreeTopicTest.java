@@ -111,13 +111,39 @@ public class BinarySearchTreeTopicTest {
         BinarySearchTreeTopic.KthLargest kthLargest = new BinarySearchTreeTopic.KthLargest(3, nums);
         int res = kthLargest.add(3);   // return 4
         System.out.println(res);
+        Assert.assertEquals(4, res);
         res = kthLargest.add(5);   // return 5
         System.out.println(res);
+        Assert.assertEquals(5, res);
         res = kthLargest.add(10);  // return 5
         System.out.println(res);
+        Assert.assertEquals(5, res);
         res = kthLargest.add(9);   // return 8
         System.out.println(res);
+        Assert.assertEquals(8, res);
         res = kthLargest.add(4);   // return 8
         System.out.println(res);
+        Assert.assertEquals(8, res);
+    }
+
+    @Test
+    public void KthLargest2() {
+        int[] nums = new int[] {};
+        BinarySearchTreeTopic.KthLargest kthLargest = new BinarySearchTreeTopic.KthLargest(1, nums);
+        int res = kthLargest.add(-3);   // return 4
+        System.out.println(res);
+        Assert.assertEquals(-3, res);
+        res = kthLargest.add(-2);   // return 5
+        System.out.println(res);
+        Assert.assertEquals(-2, res);
+        res = kthLargest.add(-4);  // return 5
+        System.out.println(res);
+        Assert.assertEquals(-2, res);
+        res = kthLargest.add(0);   // return 8
+        System.out.println(res);
+        Assert.assertEquals(0, res);
+        res = kthLargest.add(4);   // return 8
+        System.out.println(res);
+        Assert.assertEquals(4, res);
     }
 }
