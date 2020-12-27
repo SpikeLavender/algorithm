@@ -12,27 +12,6 @@ public class BinaryTreeTopicTest {
 
     private static BinaryTreeTopic BT = new BinaryTreeTopic();
 
-    /**
-     *          4
-     *        /   \
-     *       2     7
-     *      / \   / \
-     *     1   3 6   9
-     */
-    @Test
-    public void invertTree() {
-        TreeNode root = new TreeNode(4);
-        root.left = new TreeNode(2);
-        root.right = new TreeNode(7);
-        root.left.left = new TreeNode(1);
-        root.left.right = new TreeNode(3);
-        root.right.left = new TreeNode(6);
-        root.right.right = new TreeNode(9);
-
-        TreeNode treeNode = BT.invertTree(root);
-        System.out.println(treeNode);
-    }
-
     @Test
     public void codec() {
         TreeNode root = new TreeNode(4);
@@ -256,5 +235,40 @@ public class BinaryTreeTopicTest {
         int res = node == null ? -1 : node.val;
         System.out.println(res);
         Assert.assertEquals(3, res);
+    }
+
+    /**
+     *          4
+     *        /   \
+     *       2     7
+     *      / \   / \
+     *     1   3 6   9
+     */
+    @Test
+    public void invertTree() {
+        TreeNode root = new TreeNode(4);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(7);
+        root.left.left = new TreeNode(1);
+        root.left.right = new TreeNode(3);
+        root.right.left = new TreeNode(6);
+        root.right.right = new TreeNode(9);
+
+        TreeNode treeNode = BT.invertTree(root);
+        System.out.println(treeNode);
+    }
+
+
+    @Test
+    public void mirrorTree() {
+        TreeNode root = new TreeNode(4);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(7);
+        root.left.left = new TreeNode(1);
+        root.left.right = new TreeNode(3);
+        root.right.left = new TreeNode(6);
+        root.right.right = new TreeNode(9);
+        TreeNode treeNode = BT.mirrorTree(root);
+        System.out.println(treeNode);
     }
 }

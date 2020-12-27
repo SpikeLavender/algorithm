@@ -8,100 +8,100 @@ import org.junit.Test;
  */
 public class BinarySearchTreeTopicTest {
 
-    private static BinarySearchTreeTopic BST = new BinarySearchTreeTopic();
+    private static BinarySearchTreeTopic bst = new BinarySearchTreeTopic();
 
     @Test
     public void isValidBST() {
         TreeNode root = new TreeNode(2, new TreeNode(1), new TreeNode(3));
-        boolean validBST = BST.isValidBST(root);
+        boolean validBST = bst.isValidBST(root);
         Assert.assertTrue(validBST);
 
         TreeNode node = new TreeNode(5, new TreeNode(1),
                 new TreeNode(4, new TreeNode(3), new TreeNode(6)));
-        boolean validBSTFalse = BST.isValidBST(node);
+        boolean validBSTFalse = bst.isValidBST(node);
         Assert.assertFalse(validBSTFalse);
     }
 
     @Test
     public void isValidBST2() {
         TreeNode root = new TreeNode(2, new TreeNode(1), new TreeNode(3));
-        boolean validBST = BST.isValidBST2(root);
+        boolean validBST = bst.isValidBST2(root);
         Assert.assertTrue(validBST);
 
         TreeNode node = new TreeNode(5, new TreeNode(1),
                 new TreeNode(4, new TreeNode(3), new TreeNode(6)));
-        boolean validBSTFalse = BST.isValidBST2(node);
+        boolean validBSTFalse = bst.isValidBST2(node);
         Assert.assertFalse(validBSTFalse);
     }
 
     @Test
     public void recoverTree() {
         TreeNode root = new TreeNode(1, new TreeNode(3, null, new TreeNode(2)), null);
-        BST.recoverTree(root);
+        bst.recoverTree(root);
         Assert.assertEquals(3, root.val);
 
         TreeNode node = new TreeNode(3, new TreeNode(1),
                 new TreeNode(4, new TreeNode(2), null));
-        BST.recoverTree(node);
+        bst.recoverTree(node);
         Assert.assertEquals(2, node.val);
     }
 
     @Test
     public void recoverTree1() {
         TreeNode root = new TreeNode(1, new TreeNode(3, null, new TreeNode(2)), null);
-        BST.doRecoverTree1(root);
+        bst.doRecoverTree1(root);
         Assert.assertEquals(3, root.val);
 
         TreeNode node = new TreeNode(3, new TreeNode(1),
                 new TreeNode(4, new TreeNode(2), null));
-        BST.doRecoverTree1(node);
+        bst.doRecoverTree1(node);
         Assert.assertEquals(2, node.val);
     }
 
     @Test
     public void recoverTree2() {
         TreeNode root = new TreeNode(1, new TreeNode(3, null, new TreeNode(2)), null);
-        BST.doRecoverTree2(root);
+        bst.doRecoverTree2(root);
         Assert.assertEquals(3, root.val);
 
         TreeNode node = new TreeNode(3, new TreeNode(1),
                 new TreeNode(4, new TreeNode(2), null));
-        BST.doRecoverTree2(node);
+        bst.doRecoverTree2(node);
         Assert.assertEquals(2, node.val);
     }
 
     @Test
     public void testSearchBST() {
         TreeNode root = new TreeNode(2, new TreeNode(1), new TreeNode(3));
-        boolean validBST = BST.isValidBST(root);
+        boolean validBST = bst.isValidBST(root);
         System.out.println(validBST);
-        TreeNode treeNode = BST.searchBST(root, 3);
+        TreeNode treeNode = bst.searchBST(root, 3);
         Assert.assertNotNull(treeNode);
     }
 
     @Test
     public void testInsertIntoBST() {
         TreeNode node;
-        node = BST.insertIntoBST(null, 4);
-        node = BST.insertIntoBST(node, 2);
-        node = BST.insertIntoBST(node, 1);
-        node = BST.insertIntoBST(node, 3);
-        node = BST.insertIntoBST(node, 7);
-        node = BST.insertIntoBST(node, 5);
+        node = bst.insertIntoBST(null, 4);
+        node = bst.insertIntoBST(node, 2);
+        node = bst.insertIntoBST(node, 1);
+        node = bst.insertIntoBST(node, 3);
+        node = bst.insertIntoBST(node, 7);
+        node = bst.insertIntoBST(node, 5);
         System.out.println(node);
     }
 
     @Test
     public void deleteNode() {
         TreeNode node;
-        node = BST.insertIntoBST(null, 4);
-        node = BST.insertIntoBST(node, 2);
-        node = BST.insertIntoBST(node, 1);
-        node = BST.insertIntoBST(node, 3);
-        node = BST.insertIntoBST(node, 7);
-        node = BST.insertIntoBST(node, 5);
+        node = bst.insertIntoBST(null, 4);
+        node = bst.insertIntoBST(node, 2);
+        node = bst.insertIntoBST(node, 1);
+        node = bst.insertIntoBST(node, 3);
+        node = bst.insertIntoBST(node, 7);
+        node = bst.insertIntoBST(node, 5);
         System.out.println(node);
-        BST.deleteNode(node, 1);
+        bst.deleteNode(node, 1);
         System.out.println(node);
     }
 
@@ -145,5 +145,39 @@ public class BinarySearchTreeTopicTest {
         res = kthLargest.add(4);   // return 8
         System.out.println(res);
         Assert.assertEquals(4, res);
+    }
+
+    @Test
+    public void isBalanced01() {
+        TreeNode root = new TreeNode(3, new TreeNode(9), new TreeNode(20, new TreeNode(15), new TreeNode(7)));
+        Assert.assertTrue(bst.isBalanced01(root));
+        root = new TreeNode(1, new TreeNode(2, new TreeNode(3, new TreeNode(4), new TreeNode(4)),
+                new TreeNode(3)), new TreeNode(2));
+        Assert.assertFalse(bst.isBalanced01(root));
+    }
+
+    @Test
+    public void isBalanced() {
+        TreeNode root = new TreeNode(3, new TreeNode(9), new TreeNode(20, new TreeNode(15), new TreeNode(7)));
+        Assert.assertTrue(bst.isBalanced(root));
+        root = new TreeNode(1, new TreeNode(2, new TreeNode(3, new TreeNode(4), new TreeNode(4)),
+                new TreeNode(3)), new TreeNode(2));
+        Assert.assertFalse(bst.isBalanced(root));
+    }
+
+    @Test
+    public void sortedArrayToBST() {
+        TreeNode node = bst.sortedArrayToBST(new int[]{-10, -3, 0, 5, 9});
+        System.out.println(node);
+    }
+
+    @Test
+    public void containsNearbyAlmostDuplicate() {
+        Assert.assertTrue(bst.containsNearbyAlmostDuplicate(new int[] {1, 2, 3, 1}, 3, 0));
+        Assert.assertTrue(bst.containsNearbyAlmostDuplicate(new int[] {1, 0, 1, 1}, 1, 2));
+        Assert.assertFalse(bst.containsNearbyAlmostDuplicate(new int[] {1, 5, 9, 1, 5, 9}, 2, 3));
+        Assert.assertTrue(bst.containsNearbyAlmostDuplicate(new int[] {-2147483648, -2147483647}, 3, 3));
+        Assert.assertTrue(bst.containsNearbyAlmostDuplicate(new int[] {2147483640, 2147483641}, 1, 100));
+        Assert.assertFalse(bst.containsNearbyAlmostDuplicate(new int[] {-2147483648, 2147483647}, 1, 1));
     }
 }

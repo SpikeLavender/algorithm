@@ -370,7 +370,7 @@ public class BinaryTreeTopic {
     private int answer = 0;
 
     /**
-     * LC 二叉树的最大深度 || 104. 二叉树的最大深度
+     * LC 二叉树的最大深度 || 104. 二叉树的最大深度 || 剑指 Offer 55 - I. 二叉树的深度
      * <p>
      * 给定一个二叉树，找出其最大深度。
      * <p>
@@ -871,25 +871,6 @@ public class BinaryTreeTopic {
         }
     }
 
-    private TreeNode build(int[] preorder, int pStart, int pEnd, int[] inorder, int iStart, int iEnd) {
-        if (pStart > pEnd) {
-            return null;
-        }
-        int rootVal = preorder[pStart];
-        int index = 0;
-        for (int i = iStart; i <= iEnd; i++) {
-            if (rootVal == inorder[i]) {
-                index = i;
-                break;
-            }
-        }
-        int leftSize = index - iStart;
-        TreeNode root = new TreeNode(rootVal);
-        root.left = build(preorder,pStart + 1, pStart + leftSize, inorder, iStart, index - 1);
-        root.right = build(preorder, pStart + leftSize + 1, pEnd, inorder, index + 1, iEnd);
-        return root;
-    }
-
     /**
      * 106. 从中序与后序遍历序列构造二叉树
      *
@@ -967,6 +948,25 @@ public class BinaryTreeTopic {
      */
     public TreeNode buildTree01(int[] preorder, int[] inorder) {
         return build(preorder, 0, preorder.length - 1, inorder, 0, inorder.length - 1);
+    }
+
+    private TreeNode build(int[] preorder, int pStart, int pEnd, int[] inorder, int iStart, int iEnd) {
+        if (pStart > pEnd) {
+            return null;
+        }
+        int rootVal = preorder[pStart];
+        int index = 0;
+        for (int i = iStart; i <= iEnd; i++) {
+            if (rootVal == inorder[i]) {
+                index = i;
+                break;
+            }
+        }
+        int leftSize = index - iStart;
+        TreeNode root = new TreeNode(rootVal);
+        root.left = build(preorder,pStart + 1, pStart + leftSize, inorder, iStart, index - 1);
+        root.right = build(preorder, pStart + leftSize + 1, pEnd, inorder, index + 1, iEnd);
+        return root;
     }
 
     /**
@@ -1309,5 +1309,71 @@ public class BinaryTreeTopic {
         invertTree(root.left);
         invertTree(root.right);
         return root;
+    }
+
+
+    /**
+     * 剑指 Offer 27. 二叉树的镜像
+     *
+     * 请完成一个函数，输入一个二叉树，该函数输出它的镜像。
+     *
+     * 例如输入：
+     *
+     *      4
+     *    /   \
+     *   2     7
+     *  / \   / \
+     * 1   3 6   9
+     * 镜像输出：
+     *
+     *      4
+     *    /   \
+     *   7     2
+     *  / \   / \
+     * 9   6 3   1
+     *
+     *
+     *
+     * 示例 1：
+     *
+     * 输入：root = [4,2,7,1,3,6,9]
+     * 输出：[4,7,2,9,6,3,1]
+     *
+     *
+     * 限制：
+     *
+     * 0 <= 节点个数 <= 1000
+     * 注意：本题与主站 226 题相同：https://leetcode-cn.com/problems/invert-binary-tree/
+     * https://leetcode-cn.com/problems/er-cha-shu-de-jing-xiang-lcof/
+     */
+    public TreeNode mirrorTree(TreeNode root) {
+        if (root == null) {
+            return null;
+        }
+        TreeNode node = root.left;
+        root.left = root.right;
+        root.right = node;
+
+        mirrorTree(root.left);
+        mirrorTree(root.right);
+        return root;
+    }
+
+    public TreeNode lowestCommonAncestorA(TreeNode root, TreeNode p, TreeNode q) {
+        if (root == null) {
+            return null;
+        }
+        if (root == p || root == q) {
+            return root;
+        }
+        TreeNode left = lowestCommonAncestorA(root.left, p, q);
+        TreeNode right = lowestCommonAncestorA(root.right, p, q);
+        if (left != null && right != null) {
+            return root;
+        }
+        if (left == null && right == null) {
+            return null;
+        }
+        return left == null ? right : left;
     }
 }
