@@ -271,4 +271,52 @@ public class BinaryTreeTopicTest {
         TreeNode treeNode = BT.mirrorTree(root);
         System.out.println(treeNode);
     }
+
+    @Test
+    public void diameterOfBinaryTree() {
+        TreeNode root = new TreeNode(1);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(3);
+        root.left.left = new TreeNode(4);
+        root.left.right = new TreeNode(5);
+        Assert.assertEquals(3, BT.diameterOfBinaryTree(root));
+    }
+
+    @Test
+    public void isUnivalTree() {
+        TreeNode root = new TreeNode(1);
+        root.left = new TreeNode(1);
+        root.right = new TreeNode(1);
+        root.left.left = new TreeNode(1);
+        root.left.right = new TreeNode(1);
+        Assert.assertTrue(BT.isUnivalTree(root));
+
+        Assert.assertTrue(BT.isUnivalTree(null));
+        root = new TreeNode(1);
+        root.left = new TreeNode(1);
+        root.right = new TreeNode(1);
+        root.left.left = new TreeNode(2);
+        root.left.right = new TreeNode(1);
+        Assert.assertFalse(BT.isUnivalTree(root));
+    }
+
+    @Test
+    public void mergeTrees() {
+        TreeNode t1 = new TreeNode(1, new TreeNode(3, new TreeNode(5), null), new TreeNode(2));
+        TreeNode t2 = new TreeNode(2, new TreeNode(1, null, new TreeNode(4)),
+                new TreeNode(3, null, new TreeNode(7)));
+        TreeNode node = BT.mergeTrees(t1, t2);
+        System.out.println(node);
+        Assert.assertEquals(3, node.val);
+    }
+
+    @Test
+    public void mergeTrees0() {
+//        TreeNode t1 = new TreeNode(1, new TreeNode(3, new TreeNode(5), null), new TreeNode(2));
+//        TreeNode t2 = new TreeNode(2, new TreeNode(1, null, new TreeNode(4)),
+//                new TreeNode(3, null, new TreeNode(7)));
+//        TreeNode node = BT.mergeTrees0(t1, t2);
+//        System.out.println(node);
+//        Assert.assertEquals(3, node.val);
+    }
 }

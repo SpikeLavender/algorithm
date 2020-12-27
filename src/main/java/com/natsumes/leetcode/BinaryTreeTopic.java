@@ -871,6 +871,24 @@ public class BinaryTreeTopic {
         }
     }
 
+    public TreeNode lowestCommonAncestorA(TreeNode root, TreeNode p, TreeNode q) {
+        if (root == null) {
+            return null;
+        }
+        if (root == p || root == q) {
+            return root;
+        }
+        TreeNode left = lowestCommonAncestorA(root.left, p, q);
+        TreeNode right = lowestCommonAncestorA(root.right, p, q);
+        if (left != null && right != null) {
+            return root;
+        }
+        if (left == null && right == null) {
+            return null;
+        }
+        return left == null ? right : left;
+    }
+
     /**
      * 106. 从中序与后序遍历序列构造二叉树
      *
@@ -1359,21 +1377,203 @@ public class BinaryTreeTopic {
         return root;
     }
 
-    public TreeNode lowestCommonAncestorA(TreeNode root, TreeNode p, TreeNode q) {
+    /**
+     * 543. 二叉树的直径
+     * 给定一棵二叉树，你需要计算它的直径长度。一棵二叉树的直径长度是任意两个结点路径长度中的最大值。
+     * 这条路径可能穿过也可能不穿过根结点。
+     *
+     *
+     *
+     * 示例 :
+     * 给定二叉树
+     *
+     *           1
+     *          / \
+     *         2   3
+     *        / \
+     *       4   5
+     * 返回 3, 它的长度是路径 [4,2,1,3] 或者 [5,2,1,3]。
+     *
+     *
+     *
+     * 注意：两结点之间的路径长度是以它们之间边的数目表示。
+     */
+    public int diameterOfBinaryTree(TreeNode root) {
+        //DFS
+        // left + right
+        distance = 1;
+        getDepth(root);
+        return distance - 1;
+    }
+
+    private int distance;
+
+    private int getDepth(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        // 左儿子深度
+        int left = getDepth(root.left);
+        // 右儿子深度
+        int right = getDepth(root.right);
+        distance = Math.max(distance, left + right + 1);
+        return Math.max(left, right) + 1;
+    }
+
+    /**
+     * 965. 单值二叉树
+     * 如果二叉树每个节点都具有相同的值，那么该二叉树就是单值二叉树。
+     *
+     * 只有给定的树是单值二叉树时，才返回 true；否则返回 false。
+     *
+     *
+     *
+     * 示例 1：
+     *
+     *
+     *
+     * 输入：[1,1,1,1,1,null,1]
+     * 输出：true
+     * 示例 2：
+     *
+     *
+     *
+     * 输入：[2,2,2,5,2]
+     * 输出：false
+     *
+     *
+     * 提示：
+     *
+     * 给定树的节点数范围是 [1, 100]。
+     * 每个节点的值都是整数，范围为 [0, 99] 。
+     *
+     * https://leetcode-cn.com/problems/univalued-binary-tree/
+     */
+    public boolean isUnivalTree(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+        return isUnivalTree(root, root.val);
+    }
+
+    private boolean isUnivalTree(TreeNode root, int val) {
+        if (root == null) {
+            return true;
+        }
+        if (root.val != val) {
+            return false;
+        }
+        return isUnivalTree(root.left, val) && isUnivalTree(root.right, val);
+    }
+
+
+    /**
+     * 617. 合并二叉树
+     * 给定两个二叉树，想象当你将它们中的一个覆盖到另一个上时，两个二叉树的一些节点便会重叠。
+     *
+     * 你需要将他们合并为一个新的二叉树。合并的规则是如果两个节点重叠，那么将他们的值相加作为节点合并后的新值，
+     * 否则不为 NULL 的节点将直接作为新二叉树的节点。
+     *
+     * 示例 1:
+     *
+     * 输入:
+     * 	Tree 1                     Tree 2
+     *           1                         2
+     *          / \                       / \
+     *         3   2                     1   3
+     *        /                           \   \
+     *       5                             4   7
+     * 输出:
+     * 合并后的树:
+     * 	     3
+     * 	    / \
+     * 	   4   5
+     * 	  / \   \
+     * 	 5   4   7
+     * 注意: 合并必须从两个树的根节点开始。
+     * https://leetcode-cn.com/problems/merge-two-binary-trees/
+     */
+    public TreeNode mergeTrees(TreeNode t1, TreeNode t2) {
+        // DFS
+        if (t1 == null) {
+            return t2;
+        }
+        if (t2 == null) {
+            return t1;
+        }
+        TreeNode merge = new TreeNode(t1.val + t2.val);
+        merge.left = mergeTrees(t1.left, t2.left);
+        merge.right = mergeTrees(t1.right, t2.right);
+        return merge;
+    }
+
+    /**
+     * BFS
+     */
+    public TreeNode mergeTrees0(TreeNode t1, TreeNode t2) {
+        // DFS 或者 BFS
+        //if ()
+        return null;
+    }
+
+    /**
+     * 669. 修剪二叉搜索树
+     * 给你二叉搜索树的根节点 root ，同时给定最小边界low 和最大边界 high。通过修剪二叉搜索树，
+     * 使得所有节点的值在[low, high]中。修剪树不应该改变保留在树中的元素的相对结构（即，如果没有被移除，
+     * 原有的父代子代关系都应当保留）。 可以证明，存在唯一的答案。
+     *
+     * 所以结果应当返回修剪好的二叉搜索树的新的根节点。注意，根节点可能会根据给定的边界发生改变。
+     *
+     *
+     *
+     * 示例 1：
+     *
+     *
+     * 输入：root = [1,0,2], low = 1, high = 2
+     * 输出：[1,null,2]
+     * 示例 2：
+     *
+     *
+     * 输入：root = [3,0,4,null,2,null,null,1], low = 1, high = 3
+     * 输出：[3,2,null,1]
+     * 示例 3：
+     *
+     * 输入：root = [1], low = 1, high = 2
+     * 输出：[1]
+     * 示例 4：
+     *
+     * 输入：root = [1,null,2], low = 1, high = 3
+     * 输出：[1,null,2]
+     * 示例 5：
+     *
+     * 输入：root = [1,null,2], low = 2, high = 4
+     * 输出：[2]
+     *
+     *
+     * 提示：
+     *
+     * 树中节点数在范围 [1, 104] 内
+     * 0 <= Node.val <= 104
+     * 树中每个节点的值都是唯一的
+     * 题目数据保证输入是一棵有效的二叉搜索树
+     * 0 <= low <= high <= 104
+     *
+     * https://leetcode-cn.com/problems/trim-a-binary-search-tree/
+     */
+    public TreeNode trimBST(TreeNode root, int low, int high) {
         if (root == null) {
             return null;
         }
-        if (root == p || root == q) {
-            return root;
+
+        if (root.val < low) {
+            return trimBST(root.right, low, high);
         }
-        TreeNode left = lowestCommonAncestorA(root.left, p, q);
-        TreeNode right = lowestCommonAncestorA(root.right, p, q);
-        if (left != null && right != null) {
-            return root;
+        if (root.val > high) {
+            return trimBST(root.left, low, high);
         }
-        if (left == null && right == null) {
-            return null;
-        }
-        return left == null ? right : left;
+        root.left = trimBST(root.left, low, high);
+        root.right = trimBST(root.right, low, high);
+        return root;
     }
+
 }

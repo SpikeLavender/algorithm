@@ -180,4 +180,13 @@ public class BinarySearchTreeTopicTest {
         Assert.assertTrue(bst.containsNearbyAlmostDuplicate(new int[] {2147483640, 2147483641}, 1, 100));
         Assert.assertFalse(bst.containsNearbyAlmostDuplicate(new int[] {-2147483648, 2147483647}, 1, 1));
     }
+
+    @Test
+    public void kthLargest1() {
+
+        TreeNode root = new TreeNode(5, new TreeNode(3 ,
+                new TreeNode(2, new TreeNode(1), null), new TreeNode(4)),
+                new TreeNode(6));
+        Assert.assertEquals(6, bst.kthLargest(root, 1));
+    }
 }
