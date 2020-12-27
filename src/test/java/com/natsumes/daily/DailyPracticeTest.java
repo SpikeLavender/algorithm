@@ -6,9 +6,18 @@ import org.junit.Test;
 /**
  * @author hetengjiao
  */
-public class MaximalRectangleTest {
+public class DailyPracticeTest {
 
-    private static MaximalRectangle mr = new MaximalRectangle();
+    private static DailyPractice mr = new DailyPractice();
+
+    @Test
+    public void isIsomorphic() {
+        Assert.assertTrue(mr.isIsomorphic("egg", "add"));
+        Assert.assertFalse(mr.isIsomorphic("foo", "bar"));
+        Assert.assertTrue(mr.isIsomorphic("paper", "title"));
+        Assert.assertFalse(mr.isIsomorphic("aa", "ab"));
+        Assert.assertFalse(mr.isIsomorphic("ab", "aa"));
+    }
 
     @Test
     public void maximalRectangle() {
@@ -32,5 +41,13 @@ public class MaximalRectangleTest {
 
         matrix = new char[][] {{'0', '0'}};
         Assert.assertEquals(0, mr.doMaximalRectangleCommon(matrix));
+    }
+
+    @Test
+    public void findContentChildren() {
+        Assert.assertEquals(2, mr.findContentChildren(new int[]{7, 8, 9, 10}, new int[]{5, 6, 7, 8}));
+        Assert.assertEquals(1, mr.findContentChildren(new int[]{1, 2, 3}, new int[]{1, 1}));
+        Assert.assertEquals(2, mr.findContentChildren(new int[]{1, 2}, new int[]{1, 2, 3}));
+        Assert.assertEquals(1, mr.findContentChildren(new int[]{1, 2, 3}, new int[]{4}));
     }
 }
