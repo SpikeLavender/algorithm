@@ -1,13 +1,14 @@
 package com.natsumes.thread;
 
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author hetengjiao
  */
 public class OrderPrinter {
 
-    private volatile AtomicInteger num = new AtomicInteger(0);
+    private volatile int num = 0;
+
+    private final int count;
 
     /**
      * 1114. 按序打印
@@ -23,31 +24,51 @@ public class OrderPrinter {
      *
      * 输出: "firstsecondthird"
      *
+     * https://leetcode-cn.com/problems/print-in-order/
      */
     public OrderPrinter() {
+        this.count = 10;
+    }
+
+    public OrderPrinter(int count) {
+        this.count = count;
     }
 
     public void first(Runnable printFirst) throws InterruptedException {
-        while (num.get() != 0) {
-            //
+        int count = this.count;
+        while (count-- >= 0) {
+
+            while (num != 0) {
+                //
+            }
+
+            printFirst.run();
+            num = 1;
         }
-        printFirst.run();
-        num.compareAndSet(0, 1);
     }
 
     public void second(Runnable printSecond) throws InterruptedException {
-        while (num.get() != 1) {
-            //
+        int count = this.count;
+        while (count-- >= 0) {
+            while (num != 1) {
+                //
+            }
+
+            printSecond.run();
+            num = 2;
         }
-        printSecond.run();
-        num.compareAndSet(1, 2);
     }
 
     public void third(Runnable printThird) throws InterruptedException {
-        while (num.get() != 2) {
-            //
+        int count = this.count;
+        while (count-- >= 0) {
+            while (num != 2) {
+                //
+            }
+
+            printThird.run();
+            System.out.println();
+            num = 0;
         }
-        printThird.run();
-        num.compareAndSet(2, 0);
     }
 }

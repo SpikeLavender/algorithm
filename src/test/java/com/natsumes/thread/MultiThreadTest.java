@@ -7,12 +7,13 @@ import org.junit.Test;
  */
 public class MultiThreadTest {
 
-    private MultiThread multiThread = new MultiThread();
+    private final MultiThread multiThread = new MultiThread();
 
     @Test
-    public void test1() throws InterruptedException {
-        //multiThread.print(new int[]{1, 2, 3});
-        //multiThread.print(new int[]{1, 3, 2});
+    public void test() throws InterruptedException {
+//        for (int i = 0; i < 10; i++) {
+//            System.out.println();
+//        }
         multiThread.print();
     }
 }
