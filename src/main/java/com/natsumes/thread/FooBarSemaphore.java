@@ -10,7 +10,7 @@ public class FooBarSemaphore {
     private int n;
 
     /**
-     * permits 优先级
+     * permits 信号量
      */
     Semaphore foo = new Semaphore(1);
 
