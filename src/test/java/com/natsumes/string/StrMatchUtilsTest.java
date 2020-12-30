@@ -1,4 +1,4 @@
-package com.natsumes.strmatch;
+package com.natsumes.string;
 
 import org.junit.Assert;
 import org.junit.Test;
