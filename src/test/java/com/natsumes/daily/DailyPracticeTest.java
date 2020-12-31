@@ -50,4 +50,10 @@ public class DailyPracticeTest {
         Assert.assertEquals(2, mr.findContentChildren(new int[]{1, 2}, new int[]{1, 2, 3}));
         Assert.assertEquals(1, mr.findContentChildren(new int[]{1, 2, 3}, new int[]{4}));
     }
+
+    @Test
+    public void lastStoneWeight() {
+        Assert.assertEquals(1, mr.lastStoneWeight(new int[] {2,7,4,1,8,1}));
+        Assert.assertEquals(2, mr.lastStoneWeight(new int[] {1,3}));
+    }
 }
