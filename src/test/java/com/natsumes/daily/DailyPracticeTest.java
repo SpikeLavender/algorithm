@@ -73,10 +73,10 @@ public class DailyPracticeTest {
 
     @Test
     public void testEraseOverlapIntervals() {
-        Assert.assertEquals(1, mr.eraseOverlapIntervals(new int[][]{{1, 2}, {2, 3}, {3, 4}, {1, 3}}));
-        Assert.assertEquals(2, mr.eraseOverlapIntervals(new int[][]{{1, 2}, {1, 2}, {1, 2}}));
-        Assert.assertEquals(0, mr.eraseOverlapIntervals(new int[][]{{1, 2}, {2, 3}}));
-        Assert.assertEquals(0, mr.eraseOverlapIntervals(new int[][]{{0, 1}, {3, 4}, {1, 2}}));
-        Assert.assertEquals(2, mr.eraseOverlapIntervals(new int[][]{{1, 100}, {11, 22}, {1, 11}, {2, 12}}));
+        Assert.assertEquals(1, dp.eraseOverlapIntervals(new int[][]{{1, 2}, {2, 3}, {3, 4}, {1, 3}}));
+        Assert.assertEquals(2, dp.eraseOverlapIntervals(new int[][]{{1, 2}, {1, 2}, {1, 2}}));
+        Assert.assertEquals(0, dp.eraseOverlapIntervals(new int[][]{{1, 2}, {2, 3}}));
+        Assert.assertEquals(0, dp.eraseOverlapIntervals(new int[][]{{0, 1}, {3, 4}, {1, 2}}));
+        Assert.assertEquals(2, dp.eraseOverlapIntervals(new int[][]{{1, 100}, {11, 22}, {1, 11}, {2, 12}}));
     }
 }
