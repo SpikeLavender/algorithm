@@ -3,6 +3,8 @@ package com.natsumes.leetcode;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.Arrays;
+
 
 /**
  * @author hetengjiao
@@ -144,5 +146,17 @@ public class LinkedListTopicTest {
         Assert.assertEquals(0, llt.getDecimalValue(ListNode.build(new int[] {0, 0})));
         Assert.assertEquals(0, llt.getDecimalValue(ListNode.build(new int[] {0})));
         Assert.assertEquals(1, llt.getDecimalValue(ListNode.build(new int[] {1})));
+    }
+
+    @Test
+    public void getKthFromEnd() {
+        ListNode node = ListNode.build(new int[]{1, 2, 3, 4, 5});
+        System.out.println(llt.getKthFromEnd(node, 2));
+    }
+
+    @Test
+    public void reversePrint() {
+        ListNode node = ListNode.build(new int[]{1, 2, 3, 4, 5});
+        System.out.println(Arrays.toString(llt.reversePrint(node)));
     }
 }

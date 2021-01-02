@@ -1,5 +1,8 @@
 package com.natsumes.leetcode;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author hetengjiao
  */
@@ -270,6 +273,7 @@ public class LinkedListTopic {
      * 你能否用 O(n) 时间复杂度和 O(1) 空间复杂度解决此题？
      *
      * https://leetcode-cn.com/problems/palindrome-linked-list/
+     * https://leetcode-cn.com/problems/palindrome-linked-list-lcci/
      */
     public boolean isPalindrome(ListNode head) {
         if (head == null) {
@@ -304,7 +308,8 @@ public class LinkedListTopic {
     }
 
     /**
-     * 237. 删除链表中的节点
+     * 237. 删除链表中的节点 || 面试题 02.03. 删除中间节点
+     *
      * 请编写一个函数，使其可以删除某个链表中给定的（非末尾）节点。传入函数的唯一参数为 要被删除的节点 。
      *
      * 现有一个链表 -- head = [4,5,1,9]，它可以表示为:
@@ -330,6 +335,7 @@ public class LinkedListTopic {
      * 不要从你的函数中返回任何结果。
      *
      * https://leetcode-cn.com/problems/delete-node-in-a-linked-list/
+     * https://leetcode-cn.com/problems/delete-middle-node-lcci/submissions/
      */
     public void deleteNode(ListNode node) {
         node.val = node.next.val;
@@ -423,5 +429,85 @@ public class LinkedListTopic {
         }
 
         return res;
+    }
+
+    /**
+     * 剑指 Offer 22. 链表中倒数第k个节点
+     * 输入一个链表，输出该链表中倒数第k个节点。为了符合大多数人的习惯，本题从1开始计数，即链表的尾节点是倒数第1个节点。
+     * 例如，一个链表有6个节点，从头节点开始，它们的值依次是1、2、3、4、5、6。这个链表的倒数第3个节点是值为4的节点。
+     *
+     *
+     *
+     * 示例：
+     *
+     * 给定一个链表: 1->2->3->4->5, 和 k = 2.
+     *
+     * 返回链表 4->5.
+     */
+    public ListNode getKthFromEnd(ListNode head, int k) {
+        ListNode slow = head;
+        ListNode fast = head;
+        while (fast != null) {
+            k--;
+            if (k < 0) {
+                slow = slow.next;
+            }
+            fast = fast.next;
+        }
+        return slow;
+    }
+
+    /**
+     * 剑指 Offer 06. 从尾到头打印链表
+     * 输入一个链表的头节点，从尾到头反过来返回每个节点的值（用数组返回）。
+     *
+     *
+     *
+     * 示例 1：
+     *
+     * 输入：head = [1,3,2]
+     * 输出：[2,3,1]
+     *
+     * https://leetcode-cn.com/problems/cong-wei-dao-tou-da-yin-lian-biao-lcof/
+     */
+    public int[] reversePrint(ListNode head) {
+        List<Integer> nums = new ArrayList<>();
+        reversePrint(head, nums);
+        return nums.stream().mapToInt(Integer::valueOf).toArray();
+    }
+
+    private void reversePrint(ListNode head, List<Integer> nums) {
+        if (head == null) {
+            return;
+        }
+        reversePrint(head.next, nums);
+        nums.add(head.val);
+    }
+
+    /**
+     * 面试题 02.01. 移除重复节点
+     * 编写代码，移除未排序链表中的重复节点。保留最开始出现的节点。
+     *
+     * 示例1:
+     *
+     *  输入：[1, 2, 3, 3, 2, 1]
+     *  输出：[1, 2, 3]
+     * 示例2:
+     *
+     *  输入：[1, 1, 1, 1, 2]
+     *  输出：[1, 2]
+     * 提示：
+     *
+     * 链表长度在[0, 20000]范围内。
+     * 链表元素在[0, 20000]范围内。
+     * 进阶：
+     *
+     * 如果不得使用临时缓冲区，该怎么解决？
+     *
+     * https://leetcode-cn.com/problems/remove-duplicate-node-lcci/
+     *
+     */
+    public ListNode removeDuplicateNodes(ListNode head) {
+        return null;
     }
 }
