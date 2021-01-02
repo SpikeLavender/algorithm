@@ -35,33 +35,21 @@ public class ArrayTopic {
      * 输出：2.00000
      */
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
-        int left1 = 0;
-        int left2 = 0;
-        int right1 = nums1.length - 1;
-        int right2 = nums2.length - 1;
-        // mid = mid1 + mid2
-        // mid2 = mid - mid1
-        // [1, 5, 7] [2, 3, 4, 6, 8, 9]
-        // [1, 2, 3] [4, 5, 6, 7, 8, 9]
-        int mid1 = left1 + (right1 - left1) / 2;
-        int mid2 = left2 + (right2 - left2) / 2;
-        while (left1 < right1 && left2 < right2) {
-            mid1 = left1 + (right1 - left1) / 2;
-            mid2 = left2 + (right2 - left2) / 2;
-            if (nums1[mid1] <= nums2[mid2]) {
-                left1 = mid1;
-                right2 = mid2;
-            } else {
-                right1 = mid1;
-                left2 = mid2;
-            }
-        }
-        if ((nums1.length + nums2.length) % 2 == 0) {
-            System.out.println(mid1);
-            System.out.println(mid2);
-        } else {
+        int len1 = nums1.length;
+        int len2 = nums2.length;
 
+        int totalNum = len1 + len2;
+        if (totalNum % 2 == 0) {
+            int mid1 = totalNum / 2 - 1, mid2 = totalNum / 2;
+            return (getKthElement(nums1, nums2, mid1 + 1)
+                    + getKthElement(nums1, nums2, mid2 + 1)) / 2;
+        } else {
+            int mid = totalNum / 2;
+            return getKthElement(nums1, nums2, mid + 1);
         }
+    }
+
+    private double getKthElement(int[] nums1, int[] nums2, int index) {
         return 0;
     }
 }

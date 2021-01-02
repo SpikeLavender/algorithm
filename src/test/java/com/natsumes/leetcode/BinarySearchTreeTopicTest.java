@@ -189,4 +189,16 @@ public class BinarySearchTreeTopicTest {
                 new TreeNode(6));
         Assert.assertEquals(6, bst.kthLargest(root, 1));
     }
+
+    @Test
+    public void generateTrees() {
+        Assert.assertEquals(5, bst.generateTrees(3).size());
+        Assert.assertEquals(1430, bst.generateTrees(8).size());
+    }
+
+    @Test
+    public void numTrees() {
+        Assert.assertEquals(5, bst.numTrees(3));
+        Assert.assertEquals(1430, bst.numTrees(8));
+    }
 }
