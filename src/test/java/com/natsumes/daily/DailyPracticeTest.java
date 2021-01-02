@@ -88,4 +88,16 @@ public class DailyPracticeTest {
         Assert.assertArrayEquals(new int[] {11}, dp.maxSlidingWindow(new int[]{9,11}, 2));
         Assert.assertArrayEquals(new int[] {4}, dp.maxSlidingWindow(new int[]{4,-2}, 2));
     }
+
+    @Test
+    public void partition() {
+        DailyPractice.ListNode listNode = new DailyPractice.ListNode(1);
+        listNode.next = new DailyPractice.ListNode(4);
+        listNode.next.next = new DailyPractice.ListNode(3);
+        listNode.next.next.next = new DailyPractice.ListNode(2);
+        listNode.next.next.next.next = new DailyPractice.ListNode(5);
+        listNode.next.next.next.next.next = new DailyPractice.ListNode(2);
+        DailyPractice.ListNode node = dp.partition(listNode, 3);
+        System.out.println(node);
+    }
 }
