@@ -79,4 +79,13 @@ public class DailyPracticeTest {
         Assert.assertEquals(0, dp.eraseOverlapIntervals(new int[][]{{0, 1}, {3, 4}, {1, 2}}));
         Assert.assertEquals(2, dp.eraseOverlapIntervals(new int[][]{{1, 100}, {11, 22}, {1, 11}, {2, 12}}));
     }
+
+    @Test
+    public void maxSlidingWindow() {
+        Assert.assertArrayEquals(new int[] {3,3,5,5,6,7}, dp.maxSlidingWindow(new int[]{1,3,-1,-3,5,3,6,7}, 3));
+        Assert.assertArrayEquals(new int[] {1}, dp.maxSlidingWindow(new int[]{1}, 1));
+        Assert.assertArrayEquals(new int[] {1,-1}, dp.maxSlidingWindow(new int[]{1,-1}, 1));
+        Assert.assertArrayEquals(new int[] {11}, dp.maxSlidingWindow(new int[]{9,11}, 2));
+        Assert.assertArrayEquals(new int[] {4}, dp.maxSlidingWindow(new int[]{4,-2}, 2));
+    }
 }
