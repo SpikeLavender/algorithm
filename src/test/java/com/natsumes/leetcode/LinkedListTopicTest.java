@@ -159,4 +159,53 @@ public class LinkedListTopicTest {
         ListNode node = ListNode.build(new int[]{1, 2, 3, 4, 5});
         System.out.println(Arrays.toString(llt.reversePrint(node)));
     }
+
+    @Test
+    public void removeDuplicateNodes() {
+        ListNode node = ListNode.build(new int[] {1, 2, 3, 3, 2, 1});
+        System.out.println(llt.removeDuplicateNodes(node));
+
+        node = ListNode.build(new int[] {1, 1, 1, 1, 2});
+        System.out.println(llt.removeDuplicateNodes(node));
+    }
+
+    @Test
+    public void removeNthFromEnd() {
+        ListNode node = ListNode.build(new int[]{1, 2, 3, 4, 5});
+        System.out.println(llt.removeNthFromEnd(node, 2));
+
+        node = ListNode.build(new int[]{1, 2, 3, 4, 5});
+        System.out.println(llt.removeNthFromEnd(node, 1));
+
+        node = ListNode.build(new int[]{1});
+        System.out.println(llt.removeNthFromEnd(node, 1));
+
+        node = ListNode.build(new int[]{1});
+        System.out.println(llt.removeNthFromEnd(node, 0));
+
+        node = ListNode.build(new int[]{1, 2, 3, 4, 5});
+        System.out.println(llt.removeNthFromEnd(node, 5));
+    }
+
+    @Test
+    public void swapPairs() {
+        ListNode node = ListNode.build(new int[]{1, 2, 3, 4});
+        System.out.println(llt.swapPairs(node));
+
+        node = ListNode.build(new int[]{});
+        System.out.println(llt.swapPairs(node));
+
+        node = ListNode.build(new int[]{1});
+        System.out.println(llt.swapPairs(node));
+    }
+
+    @Test
+    public void rotateRight() {
+        ListNode node = ListNode.build(new int[]{1, 2, 3, 4, 5});
+        System.out.println(llt.rotateRight(node, 2));
+
+        node = ListNode.build(new int[]{0, 1, 2});
+        System.out.println(llt.rotateRight(node, 4));
+
+    }
 }

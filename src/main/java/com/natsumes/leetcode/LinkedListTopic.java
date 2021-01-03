@@ -508,6 +508,130 @@ public class LinkedListTopic {
      *
      */
     public ListNode removeDuplicateNodes(ListNode head) {
+        ListNode node = head;
+        while (node != null) {
+            ListNode newNode = node;
+            while (newNode.next != null) {
+                if (node.val == newNode.next.val) {
+                    newNode.next = newNode.next.next;
+                } else {
+                    newNode = newNode.next;
+                }
+            }
+            node = node.next;
+        }
+        return head;
+    }
+
+    /*============================================中等===============================================*/
+    /**
+     * 19. 删除链表的倒数第N个节点
+     * 给定一个链表，删除链表的倒数第 n 个节点，并且返回链表的头结点。
+     *
+     * 示例：
+     *
+     * 给定一个链表: 1->2->3->4->5, 和 n = 2.
+     *
+     * 当删除了倒数第二个节点后，链表变为 1->2->3->5.
+     * 说明：
+     *
+     * 给定的 n 保证是有效的。
+     *
+     * 进阶：
+     *
+     * 你能尝试使用一趟扫描实现吗？
+     * https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/
+     */
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        if (n <= 0) {
+            return head;
+        }
+        ListNode preHead = new ListNode(0);
+        preHead.next = head;
+        ListNode slow = preHead;
+        ListNode fast = head;
+
+        for (int i = 0; i < n; i++) {
+            fast = fast.next;
+        }
+
+        while (fast != null) {
+            slow = slow.next;
+            fast = fast.next;
+        }
+        slow.next = slow.next.next;
+
+        return preHead.next;
+    }
+
+    /**
+     * 24. 两两交换链表中的节点
+     * 给定一个链表，两两交换其中相邻的节点，并返回交换后的链表。
+     *
+     * 你不能只是单纯的改变节点内部的值，而是需要实际的进行节点交换。
+     *
+     * 示例 1：
+     *
+     *
+     * 输入：head = [1,2,3,4]
+     * 输出：[2,1,4,3]
+     * 示例 2：
+     *
+     * 输入：head = []
+     * 输出：[]
+     * 示例 3：
+     *
+     * 输入：head = [1]
+     * 输出：[1]
+     *
+     *
+     * 提示：
+     *
+     * 链表中节点的数目在范围 [0, 100] 内
+     * 0 <= Node.val <= 100
+     *
+     * https://leetcode-cn.com/problems/swap-nodes-in-pairs/
+     */
+    public ListNode swapPairs(ListNode head) {
+        ListNode dummyHead = new ListNode(0);
+        dummyHead.next = head;
+        ListNode tmp = dummyHead;
+        while (tmp.next != null && tmp.next.next != null) {
+            ListNode pre = tmp.next;
+            ListNode cur = tmp.next.next;
+            pre.next = cur.next;
+            cur.next = pre;
+            tmp.next = cur;
+            tmp = pre;
+        }
+        return dummyHead.next;
+    }
+
+    /**
+     * 61. 旋转链表
+     * 给定一个链表，旋转链表，将链表每个节点向右移动 k 个位置，其中 k 是非负数。
+     *
+     * 示例 1:
+     *
+     * 输入: 1->2->3->4->5->NULL, k = 2
+     * 输出: 4->5->1->2->3->NULL
+     * 解释:
+     * 向右旋转 1 步: 5->1->2->3->4->NULL
+     * 向右旋转 2 步: 4->5->1->2->3->NULL
+     * 示例 2:
+     *
+     * 输入: 0->1->2->NULL, k = 4
+     * 输出: 2->0->1->NULL
+     * 解释:
+     * 向右旋转 1 步: 2->0->1->NULL
+     * 向右旋转 2 步: 1->2->0->NULL
+     * 向右旋转 3 步: 0->1->2->NULL
+     * 向右旋转 4 步: 2->0->1->NULL
+     *
+     * https://leetcode-cn.com/problems/rotate-list/
+     */
+    public ListNode rotateRight(ListNode head, int k) {
+        //todo
         return null;
     }
 }
