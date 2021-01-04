@@ -100,4 +100,11 @@ public class DailyPracticeTest {
         DailyPractice.ListNode node = dp.partition(listNode, 3);
         System.out.println(node);
     }
+
+    @Test
+    public void testFib() {
+        Assert.assertEquals(1, dp.fib(2));
+        Assert.assertEquals(2, dp.fib(3));
+        Assert.assertEquals(3, dp.fib(4));
+    }
 }
