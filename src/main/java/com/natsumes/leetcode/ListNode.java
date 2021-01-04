@@ -12,12 +12,20 @@ public class ListNode {
 
     ListNode next;
 
+    boolean hasCycle;
+
     ListNode() {
 
     }
 
     ListNode(int val) {
         this.val = val;
+        this.hasCycle = false;
+    }
+
+    ListNode(int val, boolean hasCycle) {
+        this.val = val;
+        this.hasCycle = hasCycle;
     }
 
     ListNode(int val, ListNode next) {
@@ -26,10 +34,14 @@ public class ListNode {
     }
 
     public static ListNode build(int[] nums) {
+        return build(nums, false);
+    }
+
+    public static ListNode build(int[] nums, boolean hasCycle) {
         ListNode head = new ListNode();
         ListNode cur = head;
         for (int num : nums) {
-            cur.next = new ListNode(num);
+            cur.next = new ListNode(num, hasCycle);
             cur = cur.next;
         }
         return head.next;
@@ -62,6 +74,13 @@ public class ListNode {
 
     @Override
     public String toString() {
+        if (hasCycle) {
+            return "val = " + val;
+        }
         return NodePrinter.toString(this);
+    }
+
+    public void setHasCycle(boolean hasCycle) {
+        this.hasCycle = hasCycle;
     }
 }

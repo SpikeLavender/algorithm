@@ -1,6 +1,10 @@
 package com.natsumes.leetcode;
 
+import com.natsumes.linearlist.Stack;
+
 import java.util.ArrayList;
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -61,13 +65,11 @@ public class LinkedListTopic {
         ListNode pre = head;
 
         while (cur != null) {
-            if (cur.val == pre.val) {
-                cur = cur.next;
-            } else {
+            if (cur.val != pre.val) {
                 pre.next = cur;
                 pre = cur;
-                cur = cur.next;
             }
+            cur = cur.next;
         }
         pre.next = null;
 
@@ -631,7 +633,354 @@ public class LinkedListTopic {
      * https://leetcode-cn.com/problems/rotate-list/
      */
     public ListNode rotateRight(ListNode head, int k) {
-        //todo
+        if (head == null) {
+            return null;
+        }
+        if (head.next == null) {
+            return head;
+        }
+        ListNode oldTail = head;
+        int n;
+        for (n = 1; oldTail.next != null; n++) {
+            oldTail = oldTail.next;
+        }
+        oldTail.next = head;
+        ListNode newTail = head;
+        for (int i = 1; i < n - k % n; i++) {
+            newTail = newTail.next;
+        }
+        ListNode newHead = newTail.next;
+        newTail.next = null;
+        return newHead;
+    }
+
+    /**
+     * 82. 删除排序链表中的重复元素 II
+     * 给定一个排序链表，删除所有含有重复数字的节点，只保留原始链表中 没有重复出现 的数字。
+     *
+     * 示例 1:
+     *
+     * 输入: 1->2->3->3->4->4->5
+     * 输出: 1->2->5
+     * 示例 2:
+     *
+     * 输入: 1->1->1->2->3
+     * 输出: 2->3
+     *
+     * https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list-ii/
+     */
+    public ListNode deleteDuplicatesNode(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+
+        if (head.val == head.next.val) {
+            while (head.next != null && head.val == head.next.val) {
+                head = head.next;
+            }
+            return deleteDuplicatesNode(head.next);
+        } else {
+            head.next = deleteDuplicatesNode(head.next);
+            return head;
+        }
+    }
+
+    /**
+     * 92. 反转链表 II
+     * 反转从位置 m 到 n 的链表。请使用一趟扫描完成反转。
+     *
+     * 说明:
+     * 1 ≤ m ≤ n ≤ 链表长度。
+     *
+     * 示例:
+     *
+     * 输入: 1->2->3->4->5->NULL, m = 2, n = 4
+     * 输出: 1->4->3->2->5->NULL
+     *
+     * https://leetcode-cn.com/problems/reverse-linked-list-ii/
+     *
+     */
+    public ListNode reverseBetween(ListNode head, int m, int n) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode cur = head;
+        ListNode preHead = null;
+        int j = 0;
+
+        for (int i = 1; i < m; i++) {
+            j++;
+            preHead = cur;
+            cur = cur.next;
+        }
+        ListNode pre = null;
+        ListNode supHead = cur;
+        while (j < n) {
+            ListNode tmp = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = tmp;
+            j++;
+        }
+        if (supHead != null) {
+            supHead.next = cur;
+        }
+        if (preHead == null) {
+            head = pre;
+        } else {
+            preHead.next = pre;
+        }
+        return head;
+    }
+
+    /**
+     * 给定一个单链表，其中的元素按升序排序，将其转换为高度平衡的二叉搜索树。
+     *
+     * 本题中，一个高度平衡二叉树是指一个二叉树每个节点的左右两个子树的高度差的绝对值不超过 1。
+     *
+     * 示例:
+     *
+     * 给定的有序链表： [-10, -3, 0, 5, 9],
+     *
+     * 一个可能的答案是：[0, -3, 9, -10, null, 5], 它可以表示下面这个高度平衡二叉搜索树：
+     *
+     *       0
+     *      / \
+     *    -3   9
+     *    /   /
+     *  -10  5
+     *
+     * 来源：力扣（LeetCode）
+     * 链接：https://leetcode-cn.com/problems/convert-sorted-list-to-binary-search-tree
+     * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+     */
+    public TreeNode sortedListToBST(ListNode head) {
+        // 中序遍历
         return null;
+    }
+
+    /**
+     * 142. 环形链表 II || 面试题 02.08. 环路检测
+     * 给定一个链表，如果它是有环链表，实现一个算法返回环路的开头节点。
+     *
+     * 如果链表中有某个节点，可以通过连续跟踪 next 指针再次到达，则链表中存在环。
+     * 为了表示给定链表中的环，我们使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。
+     * 如果 pos 是 -1，则在该链表中没有环。注意：pos 不作为参数进行传递，仅仅是为了标识链表的实际情况。
+     *
+     *
+     *
+     * 示例 1：
+     *
+     *
+     *
+     * 输入：head = [3,2,0,-4], pos = 1
+     * 输出：tail connects to node index 1
+     * 解释：链表中有一个环，其尾部连接到第二个节点。
+     * 示例 2：
+     *
+     *
+     *
+     * 输入：head = [1,2], pos = 0
+     * 输出：tail connects to node index 0
+     * 解释：链表中有一个环，其尾部连接到第一个节点。
+     * 示例 3：
+     *
+     *
+     *
+     * 输入：head = [1], pos = -1
+     * 输出：no cycle
+     * 解释：链表中没有环。
+     *
+     *
+     * 进阶：
+     *
+     * 你是否可以不用额外空间解决此题？
+     *
+     * https://leetcode-cn.com/problems/linked-list-cycle-lcci/
+     * https://leetcode-cn.com/problems/linked-list-cycle-ii/
+     */
+    public ListNode detectCycle(ListNode head) {
+        if (head == null) {
+            return null;
+        }
+        ListNode slow = head;
+        ListNode fast = head;
+        while (fast != null) {
+            slow = slow.next;
+            if (fast.next == null) {
+                return null;
+            }
+            fast = fast.next.next;
+            if (fast == slow) {
+                ListNode cur = head;
+                while (cur != slow) {
+                    cur = cur.next;
+                    slow = slow.next;
+                }
+                return cur;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 面试题 02.05. 链表求和
+     * 给定两个用链表表示的整数，每个节点包含一个数位。
+     *
+     * 这些数位是反向存放的，也就是个位排在链表首部。
+     *
+     * 编写函数对这两个整数求和，并用链表形式返回结果。
+     *
+     *
+     *
+     * 示例：
+     *
+     * 输入：(7 -> 1 -> 6) + (5 -> 9 -> 2)，即617 + 295
+     * 输出：2 -> 1 -> 9，即912
+     * 进阶：思考一下，假设这些数位是正向存放的，又该如何解决呢?
+     *
+     * 示例：
+     *
+     * 输入：(6 -> 1 -> 7) + (2 -> 9 -> 5)，即617 + 295
+     * 输出：9 -> 1 -> 2，即912
+     *
+     * https://leetcode-cn.com/problems/sum-lists-lcci/
+     */
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode res = new ListNode(0);
+        addTwoNumbers(res, l1, l2, 0);
+        return res.next;
+    }
+
+    private void addTwoNumbers(ListNode res, ListNode l1, ListNode l2, int flag) {
+        if (l1 == null && l2 == null && flag == 0) {
+            return;
+        }
+        int sum1 = l1 == null ? 0 : l1.val;
+        int sum2 = l2 == null ? 0 : l2.val;
+        int sum = sum1 + sum2 + flag;
+        res.next = new ListNode(sum % 10);
+        flag = sum / 10;
+        addTwoNumbers(res.next, l1 == null ? null : l1.next, l2 == null ? null : l2.next, flag);
+    }
+
+    public ListNode addTwoNumbers01(ListNode l1, ListNode l2) {
+        ListNode res = new ListNode(0);
+        ListNode dummyHead = res;
+        int flag = 0;
+        while (l1 != null || l2 != null || flag != 0) {
+            int sum1 = l1 == null ? 0 : l1.val;
+            int sum2 = l2 == null ? 0 : l2.val;
+            int sum = sum1 + sum2 + flag;
+            flag = sum / 10;
+            res.next = new ListNode(sum % 10);
+            l1 = l1 == null ? null : l1.next;
+            l2 = l2 == null ? null : l2.next;
+            res = res.next;
+        }
+        return dummyHead.next;
+    }
+
+    /**
+     * 445. 两数相加 II
+     * 给你两个 非空 链表来代表两个非负整数。数字最高位位于链表开始位置。它们的每个节点只存储一位数字。
+     * 将这两数相加会返回一个新的链表。
+     *
+     * 你可以假设除了数字 0 之外，这两个数字都不会以零开头。
+     *
+     * 进阶：
+     *
+     * 如果输入链表不能修改该如何处理？换句话说，你不能对列表中的节点进行翻转。
+     *
+     * 示例：
+     *
+     * 输入：(7 -> 2 -> 4 -> 3) + (5 -> 6 -> 4)
+     * 输出：7 -> 8 -> 0 -> 7
+     *
+     * https://leetcode-cn.com/problems/add-two-numbers-ii/
+     */
+    public ListNode addTwoNumbers02(ListNode l1, ListNode l2) {
+        Deque<Integer> stack1 = new LinkedList<>();
+        Deque<Integer> stack2 = new LinkedList<>();
+        while (l1 != null) {
+            stack1.push(l1.val);
+            l1 = l1.next;
+        }
+        while (l2 != null) {
+            stack2.push(l2.val);
+            l2 = l2.next;
+        }
+        int flag = 0;
+        ListNode res = null;
+        while (!stack1.isEmpty() || !stack2.isEmpty() || flag != 0) {
+            int sum1 = stack1.isEmpty() ? 0 : stack1.pop();
+            int sum2 = stack2.isEmpty() ? 0 : stack2.pop();
+            int sum = sum1 + sum2 + flag;
+            flag = sum / 10;
+            ListNode cur = new ListNode(sum % 10);
+            cur.next = res;
+            res = cur;
+        }
+
+        return res;
+    }
+
+    /**
+     * 1669. 合并两个链表
+     * 给你两个链表 list1 和 list2 ，它们包含的元素分别为 n 个和 m 个。
+     *
+     * 请你将 list1 中第 a 个节点到第 b 个节点删除，并将list2 接在被删除节点的位置。
+     *
+     * 下图中蓝色边和节点展示了操作后的结果：
+     *
+     *
+     * 请你返回结果链表的头指针。
+     *
+     *
+     *
+     * 示例 1：
+     *
+     *
+     *
+     * 输入：list1 = [0,1,2,3,4,5], a = 3, b = 4, list2 = [1000000,1000001,1000002]
+     * 输出：[0,1,2,1000000,1000001,1000002,5]
+     * 解释：我们删除 list1 中第三和第四个节点，并将 list2 接在该位置。上图中蓝色的边和节点为答案链表。
+     * 示例 2：
+     *
+     *
+     * 输入：list1 = [0,1,2,3,4,5,6], a = 2, b = 5, list2 = [1000000,1000001,1000002,1000003,1000004]
+     * 输出：[0,1,1000000,1000001,1000002,1000003,1000004,6]
+     * 解释：上图中蓝色的边和节点为答案链表。
+     *
+     *
+     * 提示：
+     *
+     * 3 <= list1.length <= 104
+     * 1 <= a <= b < list1.length - 1
+     * 1 <= list2.length <= 10
+     *
+     * https://leetcode-cn.com/problems/merge-in-between-linked-lists/
+     */
+    public ListNode mergeInBetween(ListNode list1, int a, int b, ListNode list2) {
+        ListNode cur = list1;
+        while (cur != null) {
+            if (a == 1) {
+                ListNode cur2 = cur.next;
+                cur.next = list2;
+                while (list2.next != null) {
+                    list2 = list2.next;
+                }
+                while (cur2 != null && b > 0) {
+                    b--;
+                    cur2 = cur2.next;
+                }
+                list2.next = cur2;
+                break;
+            }
+            a--;
+            b--;
+            cur = cur.next;
+        }
+        return list1;
     }
 }

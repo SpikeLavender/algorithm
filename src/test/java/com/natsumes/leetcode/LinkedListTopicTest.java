@@ -208,4 +208,116 @@ public class LinkedListTopicTest {
         System.out.println(llt.rotateRight(node, 4));
 
     }
+
+    @Test
+    public void testDeleteDuplicatesNode() {
+        ListNode node = ListNode.build(new int[]{1, 2, 3, 3, 4, 4, 5});
+        System.out.println(llt.deleteDuplicatesNode(node));
+
+        node = ListNode.build(new int[]{1, 1, 1, 2, 3});
+        System.out.println(llt.deleteDuplicatesNode(node));
+    }
+
+    @Test
+    public void testReverseBetween() {
+        ListNode node = ListNode.build(new int[]{1, 2, 3, 4, 5});
+        System.out.println(llt.reverseBetween(node, 2, 4));
+
+        node = ListNode.build(new int[]{3, 5});
+        System.out.println(llt.reverseBetween(node, 1, 2));
+
+        node = ListNode.build(new int[]{3, 5, 6});
+        System.out.println(llt.reverseBetween(node, 1, 2));
+    }
+
+    @Test
+    public void testDetectCycle() {
+        ListNode node = ListNode.build(new int[]{1}, true);
+        ListNode.setCycle(node, 0);
+        ListNode listNode = llt.detectCycle(node);
+        System.out.println(listNode);
+
+        node = ListNode.build(new int[] {3, 2, 0, -4}, true);
+        ListNode.setCycle(node, 1);
+        listNode = llt.detectCycle(node);
+        System.out.println(listNode);
+        //Assert.assertTrue();
+
+        node = ListNode.build(new int[] {1, 2}, true);
+        ListNode.setCycle(node, 0);
+        listNode = llt.detectCycle(node);
+        System.out.println(listNode);
+
+        node = ListNode.build(new int[] {1, 2}, false);
+        ListNode.setCycle(node, -1);
+        listNode = llt.detectCycle(node);
+        System.out.println(listNode);
+
+        node = ListNode.build(new int[] {1}, false);
+        ListNode.setCycle(node, -1);
+        listNode = llt.detectCycle(node);
+        System.out.println(listNode);
+    }
+
+    @Test
+    public void testAddTwoNumbers() {
+        ListNode node1 = ListNode.build(new int[]{7, 1, 6});
+        ListNode node2 = ListNode.build(new int[]{5, 9, 2});
+        ListNode listNode = llt.addTwoNumbers(node1, node2);
+        System.out.println(listNode);
+
+        node1 = ListNode.build(new int[]{1, 8});
+        node2 = ListNode.build(new int[]{0});
+        listNode = llt.addTwoNumbers(node1, node2);
+        System.out.println(listNode);
+    }
+
+    @Test
+    public void testAddTwoNumbers01() {
+        ListNode node1 = ListNode.build(new int[]{7, 1, 6});
+        ListNode node2 = ListNode.build(new int[]{5, 9, 2});
+        ListNode listNode = llt.addTwoNumbers01(node1, node2);
+        System.out.println(listNode);
+
+        node1 = ListNode.build(new int[]{1, 8});
+        node2 = ListNode.build(new int[]{0});
+        listNode = llt.addTwoNumbers01(node1, node2);
+        System.out.println(listNode);
+    }
+
+    @Test
+    public void testAddTwoNumbers02() {
+        ListNode node1 = ListNode.build(new int[]{7, 2, 4, 3});
+        ListNode node2 = ListNode.build(new int[]{5, 6, 4});
+        ListNode listNode = llt.addTwoNumbers02(node1, node2);
+        System.out.println(listNode);
+    }
+
+    @Test
+    public void testMergeInBetween() {
+        ListNode node1 = ListNode.build(new int[]{0, 1, 2, 3, 4, 5});
+        ListNode node2 = ListNode.build(new int[]{10000, 100001, 10002});
+        ListNode listNode = llt.mergeInBetween(node1, 3, 4, node2);
+        System.out.println(listNode);
+
+        node1 = ListNode.build(new int[]{0, 1, 2, 3, 4, 5});
+        node2 = ListNode.build(new int[]{10000, 100001, 10002});
+        listNode = llt.mergeInBetween(node1, 4, 5, node2);
+        System.out.println(listNode);
+
+        node1 = ListNode.build(new int[]{0, 1, 2, 3, 4, 5});
+        node2 = ListNode.build(new int[]{10000, 100001, 10002});
+        listNode = llt.mergeInBetween(node1, 5, 5, node2);
+        System.out.println(listNode);
+
+        node1 = ListNode.build(new int[]{0, 1, 2, 3, 4, 5});
+        node2 = ListNode.build(new int[]{10000, 100001, 10002});
+        listNode = llt.mergeInBetween(node1, 4, 4, node2);
+        System.out.println(listNode);
+
+        node1 = ListNode.build(new int[]{0, 1, 2, 3, 4, 5});
+        node2 = ListNode.build(new int[]{10000, 100001, 10002});
+        listNode = llt.mergeInBetween(node1, 1, 4, node2);
+        System.out.println(listNode);
+    }
 }
