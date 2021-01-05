@@ -16,11 +16,10 @@ public class LinkedQueue<E> implements Queue<E> {
         Node<E> node = new Node<>(e);
         if (tail == null) {
             head = node;
-            tail = node;
         } else {
             tail.next = node;
-            tail = node;
         }
+        tail = node;
         size++;
         return false;
     }

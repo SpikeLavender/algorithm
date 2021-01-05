@@ -1,5 +1,7 @@
 package com.natsumes.leetcode;
 
+import java.util.ArrayList;
+
 /**
  * @author hetengjiao
  */

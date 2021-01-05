@@ -320,4 +320,28 @@ public class LinkedListTopicTest {
         listNode = llt.mergeInBetween(node1, 1, 4, node2);
         System.out.println(listNode);
     }
+
+    @Test
+    public void partition() {
+        ListNode node = ListNode.build(new int[]{3, 5, 8, 5, 10, 2, 1});
+        System.out.println(llt.partition(node, 5));
+
+        node = ListNode.build(new int[]{3, 5, 8, 5, 10, 2, 1});
+        System.out.println(llt.partition(node, 3));
+
+        node = ListNode.build(new int[]{3, 5, 8, 5, 10, 2, 1});
+        System.out.println(llt.partition(node, 1));
+
+        node = ListNode.build(new int[]{3, 5, 8, 5, 10, 2, 1});
+        System.out.println(llt.partition(node, 8));
+
+        node = ListNode.build(new int[]{});
+        System.out.println(llt.partition(node, 8));
+
+        node = ListNode.build(new int[]{1});
+        System.out.println(llt.partition(node, 8));
+
+        node = ListNode.build(new int[]{9});
+        System.out.println(llt.partition(node, 8));
+    }
 }
