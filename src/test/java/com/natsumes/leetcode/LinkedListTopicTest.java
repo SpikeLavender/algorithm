@@ -344,4 +344,39 @@ public class LinkedListTopicTest {
         node = ListNode.build(new int[]{9});
         System.out.println(llt.partition(node, 8));
     }
+
+    @Test
+    public void nextLargerNodes() {
+        ListNode node = ListNode.build(new int[]{2, 1, 5});
+        System.out.println(Arrays.toString(llt.nextLargerNodes(node)));
+
+        node = ListNode.build(new int[]{2, 7, 4, 3, 5});
+        System.out.println(Arrays.toString(llt.nextLargerNodes(node)));
+
+        node = ListNode.build(new int[]{1, 7, 5, 1, 9, 2, 5, 1});
+        System.out.println(Arrays.toString(llt.nextLargerNodes(node)));
+    }
+
+    @Test
+    public void removeZeroSumSublists() {
+        ListNode node = ListNode.build(new int[]{1, 2, -3, 3, 1});
+        System.out.println(llt.removeZeroSumSublists(node));
+
+        node = ListNode.build(new int[]{1, 2, -3, 3, 4});
+        System.out.println(llt.removeZeroSumSublists(node));
+
+        node = ListNode.build(new int[]{1, 2, 3, -3, -2});
+        System.out.println(llt.removeZeroSumSublists(node));
+    }
+
+    @Test
+    public void reorderList() {
+        ListNode node = ListNode.build(new int[]{1, 2, 3, 4});
+        llt.reorderList(node);
+        System.out.println(node);
+
+        node = ListNode.build(new int[]{1, 2, 3, 4, 5});
+        llt.reorderList(node);
+        System.out.println(node);
+    }
 }

@@ -2,10 +2,7 @@ package com.natsumes.leetcode;
 
 import com.natsumes.linearlist.Stack;
 
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author hetengjiao
@@ -1014,5 +1011,134 @@ public class LinkedListTopic {
             }
         }
         return head;
+    }
+
+    /**
+     * 1019. 链表中的下一个更大节点
+     * 给出一个以头节点 head 作为第一个节点的链表。链表中的节点分别编号为：node_1, node_2, node_3, ... 。
+     *
+     * 每个节点都可能有下一个更大值（next larger value）：对于 node_i，如果其 next_larger(node_i) 是 node_j.val，
+     * 那么就有 j > i 且  node_j.val > node_i.val，而 j 是可能的选项中最小的那个。如果不存在这样的 j，那么下一个更大值为 0 。
+     *
+     * 返回整数答案数组 answer，其中 answer[i] = next_larger(node_{i+1}) 。
+     *
+     * 注意：在下面的示例中，诸如 [2,1,5] 这样的输入（不是输出）是链表的序列化表示，
+     * 其头节点的值为 2，第二个节点值为 1，第三个节点值为 5 。
+     *
+     *
+     *
+     * 示例 1：
+     *
+     * 输入：[2,1,5]
+     * 输出：[5,5,0]
+     * 示例 2：
+     *
+     * 输入：[2,7,4,3,5]
+     * 输出：[7,0,5,5,0]
+     * 示例 3：
+     *
+     * 输入：[1,7,5,1,9,2,5,1]
+     * 输出：[7,9,9,9,0,5,0,0]
+     *
+     *
+     * 提示：
+     *
+     * 对于链表中的每个节点，1 <= node.val <= 10^9
+     * 给定列表的长度在 [0, 10000] 范围内
+     *
+     * https://leetcode-cn.com/problems/next-greater-node-in-linked-list/
+     *
+     * ANS: 单调栈, 后序遍历
+     */
+    public int[] nextLargerNodes(ListNode head) {
+        Deque<Integer> stack = new LinkedList<>();
+        LinkedList<Integer> res = new LinkedList<>();
+        nextLargerNodes(head, stack, res);
+        return res.stream().mapToInt(Integer::intValue).toArray();
+    }
+
+    private void nextLargerNodes(ListNode node, Deque<Integer> stack, LinkedList<Integer> res) {
+        if (node == null) {
+            return;
+        }
+        nextLargerNodes(node.next, stack, res);
+        while (!stack.isEmpty() && stack.peek() <= node.val) {
+            stack.pop();
+        }
+        res.addFirst(stack.isEmpty() ? 0 : stack.peek());
+        stack.push(node.val);
+    }
+
+    /**
+     * 1171. 从链表中删去总和值为零的连续节点
+     * 给你一个链表的头节点 head，请你编写代码，反复删去链表中由 总和 值为 0 的连续节点组成的序列，直到不存在这样的序列为止。
+     *
+     * 删除完毕后，请你返回最终结果链表的头节点。
+     *
+     *
+     *
+     * 你可以返回任何满足题目要求的答案。
+     *
+     * （注意，下面示例中的所有序列，都是对 ListNode 对象序列化的表示。）
+     *
+     * 示例 1：
+     *
+     * 输入：head = [1,2,-3,3,1]
+     * 输出：[3,1]
+     * 提示：答案 [1,2,1] 也是正确的。
+     * 示例 2：
+     *
+     * 输入：head = [1,2,3,-3,4]
+     * 输出：[1,2,4]
+     * 示例 3：
+     *
+     * 输入：head = [1,2,3,-3,-2]
+     * 输出：[1]
+     *
+     *
+     * 提示：
+     *
+     * 给你的链表中可能有 1 到 1000 个节点。
+     * 对于链表中的每个节点，节点的值：-1000 <= node.val <= 1000.
+     *
+     * https://leetcode-cn.com/problems/remove-zero-sum-consecutive-nodes-from-linked-list/
+     */
+    public ListNode removeZeroSumSublists(ListNode head) {
+        ListNode dummyHead = new ListNode();
+        dummyHead.next = head;
+
+        Map<Integer, ListNode> map = new HashMap<>();
+        int sum = 0;
+        for (ListNode d = dummyHead; d != null; d = d.next) {
+            sum += d.val;
+            map.put(sum, d);
+        }
+
+        sum = 0;
+        for (ListNode d = dummyHead; d != null; d = d.next) {
+            sum += d.val;
+            d.next = map.get(sum).next;
+        }
+
+        return dummyHead.next;
+    }
+
+    /**
+     * 143. 重排链表
+     * 给定一个单链表 L：L0→L1→…→Ln-1→Ln ，
+     * 将其重新排列后变为： L0→Ln→L1→Ln-1→L2→Ln-2→…
+     *
+     * 你不能只是单纯的改变节点内部的值，而是需要实际的进行节点交换。
+     *
+     * 示例 1:
+     *
+     * 给定链表 1->2->3->4, 重新排列为 1->4->2->3.
+     * 示例 2:
+     *
+     * 给定链表 1->2->3->4->5, 重新排列为 1->5->2->4->3.
+     * https://leetcode-cn.com/problems/reorder-list/
+     */
+    public void reorderList(ListNode head) {
+
     }
 }
