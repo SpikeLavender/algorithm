@@ -107,4 +107,14 @@ public class DailyPracticeTest {
         Assert.assertEquals(2, dp.fib(3));
         Assert.assertEquals(3, dp.fib(4));
     }
+
+    @Test
+    public void testLargeGroupPositions() {
+        System.out.println(dp.largeGroupPositions("abbxxxxzzy"));
+        System.out.println(dp.largeGroupPositions("abc"));
+        System.out.println(dp.largeGroupPositions("abcdddeeeeaabbbcd"));
+        System.out.println(dp.largeGroupPositions("aba"));
+        System.out.println(dp.largeGroupPositions("aaa"));
+        System.out.println(dp.largeGroupPositions("aa"));
+    }
 }
