@@ -112,6 +112,12 @@ public class LinkedListTopicTest {
     }
 
     @Test
+    public void reverseList4R() {
+        ListNode node = ListNode.build(new int[]{1, 2, 6, 3, 4, 5});
+        System.out.println(llt.reverseList4R(node));
+    }
+
+    @Test
     public void isPalindrome() {
         Assert.assertFalse(llt.isPalindrome(ListNode.build(new int[] {1, 2})));
         Assert.assertTrue(llt.isPalindrome(ListNode.build(new int[] {1, 2, 2, 1})));
@@ -200,6 +206,21 @@ public class LinkedListTopicTest {
     }
 
     @Test
+    public void reverseKGroup() {
+        ListNode node = ListNode.build(new int[]{1, 2, 3, 4});
+        System.out.println(llt.reverseKGroup(node, 2));
+
+        node = ListNode.build(new int[]{1, 2, 3, 4, 5});
+        System.out.println(llt.reverseKGroup(node, 2));
+
+        node = ListNode.build(new int[]{});
+        System.out.println(llt.reverseKGroup(node, 2));
+
+        node = ListNode.build(new int[]{1});
+        System.out.println(llt.reverseKGroup(node, 2));
+    }
+
+    @Test
     public void rotateRight() {
         ListNode node = ListNode.build(new int[]{1, 2, 3, 4, 5});
         System.out.println(llt.rotateRight(node, 2));
@@ -228,6 +249,30 @@ public class LinkedListTopicTest {
 
         node = ListNode.build(new int[]{3, 5, 6});
         System.out.println(llt.reverseBetween(node, 1, 2));
+    }
+
+    @Test
+    public void testReverseBetween4R() {
+        ListNode node = ListNode.build(new int[]{1, 2, 3, 4, 5});
+        System.out.println(llt.reverseBetween4R(node, 2, 4));
+
+        node = ListNode.build(new int[]{3, 5});
+        System.out.println(llt.reverseBetween4R(node, 1, 2));
+
+        node = ListNode.build(new int[]{3, 5, 6});
+        System.out.println(llt.reverseBetween4R(node, 1, 2));
+    }
+
+    @Test
+    public void testReverseN() {
+        ListNode node = ListNode.build(new int[]{1, 2, 3, 4, 5});
+        System.out.println(llt.reverseN(node, 2));
+
+        node = ListNode.build(new int[]{3, 5});
+        System.out.println(llt.reverseN(node, 1));
+
+        node = ListNode.build(new int[]{3, 5, 6});
+        System.out.println(llt.reverseN(node, 1));
     }
 
     @Test

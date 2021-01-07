@@ -1,7 +1,5 @@
 package com.natsumes.leetcode;
 
-import com.natsumes.linearlist.Stack;
-
 import java.util.*;
 
 /**
@@ -240,7 +238,6 @@ public class LinkedListTopic {
      *
      * https://leetcode-cn.com/problems/reverse-linked-list/
      *
-     * todo: 递归
      */
     public ListNode reverseList(ListNode head) {
 
@@ -254,6 +251,19 @@ public class LinkedListTopic {
         }
 
         return pre;
+    }
+
+    /**
+     * 递归实现
+     */
+    public ListNode reverseList4R(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode last = reverseList4R(head.next);
+        head.next.next = head;
+        head.next = null;
+        return last;
     }
 
     /**
@@ -287,6 +297,7 @@ public class LinkedListTopic {
         while (p1 != null && p2 != null) {
             if (p1.val != p2.val) {
                 result = false;
+                break;
             }
             p1 = p1.next;
             p2 = p2.next;
@@ -607,6 +618,42 @@ public class LinkedListTopic {
     }
 
     /**
+     * K 个一组反转链表
+     * @param head 头节点
+     * @param k 组数
+     * @return 新节点
+     */
+    public ListNode reverseKGroup(ListNode head, int k) {
+        if (head == null) {
+            return null;
+        }
+        ListNode a, b;
+        a = b = head;
+        for (int i = 0; i < k; i++) {
+            if (b == null) {
+                return head;
+            }
+            b = b.next;
+        }
+        ListNode newHead = reverseK(a, b);
+        a.next = reverseKGroup(b, k);
+        return newHead;
+    }
+
+    public ListNode reverseK(ListNode a, ListNode b) {
+        ListNode pre, cur, nxt;
+        pre = null;
+        cur = a;
+        while (cur != b) {
+            nxt = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = nxt;
+        }
+        return pre;
+    }
+
+    /**
      * 61. 旋转链表
      * 给定一个链表，旋转链表，将链表每个节点向右移动 k 个位置，其中 k 是非负数。
      *
@@ -729,6 +776,34 @@ public class LinkedListTopic {
         }
         return head;
     }
+
+    /**
+     * 递归实现
+     */
+    public ListNode reverseBetween4R(ListNode head, int m, int n) {
+        if (m == 1) {
+            return reverseN(head, n);
+        }
+        head.next = reverseBetween4R(head.next, m - 1, n - 1);
+        return head;
+    }
+
+    ListNode successor = null;
+
+    /**
+     * 反转前N个节点
+     */
+    public ListNode reverseN(ListNode head, int n) {
+        if (n == 1) {
+            successor = head.next;
+            return head;
+        }
+        ListNode last = reverseN(head.next, n - 1);
+        head.next.next = head;
+        head.next = successor;
+        return last;
+    }
+
 
     /**
      * 给定一个单链表，其中的元素按升序排序，将其转换为高度平衡的二叉搜索树。

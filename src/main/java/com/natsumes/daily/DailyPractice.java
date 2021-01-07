@@ -9,6 +9,100 @@ public class DailyPractice {
 
     /*========================================= 2021-01-05 ======================================================*/
     /**
+     * 547. 省份数量
+     * 有 n 个城市，其中一些彼此相连，另一些没有相连。如果城市 a 与城市 b 直接相连，
+     * 且城市 b 与城市 c 直接相连，那么城市 a 与城市 c 间接相连。
+     *
+     * 省份 是一组直接或间接相连的城市，组内不含其他没有相连的城市。
+     *
+     * 给你一个 n x n 的矩阵 isConnected ，其中 isConnected[i][j] = 1 表示第 i 个城市和第 j 个城市直接相连，
+     * 而 isConnected[i][j] = 0 表示二者不直接相连。
+     *
+     * 返回矩阵中 省份 的数量。
+     *
+     *
+     *
+     * 示例 1：
+     *
+     *
+     * 输入：isConnected = [[1,1,0],[1,1,0],[0,0,1]]
+     * 输出：2
+     * 示例 2：
+     *
+     *
+     * 输入：isConnected = [[1,0,0],[0,1,0],[0,0,1]]
+     * 输出：3
+     *
+     *
+     * 提示：
+     *
+     * 1 <= n <= 200
+     * n == isConnected.length
+     * n == isConnected[i].length
+     * isConnected[i][j] 为 1 或 0
+     * isConnected[i][i] == 1
+     * isConnected[i][j] == isConnected[j][i]
+     */
+    public int findCircleNum(int[][] isConnected) {
+        return 0;
+    }
+
+    /*========================================= 2021-01-05 ======================================================*/
+    /**
+     * 399. 除法求值
+     * 给你一个变量对数组 equations 和一个实数值数组 values 作为已知条件，其中 equations[i] = [Ai, Bi] 和 values[i] 共同表示等式 Ai / Bi = values[i] 。每个 Ai 或 Bi 是一个表示单个变量的字符串。
+     *
+     * 另有一些以数组 queries 表示的问题，其中 queries[j] = [Cj, Dj] 表示第 j 个问题，请你根据已知条件找出 Cj / Dj = ? 的结果作为答案。
+     *
+     * 返回 所有问题的答案 。如果存在某个无法确定的答案，则用 -1.0 替代这个答案。
+     *
+     *
+     *
+     * 注意：输入总是有效的。你可以假设除法运算中不会出现除数为 0 的情况，且不存在任何矛盾的结果。
+     *
+     *
+     *
+     * 示例 1：
+     *
+     * 输入：equations = [["a","b"],["b","c"]], values = [2.0,3.0],
+     * queries = [["a","c"],["b","a"],["a","e"],["a","a"],["x","x"]]
+     * 输出：[6.00000,0.50000,-1.00000,1.00000,-1.00000]
+     * 解释：
+     * 条件：a / b = 2.0, b / c = 3.0
+     * 问题：a / c = ?, b / a = ?, a / e = ?, a / a = ?, x / x = ?
+     * 结果：[6.0, 0.5, -1.0, 1.0, -1.0 ]
+     * 示例 2：
+     *
+     * 输入：equations = [["a","b"],["b","c"],["bc","cd"]], values = [1.5,2.5,5.0],
+     * queries = [["a","c"],["c","b"],["bc","cd"],["cd","bc"]]
+     * 输出：[3.75000,0.40000,5.00000,0.20000]
+     * 示例 3：
+     *
+     * 输入：equations = [["a","b"]], values = [0.5], queries = [["a","b"],["b","a"],["a","c"],["x","y"]]
+     * 输出：[0.50000,2.00000,-1.00000,-1.00000]
+     *
+     *
+     * 提示：
+     *
+     * 1 <= equations.length <= 20
+     * equations[i].length == 2
+     * 1 <= Ai.length, Bi.length <= 5
+     * values.length == equations.length
+     * 0.0 < values[i] <= 20.0
+     * 1 <= queries.length <= 20
+     * queries[i].length == 2
+     * 1 <= Cj.length, Dj.length <= 5
+     * Ai, Bi, Cj, Dj 由小写英文字母与数字组成
+     *
+     * https://leetcode-cn.com/problems/evaluate-division/
+     */
+    public double[] calcEquation(List<List<String>> equations, double[] values, List<List<String>> queries) {
+        double[] res = new double[0];
+        return res;
+    }
+
+    /*========================================= 2021-01-05 ======================================================*/
+    /**
      * 830. 较大分组的位置
      * 在一个由小写字母构成的字符串 s 中，包含由一些连续的相同字符所构成的分组。
      *
