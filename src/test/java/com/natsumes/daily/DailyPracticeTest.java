@@ -117,4 +117,16 @@ public class DailyPracticeTest {
         System.out.println(dp.largeGroupPositions("aaa"));
         System.out.println(dp.largeGroupPositions("aa"));
     }
+
+    @Test
+    public void rotate() {
+        int[] nums = new int[] {1, 2, 3, 4, 5, 6, 7};
+        dp.rotate( nums, 3);
+        Assert.assertArrayEquals(new int[] {5, 6, 7, 1, 2, 3, 4}, nums);
+
+        nums = new int[] {-1, -100, 3, 99};
+        dp.rotate( nums, 2);
+        Assert.assertArrayEquals(new int[] {3, 99, -1, -100}, nums);
+
+    }
 }
