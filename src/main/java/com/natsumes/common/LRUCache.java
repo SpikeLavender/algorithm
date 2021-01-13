@@ -30,12 +30,12 @@ public class LRUCache<K, V> implements Serializable {
         Node node = cache.get(key);
         if (node == null) {
             node = new Node(key, value);
-            cache.put(key, node);
-            addToHead(node);
-            if (cache.size() > capacity) {
+            if (cache.size() >= capacity) {
                 Node tail = removeTail();
                 cache.remove(tail.key);
             }
+            cache.put(key, node);
+            addToHead(node);
         } else {
             node.value = value;
             moveToHead(node);
