@@ -26,7 +26,7 @@ public class Trie {
      */
     public Trie insert(String src) {
         char[] text = src.toCharArray();
-        Trie.TrieNode p = root;
+        TrieNode p = root;
         for (char c : text) {
             int index = c - 'a';
             if (p.children[index] == null) {
@@ -61,7 +61,7 @@ public class Trie {
 
     }
 
-    class TrieNode {
+    private static class TrieNode {
         char data;
 
         TrieNode[] children = new TrieNode[26];

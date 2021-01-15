@@ -10,7 +10,7 @@ public class StrUtils {
      */
     public static int print(String s) {
 
-        int[] chars = new int[128];
+        int[] chars = new int[256];
         int res = 0;
         int i = 0;
         int j = 0;

@@ -120,13 +120,17 @@ public class StrMatchUtils {
                 return i;
             }
 
-            // 这里等同于将模式串往后滑动j-bc[(int)a[i+j]]位
-            // j：si bc[(int)a[i+j]]:xi
-            i = i + (j - bc[(int) a[i + j]]);
+            // 这里等同于将模式串往后滑动j-bc[a[i+j]]位
+            // si - xi
+            // j：si bc[a[i+j]]:xi
+            i = i + (j - bc[a[i + j]]);
 
         }
         return -1;
     }
+
+    // hello
+    // el
 
     private static void generateBc(char[] b, int m, int[] dc) {
         // 初始化 bc 模式串中没有的字符值都是-1
@@ -135,9 +139,8 @@ public class StrMatchUtils {
         }
         //将模式串中的字符希写入到字典中
         for (int i = 0; i < m; ++i) {
-            int ascii = (int)b[i];
             // 计算 b[i] 的 ASCII 值
-            dc[ascii] = i;
+            dc[b[i]] = i;
         }
     }
 

@@ -76,5 +76,9 @@ public class StrMatchUtilsTest {
         how = trie.find("hs");
         System.out.println(how);
         Assert.assertFalse(how);
+
+        how = trie.find("h");
+        System.out.println(how);
+        Assert.assertFalse(how);
     }
 }
