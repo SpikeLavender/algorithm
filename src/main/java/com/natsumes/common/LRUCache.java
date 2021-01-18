@@ -83,10 +83,10 @@ public class LRUCache<K, V> implements Serializable {
 
         Node next;
 
-        public Node() {
+        Node() {
         }
 
-        public Node(K key, V value) {
+        Node(K key, V value) {
             this.key = key;
             this.value = value;
         }

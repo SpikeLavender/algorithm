@@ -15,10 +15,6 @@ public class Auction02 {
 
     private int totalCount;
 
-    public Auction02(int totalCount) {
-        this.totalCount = totalCount;
-    }
-
     private int count = 0;
 
     private final int initPrice = 4000;
@@ -30,6 +26,11 @@ public class Auction02 {
     private Random random = new Random();
 
     private int price = initPrice;
+
+    public Auction02(int totalCount) {
+        this.totalCount = totalCount;
+    }
+
 
     public void auction(String name) {
         while (count < totalCount) {
