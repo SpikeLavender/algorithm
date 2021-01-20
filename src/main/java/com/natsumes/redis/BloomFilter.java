@@ -1,6 +1,8 @@
 package com.natsumes.redis;
 
 /**
+ * 布隆过滤器
+ *
  * @author hetengjiao
  */
 public class BloomFilter {

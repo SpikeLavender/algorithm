@@ -3,6 +3,8 @@ package com.natsumes.redis;
 import java.util.Arrays;
 
 /**
+ * 位图 bitmap
+ *
  * @author hetengjiao
  */
 public class Bitmap {
