@@ -1,5 +1,6 @@
 package com.natsumes.redis;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -18,22 +19,21 @@ public class BitmapTest {
     @Test
     public void get() {
         Bitmap bitmap = new Bitmap();
-        System.out.println(bitmap.get(3));
+        Assert.assertFalse(bitmap.get(3));
         bitmap.set(3);
-        System.out.println(bitmap.get(3));
-        System.out.println(bitmap.get(65));
-    }
+        Assert.assertTrue(bitmap.get(3));
+        Assert.assertFalse(bitmap.get(65));    }
 
     @Test
     public void clear() {
         Bitmap bitmap = new Bitmap(64);
         bitmap.set(3);
         bitmap.set(65);
-        System.out.println(bitmap.get(3));
-        System.out.println(bitmap.get(65));
+        Assert.assertTrue(bitmap.get(3));
+        Assert.assertTrue(bitmap.get(65));
         bitmap.clear(3);
-        System.out.println(bitmap.get(3));
-        System.out.println(bitmap.get(65));
+        Assert.assertFalse(bitmap.get(3));
+        Assert.assertTrue(bitmap.get(65));
     }
 
     public static void main(String[] args) {
