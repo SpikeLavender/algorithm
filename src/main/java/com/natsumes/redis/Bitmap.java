@@ -104,21 +104,4 @@ public class Bitmap {
             words = Arrays.copyOf(words, request);
         }
     }
-
-
-    public static void main(String[] args) {
-        Bitmap bitmap = new Bitmap(64);
-        System.out.println(Arrays.toString(bitmap.words));
-        System.out.println(bitmap.words.length);
-        bitmap.set(3);
-        bitmap.set(64);
-        for (int i = 0; i < bitmap.words.length; i++) {
-            System.out.println(Long.toBinaryString(bitmap.words[i]));
-        }
-        System.out.println(bitmap.words.length);
-
-        System.out.println(Long.toBinaryString(((1L << 6) - 1) >> 6));
-        System.out.println(Long.toBinaryString(1L << 63));
-        System.out.println(Long.toBinaryString(1L << 31));
-    }
 }
