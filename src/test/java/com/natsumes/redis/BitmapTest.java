@@ -1,5 +1,6 @@
 package com.natsumes.redis;
 
+import org.apache.lucene.util.RamUsageEstimator;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -36,9 +37,22 @@ public class BitmapTest {
         Assert.assertTrue(bitmap.get(65));
     }
 
+    @Test
+    public void test() {
+        Bitmap bitmap = new Bitmap();
+        System.out.println(RamUsageEstimator.humanSizeOf(bitmap));
+        bitmap.set(2000000000);
+        System.out.println(RamUsageEstimator.humanSizeOf(bitmap));
+    }
+
     public static void main(String[] args) {
         System.out.println(Long.toBinaryString(((1L << 6) - 1) >> 6));
         System.out.println(Long.toBinaryString(1L << 63));
         System.out.println(Long.toBinaryString(1L << 31));
+
+        Bitmap bitmap = new Bitmap();
+        System.out.println(RamUsageEstimator.humanSizeOf(bitmap));
+        bitmap.set(10000);
+        System.out.println(RamUsageEstimator.humanSizeOf(bitmap));
     }
 }
