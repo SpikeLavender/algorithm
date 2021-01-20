@@ -1,4 +1,4 @@
-package com.natsumes.common;
+package com.natsumes.redis;
 
 import java.io.Serializable;
 import java.util.Map;
