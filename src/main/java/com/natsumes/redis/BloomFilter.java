@@ -46,6 +46,9 @@ public class BloomFilter {
             }
         },
 
+        /**
+         *
+         */
         ADDITIVE_HASH {
             @Override
             public IBloomHash getBloomHash() {
@@ -126,7 +129,7 @@ public class BloomFilter {
         }
 
         /**
-         * additiveHash
+         * rotatingHash
          * @return hash code
          */
         static IBloomHash rotatingHash() {
@@ -140,7 +143,7 @@ public class BloomFilter {
         }
 
         /**
-         * additiveHash
+         * bernsteinHash
          * @return hash code
          */
         static IBloomHash bernsteinHash() {
@@ -154,7 +157,7 @@ public class BloomFilter {
         }
 
         /**
-         * additiveHash
+         * optimizeFnvHash
          * @return hash code
          */
         static IBloomHash optimizeFnvHash() {
@@ -174,7 +177,7 @@ public class BloomFilter {
         }
 
         /**
-         * additiveHash
+         * rsHash
          * @return hash code
          */
         static IBloomHash rsHash() {
