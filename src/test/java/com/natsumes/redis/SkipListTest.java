@@ -22,9 +22,11 @@ public class SkipListTest {
         list.add(65);
         list.print();
 
-        list.search(50);
+        SkipList.Node search = list.search(50);
+        System.out.println(search);
         list.remove(50);
-        list.search(50);
+        search = list.search(50);
+        System.out.println(search);
     }
 
     @Test

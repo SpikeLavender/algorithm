@@ -5,6 +5,9 @@ import java.util.Arrays;
 /**
  * 位图 bitmap
  *
+ * 去重，交集，并集，判断存在与否
+ * 非集（与全集异或）
+ *
  * @author hetengjiao
  */
 public class Bitmap {

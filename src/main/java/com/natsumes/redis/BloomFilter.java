@@ -2,6 +2,7 @@ package com.natsumes.redis;
 
 /**
  * 布隆过滤器
+ * 去重，判断某个元素是否存在
  *
  * @author hetengjiao
  */

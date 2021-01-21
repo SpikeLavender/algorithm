@@ -4,6 +4,10 @@ import java.util.Random;
 
 /**
  * 跳跃表
+ * 快速查询、插入、删除
+ * 与红黑树功能和性能相似，但实现更简单
+ *
+ * 因为需要多层节点，所以需要2n空间，空间换时间
  *
  * @author hetengjiao
  */
@@ -25,8 +29,11 @@ public class SkipList<E extends Comparable<E>> {
     }
 
     public void add(E e) {
+        if (e == null) {
+            throw new IllegalArgumentException("param can not be null");
+        }
         Node preNode = findNode(e);
-        if (e.compareTo(preNode.data) == 0) {
+        if (preNode.data != null && e.compareTo(preNode.data) == 0) {
             return;
         }
 
@@ -142,7 +149,7 @@ public class SkipList<E extends Comparable<E>> {
         System.out.println();
     }
 
-    private class Node {
+    class Node {
 
         E data;
 
@@ -156,6 +163,11 @@ public class SkipList<E extends Comparable<E>> {
 
         Node(E data) {
             this.data = data;
+        }
+
+        @Override
+        public String toString() {
+            return "data = " + data;
         }
     }
 
