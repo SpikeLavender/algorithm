@@ -1,5 +1,7 @@
 package com.natsumes.string;
 
+import java.util.Arrays;
+
 /**
  * @author hetengjiao
  */
@@ -101,7 +103,12 @@ public class StrMatchUtils {
         // 创建字典
         int[] bc = new int[SIZE];
         // 构建坏字符哈希表，记录模式串中每个字符最后出现的位置
-        generateBc(b, m, bc);
+        badCharRule(b, m, bc);
+
+        int[] suffix = new int[m];
+        boolean[] prefix = new boolean[m];
+        goodSuffixRule(b, m, suffix, prefix);
+
         // i表示主串与模式串对齐的第一个字符
         int i = 0;
 
@@ -123,7 +130,13 @@ public class StrMatchUtils {
             // 这里等同于将模式串往后滑动j-bc[a[i+j]]位
             // si - xi
             // j：si bc[a[i+j]]:xi
-            i = i + (j - bc[a[i + j]]);
+            int moveWithBc = j - bc[a[i + j]];
+            int moveWithGs = Integer.MIN_VALUE;
+            if (j < m - 1) {
+                moveWithGs = moveWithGs(m, j, suffix, prefix);
+            }
+
+            i += Math.max(moveWithBc, moveWithGs);
 
         }
         return -1;
@@ -132,11 +145,54 @@ public class StrMatchUtils {
     // hello
     // el
 
-    private static void generateBc(char[] b, int m, int[] dc) {
-        // 初始化 bc 模式串中没有的字符值都是-1
-        for (int i = 0; i < SIZE; ++i) {
-            dc[i] = -1;
+    /**
+     * 处理好后缀
+     * @param b     模式串
+     * @param m     模式串长度
+     * @param suffix    用子串长度为 k 存储主串的好后缀{u} 对应的子串中 {u*} 对应的起始位置
+     * @param prefix    用子串长度为 k 存储 模式串中是否存在和好后缀相同的字符串
+     */
+    private static void goodSuffixRule(char[] b, int m, int[] suffix, boolean[] prefix) {
+        Arrays.fill(suffix, -1);
+        Arrays.fill(prefix, false);
+        for (int i = 0; i < m - 1; i++) {
+            int j = i;
+            int k = 0;
+            while (j >= 0 && b[j] == b[m - k - 1]) {
+                j--;
+                k++;
+                suffix[k] = j + 1;
+            }
+            if (j == -1) {
+                prefix[k] = true;
+            }
         }
+    }
+
+    /**
+     * 滑动
+     * @param n 模式串长度
+     * @param j 坏字符的对应的模式串的下标
+     * @param suffix    suffix
+     * @param prefix    prefix
+     * @return  int
+     */
+    private static int moveWithGs(int n, int j, int[] suffix, boolean[] prefix) {
+        int k = n - j - 1;
+        if (suffix[k] != -1) {
+            return j - suffix[k] + 1;
+        }
+        for (int i = k - 1; i >= 0; i--) {
+            if (prefix[i]) {
+                return n - i;
+            }
+        }
+        return n;
+    }
+
+    private static void badCharRule(char[] b, int m, int[] dc) {
+        // 初始化 bc 模式串中没有的字符值都是-1
+        Arrays.fill(dc, -1);
         //将模式串中的字符希写入到字典中
         for (int i = 0; i < m; ++i) {
             // 计算 b[i] 的 ASCII 值

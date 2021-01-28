@@ -52,6 +52,10 @@ public class StrMatchUtilsTest {
         System.out.println(index);
         Assert.assertEquals(0, index);
 
+        index = StrMatchUtils.badBoyerMooreMatch("aaaaaaaaaaaaaaaaaaaaaab", "ba");
+        System.out.println(index);
+        Assert.assertEquals(-1, index);
+
         index = StrMatchUtils.badBoyerMooreMatch("abcdsef", "cd");
         System.out.println(index);
         Assert.assertEquals(2, index);
