@@ -131,10 +131,8 @@ public class StrMatchUtils {
             // si - xi
             // j：si bc[a[i+j]]:xi
             int moveWithBc = j - bc[a[i + j]];
-            int moveWithGs = Integer.MIN_VALUE;
-            if (j < m - 1) {
-                moveWithGs = moveWithGs(m, j, suffix, prefix);
-            }
+
+            int moveWithGs = moveWithGs(m, j, suffix, prefix);
 
             i += Math.max(moveWithBc, moveWithGs);
 
@@ -179,6 +177,9 @@ public class StrMatchUtils {
      */
     private static int moveWithGs(int n, int j, int[] suffix, boolean[] prefix) {
         int k = n - j - 1;
+        if (k <= 0) {
+            return 0;
+        }
         if (suffix[k] != -1) {
             return j - suffix[k] + 1;
         }
