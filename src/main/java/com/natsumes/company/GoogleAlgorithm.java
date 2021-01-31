@@ -1,4 +1,4 @@
-package com.natsumes.google;
+package com.natsumes.company;
 
 import java.util.Arrays;
 
