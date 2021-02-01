@@ -15,7 +15,7 @@ public class ByteDanceTest {
         Assert.assertEquals("aba", bd.longestPalindrome("babad"));
         Assert.assertEquals("bb", bd.longestPalindrome("cbbd"));
         Assert.assertEquals("a", bd.longestPalindrome("a"));
-        Assert.assertEquals("a", bd.longestPalindrome("ac"));
+        Assert.assertEquals("c", bd.longestPalindrome("ac"));
     }
 
     @Test
@@ -37,5 +37,29 @@ public class ByteDanceTest {
                 )
         );
         Assert.assertEquals(12, bd.findLastRightNode(node).val);
+    }
+
+    @Test
+    public void countBalls() {
+        Assert.assertEquals(2, bd.countBalls(1, 10));
+        Assert.assertEquals(2, bd.countBalls(5, 15));
+        Assert.assertEquals(2, bd.countBalls(19, 28));
+    }
+
+    @Test
+    public void checkPartitioning() {
+        Assert.assertTrue(bd.checkPartitioning("juchzcedhfesefhdeczhcujzzvbmoeombv"));
+        Assert.assertTrue(bd.checkPartitioning("aaa"));
+        Assert.assertTrue(bd.checkPartitioning("aac"));
+        Assert.assertTrue(bd.checkPartitioning("abcbdd"));
+        Assert.assertFalse(bd.checkPartitioning("aa"));
+        Assert.assertFalse(bd.checkPartitioning("bcbddxy"));
+    }
+
+    @Test
+    public void restoreArray() {
+        Assert.assertArrayEquals(new int[]{1, 2, 3, 4}, bd.restoreArray(new int[][]{{2, 1}, {3, 4}, {3, 2}}));
+        Assert.assertArrayEquals(new int[]{-2, 4, 1, -3}, bd.restoreArray(new int[][]{{4, -2}, {1, 4}, {-3, 1}}));
+        Assert.assertArrayEquals(new int[]{100000, -100000}, bd.restoreArray(new int[][]{{100000, -100000}}));
     }
 }
