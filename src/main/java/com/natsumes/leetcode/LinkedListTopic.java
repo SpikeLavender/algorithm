@@ -4,6 +4,9 @@ import java.util.*;
 
 /**
  * @author hetengjiao
+ *
+ * <a href="https://leetcode-cn.com/problems/reorder-list/">143.重排链表</a>
+ * @see LinkedListTopic#reorderList(com.natsumes.leetcode.ListNode)
  */
 public class LinkedListTopic {
 
@@ -1212,8 +1215,44 @@ public class LinkedListTopic {
      *
      * 给定链表 1->2->3->4->5, 重新排列为 1->5->2->4->3.
      * https://leetcode-cn.com/problems/reorder-list/
+     *
+     * @param head head
+     * @see LinkedListTopic
+     * @see LinkedListTopic#reverseList(com.natsumes.leetcode.ListNode)
+     * @see LinkedListTopic#middleNode(com.natsumes.leetcode.ListNode)
      */
     public void reorderList(ListNode head) {
+        if (head == null) {
+            return;
+        }
+        ListNode slow = head;
+        ListNode fast = head.next;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        // 反转后半部分链表 1 -> 2  3 -> 4 -> 5
+        ListNode right = slow.next;
+        slow.next = null;
+        ListNode pre = null;
 
+        while (right != null) {
+            ListNode tmp = right.next;
+            right.next = pre;
+            pre = right;
+            right = tmp;
+        }
+        ListNode node = head;
+        // 合并 1 -> 2  3 -> 4 -> 5
+        // 1 -> 3 -> 2 -> 4
+        while (node != null && pre != null) {
+            ListNode nextL = node.next;
+            ListNode nextR = pre.next;
+
+            node.next = pre;
+            node = nextL;
+            pre.next = node;
+            pre = nextR;
+        }
     }
 }

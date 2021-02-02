@@ -416,11 +416,11 @@ public class LinkedListTopicTest {
 
     @Test
     public void reorderList() {
-        ListNode node = ListNode.build(new int[]{1, 2, 3, 4});
+        ListNode node = ListNode.build(new int[]{1, 2, 3, 4, 5});
         llt.reorderList(node);
         System.out.println(node);
 
-        node = ListNode.build(new int[]{1, 2, 3, 4, 5});
+        node = ListNode.build(new int[]{1, 2, 3, 4});
         llt.reorderList(node);
         System.out.println(node);
     }

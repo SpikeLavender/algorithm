@@ -4,6 +4,7 @@ import java.util.*;
 
 /**
  * 并查集
+ * @author hetengjiao
  *
  * <a href="https://leetcode-cn.com/problems/number-of-connected-components-in-an-undirected-graph/">323.无向图中连通分量的数目</a>
  * @see UnionFinder#countComponents(int, int[][])
@@ -41,7 +42,15 @@ import java.util.*;
  * <a href="https://leetcode-cn.com/problems/bricks-falling-when-hit/">803.打砖块</a>
  * @see UnionFinder#hitBricks(int[][], int[][])
  *
- * @author hetengjiao
+ * <a href="https://leetcode-cn.com/problems/couples-holding-hands/">765.情侣牵手</a>
+ * @see UnionFinder#minSwapsCouples(int[])
+ *
+ * <a href="https://leetcode-cn.com/problems/swim-in-rising-water/">778.水位上升的泳池中游泳</a>
+ * @see UnionFinder#swimInWater(int[][])
+ *
+ * <a href="https://leetcode-cn.com/problems/minimize-malware-spread/">924.尽量减少恶意软件的传播</a>
+ * @see UnionFinder#minMalwareSpread(int[][], int[])
+ *
  */
 public class UnionFinder {
 
@@ -860,6 +869,205 @@ public class UnionFinder {
     }
 
     /**
+     * 765. 情侣牵手
+     * N 对情侣坐在连续排列的 2N 个座位上，想要牵到对方的手。 计算最少交换座位的次数，以便每对情侣可以并肩坐在一起。
+     * 一次交换可选择任意两人，让他们站起来交换座位。
+     *
+     * 人和座位用 0 到 2N-1 的整数表示，情侣们按顺序编号，第一对是 (0, 1)，第二对是 (2, 3)，以此类推，最后一对是 (2N-2, 2N-1)。
+     *
+     * 这些情侣的初始座位  row[i] 是由最初始坐在第 i 个座位上的人决定的。
+     *
+     * 示例 1:
+     *
+     * 输入: row = [0, 2, 1, 3]
+     * 输出: 1
+     * 解释: 我们只需要交换row[1]和row[2]的位置即可。
+     * 示例 2:
+     *
+     * 输入: row = [3, 2, 0, 1]
+     * 输出: 0
+     * 解释: 无需交换座位，所有的情侣都已经可以手牵手了。
+     * 说明:
+     *
+     * len(row) 是偶数且数值在 [4, 60]范围内。
+     * 可以保证row 是序列 0...len(row)-1 的一个全排列。
+     *
+     * @param row row
+     * @return int
+     * @see UnionFinder
+     */
+    public int minSwapsCouples(int[] row) {
+        int n = row.length;
+        Union union = new Union(n / 2);
+        for (int i = 0; i < n; i += 2) {
+            union.union(row[i] / 2, row[i + 1] / 2);
+        }
+
+        return n / 2 - union.count();
+    }
+
+    /**
+     * 778. 水位上升的泳池中游泳
+     * 在一个 N x N 的坐标方格 grid 中，每一个方格的值 grid[i][j] 表示在位置 (i,j) 的平台高度。
+     *
+     * 现在开始下雨了。当时间为 t 时，此时雨水导致水池中任意位置的水位为 t 。
+     * 你可以从一个平台游向四周相邻的任意一个平台，但是前提是此时水位必须同时淹没这两个平台。
+     * 假定你可以瞬间移动无限距离，也就是默认在方格内部游动是不耗时的。当然，在你游泳的时候你必须待在坐标方格里面。
+     *
+     * 你从坐标方格的左上平台 (0，0) 出发。最少耗时多久你才能到达坐标方格的右下平台 (N-1, N-1)？
+     *
+     *
+     *
+     * 示例 1:
+     *
+     * 输入: [[0,2],[1,3]]
+     * 输出: 3
+     * 解释:
+     * 时间为0时，你位于坐标方格的位置为 (0, 0)。
+     * 此时你不能游向任意方向，因为四个相邻方向平台的高度都大于当前时间为 0 时的水位。
+     *
+     * 等时间到达 3 时，你才可以游向平台 (1, 1). 因为此时的水位是 3，坐标方格中的平台没有比水位 3 更高的，
+     * 所以你可以游向坐标方格中的任意位置
+     * 示例2:
+     *
+     * 输入: [[0,1,2,3,4],[24,23,22,21,5],[12,13,14,15,16],[11,17,18,19,20],[10,9,8,7,6]]
+     * 输出: 16
+     * 解释:
+     *  0  1  2  3  4
+     * 24 23 22 21  5
+     * 12 13 14 15 16
+     * 11 17 18 19 20
+     * 10  9  8  7  6
+     *
+     * 最终的路线用加粗进行了标记。
+     * 我们必须等到时间为 16，此时才能保证平台 (0, 0) 和 (4, 4) 是连通的
+     * @param grid grid
+     * @return int
+     * @see UnionFinder
+     */
+    public int swimInWater(int[][] grid) {
+        int m = grid.length;
+        int n = grid[0].length;
+        Union union = new Union(m * n);
+
+        int[] index = new int[m * n];
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                index[grid[i][j]] = i * n + j;
+            }
+        }
+
+        int[][] d = new int[][] {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+
+        for (int i = 0; i < m * n; i++) {
+            int ii = index[i] / n;
+            int jj = index[i] % n;
+            for (int k = 0; k < 4; k++) {
+                int x = ii + d[k][0];
+                int y = jj + d[k][1];
+                if (checkIndex(x, y, m, n) && grid[x][y] <= i) {
+                    union.union(x * n + y, ii * n + jj);
+                }
+            }
+            if (union.connect(0, m * n - 1)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * 924. 尽量减少恶意软件的传播
+     * 在节点网络中，只有当 graph[i][j] = 1 时，每个节点 i 能够直接连接到另一个节点 j。
+     *
+     * 一些节点 initial 最初被恶意软件感染。只要两个节点直接连接，且其中至少一个节点受到恶意软件的感染，
+     * 那么两个节点都将被恶意软件感染。这种恶意软件的传播将继续，直到没有更多的节点可以被这种方式感染。
+     *
+     * 假设 M(initial) 是在恶意软件停止传播之后，整个网络中感染恶意软件的最终节点数。
+     *
+     * 我们可以从初始列表中删除一个节点。如果移除这一节点将最小化 M(initial)， 则返回该节点。
+     * 如果有多个节点满足条件，就返回索引最小的节点。
+     *
+     * 请注意，如果某个节点已从受感染节点的列表 initial 中删除，它以后可能仍然因恶意软件传播而受到感染。
+     *
+     *
+     *
+     * 示例 1：
+     *
+     * 输入：graph = [[1,1,0],[1,1,0],[0,0,1]], initial = [0,1]
+     * 输出：0
+     * 示例 2：
+     *
+     * 输入：graph = [[1,0,0],[0,1,0],[0,0,1]], initial = [0,2]
+     * 输出：0
+     * 示例 3：
+     *
+     * 输入：graph = [[1,1,1],[1,1,1],[1,1,1]], initial = [1,2]
+     * 输出：1
+     *
+     *
+     * 提示：
+     *
+     * 1 < graph.length = graph[0].length <= 300
+     * 0 <= graph[i][j] == graph[j][i] <= 1
+     * graph[i][i] == 1
+     * 1 <= initial.length < graph.length
+     * 0 <= initial[i] < graph.length
+     *
+     * @param graph graph
+     * @param initial initial
+     * @return int
+     * @see UnionFinder
+     */
+    public int minMalwareSpread(int[][] graph, int[] initial) {
+        int n = graph.length;
+        Union union = new Union(n);
+
+        for (int i = 0; i < n; i++) {
+            for (int j = i; j < n; j++) {
+                if (graph[i][j] == 1) {
+                    union.union(i, j);
+                }
+            }
+        }
+
+        int[] count = new int[n];
+
+        for (int value : initial) {
+            count[union.find(value)]++;
+        }
+
+        int ans = -1;
+        int ansSize = -1;
+        for (int node : initial) {
+            int root = union.find(node);
+            if (count[root] == 1) {
+                int rootSize = union.getSize(root);
+                if (rootSize > ansSize) {
+                    ansSize = rootSize;
+                    ans = node;
+                } else if (rootSize == ansSize && node < ans) {
+                    ans = node;
+                }
+            }
+        }
+
+        if (ans == -1) {
+            ans = Integer.MAX_VALUE;
+            for (int value : initial) {
+                ans = Math.min(value, ans);
+            }
+        }
+        return ans;
+    }
+
+
+
+    private boolean checkIndex(int x, int y, int m, int n) {
+        return x >= 0 && y >= 0 && x < m && y < n;
+    }
+
+    /**
      * 并查集
      */
     private static class Union {
@@ -927,7 +1135,7 @@ public class UnionFinder {
             count++;
         }
 
-        private int find(int x) {
+        int find(int x) {
             if (parent[x] != x) {
                 // 进行路径压缩
                 parent[x] = find(parent[x]);

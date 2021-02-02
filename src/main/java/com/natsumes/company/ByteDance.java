@@ -94,32 +94,29 @@ public class ByteDance {
             return node;
         }
 
-        // 计算高度
-        int depth = 0;
         Node curNode = node;
+        int depth = 0;
         while (curNode != null) {
-            depth++;
             curNode = curNode.left;
+            depth++;
         }
-
         int level = 0;
-        int tmpDepth;
+        int tempDepth;
         while (node != null) {
             level++;
             if (level == depth) {
                 break;
             }
-            curNode = node;
-            if (curNode.right != null) {
-                tmpDepth = level + 1;
+            if (node.right != null) {
+                curNode = node.right;
                 Node preNode = curNode;
-                curNode = curNode.right;
+                tempDepth = level + 1;
                 while (curNode.left != null) {
-                    tmpDepth++;
+                    tempDepth++;
                     preNode = curNode;
                     curNode = curNode.left;
                 }
-                if (tmpDepth < depth) {
+                if (tempDepth < depth) {
                     node = node.left;
                 } else if (preNode.right == null || preNode.right == curNode) {
                     return curNode;
@@ -130,6 +127,7 @@ public class ByteDance {
                 node = node.left;
             }
         }
+
         return node;
     }
 

@@ -152,4 +152,85 @@ public class UnionFinderTest {
         exp = new int[] {0, 0};
         Assert.assertArrayEquals(exp, uf.hitBricks(grid, hits));
     }
+
+    @Test
+    public void minSwapsCouples() {
+        Assert.assertEquals(1, uf.minSwapsCouples(new int[] {0, 2, 1, 3}));
+        Assert.assertEquals(0, uf.minSwapsCouples(new int[] {3, 2, 0, 1}));
+    }
+
+    @Test
+    public void swimInWater() {
+        Assert.assertEquals(17, uf.swimInWater(new int[][]{
+                {1, 2, 3, 4, 5},
+                {24, 23, 22, 21, 17},
+                {12, 13, 14, 15, 16},
+                {11, 0, 18, 19, 20},
+                {10, 9, 8, 7, 6}
+        }));
+        Assert.assertEquals(3, uf.swimInWater(new int[][]{{0, 2}, {1, 3}}));
+        Assert.assertEquals(16, uf.swimInWater(new int[][]{
+                {0, 1, 2, 3, 4},
+                {24, 23, 22, 21, 5},
+                {12, 13, 14, 15, 16},
+                {11, 17, 18, 19, 20},
+                {10, 9, 8, 7, 6}
+        }));
+    }
+
+    /**
+     * 示例 1：
+     *
+     * 输入：graph = [[1,1,0],[1,1,0],[0,0,1]], initial = [0,1]
+     * 输出：0
+     * 示例 2：
+     *
+     * 输入：graph = [[1,0,0],[0,1,0],[0,0,1]], initial = [0,2]
+     * 输出：0
+     * 示例 3：
+     *
+     * 输入：graph = [[1,1,1],[1,1,1],[1,1,1]], initial = [1,2]
+     * 输出：1
+     *
+     * [
+     * [1,0,0,0,1,0,0,0,0,0,1],
+     * [0,1,0,1,0,0,0,0,0,0,0],
+     * [0,0,1,0,0,0,0,1,0,0,0],
+     * [0,1,0,1,0,1,0,0,0,0,0],
+     * [1,0,0,0,1,0,0,0,0,0,0],
+     * [0,0,0,1,0,1,0,0,1,1,0],
+     * [0,0,0,0,0,0,1,1,0,0,0],
+     * [0,0,1,0,0,0,1,1,0,0,0],
+     * [0,0,0,0,0,1,0,0,1,0,0],
+     * [0,0,0,0,0,1,0,0,0,1,0],
+     * [1,0,0,0,0,0,0,0,0,0,1]
+     * ]
+     * [7,8,6,2,3]
+     */
+    @Test
+    public void minMalwareSpread() {
+        Assert.assertEquals(2,
+                uf.minMalwareSpread(new int[][] {
+                                {1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1},
+                                {0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0},
+                                {0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0},
+                                {0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0},
+                                {1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
+                                {0, 0, 0, 1, 0, 1, 0, 0, 1, 1, 0},
+                                {0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0},
+                                {0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0},
+                                {0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0},
+                                {0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0},
+                                {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}
+                        },
+                        new int[] {7,8,6,2,3}));
+        Assert.assertEquals(1,
+                uf.minMalwareSpread(new int[][]{{1, 1, 1}, {1, 1, 1}, {1, 1, 1}}, new int[] {1, 2}));
+        Assert.assertEquals(2,
+                uf.minMalwareSpread(new int[][]{{1, 1, 0}, {1, 1, 0}, {0, 0, 1}}, new int[] {0, 1, 2}));
+        Assert.assertEquals(0,
+                uf.minMalwareSpread(new int[][]{{1, 1, 0}, {1, 1, 0}, {0, 0, 1}}, new int[] {0, 1}));
+        Assert.assertEquals(0,
+                uf.minMalwareSpread(new int[][]{{1, 0, 0}, {0, 1, 0}, {0, 0, 1}}, new int[] {0, 2}));
+    }
 }
