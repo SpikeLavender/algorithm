@@ -3,6 +3,8 @@ package com.natsumes.company;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.List;
+
 /**
  * @author hetengjiao
  */
@@ -20,23 +22,23 @@ public class ByteDanceTest {
 
     @Test
     public void findLastRightNode() {
-        Node node = new Node(1,
-                new Node(2, new Node(4, new Node(7), new Node(8)), new Node(5)),
-                new Node(3, new Node(6), new Node(9))
+        TreeNode treeNode = new TreeNode(1,
+                new TreeNode(2, new TreeNode(4, new TreeNode(7), new TreeNode(8)), new TreeNode(5)),
+                new TreeNode(3, new TreeNode(6), new TreeNode(9))
         );
-        Assert.assertEquals(8, bd.findLastRightNode(node).val);
+        Assert.assertEquals(8, bd.findLastRightNode(treeNode).val);
 
-        node = new Node(1,
-                new Node(2,
-                        new Node(4, new Node(7), new Node(8)),
-                        new Node(5, new Node(10), new Node(11))
+        treeNode = new TreeNode(1,
+                new TreeNode(2,
+                        new TreeNode(4, new TreeNode(7), new TreeNode(8)),
+                        new TreeNode(5, new TreeNode(10), new TreeNode(11))
                 ),
-                new Node(3,
-                        new Node(6, new Node(12), null),
-                        new Node(9)
+                new TreeNode(3,
+                        new TreeNode(6, new TreeNode(12), null),
+                        new TreeNode(9)
                 )
         );
-        Assert.assertEquals(12, bd.findLastRightNode(node).val);
+        Assert.assertEquals(12, bd.findLastRightNode(treeNode).val);
     }
 
     @Test
@@ -61,5 +63,22 @@ public class ByteDanceTest {
         Assert.assertArrayEquals(new int[]{1, 2, 3, 4}, bd.restoreArray(new int[][]{{2, 1}, {3, 4}, {3, 2}}));
         Assert.assertArrayEquals(new int[]{-2, 4, 1, -3}, bd.restoreArray(new int[][]{{4, -2}, {1, 4}, {-3, 1}}));
         Assert.assertArrayEquals(new int[]{100000, -100000}, bd.restoreArray(new int[][]{{100000, -100000}}));
+    }
+
+    @Test
+    public void rightSideView() {
+        TreeNode treeNode = new TreeNode(1,
+                new TreeNode(2,
+                        null,
+                        new TreeNode(5)
+                ),
+                new TreeNode(3,
+                        null,
+                        new TreeNode(4)
+                )
+        );
+        List<Integer> list = bd.rightSideView(treeNode);
+        System.out.println(list);
+        //Assert.assertEquals(12, bd.findLastRightNode(treeNode).val);
     }
 }

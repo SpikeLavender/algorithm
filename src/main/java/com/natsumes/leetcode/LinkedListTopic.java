@@ -5,8 +5,18 @@ import java.util.*;
 /**
  * @author hetengjiao
  *
+ * <a href="https://leetcode-cn.com/problems/merge-two-sorted-lists/">21.合并两个有序链表</a>
+ * @see LinkedListTopic#mergeTwoLists(ListNode, ListNode)
+ *
  * <a href="https://leetcode-cn.com/problems/reorder-list/">143.重排链表</a>
  * @see LinkedListTopic#reorderList(com.natsumes.leetcode.ListNode)
+ *
+ * <a href="https://leetcode-cn.com/problems/sort-list/">148.排序链表</a>
+ * @see LinkedListTopic#sortList(com.natsumes.leetcode.ListNode)
+ *
+ * <a href="https://leetcode-cn.com/problems/insertion-sort-list/">147.对链表进行插入排序</a>
+ * @see LinkedListTopic#insertionSortList(com.natsumes.leetcode.ListNode)
+ *
  */
 public class LinkedListTopic {
 
@@ -24,10 +34,10 @@ public class LinkedListTopic {
      * https://leetcode-cn.com/problems/merge-two-sorted-lists/
      */
     public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
-        ListNode head = new ListNode(-1);
-        ListNode cur = head;
+        ListNode dummyHead = new ListNode(-1);
+        ListNode cur = dummyHead;
         while (l1 != null && l2 != null) {
-            if (l1.val <= l2.val) {
+            if (l1.val < l2.val) {
                 cur.next = l1;
                 l1 = l1.next;
             } else {
@@ -37,7 +47,7 @@ public class LinkedListTopic {
             cur = cur.next;
         }
         cur.next = l1 != null ? l1 : l2;
-        return head.next;
+        return dummyHead.next;
     }
 
     /**
@@ -118,7 +128,7 @@ public class LinkedListTopic {
      * 提示：
      *
      * 链表中节点的数目范围是 [0, 104]
-     * -105 <= Node.val <= 105
+     * -105 <= TreeNode.val <= 105
      * pos 为 -1 或者链表中的一个 有效索引 。
      *
      * https://leetcode-cn.com/problems/linked-list-cycle/
@@ -601,7 +611,7 @@ public class LinkedListTopic {
      * 提示：
      *
      * 链表中节点的数目在范围 [0, 100] 内
-     * 0 <= Node.val <= 100
+     * 0 <= TreeNode.val <= 100
      *
      * https://leetcode-cn.com/problems/swap-nodes-in-pairs/
      */
@@ -1254,5 +1264,140 @@ public class LinkedListTopic {
             pre.next = node;
             pre = nextR;
         }
+    }
+
+    /**
+     * 148. 排序链表 -- 归并排序
+     * 给你链表的头结点 head ，请将其按 升序 排列并返回 排序后的链表 。
+     *
+     * 进阶：
+     *
+     * 你可以在 O(n log n) 时间复杂度和常数级空间复杂度下，对链表进行排序吗？
+     * 归并排序
+     *
+     * 示例 1：
+     *
+     *
+     * 输入：head = [4,2,1,3]
+     * 输出：[1,2,3,4]
+     * 示例 2：
+     *
+     *
+     * 输入：head = [-1,5,3,4,0]
+     * 输出：[-1,0,3,4,5]
+     * 示例 3：
+     *
+     * 输入：head = []
+     * 输出：[]
+     *
+     *
+     * 提示：
+     *
+     * 链表中节点的数目在范围 [0, 5 * 104] 内
+     * -105 <= TreeNode.val <= 105
+     *
+     * @param head head
+     * @return  {@link ListNode}
+     * @see LinkedListTopic
+     * @see LinkedListTopic#mergeTwoLists(ListNode, ListNode)
+     *
+     */
+    public ListNode sortList(ListNode head) {
+        if (head == null) {
+            return null;
+        }
+
+        int length = 0;
+        ListNode node = head;
+        while (node != null) {
+            length++;
+            node = node.next;
+        }
+
+        ListNode dummyNode = new ListNode(0, head);
+        for (int subLength = 1; subLength < length; subLength <<= 1) {
+            ListNode pre = dummyNode;
+            ListNode cur = dummyNode.next;
+            while (cur != null) {
+                ListNode head1 = cur;
+                for (int i = 1; i < subLength && cur.next != null; i++) {
+                    cur = cur.next;
+                }
+
+                ListNode head2 = cur.next;
+                cur.next = null;
+                cur = head2;
+                for (int i = 1; i < subLength && cur != null && cur.next != null; i++) {
+                    cur = cur.next;
+                }
+                ListNode next = null;
+                if (cur != null) {
+                    next = cur.next;
+                    cur.next = null;
+                }
+                pre.next = mergeTwoLists(head1, head2);
+                while (pre.next != null) {
+                    pre = pre.next;
+                }
+                cur = next;
+            }
+        }
+        return dummyNode.next;
+    }
+
+    /**
+     * 147. 对链表进行插入排序
+     * 对链表进行插入排序。
+     *
+     *
+     * 插入排序的动画演示如上。从第一个元素开始，该链表可以被认为已经部分排序（用黑色表示）。
+     * 每次迭代时，从输入数据中移除一个元素（用红色表示），并原地将其插入到已排好序的链表中。
+     *
+     *
+     *
+     * 插入排序算法：
+     *
+     * 插入排序是迭代的，每次只移动一个元素，直到所有元素可以形成一个有序的输出列表。
+     * 每次迭代中，插入排序只从输入数据中移除一个待排序的元素，找到它在序列中适当的位置，并将其插入。
+     * 重复直到所有输入数据插入完为止。
+     *
+     *
+     * 示例 1：
+     *
+     * 输入: 4->2->1->3
+     * 输出: 1->2->3->4
+     * 示例 2：
+     *
+     * 输入: -1->5->3->4->0
+     * 输出: -1->0->3->4->5
+     *
+     * @param head head
+     * @return {@link ListNode}
+     *
+     * @see LinkedListTopic
+     *
+     */
+    public ListNode insertionSortList(ListNode head) {
+        if (head == null) {
+            return null;
+        }
+        ListNode dummyHead = new ListNode(0, head);
+        ListNode last = head;
+        ListNode cur = head.next;
+        while (cur != null) {
+            if (last.val <= cur.val) {
+                last = last.next;
+            } else {
+                ListNode prev = dummyHead;
+                while (prev.next.val <= cur.val) {
+                    prev = prev.next;
+                }
+                last.next = cur.next;
+                cur.next = prev.next;
+                prev.next = cur;
+            }
+            cur = last.next;
+        }
+        return dummyHead.next;
     }
 }

@@ -424,4 +424,28 @@ public class LinkedListTopicTest {
         llt.reorderList(node);
         System.out.println(node);
     }
+
+    @Test
+    public void sortList() {
+        ListNode node = ListNode.build(new int[]{4, 2, 1, 3});
+        System.out.println(llt.sortList(node));
+
+        node = ListNode.build(new int[]{-1, 5, 3, 4, 0});
+        System.out.println(llt.sortList(node));
+
+        node = ListNode.build(new int[]{});
+        System.out.println(llt.sortList(node));
+    }
+
+    @Test
+    public void insertionSortList() {
+        ListNode node = ListNode.build(new int[]{4, 2, 1, 3});
+        System.out.println(llt.insertionSortList(node));
+
+        node = ListNode.build(new int[]{-1, 5, 3, 4, 0});
+        System.out.println(llt.insertionSortList(node));
+
+        node = ListNode.build(new int[]{});
+        System.out.println(llt.insertionSortList(node));
+    }
 }

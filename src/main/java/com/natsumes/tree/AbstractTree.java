@@ -321,7 +321,7 @@ public abstract class AbstractTree<T extends Comparable<T>> implements Tree<T> {
 
         @Override
         public String toString() {
-            return "Node{" + "data=" + data + ", nodeNum = " + nodeNum
+            return "TreeNode{" + "data=" + data + ", nodeNum = " + nodeNum
                     + ", depth = " + depth
                     + ", priority = " + priority
                     + ", color=" + (isBlack ? "BLACK" : "RED")

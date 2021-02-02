@@ -3,18 +3,18 @@ package com.natsumes.company;
 /**
  * @author hetengjiao
  */
-public class Node {
+public class TreeNode {
     int val;
 
-    Node left;
+    TreeNode left;
 
-    Node right;
+    TreeNode right;
 
-    public Node(int val) {
+    public TreeNode(int val) {
         this.val = val;
     }
 
-    public Node(int val, Node left, Node right) {
+    public TreeNode(int val, TreeNode left, TreeNode right) {
         this.val = val;
         this.left = left;
         this.right = right;

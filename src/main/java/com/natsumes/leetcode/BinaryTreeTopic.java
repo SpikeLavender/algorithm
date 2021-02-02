@@ -40,7 +40,7 @@ public class BinaryTreeTopic {
      * 提示：
      *
      * 树中节点数目在范围 [0, 100] 内
-     * -100 <= Node.val <= 100
+     * -100 <= TreeNode.val <= 100
      *  
      *
      * 进阶：递归算法很简单，你可以通过迭代算法完成吗？
@@ -129,7 +129,7 @@ public class BinaryTreeTopic {
      * 提示：
      *
      * 树中节点数目在范围 [0, 100] 内
-     * -100 <= Node.val <= 100
+     * -100 <= TreeNode.val <= 100
      *
      * 作者：力扣 (LeetCode)
      * 链接：https://leetcode-cn.com/leetbook/read/data-structure-binary-tree/xecaj6/
@@ -582,11 +582,11 @@ public class BinaryTreeTopic {
      * <p>
      * 给定一个 完美二叉树 ，其所有叶子节点都在同一层，每个父节点都有两个子节点。二叉树定义如下：
      *
-     * struct Node {
+     * struct TreeNode {
      *   int val;
-     *   Node *left;
-     *   Node *right;
-     *   Node *next;
+     *   TreeNode *left;
+     *   TreeNode *right;
+     *   TreeNode *next;
      * }
      * 填充它的每个 next 指针，让这个指针指向其下一个右侧节点。如果找不到下一个右侧节点，则将 next 指针设置为 NULL。
      *
@@ -641,11 +641,11 @@ public class BinaryTreeTopic {
      *
      * 给定一个二叉树
      *
-     * struct Node {
+     * struct TreeNode {
      *   int val;
-     *   Node *left;
-     *   Node *right;
-     *   Node *next;
+     *   TreeNode *left;
+     *   TreeNode *right;
+     *   TreeNode *next;
      * }
      * 填充它的每个 next 指针，让这个指针指向其下一个右侧节点。如果找不到下一个右侧节点，则将 next 指针设置为 NULL。
      *
@@ -1553,7 +1553,7 @@ public class BinaryTreeTopic {
      * 提示：
      *
      * 树中节点数在范围 [1, 104] 内
-     * 0 <= Node.val <= 104
+     * 0 <= TreeNode.val <= 104
      * 树中每个节点的值都是唯一的
      * 题目数据保证输入是一棵有效的二叉搜索树
      * 0 <= low <= high <= 104

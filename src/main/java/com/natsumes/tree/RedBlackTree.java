@@ -188,24 +188,24 @@ public class RedBlackTree <T extends Comparable<T>> extends AbstractTree<T> {
     }
 
 
-//    class Node extends AbstractTree.Node {
+//    class TreeNode extends AbstractTree.TreeNode {
 //
 //        transient boolean isBlack;
 //
-//        Node left;
+//        TreeNode left;
 //
-//        Node right;
+//        TreeNode right;
 //
-//        transient Node parent;
+//        transient TreeNode parent;
 //
-//        Node(T data) {
+//        TreeNode(T data) {
 //            super(data);
 //            this.isBlack = false;
 //        }
 //
 //        @Override
 //        public String toString() {
-//            return "Node{" + "data=" + data + ", nodeNum = " + nodeNum
+//            return "TreeNode{" + "data=" + data + ", nodeNum = " + nodeNum
 //                    + ", color=" + (isBlack ? "BLACK" : "RED") + '}';
 //        }
 //    }

@@ -1,14 +1,24 @@
 package com.natsumes.company;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  *
  * 字节跳动题库
  *
  * @author hetengjiao
+ *
+ * <a href="https://leetcode-cn.com/problems/reorder-list/">143.重排链表</a>
+ * @see com.natsumes.leetcode.LinkedListTopic#reorderList(com.natsumes.leetcode.ListNode)
+ *
+ * <a href="https://leetcode-cn.com/problems/sort-list/">148.排序链表</a>
+ * @see com.natsumes.leetcode.LinkedListTopic#sortList(com.natsumes.leetcode.ListNode)
+ *
+ * <a href="https://leetcode-cn.com/problems/insertion-sort-list/">147.对链表进行插入排序</a>
+ * @see com.natsumes.leetcode.LinkedListTopic#insertionSortList(com.natsumes.leetcode.ListNode)
+ *
+ * <a href="https://leetcode-cn.com/problems/binary-tree-right-side-view/">199.二叉树的右视图</a>
+ * @see com.natsumes.company.ByteDance#rightSideView(com.natsumes.company.TreeNode)
  */
 public class ByteDance {
 
@@ -86,49 +96,49 @@ public class ByteDance {
      *        / \  / \
      *       3  4 4   3
      */
-    public Node findLastRightNode(Node node) {
-        if (node == null) {
+    public TreeNode findLastRightNode(TreeNode treeNode) {
+        if (treeNode == null) {
             return null;
         }
-        if (node.left == null && node.right == null) {
-            return node;
+        if (treeNode.left == null && treeNode.right == null) {
+            return treeNode;
         }
 
-        Node curNode = node;
+        TreeNode curTreeNode = treeNode;
         int depth = 0;
-        while (curNode != null) {
-            curNode = curNode.left;
+        while (curTreeNode != null) {
+            curTreeNode = curTreeNode.left;
             depth++;
         }
         int level = 0;
         int tempDepth;
-        while (node != null) {
+        while (treeNode != null) {
             level++;
             if (level == depth) {
                 break;
             }
-            if (node.right != null) {
-                curNode = node.right;
-                Node preNode = curNode;
+            if (treeNode.right != null) {
+                curTreeNode = treeNode.right;
+                TreeNode preTreeNode = curTreeNode;
                 tempDepth = level + 1;
-                while (curNode.left != null) {
+                while (curTreeNode.left != null) {
                     tempDepth++;
-                    preNode = curNode;
-                    curNode = curNode.left;
+                    preTreeNode = curTreeNode;
+                    curTreeNode = curTreeNode.left;
                 }
                 if (tempDepth < depth) {
-                    node = node.left;
-                } else if (preNode.right == null || preNode.right == curNode) {
-                    return curNode;
+                    treeNode = treeNode.left;
+                } else if (preTreeNode.right == null || preTreeNode.right == curTreeNode) {
+                    return curTreeNode;
                 } else {
-                    node = node.right;
+                    treeNode = treeNode.right;
                 }
             } else {
-                node = node.left;
+                treeNode = treeNode.left;
             }
         }
 
-        return node;
+        return treeNode;
     }
 
     public int countBalls(int lowLimit, int highLimit) {
@@ -393,6 +403,52 @@ public class ByteDance {
                 }
             }
             res += Math.min(lMax, rMax) - height[i];
+        }
+        return res;
+    }
+
+    /**
+     * 199. 二叉树的右视图
+     * 给定一棵二叉树，想象自己站在它的右侧，按照从顶部到底部的顺序，返回从右侧所能看到的节点值。
+     *
+     * 示例:
+     *
+     * 输入: [1,2,3,null,5,null,4]
+     * 输出: [1, 3, 4]
+     * 解释:
+     *
+     *    1            <---
+     *  /   \
+     * 2     3         <---
+     *  \     \
+     *   5     4       <---
+     *
+     * @param root root
+     * @return List
+     * @see ByteDance
+     */
+    public List<Integer> rightSideView(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        if (root == null) {
+            return res;
+        }
+        // 层序遍历
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        int levelValue = root.val;
+        while (!queue.isEmpty()) {
+            int currSize = queue.size();
+            for (int i = 0; i < currSize; i++) {
+                TreeNode node = queue.poll();
+                levelValue = node.val;
+                if (node.left != null) {
+                    queue.offer(node.left);
+                }
+                if (node.right != null) {
+                    queue.offer(node.right);
+                }
+            }
+            res.add(levelValue);
         }
         return res;
     }
