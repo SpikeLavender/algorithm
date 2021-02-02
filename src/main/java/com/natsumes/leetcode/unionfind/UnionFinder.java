@@ -1,8 +1,6 @@
 package com.natsumes.leetcode.unionfind;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 /**
  * 并查集
@@ -34,12 +32,14 @@ import java.util.List;
  * <a href="https://leetcode-cn.com/problems/number-of-provinces/">547.省份数量</a>
  * @see UnionFinder#findCircleNum(int[][])
  *
- * 305. 岛屿数量 II
- * 839. 相似字符串组
- * 200. 岛屿数量
- * 990.等式方程的可满足性
- * 130.被围绕的区域
- * 128.最长连续序列
+ * <a href="https://leetcode-cn.com/problems/redundant-connection/">684.冗余连接</a>
+ * @see UnionFinder#findRedundantConnection(int[][])
+ *
+ * <a href="https://leetcode-cn.com/problems/accounts-merge/">721.账户合并</a>
+ * @see UnionFinder#accountsMerge(java.util.List)
+ *
+ * <a href="https://leetcode-cn.com/problems/bricks-falling-when-hit/">803.打砖块</a>
+ * @see UnionFinder#hitBricks(int[][], int[][])
  *
  * @author hetengjiao
  */
@@ -602,6 +602,264 @@ public class UnionFinder {
     }
 
     /**
+     * 684. 冗余连接
+     * 在本问题中, 树指的是一个连通且无环的无向图。
+     *
+     * 输入一个图，该图由一个有着N个节点 (节点值不重复1, 2, ..., N) 的树及一条附加的边构成。
+     * 附加的边的两个顶点包含在1到N中间，这条附加的边不属于树中已存在的边。
+     *
+     * 结果图是一个以边组成的二维数组。每一个边的元素是一对[u, v] ，满足 u < v，表示连接顶点u 和v的无向图的边。
+     *
+     * 返回一条可以删去的边，使得结果图是一个有着N个节点的树。如果有多个答案，
+     * 则返回二维数组中最后出现的边。答案边 [u, v] 应满足相同的格式 u < v。
+     *
+     * 示例 1：
+     *
+     * 输入: [[1,2], [1,3], [2,3]]
+     * 输出: [2,3]
+     * 解释: 给定的无向图为:
+     *   1
+     *  / \
+     * 2 - 3
+     * 示例 2：
+     *
+     * 输入: [[1,2], [2,3], [3,4], [1,4], [1,5]]
+     * 输出: [1,4]
+     * 解释: 给定的无向图为:
+     * 5 - 1 - 2
+     *     |   |
+     *     4 - 3
+     * 注意:
+     *
+     * 输入的二维数组大小在 3 到 1000。
+     * 二维数组中的整数在1到N之间，其中N是输入数组的大小。
+     *
+     */
+    public int[] findRedundantConnection(int[][] edges) {
+        int n = edges.length;
+        Union union = new Union(n);
+        for (int[] edge : edges) {
+            if (union.connect(edge[0] - 1, edge[1] - 1)) {
+                return new int[]{edge[0], edge[1]};
+            }
+            union.union(edge[0] - 1, edge[1] - 1);
+        }
+        return null;
+    }
+
+    /**
+     * 721. 账户合并
+     * 给定一个列表 accounts，每个元素 accounts[i] 是一个字符串列表，其中第一个元素 accounts[i][0] 是 名称 (name)，
+     * 其余元素是 emails 表示该账户的邮箱地址。
+     *
+     * 现在，我们想合并这些账户。如果两个账户都有一些共同的邮箱地址，则两个账户必定属于同一个人。
+     * 请注意，即使两个账户具有相同的名称，它们也可能属于不同的人，因为人们可能具有相同的名称。
+     * 一个人最初可以拥有任意数量的账户，但其所有账户都具有相同的名称。
+     *
+     * 合并账户后，按以下格式返回账户：每个账户的第一个元素是名称，其余元素是按字符 ASCII 顺序排列的邮箱地址。
+     * 账户本身可以以任意顺序返回。
+     *
+     *
+     *
+     * 示例 1：
+     *
+     * 输入：
+     * accounts = [["John", "johnsmith@mail.com", "john00@mail.com"], ["John", "johnnybravo@mail.com"],
+     * ["John", "johnsmith@mail.com", "john_newyork@mail.com"], ["Mary", "mary@mail.com"]]
+     * 输出：
+     * [["John", 'john00@mail.com', 'john_newyork@mail.com', 'johnsmith@mail.com'],
+     * ["John", "johnnybravo@mail.com"], ["Mary", "mary@mail.com"]]
+     *
+     * 解释：
+     * 第一个和第三个 John 是同一个人，因为他们有共同的邮箱地址 "johnsmith@mail.com"。
+     * 第二个 John 和 Mary 是不同的人，因为他们的邮箱地址没有被其他帐户使用。
+     * 可以以任何顺序返回这些列表，例如答案 [['Mary'，'mary@mail.com']，['John'，'johnnybravo@mail.com']，
+     * ['John'，'john00@mail.com'，'john_newyork@mail.com'，'johnsmith@mail.com']] 也是正确的。
+     *
+     *
+     * 提示：
+     *
+     * accounts的长度将在[1，1000]的范围内。
+     * accounts[i]的长度将在[1，10]的范围内。
+     * accounts[i][j]的长度将在[1，30]的范围内。
+     */
+    public List<List<String>> accountsMerge(List<List<String>> accounts) {
+        Map<String, Integer> emailToIndex = new HashMap<>(16);
+        Map<String, String> emailToName = new HashMap<>(16);
+        int emailsCount = 0;
+        for (List<String> account : accounts) {
+            String name = account.get(0);
+            int size = account.size();
+            for (int i = 1; i < size; i++) {
+                String email = account.get(i);
+                if (!emailToIndex.containsKey(email)) {
+                    emailToIndex.put(email, emailsCount++);
+                    emailToName.put(email, name);
+                }
+            }
+        }
+
+        Union union = new Union(emailsCount);
+        for (List<String> account : accounts) {
+            String firstEmail = account.get(1);
+            int firstIndex = emailToIndex.get(firstEmail);
+            int size = account.size();
+            for (int i = 2; i < size; i++) {
+                String nextEmail = account.get(i);
+                int nextIndex = emailToIndex.get(nextEmail);
+                union.union(firstIndex, nextIndex);
+            }
+        }
+
+        Map<Integer, List<String>> indexToEmails = new HashMap<>(16);
+        for (String email : emailToIndex.keySet()) {
+            int index = union.find(emailToIndex.get(email));
+            List<String> account = indexToEmails.getOrDefault(index, new ArrayList<>());
+            account.add(email);
+            indexToEmails.put(index, account);
+        }
+
+        List<List<String>> res = new ArrayList<>();
+        for (List<String> emails : indexToEmails.values()) {
+            Collections.sort(emails);
+            String name = emailToName.get(emails.get(0));
+            List<String> account = new ArrayList<>();
+            account.add(name);
+            account.addAll(emails);
+            res.add(account);
+        }
+        return res;
+    }
+
+    /**
+     * 803. 打砖块
+     * 有一个 m x n 的二元网格，其中 1 表示砖块，0 表示空白。砖块 稳定（不会掉落）的前提是：
+     *
+     * 一块砖直接连接到网格的顶部，或者
+     * 至少有一块相邻（4 个方向之一）砖块 稳定 不会掉落时
+     * 给你一个数组 hits ，这是需要依次消除砖块的位置。每当消除 hits[i] = (rowi, coli) 位置上的砖块时，
+     * 对应位置的砖块（若存在）会消失，然后其他的砖块可能因为这一消除操作而掉落。一旦砖块掉落，
+     * 它会立即从网格中消失（即，它不会落在其他稳定的砖块上）。
+     *
+     * 返回一个数组 result ，其中 result[i] 表示第 i 次消除操作对应掉落的砖块数目。
+     *
+     * 注意，消除可能指向是没有砖块的空白位置，如果发生这种情况，则没有砖块掉落。
+     *
+     *
+     *
+     * 示例 1：
+     *
+     * 输入：grid = [[1,0,0,0],[1,1,1,0]], hits = [[1,0]]
+     * 输出：[2]
+     * 解释：
+     * 网格开始为：
+     * [[1,0,0,0]，
+     *  [1,1,1,0]]
+     * 消除 (1,0) 处加粗的砖块，得到网格：
+     * [[1,0,0,0]
+     *  [0,1,1,0]]
+     * 两个加粗的砖不再稳定，因为它们不再与顶部相连，也不再与另一个稳定的砖相邻，因此它们将掉落。得到网格：
+     * [[1,0,0,0],
+     *  [0,0,0,0]]
+     * 因此，结果为 [2] 。
+     * 示例 2：
+     *
+     * 输入：grid = [[1,0,0,0],[1,1,0,0]], hits = [[1,1],[1,0]]
+     * 输出：[0,0]
+     * 解释：
+     * 网格开始为：
+     * [[1,0,0,0],
+     *  [1,1,0,0]]
+     * 消除 (1,1) 处加粗的砖块，得到网格：
+     * [[1,0,0,0],
+     *  [1,0,0,0]]
+     * 剩下的砖都很稳定，所以不会掉落。网格保持不变：
+     * [[1,0,0,0],
+     *  [1,0,0,0]]
+     * 接下来消除 (1,0) 处加粗的砖块，得到网格：
+     * [[1,0,0,0],
+     *  [0,0,0,0]]
+     * 剩下的砖块仍然是稳定的，所以不会有砖块掉落。
+     * 因此，结果为 [0,0] 。
+     *
+     *
+     * 提示：
+     *
+     * m == grid.length
+     * n == grid[i].length
+     * 1 <= m, n <= 200
+     * grid[i][j] 为 0 或 1
+     * 1 <= hits.length <= 4 * 104
+     * hits[i].length == 2
+     * 0 <= xi <= m - 1
+     * 0 <= yi <= n - 1
+     * 所有 (xi, yi) 互不相同
+     *
+     * @param grid grid
+     * @param hits hits
+     * @return int[]
+     */
+    public int[] hitBricks(int[][] grid, int[][] hits) {
+        int m = grid.length;
+        int n = grid[0].length;
+
+        int[][] copy = new int[m][n];
+        for (int i = 0; i < m; i++) {
+            System.arraycopy(grid[i], 0, copy[i], 0, n);
+        }
+
+        for (int[] hit : hits) {
+            copy[hit[0]][hit[1]] = 0;
+        }
+        int dummy = m * n;
+        Union union = new Union(m * n + 1);
+        for (int j = 0; j < n; j++) {
+            if (copy[0][j] == 1) {
+                union.union(dummy, j);
+            }
+        }
+
+        for (int i = 1; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (copy[i][j] == 1) {
+                    if (copy[i - 1][j] == 1) {
+                        union.union((i - 1) * n + j, i * n + j);
+                    }
+                    if (j > 0 && copy[i][j - 1] == 1) {
+                        union.union(i * n + j - 1, i * n + j);
+                    }
+                }
+            }
+        }
+
+        int len = hits.length;
+        int[] res = new int[len];
+        int[][] d = new int[][] {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+        for (int i = len - 1; i >= 0; i--) {
+            int x = hits[i][0];
+            int y = hits[i][1];
+            if (grid[x][y] == 0) {
+                continue;
+            }
+            int origin = union.getSize(dummy);
+            if (x == 0) {
+                union.union(y, dummy);
+            }
+            for (int k = 0; k < 4; k++) {
+                int newX = x + d[k][0];
+                int newY = y + d[k][1];
+                if (newX >= 0 && newX < m && newY >= 0 && newY < n && copy[newX][newY] == 1) {
+                    union.union(x * n + y, newX * n + newY);
+                }
+            }
+            int current = union.getSize(dummy);
+            res[i] = Math.max(0, current - origin - 1);
+            copy[x][y] = 1;
+        }
+        return res;
+    }
+
+    /**
      * 并查集
      */
     private static class Union {
@@ -681,8 +939,13 @@ public class UnionFinder {
          * 返回图中有多少个连通分量
          * @return 连通分量
          */
-        public int count() {
+        int count() {
             return count;
+        }
+
+        int getSize(int x) {
+            int root = find(x);
+            return size[root];
         }
     }
 }

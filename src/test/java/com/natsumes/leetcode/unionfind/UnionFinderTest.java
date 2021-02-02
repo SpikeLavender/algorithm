@@ -3,6 +3,8 @@ package com.natsumes.leetcode.unionfind;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -118,5 +120,36 @@ public class UnionFinderTest {
     public void findCircleNum() {
         Assert.assertEquals(2, uf.findCircleNum(new int[][] {{1, 1, 0}, {1, 1, 0}, {0, 0, 1}}));
         Assert.assertEquals(3, uf.findCircleNum(new int[][] {{1, 0, 0}, {0, 1, 0}, {0, 0, 1}}));
+    }
+
+    @Test
+    public void findRedundantConnection() {
+        Assert.assertArrayEquals(new int[] {2, 3}, uf.findRedundantConnection(new int[][]{{1, 2}, {1, 3}, {2, 3}}));
+        Assert.assertArrayEquals(new int[] {1, 4},
+                uf.findRedundantConnection(new int[][]{{1, 2}, {2, 3}, {3, 4}, {1, 4}, {1, 5}}));
+    }
+
+    @Test
+    public void accountsMerge() {
+        List<List<String>> accounts = new ArrayList<>();
+        accounts.add(Arrays.asList("John", "johnsmith@mail.com", "john00@mail.com"));
+        accounts.add(Arrays.asList("John", "johnnybravo@mail.com"));
+        accounts.add(Arrays.asList("John", "johnsmith@mail.com", "john_newyork@mail.com"));
+        accounts.add(Arrays.asList("Mary", "mary@mail.com"));
+        List<List<String>> res = uf.accountsMerge(accounts);
+        System.out.println(res);
+    }
+
+    @Test
+    public void hitBricks() {
+        int[][] grid = new int[][] {{1, 0, 0, 0}, {1, 1, 1, 0}};
+        int[][] hits = new int[][] {{1, 0}};
+        int[] exp = new int[] {2};
+        Assert.assertArrayEquals(exp, uf.hitBricks(grid, hits));
+
+        grid = new int[][] {{1, 0, 0, 0}, {1, 1, 0, 0}};
+        hits = new int[][] {{1, 1}, {1, 0}};
+        exp = new int[] {0, 0};
+        Assert.assertArrayEquals(exp, uf.hitBricks(grid, hits));
     }
 }

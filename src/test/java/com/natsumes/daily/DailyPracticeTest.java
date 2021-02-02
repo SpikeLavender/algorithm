@@ -137,4 +137,16 @@ public class DailyPracticeTest {
         Assert.assertArrayEquals(new int[] {2, 3}, dp.fairCandySwap(new int[] {2}, new int[] {1, 3}));
         Assert.assertArrayEquals(new int[] {5, 4}, dp.fairCandySwap(new int[] {1, 2, 5}, new int[] {2, 4}));
     }
+
+    @Test
+    public void characterReplacement() {
+        Assert.assertEquals(4, dp.characterReplacement("ABBB", 2));
+        Assert.assertEquals(2, dp.characterReplacement("ABAA", 0));
+        Assert.assertEquals(4, dp.characterReplacement("ABAB", 2));
+        Assert.assertEquals(4, dp.characterReplacement("AABABBA", 1));
+        Assert.assertEquals(1, dp.characterReplacement("A", 1));
+        Assert.assertEquals(4, dp.characterReplacement("AACABBA", 1));
+        Assert.assertEquals(4, dp.characterReplacement("AABABCBB", 1));
+        Assert.assertEquals(6, dp.characterReplacement("AABBBABB", 1));
+    }
 }
