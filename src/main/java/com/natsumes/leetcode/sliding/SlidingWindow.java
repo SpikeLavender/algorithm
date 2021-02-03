@@ -1,6 +1,5 @@
 package com.natsumes.leetcode.sliding;
 
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.PriorityQueue;
@@ -78,7 +77,7 @@ public class SlidingWindow {
         private int smallSize, largeSize;
 
         public DualHeap(int k) {
-            this.small = new PriorityQueue<>(Comparator.reverseOrder());
+            this.small = new PriorityQueue<>(((o1, o2) -> o2 - o1));
             this.large = new PriorityQueue<>();
             this.delayed = new HashMap<>();
             this.k = k;
@@ -87,7 +86,7 @@ public class SlidingWindow {
         }
 
         public double getMedian() {
-            return (k & 1) == 1 ? small.peek() : (small.peek() + large.peek())/ 2.0;
+            return (k & 1) == 1 ? small.peek() : ((double)small.peek() + large.peek())/ 2.0;
         }
 
         public void insert(int num) {
