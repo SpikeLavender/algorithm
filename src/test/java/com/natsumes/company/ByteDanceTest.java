@@ -84,10 +84,10 @@ public class ByteDanceTest {
 
     @Test
     public void findMedianSortedArrays() {
-        Assert.assertEquals(2.0d, 0.0, bd.findMedianSortedArrays(new int[] {1, 3}, new int[] {2}));
-        Assert.assertEquals(2.5d, 0.0, bd.findMedianSortedArrays(new int[] {1, 2}, new int[] {3, 4}));
-        Assert.assertEquals(0.0d, 0.0, bd.findMedianSortedArrays(new int[] {0, 0}, new int[] {0, 0}));
-        Assert.assertEquals(1.0d, 0.0, bd.findMedianSortedArrays(new int[] {}, new int[] {1}));
-        Assert.assertEquals(2.0d, 0.0, bd.findMedianSortedArrays(new int[] {2}, new int[] {}));
+        Assert.assertEquals(2.0d, bd.findMedianSortedArrays(new int[] {1, 3}, new int[] {2}), 0.0);
+        Assert.assertEquals(2.5d, bd.findMedianSortedArrays(new int[] {1, 2}, new int[] {3, 4}), 0.0);
+        Assert.assertEquals(0.0d, bd.findMedianSortedArrays(new int[] {0, 0}, new int[] {0, 0}), 0.0);
+        Assert.assertEquals(1.0d, bd.findMedianSortedArrays(new int[] {}, new int[] {1}), 0.0);
+        Assert.assertEquals(2.0d, bd.findMedianSortedArrays(new int[] {2}, new int[] {}), 0.0);
     }
 }
