@@ -684,21 +684,18 @@ public class DailyPractice {
             return 0;
         }
         Arrays.sort(intervals, (o1, o2) -> o1[0] == o2[0] ? o2[1] - o1[1] : o1[0] - o2[0]);
-        // f[i] = max(f[j] + 1, 1) a[j] < a[i] j < i
+        // f[i] = max(f[j] + 1, f[i]) a[j] < a[i] j < i
         int length = intervals.length;
-        int count = 0;
         int[] f = new int[length];
-        for (int i = 0; i < length; i++) {
-            int temp = 1;
-            for (int j = length - 1; j >= 0; j--) {
-                if (intervals[i][1] > intervals[j][1]) {
-                    temp = Math.max(f[j] + 1, temp);
+        Arrays.fill(f, 1);
+        for (int i = 1; i < length; i++) {
+            for (int j = 0; j < i; j++) {
+                if (intervals[j][1] <= intervals[i][0]) {
+                    f[i] = Math.max(f[j] + 1, f[i]);
                 }
             }
-            f[i] = temp;
-            count = Math.max(count, f[i]);
         }
-        return length - count;
+        return length - Arrays.stream(f).max().getAsInt();
     }
 
     /*========================================= 2020-12-30 ======================================================*/

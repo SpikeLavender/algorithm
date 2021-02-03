@@ -40,7 +40,7 @@ public class TreeTopFinderTest {
 
     private static final TopFinder spf = new SplayFinder();
 
-    private static final long TEST_NUM = 100000000;
+    private static final long TEST_NUM = 1000000;
 
     private static final long TEST_NUM_PART = 1000;
 

@@ -57,6 +57,6 @@ public class H2OSemaphoreTest extends TestCase {
 //            t3.start();
         }
 
-        while (true) ;
+        //while (true) ;
     }
 }

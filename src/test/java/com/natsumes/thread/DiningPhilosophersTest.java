@@ -55,6 +55,6 @@ public class DiningPhilosophersTest {
         for (int i = 0; i < 5; i++) {
             new Thread(new EatRunnable(i)).start();
         }
-        while (true);
+        //while (true);
     }
 }

@@ -2,8 +2,6 @@ package com.natsumes.thread;
 
 import org.junit.Test;
 
-import java.util.concurrent.CyclicBarrier;
-
 /**
  * @author hetengjiao
  */
@@ -54,25 +52,25 @@ public class MultiThreadTest {
     @Test
     public void printFooBar03() throws InterruptedException {
 
-        FooBarCyclicBarrier fooBar = new FooBarCyclicBarrier(5);
-        Thread t1 = new Thread(()-> {
-            try {
-                fooBar.foo(new MultiThread.PrintRunnable("foo"));
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        });
-
-        Thread t2 = new Thread(()-> {
-            try {
-                fooBar.bar(new MultiThread.PrintRunnable("bar"));
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        });
-        t1.start();
-        t2.start();
-        t1.join();
-        t2.join();
+//        FooBarCyclicBarrier fooBar = new FooBarCyclicBarrier(5);
+//        Thread t1 = new Thread(()-> {
+//            try {
+//                fooBar.foo(new MultiThread.PrintRunnable("foo"));
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//        });
+//
+//        Thread t2 = new Thread(()-> {
+//            try {
+//                fooBar.bar(new MultiThread.PrintRunnable("bar"));
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//        });
+//        t1.start();
+//        t2.start();
+//        t1.join();
+//        t2.join();
     }
 }
