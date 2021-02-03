@@ -331,8 +331,7 @@ public class BinaryTreeTopic {
             int currSize = q.size();
             for (int i = 0; i < currSize; i++) {
                 TreeNode node = q.poll();
-                assert node != null;
-                level.add(node.val);
+                level.add(Objects.requireNonNull(node).val);
                 if (node.left != null) {
                     q.offer(node.left);
                 }
