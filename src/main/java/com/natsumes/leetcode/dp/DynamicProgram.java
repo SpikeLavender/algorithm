@@ -70,27 +70,27 @@ public class DynamicProgram {
      * @return int
      */
     public int patienceSorting(int[] nums) {
-        int[] top = new int[nums.length];
-        int piles = 0;
-        for (int poker : nums) {
+        int n = nums.length;
+        int[] top = new int[n];
+        int count = 0;
+        for (int i = 0; i < n; i++) {
+            int heap = nums[i];
             int left = 0;
-            int right = piles;
+            int right = count;
             while (left < right) {
                 int mid = left + (right - left) / 2;
-                if (top[mid] > poker) {
+                if (top[mid] >= heap) {
                     right = mid;
-                } else if (top[mid] < poker) {
-                    left = mid + 1;
                 } else {
-                    right = mid;
+                    left = mid + 1;
                 }
             }
-            if (left == piles) {
-                piles++;
+            if (left == count) {
+                count++;
             }
-            top[left] = poker;
+            top[left] = heap;
         }
-        return piles;
+        return count;
     }
 
     /**

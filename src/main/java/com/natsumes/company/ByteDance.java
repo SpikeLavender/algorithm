@@ -23,7 +23,7 @@ import java.util.*;
  * @see com.natsumes.leetcode.nsum.NumSums#fourSum(int[], int)
  *
  * <a href="https://leetcode-cn.com/problems/median-of-two-sorted-arrays/">4.寻找两个正序数组的中位数</a>
- * com.natsumes.leetcode.ArrayTopic#findMedianSortedArrays(int[], int[])
+ * com.natsumes.leetcode.array.ArrayTopic#findMedianSortedArrays(int[], int[])
  *
  * <a href="https://leetcode-cn.com/problems/longest-palindromic-substring/">5.最长回文子串</a>
  * @see com.natsumes.company.ByteDance#longestPalindrome(String)
@@ -38,7 +38,10 @@ import java.util.*;
  * @see com.natsumes.leetcode.LinkedListTopic#insertionSortList(com.natsumes.leetcode.ListNode)
  *
  * <a href="https://leetcode-cn.com/problems/trapping-rain-water/">42.接雨水</a>
- * @see com.natsumes.leetcode.ArrayTopic#trap(int[])
+ * @see com.natsumes.leetcode.array.ArrayTopic#trap(int[])
+ *
+ * <a href="https://leetcode-cn.com/problems/next-permutation/">31.下一个排列</a>
+ * @see com.natsumes.leetcode.array.ArrayTopic#nextPermutation(int[])
  *
  * <a href="https://leetcode-cn.com/problems/restore-the-array-from-adjacent-pairs/">5665.从相邻元素对还原数组</a>
  * @see com.natsumes.company.ByteDance#restoreArray(int[][])

@@ -1,4 +1,4 @@
-package com.natsumes.leetcode;
+package com.natsumes.leetcode.array;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -9,6 +9,29 @@ import org.junit.Test;
 public class ArrayTopicTest {
 
     private final ArrayTopic at = new ArrayTopic();
+
+    @Test
+    public void nextPermutation() {
+        int[] nums = new int[] {1, 2, 3};
+        at.nextPermutation(nums);
+        Assert.assertArrayEquals(new int[] {1, 3, 2}, nums);
+
+        nums = new int[] {3, 2, 1};
+        at.nextPermutation(nums);
+        Assert.assertArrayEquals(new int[] {1, 2, 3}, nums);
+
+        nums = new int[] {1, 1, 5};
+        at.nextPermutation(nums);
+        Assert.assertArrayEquals(new int[] {1, 5, 1}, nums);
+
+        nums = new int[] {1};
+        at.nextPermutation(nums);
+        Assert.assertArrayEquals(new int[] {1}, nums);
+
+        nums = new int[] {1, 3, 4, 8, 7, 6, 9, 2, 3, 4, 3, 1, 5, 8, 6, 5, 3, 2};
+        at.nextPermutation(nums);
+        Assert.assertArrayEquals(new int[] {1, 3, 4, 8, 7, 6, 9, 2, 3, 4, 3, 1, 6, 2, 3, 5, 5, 8}, nums);
+    }
 
     @Test
     public void findMedianSortedArrays() {
