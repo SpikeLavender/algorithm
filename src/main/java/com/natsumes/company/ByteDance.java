@@ -1,8 +1,5 @@
 package com.natsumes.company;
 
-import com.natsumes.leetcode.list.LinkedListTopic;
-import com.natsumes.leetcode.list.ListNode;
-
 import java.util.*;
 
 /**
@@ -45,19 +42,19 @@ import java.util.*;
  *
  * ============================================================================
  * <h4>链表问题</h4>
- * {@link LinkedListTopic}
+ * {@link com.natsumes.leetcode.list.LinkedListTopic}
  *
  * <a href="https://leetcode-cn.com/problems/reverse-linked-list/">206.反转链表</a>
- * {@link LinkedListTopic#reverseList(ListNode)}
+ * {@link com.natsumes.leetcode.list.LinkedListTopic#reverseList(com.natsumes.leetcode.list.ListNode)}
  *
  * <a href="https://leetcode-cn.com/problems/reorder-list/">143.重排链表</a>
- * {@link LinkedListTopic#reorderList(ListNode)}
+ * {@link com.natsumes.leetcode.list.LinkedListTopic#reorderList(com.natsumes.leetcode.list.ListNode)}
  *
  * <a href="https://leetcode-cn.com/problems/sort-list/">148.排序链表</a>
- * {@link LinkedListTopic#sortList(ListNode)}
+ * {@link com.natsumes.leetcode.list.LinkedListTopic#sortList(com.natsumes.leetcode.list.ListNode)}
  *
  * <a href="https://leetcode-cn.com/problems/insertion-sort-list/">147.对链表进行插入排序</a>
- * {@link LinkedListTopic#insertionSortList(ListNode)}
+ * {@link com.natsumes.leetcode.list.LinkedListTopic#insertionSortList(com.natsumes.leetcode.list.ListNode)}
  *
  * ============================================================================
  * <a href="https://leetcode-cn.com/problems/trapping-rain-water/">42.接雨水</a>
