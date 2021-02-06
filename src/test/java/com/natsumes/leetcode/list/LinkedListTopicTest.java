@@ -1,4 +1,4 @@
-package com.natsumes.leetcode;
+package com.natsumes.leetcode.list;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -447,5 +447,19 @@ public class LinkedListTopicTest {
 
         node = ListNode.build(new int[]{});
         System.out.println(llt.insertionSortList(node));
+    }
+
+    @Test
+    public void mergeKLists() {
+        ListNode[] lists = new ListNode[] {
+                ListNode.build(new int[]{1, 4, 5}),
+                ListNode.build(new int[]{1, 3, 4}),
+                ListNode.build(new int[]{2, 6})
+        };
+        System.out.println(llt.mergeKLists(lists));
+
+        System.out.println(llt.mergeKLists(new ListNode[]{}));
+
+        System.out.println(llt.mergeKLists(new ListNode[]{null}));
     }
 }

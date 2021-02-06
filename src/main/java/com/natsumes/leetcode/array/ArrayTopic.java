@@ -1,86 +1,94 @@
 package com.natsumes.leetcode.array;
 
 /**
- * 数组 + 双指针
+ * 数组 + 双指针 + 二分查找
  *
- * <a href="https://leetcode-cn.com/problems/next-permutation/">31.下一个排列</a>
- * @see ArrayTopic#nextPermutation(int[])
+ * <a href="https://leetcode-cn.com/problems/search-in-rotated-sorted-array/">33.搜索旋转排序数组</a>
+ * {@link ArrayTopic#search(int[], int)}
  *
  * <a href="https://leetcode-cn.com/problems/container-with-most-water/">11.盛最多水的容器</a>
- * @see ArrayTopic#maxArea(int[])
+ * {@link ArrayTopic#maxArea(int[])}
  *
  * <a href="https://leetcode-cn.com/problems/trapping-rain-water/">42.接雨水</a>
- * @see ArrayTopic#trap(int[])
+ * {@link ArrayTopic#trap(int[])}
  *
  * <a href="https://leetcode-cn.com/problems/median-of-two-sorted-arrays/">4.寻找两个正序数组的中位数</a>
- * @see ArrayTopic#findMedianSortedArrays(int[], int[])
+ * {@link ArrayTopic#findMedianSortedArrays(int[], int[])}
  *
  * @author hetengjiao
  */
 public class ArrayTopic {
 
     /**
-     * 31. 下一个排列
-     * 实现获取 下一个排列 的函数，算法需要将给定数字序列重新排列成字典序中下一个更大的排列。
+     * 升序排列的整数数组 nums 在预先未知的某个点上进行了旋转（例如， [0,1,2,4,5,6,7] 经旋转后可能变为 [4,5,6,7,0,1,2] ）。
      *
-     * 如果不存在下一个更大的排列，则将数字重新排列成最小的排列（即升序排列）。
+     * 请你在数组中搜索 target ，如果数组中存在这个目标值，则返回它的索引，否则返回 -1 。
      *
-     * 必须 原地 修改，只允许使用额外常数空间。
+     *  
      *
      * 示例 1：
      *
-     * 输入：nums = [1,2,3]
-     * 输出：[1,3,2]
-     * 示例 2：
+     * 输入：nums = [4,5,6,7,0,1,2], target = 0
+     * 输出：4
+     * 示例 2：
      *
-     * 输入：nums = [3,2,1]
-     * 输出：[1,2,3]
+     * 输入：nums = [4,5,6,7,0,1,2], target = 3
+     * 输出：-1
      * 示例 3：
      *
-     * 输入：nums = [1,1,5]
-     * 输出：[1,5,1]
-     * 示例 4：
+     * 输入：nums = [1], target = 0
+     * 输出：-1
+     *  
      *
-     * 输入：nums = [1]
-     * 输出：[1]
+     * 提示：
+     *
+     * 1 <= nums.length <= 5000
+     * -10^4 <= nums[i] <= 10^4
+     * nums 中的每个值都 独一无二
+     * nums 肯定会在某个点上旋转
+     * -10^4 <= target <= 10^4
+     *
+     *
      * @param nums nums
+     * @param target target
+     * @return int
      */
-    public void nextPermutation(int[] nums) {
-        // 找到最右边 134876923431586532
+    public int search(int[] nums, int target) {
+        // 4,5,6,7,8,0,1,2  7
         int n = nums.length;
-        int i;
-        for (i = n - 1; i > 0; i--) {
-            if (nums[i] > nums[i - 1]) {
-                break;
+        int l = 0;
+        int r = n - 1;
+        //int mid;
+        while (l <= r) {
+            if (target == nums[l]) {
+                return l;
             }
-        }
-        if (i == 0) {
-            // 逆序就行
-            reverseArray(nums, 0, n - 1);
-            return;
-        }
-        // i - 1 符合
-        int j;
-        for (j = n - 1; j >= i; j--) {
-            if (nums[j] > nums[i - 1]) {
-                break;
+            if (target == nums[r]) {
+                return r;
             }
-        }
-        int tmp = nums[j];
-        nums[j] = nums[i - 1];
-        nums[i - 1] = tmp;
-        //逆序
-        reverseArray(nums, i, n - 1);
-    }
 
-    private void reverseArray(int[] nums, int start, int end) {
-        while (start < end) {
-            int tmp = nums[start];
-            nums[start] = nums[end];
-            nums[end] = tmp;
-            start++;
-            end--;
+            int mid = l + (r - l) / 2;
+            if (target == nums[mid]) {
+                return mid;
+            }
+
+            if (nums[mid] > nums[l]) {
+                // 左边是有序的，升序
+                if (target > nums[l] && target < nums[mid]) {
+                    r = mid - 1;
+                } else {
+                    l = mid + 1;
+                }
+            } else {
+                // 右边是有序的
+                if (target > nums[mid] && target < nums[r]) {
+                    l = mid + 1;
+                } else {
+                    r = mid - 1;
+                }
+            }
         }
+        return -1;
     }
 
     /**

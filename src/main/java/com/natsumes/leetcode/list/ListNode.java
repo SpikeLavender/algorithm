@@ -1,4 +1,4 @@
-package com.natsumes.leetcode;
+package com.natsumes.leetcode.list;
 
 import java.util.ArrayList;
 import java.util.List;

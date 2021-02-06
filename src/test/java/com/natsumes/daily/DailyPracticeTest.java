@@ -154,4 +154,13 @@ public class DailyPracticeTest {
     public void findMaxAverage() {
         Assert.assertEquals(12.75, dp.findMaxAverage(new int[] {1, 12, -5, -6,50, 3}, 4), 0.0001);
     }
+
+    @Test
+    public void maxScore() {
+        Assert.assertEquals(12, dp.maxScore(new int[] {1, 2, 3, 4, 5, 6, 1}, 3));
+        Assert.assertEquals(4, dp.maxScore(new int[] {2, 2, 2}, 2));
+        Assert.assertEquals(55, dp.maxScore(new int[] {9, 7, 7, 9, 7, 7, 9}, 7));
+        Assert.assertEquals(1, dp.maxScore(new int[] {1, 1000, 1}, 1));
+        Assert.assertEquals(202, dp.maxScore(new int[] {1, 79, 80, 1, 1, 1, 200, 1}, 3));
+    }
 }

@@ -1,5 +1,4 @@
-package com.natsumes.leetcode;
-
+package com.natsumes.leetcode.list;
 /**
  * @author hetengjiao
  */

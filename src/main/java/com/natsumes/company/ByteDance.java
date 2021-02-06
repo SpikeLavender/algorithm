@@ -1,67 +1,88 @@
 package com.natsumes.company;
 
+import com.natsumes.leetcode.list.LinkedListTopic;
+import com.natsumes.leetcode.list.ListNode;
+
 import java.util.*;
 
 /**
  *
- * 字节跳动题库
+ * <h3>字节跳动题库</h3>
  *
- * @author hetengjiao
+ * ============================================================================
+ * <h4>1.dp 问题</h4>
+ * {@link com.natsumes.leetcode.dp.DynamicProgram}
  *
- * 1.dp 问题
- * <a href="https://leetcode-cn.com/problems/maximum-subarray/">53.最大子序和</a>
- * @see com.natsumes.leetcode.dp.DynamicProgram#maxSubArray(int[])
+ * <p><a href="https://leetcode-cn.com/problems/maximum-subarray/">53.最大子序和</a></p>
+ * {@link com.natsumes.leetcode.dp.DynamicProgram#maxSubArray(int[])}
  *
- * 2.n sum 问题
+ * ============================================================================
+ * <h4>2.n sum 问题</h4>
+ * {@link com.natsumes.leetcode.nsum.NumSums}
+ *
  * <a href="https://leetcode-cn.com/problems/two-sum/">1.两数之和</a>
- * @see com.natsumes.leetcode.nsum.NumSums#twoSum(int[], int)
+ * {@link com.natsumes.leetcode.nsum.NumSums#twoSum(int[], int)}
  *
  * <a href="https://leetcode-cn.com/problems/3sum/">15.三数之和</a>
- * @see com.natsumes.leetcode.nsum.NumSums#threeSum(int[])
+ * {@link com.natsumes.leetcode.nsum.NumSums#threeSum(int[])}
  *
  * <a href="https://leetcode-cn.com/problems/4sum/">18.四数之和</a>
- * @see com.natsumes.leetcode.nsum.NumSums#fourSum(int[], int)
+ * {@link com.natsumes.leetcode.nsum.NumSums#fourSum(int[], int)}
  *
- * <a href="https://leetcode-cn.com/problems/median-of-two-sorted-arrays/">4.寻找两个正序数组的中位数</a>
- * com.natsumes.leetcode.array.ArrayTopic#findMedianSortedArrays(int[], int[])
- *
- * <a href="https://leetcode-cn.com/problems/longest-palindromic-substring/">5.最长回文子串</a>
- * @see com.natsumes.company.ByteDance#longestPalindrome(String)
- *
- * <a href="https://leetcode-cn.com/problems/reorder-list/">143.重排链表</a>
- * @see com.natsumes.leetcode.LinkedListTopic#reorderList(com.natsumes.leetcode.ListNode)
- *
- * <a href="https://leetcode-cn.com/problems/sort-list/">148.排序链表</a>
- * @see com.natsumes.leetcode.LinkedListTopic#sortList(com.natsumes.leetcode.ListNode)
- *
- * <a href="https://leetcode-cn.com/problems/insertion-sort-list/">147.对链表进行插入排序</a>
- * @see com.natsumes.leetcode.LinkedListTopic#insertionSortList(com.natsumes.leetcode.ListNode)
- *
- * <a href="https://leetcode-cn.com/problems/trapping-rain-water/">42.接雨水</a>
- * @see com.natsumes.leetcode.array.ArrayTopic#trap(int[])
+ * ============================================================================
+ * <h4>3.排列问题</h4>
+ * {@link com.natsumes.leetcode.permute.Permute 排列问题}
  *
  * <a href="https://leetcode-cn.com/problems/next-permutation/">31.下一个排列</a>
- * @see com.natsumes.leetcode.array.ArrayTopic#nextPermutation(int[])
+ * {@link com.natsumes.leetcode.permute.Permute#nextPermutation(int[])}
+ *
+ * ============================================================================
+ * <a href="https://leetcode-cn.com/problems/median-of-two-sorted-arrays/">4.寻找两个正序数组的中位数</a>
+ * {@link com.natsumes.leetcode.array.ArrayTopic#findMedianSortedArrays(int[], int[])}
+ *
+ * <a href="https://leetcode-cn.com/problems/longest-palindromic-substring/">5.最长回文子串</a>
+ * {@link com.natsumes.company.ByteDance#longestPalindrome(String)}
+ *
+ * ============================================================================
+ * <h4>链表问题</h4>
+ * {@link LinkedListTopic}
+ *
+ * <a href="https://leetcode-cn.com/problems/reverse-linked-list/">206.反转链表</a>
+ * {@link LinkedListTopic#reverseList(ListNode)}
+ *
+ * <a href="https://leetcode-cn.com/problems/reorder-list/">143.重排链表</a>
+ * {@link LinkedListTopic#reorderList(ListNode)}
+ *
+ * <a href="https://leetcode-cn.com/problems/sort-list/">148.排序链表</a>
+ * {@link LinkedListTopic#sortList(ListNode)}
+ *
+ * <a href="https://leetcode-cn.com/problems/insertion-sort-list/">147.对链表进行插入排序</a>
+ * {@link LinkedListTopic#insertionSortList(ListNode)}
+ *
+ * ============================================================================
+ * <a href="https://leetcode-cn.com/problems/trapping-rain-water/">42.接雨水</a>
+ * {@link com.natsumes.leetcode.array.ArrayTopic#trap(int[])}
  *
  * <a href="https://leetcode-cn.com/problems/restore-the-array-from-adjacent-pairs/">5665.从相邻元素对还原数组</a>
- * @see com.natsumes.company.ByteDance#restoreArray(int[][])
+ * {@link com.natsumes.company.ByteDance#restoreArray(int[][])}
  *
  * <a href="https://leetcode-cn.com/problems/can-you-eat-your-favorite-candy-on-your-favorite-day/">
  *     5667.你能在你最喜欢的那天吃到你最喜欢的糖果吗？</a>
- * @see com.natsumes.company.ByteDance#canEat(int[], int[][])
+ * {@link com.natsumes.company.ByteDance#canEat(int[], int[][])}
  *
  * <a href="https://leetcode-cn.com/problems/binary-tree-right-side-view/">199.二叉树的右视图</a>
- * @see com.natsumes.company.ByteDance#rightSideView(com.natsumes.company.TreeNode)
+ * {@link com.natsumes.company.ByteDance#rightSideView(com.natsumes.company.TreeNode)}
  *
- * <a href="">查找完全二叉树的最后一层最右边的节点</a>
- * @see com.natsumes.company.ByteDance#findLastRightNode(TreeNode)
+ * <a>查找完全二叉树的最后一层最右边的节点</a>
+ * {@link com.natsumes.company.ByteDance#findLastRightNode(TreeNode)}
  *
  * <a href="https://leetcode-cn.com/problems/palindrome-partitioning-iv/">1745.回文串分割 IV</a>
- * @see com.natsumes.company.ByteDance#checkPartitioning(String)
+ * {@link com.natsumes.company.ByteDance#checkPartitioning(String)}
  *
  * <a href="https://leetcode-cn.com/problems/maximum-number-of-balls-in-a-box/">1742.盒子中小球的最大数量</a>
- * @see com.natsumes.company.ByteDance#countBalls(int, int)
+ * {@link com.natsumes.company.ByteDance#countBalls(int, int)}
  *
+ * @author hetengjiao
  */
 public class ByteDance {
 
@@ -95,7 +116,7 @@ public class ByteDance {
      *
      * 提示：
      *
-     * 1 <= s.length <= 1000
+     * {@literal 1 <= s.length <= 1000}
      * s 仅由数字和英文字母（大写和/或小写）组成
      * @param s s
      * @return String
@@ -193,6 +214,7 @@ public class ByteDance {
 
     /**
      * 1742. 盒子中小球的最大数量
+     *
      * 你在一家生产小球的玩具厂工作，有 n 个小球，编号从 lowLimit 开始，到 highLimit 结束（包括 lowLimit 和 highLimit ，
      * 即 n == highLimit - lowLimit + 1）。另有无限数量的盒子，编号从 1 到 infinity 。
      *
@@ -232,7 +254,7 @@ public class ByteDance {
      *
      * 提示：
      *
-     * 1 <= lowLimit <= highLimit <= 105
+     * {@literal 1 <= lowLimit <= highLimit <= 105}
      *
      * @param lowLimit lowLimit
      * @param highLimit highLimit
@@ -281,7 +303,7 @@ public class ByteDance {
      *
      * 提示：
      *
-     * 3 <= s.length <= 2000
+     * {@literal 3 <= s.length <= 2000}
      * s​​​​​​ 只包含小写英文字母。
      *
      * @param s s
@@ -357,8 +379,8 @@ public class ByteDance {
      * nums.length == n
      * adjacentPairs.length == n - 1
      * adjacentPairs[i].length == 2
-     * 2 <= n <= 105
-     * -105 <= nums[i], ui, vi <= 105
+     * {@literal 2 <= n <= 105}
+     * {@literal -105 <= nums[i], ui, vi <= 105}
      * 题目数据保证存在一些以 adjacentPairs 作为元素对的数组 nums
      *
      * @param adjacentPairs adj
@@ -454,11 +476,11 @@ public class ByteDance {
      * 输出: [1, 3, 4]
      * 解释:
      *
-     *    1            <---
+     *    1            {@literal <---}
      *  /   \
-     * 2     3         <---
+     * 2     3         {@literal <---}
      *  \     \
-     *   5     4       <---
+     *   5     4       {@literal <---}
      *
      * @param root root  @Nullable
      * @return List
@@ -490,4 +512,100 @@ public class ByteDance {
         return res;
     }
 
+    public static int count(String fileContent) {
+        // /**/\n, /*/\n, //\n, import * \n, @\n
+        // Pattern pattern1 = new Pattern("import*\n");
+        //Pattern pattern2 = new Pattern("@^\n");
+        //return fileContent.replace(pattern, "").trim().replaceAll(" ","").split("\n").length;
+        String[] strs =  fileContent.trim().split("\n");
+        int count = 0;
+
+        for(int i = 0; i < strs.length; i++) {
+            String str = strs[i].trim();
+            //   8
+            //   /
+            //  9
+            if("".equals(str)) {
+                continue;
+            }
+
+            if(str.length()>=2 && "/*".equals(str.substring(0, 2))) {
+                while(i < strs.length && !"*/".equals(strs[i].substring(strs[i].length() - 2))) {
+                    i++;
+                }
+
+                continue;
+            }
+
+            if(str.length() >= 7 && "import ".equals(str.substring(0, 7))) {
+                while(i < strs.length && !";".equals(strs[i].substring(strs[i].length() - 1))) {
+                    i++;
+                }
+                continue;
+            }
+
+            if(str.charAt(0) == '@') {
+                while(i < strs.length && !"public".equals(strs[i].substring(strs[i].length() - 2))) {
+                    i++;
+                }
+                continue;
+            }
+
+            if(str.length()>=2 && "//".equals(str.substring(0, 2))) {
+                continue;
+            }
+
+            count++;
+        }
+        return count;
+    }
+
+    public static void main(String[] args) {
+        String s = "/**\n" +
+                "     * 199. 二叉树的右视图\n" +
+                "     * 给定一棵二叉树，想象自己站在它的右侧，按照从顶部到底部的顺序，返回从右侧所能看到的节点值。\n" +
+                "     *\n" +
+                "     * 示例:\n" +
+                "     *\n" +
+                "     * 输入: [1,2,3,null,5,null,4]\n" +
+                "     * 输出: [1, 3, 4]\n" +
+                "     * 解释:\n" +
+                "     *\n" +
+                "     *    1            {@literal <---}\n" +
+                "     *  /   \\\n" +
+                "     * 2     3         {@literal <---}\n" +
+                "     *  \\     \\\n" +
+                "     *   5     4       {@literal <---}\n" +
+                "     *\n" +
+                "     * @param root root  @Nullable\n" +
+                "     * @return List\n" +
+                "     * @see ByteDance\n" +
+                "     */\n" +
+                "    public List<Integer> rightSideView(TreeNode root) {\n" +
+                "        List<Integer> res = new ArrayList<>();\n" +
+                "        if (root == null) {\n" +
+                "            return res;\n" +
+                "        }\n" +
+                "        // 层序遍历\n" +
+                "        Queue<TreeNode> queue = new LinkedList<>();\n" +
+                "        queue.offer(root);\n" +
+                "        int levelValue = root.val;\n" +
+                "        while (!queue.isEmpty()) {\n" +
+                "            int size = queue.size();\n" +
+                "            for (int i = 0; i < size; i++) {\n" +
+                "                TreeNode node = queue.poll();\n" +
+                "                levelValue = Objects.requireNonNull(node).val;\n" +
+                "                if (node.left != null) {\n" +
+                "                    queue.offer(node.left);\n" +
+                "                }\n" +
+                "                if (node.right != null) {\n" +
+                "                    queue.offer(node.right);\n" +
+                "                }\n" +
+                "            }\n" +
+                "            res.add(levelValue);\n" +
+                "        }\n" +
+                "        return res;\n" +
+                "    }\n";
+        System.out.println(count(s));
+    }
 }

@@ -1,26 +1,77 @@
-package com.natsumes.leetcode;
+package com.natsumes.leetcode.list;
+
+import com.natsumes.leetcode.TreeNode;
 
 import java.util.*;
 
 /**
- * @author hetengjiao
+ * <h3>链表专题</h3>
  *
  * <a href="https://leetcode-cn.com/problems/merge-two-sorted-lists/">21.合并两个有序链表</a>
- * @see LinkedListTopic#mergeTwoLists(ListNode, ListNode)
+ * {@link LinkedListTopic#mergeTwoLists(ListNode, ListNode)}
  *
  * <a href="https://leetcode-cn.com/problems/reorder-list/">143.重排链表</a>
- * @see LinkedListTopic#reorderList(com.natsumes.leetcode.ListNode)
+ * {@link LinkedListTopic#reorderList(ListNode)}
  *
  * <a href="https://leetcode-cn.com/problems/sort-list/">148.排序链表</a>
- * @see LinkedListTopic#sortList(com.natsumes.leetcode.ListNode)
+ * {@link LinkedListTopic#sortList(ListNode)}
  *
  * <a href="https://leetcode-cn.com/problems/insertion-sort-list/">147.对链表进行插入排序</a>
- * @see LinkedListTopic#insertionSortList(com.natsumes.leetcode.ListNode)
+ * {@link LinkedListTopic#insertionSortList(ListNode)}
  *
  * <a href="https://leetcode-cn.com/problems/reverse-nodes-in-k-group/">25.K 个一组翻转链表</a>
- * @see LinkedListTopic#reverseKGroup(com.natsumes.leetcode.ListNode, int)
+ * {@link LinkedListTopic#reverseKGroup(ListNode, int)}
+ *
+ * <a href="https://leetcode-cn.com/problems/merge-k-sorted-lists/">23.合并K个升序链表</a>
+ * {@link LinkedListTopic#mergeKLists(ListNode[])}
+ *
+ * @author hetengjiao
  */
 public class LinkedListTopic {
+
+    /**
+     * 23. 合并K个升序链表
+     * 给你一个链表数组，每个链表都已经按升序排列。
+     *
+     * 请你将所有链表合并到一个升序链表中，返回合并后的链表。
+     * 示例 1：
+     *
+     * 输入：lists = [[1,4,5],[1,3,4],[2,6]]
+     * 输出：[1,1,2,3,4,4,5,6]
+     * 解释：链表数组如下：
+     * [
+     *   1->4->5,
+     *   1->3->4,
+     *   2->6
+     * ]
+     * 将它们合并到一个有序链表中得到。
+     * 1->1->2->3->4->4->5->6
+     * 示例 2：
+     *
+     * 输入：lists = []
+     * 输出：[]
+     * 示例 3：
+     *
+     * 输入：lists = [[]]
+     * 输出：[]
+     *
+     * @param lists lists
+     * @return listNode
+     */
+    public ListNode mergeKLists(ListNode[] lists) {
+        return doMergeKLists(lists, 0, lists.length - 1);
+    }
+
+    public ListNode doMergeKLists(ListNode[] lists, int l, int r) {
+        if (l == r) {
+            return lists[l];
+        }
+        if (l > r) {
+            return null;
+        }
+        int mid = l + (r - l) / 2;
+        return mergeTwoLists(doMergeKLists(lists, l, mid), doMergeKLists(lists, mid + 1, r));
+    }
 
     /**
      * 21. 合并两个有序链表
@@ -1194,8 +1245,8 @@ public class LinkedListTopic {
      *
      * @param head head
      * @see LinkedListTopic
-     * @see LinkedListTopic#reverseList(com.natsumes.leetcode.ListNode)
-     * @see LinkedListTopic#middleNode(com.natsumes.leetcode.ListNode)
+     * @see LinkedListTopic#reverseList(ListNode)
+     * @see LinkedListTopic#middleNode(ListNode)
      */
     public void reorderList(ListNode head) {
         if (head == null) {

@@ -10,28 +10,6 @@ public class ArrayTopicTest {
 
     private final ArrayTopic at = new ArrayTopic();
 
-    @Test
-    public void nextPermutation() {
-        int[] nums = new int[] {1, 2, 3};
-        at.nextPermutation(nums);
-        Assert.assertArrayEquals(new int[] {1, 3, 2}, nums);
-
-        nums = new int[] {3, 2, 1};
-        at.nextPermutation(nums);
-        Assert.assertArrayEquals(new int[] {1, 2, 3}, nums);
-
-        nums = new int[] {1, 1, 5};
-        at.nextPermutation(nums);
-        Assert.assertArrayEquals(new int[] {1, 5, 1}, nums);
-
-        nums = new int[] {1};
-        at.nextPermutation(nums);
-        Assert.assertArrayEquals(new int[] {1}, nums);
-
-        nums = new int[] {1, 3, 4, 8, 7, 6, 9, 2, 3, 4, 3, 1, 5, 8, 6, 5, 3, 2};
-        at.nextPermutation(nums);
-        Assert.assertArrayEquals(new int[] {1, 3, 4, 8, 7, 6, 9, 2, 3, 4, 3, 1, 6, 2, 3, 5, 5, 8}, nums);
-    }
 
     @Test
     public void findMedianSortedArrays() {
@@ -48,5 +26,12 @@ public class ArrayTopicTest {
         Assert.assertEquals(1, at.maxArea(new int[] {1, 1}));
         Assert.assertEquals(16, at.maxArea(new int[] {4, 3, 2, 1, 4}));
         Assert.assertEquals(2, at.maxArea(new int[] {1, 1, 1}));
+    }
+
+    @Test
+    public void search() {
+        Assert.assertEquals(4, at.search(new int[] {4,5,6,7,0,1,2}, 0));
+        Assert.assertEquals(-1, at.search(new int[] {4,5,6,7,0,1,2}, 3));
+        Assert.assertEquals(-1, at.search(new int[] {1}, 0));
     }
 }
