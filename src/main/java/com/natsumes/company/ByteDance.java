@@ -7,6 +7,14 @@ import java.util.*;
  * <h3>字节跳动题库</h3>
  *
  * ============================================================================
+ * <h4>DFS 问题</h4>
+ * <a href="https://leetcode-cn.com/problems/restore-ip-addresses/">93.复原IP地址</a>
+ * {@link com.natsumes.leetcode.DfsAndBinarySearch#restoreIpAddresses(java.lang.String)}
+ *
+ * <a href="https://leetcode-cn.com/problems/subsets/">78.子集</a>
+ * {@link com.natsumes.leetcode.DfsAndBinarySearch#subsets(int[])}
+ *
+ * ============================================================================
  * <h4>1.dp 问题</h4>
  * {@link com.natsumes.leetcode.dp.DynamicProgram}
  *

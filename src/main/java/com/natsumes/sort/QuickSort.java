@@ -1,7 +1,5 @@
 package com.natsumes.sort;
 
-import java.util.Comparator;
-
 /**
  * 快速排序
  * 同冒泡排序一样，快速排序也属于交换排序，通过元素之间的比较和交换位置来达到排序的目的。
@@ -13,13 +11,7 @@ import java.util.Comparator;
  *
  * @author hetengjiao
  */
-public class QuickSort<T> {
-
-    private final Comparator<? super T> comparator;
-
-    public QuickSort(Comparator<? super T> comparator) {
-        this.comparator = comparator;
-    }
+public class QuickSort<T extends Comparable<T>> {
 
     public T[] doubleQuickSort(T[] arr, int start, int end) {
 
@@ -51,11 +43,11 @@ public class QuickSort<T> {
 
         while (left != right) {
             //控制right 指针比较并左移
-            while (left < right && comparator.compare(arr[right], pivot) > 0) {
+            while (left < right && arr[right].compareTo(pivot) > 0) {
                 right--;
             }
             //控制left指针比较并右移
-            while (left < right && comparator.compare(arr[left], pivot) <= 0) {
+            while (left < right && arr[left].compareTo(pivot) <= 0) {
                 left++;
             }
 
@@ -93,14 +85,14 @@ public class QuickSort<T> {
      * @param arr       待交换的数组
      * @param start     起始下标
      * @param end       结束下标
-     * @return
+     * @return int
      */
     private int signalPartition(T[] arr, int start, int end) {
         // 取第1个位置（也可以选择随机位置）的元素作为基准元素
         T pivot = arr[start];
         int mark = start;
         for (int i = start + 1; i <= end ; i++) {
-            if (comparator.compare(arr[i], pivot) < 0) {
+            if (arr[i].compareTo(pivot) < 0) {
                 mark++;
                 T tmp = arr[mark];
                 arr[mark] = arr[i];

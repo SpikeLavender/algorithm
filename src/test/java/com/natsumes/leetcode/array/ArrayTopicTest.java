@@ -34,4 +34,10 @@ public class ArrayTopicTest {
         Assert.assertEquals(-1, at.search(new int[] {4,5,6,7,0,1,2}, 3));
         Assert.assertEquals(-1, at.search(new int[] {1}, 0));
     }
+
+    @Test
+    public void findKthLargest() {
+        Assert.assertEquals(5, at.findKthLargest(new int[] {3, 2, 1, 5, 6, 4}, 2));
+        Assert.assertEquals(4, at.findKthLargest(new int[] {3, 2, 3, 1, 2, 4, 5, 5, 6}, 4));
+    }
 }

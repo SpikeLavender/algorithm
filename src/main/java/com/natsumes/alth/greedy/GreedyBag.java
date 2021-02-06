@@ -2,8 +2,6 @@ package com.natsumes.alth.greedy;
 
 import com.natsumes.sort.SortUtils;
 
-import java.util.Comparator;
-
 /**
  * 贪婪算法
  *
@@ -45,7 +43,7 @@ public class GreedyBag {
      * 按价值排序
      */
     private Goods[] sort(Goods[] goods) {
-        return SortUtils.quickSort(goods, Comparator.comparingDouble(o -> o.value * -1));
+        return SortUtils.quickSort(goods);
     }
 
     public void setMax(double max) {

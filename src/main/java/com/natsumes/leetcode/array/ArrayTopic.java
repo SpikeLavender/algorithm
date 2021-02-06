@@ -1,8 +1,9 @@
 package com.natsumes.leetcode.array;
 
 /**
- * 数组 + 双指针 + 二分查找
+ * <h3>数组 + 双指针 + 二分查找</h3>
  *
+ * =====================================================================================================================
  * <a href="https://leetcode-cn.com/problems/search-in-rotated-sorted-array/">33.搜索旋转排序数组</a>
  * {@link ArrayTopic#search(int[], int)}
  *
@@ -14,6 +15,15 @@ package com.natsumes.leetcode.array;
  *
  * <a href="https://leetcode-cn.com/problems/median-of-two-sorted-arrays/">4.寻找两个正序数组的中位数</a>
  * {@link ArrayTopic#findMedianSortedArrays(int[], int[])}
+ *
+ * <a href="https://leetcode-cn.com/problems/kth-largest-element-in-an-array/">215.数组中的第K个最大元素</a>
+ * {@link ArrayTopic#findKthLargest(int[], int)}
+ *
+ * =====================================================================================================================
+ * <h4>排序</h4>
+ *
+ * {@link ArrayTopic#quickSort(int[]) 快速排序}
+ *
  *
  * @author hetengjiao
  */
@@ -336,4 +346,82 @@ public class ArrayTopic {
         }
         return (m + n) % 2 == 0 ? (median1 + median2) / 2.0 : median1;
     }
+
+    /**
+     * 215. 数组中的第K个最大元素
+     * 在未排序的数组中找到第 k 个最大的元素。请注意，你需要找的是数组排序后的第 k 个最大的元素，而不是第 k 个不同的元素。
+     *
+     * 示例 1:
+     *
+     * 输入: [3,2,1,5,6,4] 和 k = 2
+     * 输出: 5
+     * 示例 2:
+     *
+     * 输入: [3,2,3,1,2,4,5,5,6] 和 k = 4
+     * 输出: 4
+     * 说明:
+     *
+     * 你可以假设 k 总是有效的，且 1 ≤ k ≤ 数组的长度。
+     *
+     * @param nums nums
+     * @param k k
+     * @return int
+     */
+    public int findKthLargest(int[] nums, int k) {
+        int heapSize = nums.length;
+        buildHeap(nums, heapSize);
+        // 执行 k - 1 删除
+        for (int i = nums.length - 1; i >= nums.length - k + 1; i--) {
+            swap(nums, 0, i);
+            heapify(nums, 0, i);
+        }
+        return nums[0];
+    }
+
+    private void buildHeap(int[] nums, int heapSize) {
+        for (int i = heapSize / 2; i >= 0; i--) {
+            heapify(nums, i, heapSize);
+        }
+    }
+
+    private void heapify(int[] nums, int i, int heapSize) {
+        int l = i * 2 + 1;
+        int r = i * 2 + 2;
+
+        int largest = i;
+        if (l < heapSize && nums[l] > nums[largest]) {
+            largest = l;
+        }
+        if (r < heapSize && nums[r] > nums[largest]) {
+            largest = r;
+        }
+
+        if (largest != i) {
+            swap(nums, largest, i);
+            heapify(nums, largest, heapSize);
+        }
+    }
+
+
+    private void swap(int[] nums, int i, int j) {
+        int tmp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = tmp;
+    }
+
+    /**
+     * 快速排序
+     * [1, 3, 5, 7, 9, 4, 2, 6]
+     *
+     * @param nums nums
+     */
+    public void quickSort(int[] nums) {
+        int partion = nums[0];
+        int left = 1;
+        int right = nums.length;
+
+
+    }
+
+
 }

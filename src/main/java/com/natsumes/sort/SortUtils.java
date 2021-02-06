@@ -1,7 +1,5 @@
 package com.natsumes.sort;
 
-import java.util.Comparator;
-
 /**
  * 排序工具类
  *
@@ -10,8 +8,8 @@ import java.util.Comparator;
 public class SortUtils {
 
 
-    public static <E> E[] quickSort(E[] arr, Comparator<E> comparator) {
-        QuickSort<E> qs = new QuickSort<>(comparator);
+    public static <E extends Comparable<E>> E[] quickSort(E[] arr) {
+        QuickSort<E> qs = new QuickSort<>();
         return qs.doubleQuickSort(arr, 0, arr.length - 1);
     }
 }

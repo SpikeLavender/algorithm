@@ -3,7 +3,7 @@ package com.natsumes.alth.greedy;
 /**
  * @author hetengjiao
  */
-public class Goods {
+public class Goods implements Comparable<Goods> {
     /**
      * 名称
      */
@@ -29,5 +29,15 @@ public class Goods {
         this.weight = weight;
         this.price = price;
         this.value = price / weight;
+    }
+
+    @Override
+    public int compareTo(Goods o) {
+        if (value - o.value < 0) {
+            return 1;
+        } else if (value - o.value > 0) {
+            return -1;
+        }
+        return 0;
     }
 }
