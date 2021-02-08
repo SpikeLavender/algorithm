@@ -1,5 +1,7 @@
 package com.natsumes.leetcode.array;
 
+import java.util.Random;
+
 /**
  * <h3>数组 + 双指针 + 二分查找</h3>
  *
@@ -24,6 +26,9 @@ package com.natsumes.leetcode.array;
  *
  * {@link ArrayTopic#quickSort(int[]) 快速排序}
  *
+ * =====================================================================================================================
+ * <a href="https://leetcode-cn.com/problems/non-decreasing-array/">665.非递减数列</a>
+ * {@link ArrayTopic#checkPossibility(int[])}
  *
  * @author hetengjiao
  */
@@ -416,12 +421,97 @@ public class ArrayTopic {
      * @param nums nums
      */
     public void quickSort(int[] nums) {
-        int partion = nums[0];
-        int left = 1;
-        int right = nums.length;
-
-
+        doQuickSort(nums, 0, nums.length - 1);
     }
 
+    private void doQuickSort(int[] nums, int start, int end) {
+        if (start >= end) {
+            return;
+        }
+        int p = partition(nums, start, end);
+        doQuickSort(nums, start, p - 1);
+        doQuickSort(nums, p + 1, end);
+    }
 
+    private int partition(int[] nums, int left, int right) {
+        // 3, 2, 3, 1, 2, 4, 5, 5, 6    pivot = 3, left = 0, right = 8
+        // 2, 2, 3, 1, 2, 4, 5, 5, 6    pivot = 3, left = 0, right = 4
+        // 2, 2, 3, 1, 2, 4, 5, 5, 6    pivot = 3, left = 4, right = 4
+        // 2, 2, 3, 1, 3, 4, 5, 5, 6    pivot = 3, left = 4, right = 4
+
+        // 2, 2, 3, 1   pivot = 2, left = 0, right = 3
+        // 1, 2, 3, 1   pivot = 2, left = 0, right = 3
+        // 1, 2, 3, 3   pivot = 2, left = 2, right = 3
+        // 1, 2, 2, 3   pivot = 2, left = 2, right = 3
+
+        // 3, 2, 3, 1, 2, 5, 2, 5, 6    pivot = 3, left = 0, right = 8
+        // 2, 2, 3, 1, 2, 5, 2, 5, 6    pivot = 3, left = 0, right = 6
+        // 2, 2, 3, 1, 2, 5, 5, 5, 6    pivot = 3, left = 5, right = 6
+        // 2, 2, 3, 1, 2, 5, 5, 5, 6    pivot = 3, left = 5, right = 5
+        // 2, 2, 3, 1, 2, 3, 5, 5, 6    pivot = 3, left = 5, right = 5
+        int index = new Random().nextInt(right - left) + left;
+        int pivot = nums[index];
+        nums[index] = nums[left];
+        nums[left] = pivot;
+
+        while (left != right) {
+            while (left < right && nums[right] > pivot) {
+                right--;
+            }
+            nums[left] = nums[right];
+            while (left < right && nums[left] <= pivot) {
+                left++;
+            }
+            nums[right] = nums[left];
+        }
+        nums[left] = pivot;
+        return left;
+    }
+
+    /**
+     *
+     * 665. 非递减数列
+     * 给你一个长度为 n 的整数数组，请你判断在 最多 改变 1 个元素的情况下，该数组能否变成一个非递减数列。
+     *
+     * 我们是这样定义一个非递减数列的： 对于数组中所有的 i (0 <= i <= n-2)，总满足 nums[i] <= nums[i + 1]。
+     *
+     *
+     *
+     * 示例 1:
+     *
+     * 输入: nums = [4,2,3]
+     * 输出: true
+     * 解释: 你可以通过把第一个4变成1来使得它成为一个非递减数列。
+     * 示例 2:
+     *
+     * 输入: nums = [4,2,1]
+     * 输出: false
+     * 解释: 你不能在只改变一个元素的情况下将其变为非递减数列。
+     *
+     *
+     * 说明：
+     *
+     * 1 <= n <= 10 ^ 4
+     * - 10 ^ 5 <= nums[i] <= 10 ^ 5
+     *
+     * @param nums nums
+     * @return true or false
+     */
+    public boolean checkPossibility(int[] nums) {
+        int count = 0;
+        for (int i = 0; i < nums.length - 1; i++) {
+            if (nums[i] > nums[i + 1]) {
+                count++;
+                if (count > 1) {
+                    return false;
+                }
+                // 3, 4, 2, 5, 6, 7
+                // 1, 4, 2, 5, 6, 7
+                if (i > 0 && nums[i + 1] < nums[i - 1]) {
+                    nums[i + 1] = nums[i];
+                }
+            }
+        }
+        return true;
+    }
 }

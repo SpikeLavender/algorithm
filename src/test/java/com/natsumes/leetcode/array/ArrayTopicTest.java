@@ -3,6 +3,8 @@ package com.natsumes.leetcode.array;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.Arrays;
+
 /**
  * @author hetengjiao
  */
@@ -39,5 +41,31 @@ public class ArrayTopicTest {
     public void findKthLargest() {
         Assert.assertEquals(5, at.findKthLargest(new int[] {3, 2, 1, 5, 6, 4}, 2));
         Assert.assertEquals(4, at.findKthLargest(new int[] {3, 2, 3, 1, 2, 4, 5, 5, 6}, 4));
+    }
+
+    @Test
+    public void quickSort() {
+        int[] nums = new int[] {1, 3, 5, 7, 9, 4, 2, 6};
+        at.quickSort(nums);
+        System.out.println(Arrays.toString(nums));
+
+        nums = new int[] {3, 2, 3, 1, 2, 4, 5, 5, 6};
+        at.quickSort(nums);
+        System.out.println(Arrays.toString(nums));
+
+        nums = new int[] {3, 2, 3, 1, 2, 5, 2, 5, 6};
+        at.quickSort(nums);
+        System.out.println(Arrays.toString(nums));
+    }
+
+    @Test
+    public void checkPossibility() {
+        Assert.assertTrue(at.checkPossibility(new int[] {1, 4, 2, 5, 6, 7}));
+        Assert.assertTrue(at.checkPossibility(new int[] {3, 4, 2, 5, 6, 7}));
+        Assert.assertFalse(at.checkPossibility(new int[] {3, 4, 2, 3, 4, 5}));
+        Assert.assertTrue(at.checkPossibility(new int[] {4, 2, 3}));
+        Assert.assertTrue(at.checkPossibility(new int[] {4, 2}));
+        Assert.assertTrue(at.checkPossibility(new int[] {4}));
+        Assert.assertFalse(at.checkPossibility(new int[] {4, 2, 1}));
     }
 }

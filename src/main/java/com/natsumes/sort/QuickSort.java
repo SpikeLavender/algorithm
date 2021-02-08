@@ -33,7 +33,7 @@ public class QuickSort<T extends Comparable<T>> {
      * @param arr       待交换的数组
      * @param start     起始下标
      * @param end       结束下标
-     * @return
+     * @return 基准元素位置
      */
     private int partition(T[] arr, int start, int end) {
         // 取第1个位置（也可以选择随机位置）的元素作为基准元素
