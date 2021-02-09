@@ -25,4 +25,10 @@ public class SlidingWindowTest {
         Assert.assertEquals(2, sw.maxTurbulenceSize(new int[] {4, 8, 12, 16}));
         Assert.assertEquals(1, sw.maxTurbulenceSize(new int[] {100}));
     }
+
+    @Test
+    public void subarraysWithKDistinct() {
+        Assert.assertEquals(7, sw.subarraysWithKDistinct(new int[] {1,2,1,2,3}, 2));
+        Assert.assertEquals(3, sw.subarraysWithKDistinct(new int[] {1,2,1,3,4}, 3));
+    }
 }
