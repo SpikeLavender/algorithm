@@ -6,13 +6,13 @@ import java.util.*;
  * n sums 问题
  *
  * <a href="https://leetcode-cn.com/problems/two-sum/">1.两数之和</a>
- * @see NumSums#twoSum(int[], int)
+ * {@link NumSums#twoSum(int[], int)}
  *
  * <a href="https://leetcode-cn.com/problems/3sum/">15.三数之和</a>
- * @see NumSums#threeSum(int[])
+ * {@link NumSums#threeSum(int[])}
  *
  * <a href="https://leetcode-cn.com/problems/4sum/">18.四数之和</a>
- * @see NumSums#fourSum(int[], int)
+ * {@link NumSums#fourSum(int[], int)}
  *
  * @author hetengjiao
  */

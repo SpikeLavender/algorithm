@@ -139,18 +139,6 @@ public class DailyPracticeTest {
     }
 
     @Test
-    public void characterReplacement() {
-        Assert.assertEquals(4, dp.characterReplacement("ABBB", 2));
-        Assert.assertEquals(2, dp.characterReplacement("ABAA", 0));
-        Assert.assertEquals(4, dp.characterReplacement("ABAB", 2));
-        Assert.assertEquals(4, dp.characterReplacement("AABABBA", 1));
-        Assert.assertEquals(1, dp.characterReplacement("A", 1));
-        Assert.assertEquals(4, dp.characterReplacement("AACABBA", 1));
-        Assert.assertEquals(4, dp.characterReplacement("AABABCBB", 1));
-        Assert.assertEquals(6, dp.characterReplacement("AABBBABB", 1));
-    }
-
-    @Test
     public void findMaxAverage() {
         Assert.assertEquals(12.75, dp.findMaxAverage(new int[] {1, 12, -5, -6,50, 3}, 4), 0.0001);
     }

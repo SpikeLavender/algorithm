@@ -305,7 +305,7 @@ public class LinkedListTopicTest {
     }
 
     @Test
-    public void testAddTwoNumbers() {
+    public void addTwoNumbers() {
         ListNode node1 = ListNode.build(new int[]{7, 1, 6});
         ListNode node2 = ListNode.build(new int[]{5, 9, 2});
         ListNode listNode = llt.addTwoNumbers(node1, node2);
@@ -313,6 +313,21 @@ public class LinkedListTopicTest {
 
         node1 = ListNode.build(new int[]{1, 8});
         node2 = ListNode.build(new int[]{0});
+        listNode = llt.addTwoNumbers(node1, node2);
+        System.out.println(listNode);
+
+        node1 = ListNode.build(new int[]{2, 4, 3});
+        node2 = ListNode.build(new int[]{5, 6, 4});
+        listNode = llt.addTwoNumbers(node1, node2);
+        System.out.println(listNode);
+
+        node1 = ListNode.build(new int[]{0});
+        node2 = ListNode.build(new int[]{0});
+        listNode = llt.addTwoNumbers(node1, node2);
+        System.out.println(listNode);
+
+        node1 = ListNode.build(new int[]{9,9,9,9,9,9,9});
+        node2 = ListNode.build(new int[]{9,9,9,9});
         listNode = llt.addTwoNumbers(node1, node2);
         System.out.println(listNode);
     }

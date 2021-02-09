@@ -7,7 +7,34 @@ import java.util.PriorityQueue;
 /**
  * 滑动窗口
  *
- * <a href="https://leetcode-cn.com/problems/subarrays-with-k-different-integers/">992.K 个不同整数的子数组</a>
+ * <a href="https://leetcode-cn.com/problems/permutation-in-string/">567.字符串的排列</a>
+ * {@link SlidingWindow#checkInclusion(java.lang.String, java.lang.String)}
+ *
+ * <a href="https://leetcode-cn.com/problems/fruit-into-baskets/">904.水果成篮</a>
+ * {@link SlidingWindow#totalFruit(int[])}
+ *
+ * <a href="https://leetcode-cn.com/problems/subarray-product-less-than-k/">713.乘积小于K的子数组</a>
+ * {@link SlidingWindow#numSubarrayProductLessThanK(int[], int)}
+ *
+ * <a href="https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/">3.无重复字符的最长子串</a>
+ * {@link SlidingWindow#lengthOfLongestSubstring(java.lang.String)}
+ *
+ * <a href="https://leetcode-cn.com/problems/longest-repeating-character-replacement/">424.替换后的最长重复字符</a>
+ * {@link SlidingWindow#characterReplacement(java.lang.String, int)}
+ *
+ * <a href="https://leetcode-cn.com/problems/longest-substring-with-at-most-two-distinct-characters/">159.至多包含两个不同字符的最长子串</a>
+ * {@link SlidingWindow#lengthOfLongestSubstringTwoDistinct(java.lang.String)}
+ *
+ * <a href="https://leetcode-cn.com/problems/longest-substring-with-at-most-k-distinct-characters/">340.至多包含 K 个不同字符的最长子串</a>
+ * {@link SlidingWindow#lengthOfLongestSubstringKDistinct(java.lang.String, int)}
+ *
+ * <a href="https://leetcode-cn.com/problems/minimum-size-subarray-sum/">209.长度最小的子数组</a>
+ * {@link SlidingWindow#minSubArrayLen(int, int[])}
+ *
+ * <a href="https://leetcode-cn.com/problems/minimum-window-substring/">76.最小覆盖子串</a>
+ * {@link SlidingWindow#minWindow(java.lang.String, java.lang.String)}
+ *
+ * <a href="https://leetcode-cn.com/problems/subarrays-with-k-different-integers/">992.K个不同整数的子数组</a>
  * {@link SlidingWindow#subarraysWithKDistinct(int[], int)}
  *
  * <a href="https://leetcode-cn.com/problems/longest-turbulent-subarray/">978.最长湍流子数组</a>
@@ -19,6 +46,514 @@ import java.util.PriorityQueue;
  * @author hetengjiao
  */
 public class SlidingWindow {
+
+    /**
+     * 567. 字符串的排列
+     * 给定两个字符串 s1 和 s2，写一个函数来判断 s2 是否包含 s1 的排列。
+     *
+     * 换句话说，第一个字符串的排列之一是第二个字符串的子串。
+     *
+     * 示例1:
+     *
+     * 输入: s1 = "ab" s2 = "eidbaooo"
+     * 输出: True
+     * 解释: s2 包含 s1 的排列之一 ("ba").
+     *
+     *
+     * 示例2:
+     *
+     * 输入: s1= "ab" s2 = "eidboaoo"
+     * 输出: False
+     *
+     *
+     * 注意：
+     *
+     * 输入的字符串只包含小写字母
+     * 两个字符串的长度都在 [1, 10,000] 之间
+     *
+     * @param s1 s1
+     * @param s2 s2
+     * @return true or false
+     */
+    public boolean checkInclusion(String s1, String s2) {
+        int[] nums = new int[26];
+
+        for (int i = 0; i < s1.length(); i++) {
+            nums[s1.charAt(i) - 'a']--;
+        }
+
+        int left = 0;
+        int window = s1.length();
+        int right = 0;
+
+        while (right < s2.length()) {
+            int index = s2.charAt(right) - 'a';
+            nums[index]++;
+            // eidboaoo
+            while (nums[index] > 0) {
+                nums[s2.charAt(left) - 'a']--;
+                left++;
+            }
+            if (right - left + 1 == window){
+                return true;
+            }
+            right++;
+        }
+        return false;
+    }
+
+    public int numSubarrayBoundedMax(int[] A, int L, int R) {
+        return 0;
+    }
+
+    /**
+     * 904. 水果成篮
+     * 在一排树中，第 i 棵树产生 tree[i] 型的水果。
+     * 你可以从你选择的任何树开始，然后重复执行以下步骤：
+     *
+     *   1. 把这棵树上的水果放进你的篮子里。如果你做不到，就停下来。
+     *   2. 移动到当前树右侧的下一棵树。如果右边没有树，就停下来。
+     *
+     * 请注意，在选择一颗树后，你没有任何选择：你必须执行步骤 1，然后执行步骤 2，然后返回步骤 1，然后执行步骤 2，依此类推，直至停止。
+     *
+     * 你有两个篮子，每个篮子可以携带任何数量的水果，但你希望每个篮子只携带一种类型的水果。
+     *
+     * 用这个程序你能收集的水果树的最大总量是多少？
+     *
+     * 示例 1：
+     *
+     * 输入：[1,2,1]
+     * 输出：3
+     * 解释：我们可以收集 [1,2,1]。
+     * 示例 2：
+     *
+     * 输入：[0,1,2,2]
+     * 输出：3
+     * 解释：我们可以收集 [1,2,2]
+     * 如果我们从第一棵树开始，我们将只能收集到 [0, 1]。
+     * 示例 3：
+     *
+     * 输入：[1,2,3,2,2]
+     * 输出：4
+     * 解释：我们可以收集 [2,3,2,2]
+     * 如果我们从第一棵树开始，我们将只能收集到 [1, 2]。
+     * 示例 4：
+     *
+     * 输入：[3,3,3,1,2,1,1,2,3,3,4]
+     * 输出：5
+     * 解释：我们可以收集 [1,2,1,1,2]
+     * 如果我们从第一棵树或第八棵树开始，我们将只能收集到 4 棵水果树。
+     *
+     *
+     * 提示：
+     *
+     * 1 <= tree.length <= 40000
+     * 0 <= tree[i] < tree.length
+     *
+     * @param tree tree
+     * @return int
+     */
+    public int totalFruit(int[] tree) {
+        int n = tree.length;
+        int left = 0;
+        int right = 0;
+        int max = 0;
+        int k = 0;
+        int[] nums = new int[n];
+
+        while (right < n) {
+            if (nums[tree[right]] == 0) {
+                k++;
+            }
+            nums[tree[right]]++;
+            while (k > 2) {
+                nums[tree[left]]--;
+                if (nums[tree[left]] == 0) {
+                    k--;
+                }
+                left++;
+            }
+            max = Math.max(max, right - left + 1);
+            right++;
+        }
+        return max;
+    }
+
+    /**
+     * 713. 乘积小于K的子数组
+     * 给定一个正整数数组 nums。
+     *
+     * 找出该数组内乘积小于 k 的连续的子数组的个数。
+     *
+     * 示例 1:
+     *
+     * 输入: nums = [10,5,2,6], k = 100
+     * 输出: 8
+     * 解释: 8个乘积小于100的子数组分别为: [10], [5], [2], [6], [10,5], [5,2], [2,6], [5,2,6]。
+     * 需要注意的是 [10,5,2] 并不是乘积小于100的子数组。
+     * 说明:
+     *
+     * 0 < nums.length <= 50000
+     * 0 < nums[i] < 1000
+     * 0 <= k < 10^6
+     *
+     * @param nums nums
+     * @param k k
+     * @return int
+     */
+    public int numSubarrayProductLessThanK(int[] nums, int k) {
+        if (k <= 1) {
+            return 0;
+        }
+        int n = nums.length;
+        int left = 0;
+        int right = 0;
+        int ans = 0;
+        int prod = 1;
+
+        while (right < n) {
+            prod *= nums[right];
+            while (prod >= k) {
+                prod /= nums[left];
+                left++;
+            }
+            ans += right - left + 1;
+            right++;
+        }
+        return ans;
+    }
+
+    /**
+     * 3. 无重复字符的最长子串
+     * 给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。
+     *
+     * 示例 1:
+     *
+     * 输入: s = "abcabcbb"
+     * 输出: 3
+     * 解释: 因为无重复字符的最长子串是 "abc"，所以其长度为 3。
+     * 示例 2:
+     *
+     * 输入: s = "bbbbb"
+     * 输出: 1
+     * 解释: 因为无重复字符的最长子串是 "b"，所以其长度为 1。
+     * 示例 3:
+     *
+     * 输入: s = "pwwkew"
+     * 输出: 3
+     * 解释: 因为无重复字符的最长子串是 "wke"，所以其长度为 3。
+     *      请注意，你的答案必须是 子串 的长度，"pwke" 是一个子序列，不是子串。
+     * 示例 4:
+     *
+     * 输入: s = ""
+     * 输出: 0
+     *
+     *
+     * 提示：
+     *
+     * 0 <= s.length <= 5 * 104
+     * s 由英文字母、数字、符号和空格组成
+     *
+     *
+     * @param s s
+     * @return int
+     */
+    public int lengthOfLongestSubstring(String s) {
+        int n = s.length();
+        int[] arr = new int[128];
+
+        int max = 0;
+        int left = 0;
+        int right = 0;
+        // acbcabcbb
+        while (right < n) {
+            if (arr[s.charAt(right)] == 0) {
+                arr[s.charAt(right)] = 1;
+                right++;
+                max = Math.max(max, right - left);
+            } else {
+                arr[s.charAt(left)] = 0;
+                left++;
+            }
+        }
+        return max;
+    }
+
+    /**
+     * 424. 替换后的最长重复字符
+     * 给你一个仅由大写英文字母组成的字符串，你可以将任意位置上的字符替换成另外的字符，总共可最多替换 k 次。
+     * 在执行上述操作后，找到包含重复字母的最长子串的长度。
+     *
+     * 注意：字符串长度 和 k 不会超过 104。
+     *
+     *
+     *
+     * 示例 1：
+     *
+     * 输入：s = "ABAB", k = 2
+     * 输出：4
+     * 解释：用两个'A'替换为两个'B',反之亦然。
+     * 示例 2：
+     *
+     * 输入：s = "AABABBA", k = 1
+     * 输出：4
+     * 解释：
+     * 将中间的一个'A'替换为'B',字符串变为 "AABBBBA"。
+     * 子串 "BBBB" 有最长重复字母, 答案为 4。
+     *
+     * @param s s
+     * @param k k
+     * @return int
+     */
+    public int characterReplacement(String s, int k) {
+        if (s == null || s.length() == 0) {
+            return 0;
+        }
+        if (s.length() == 1) {
+            return 1;
+        }
+        int[] nums = new int[26];
+        int max = 0;
+        int left = 0;
+        int right = 0;
+        while (right < s.length()) {
+            int index = s.charAt(right) - 'A';
+            nums[index]++;
+            max = Math.max(max, nums[index]);
+            if (right - left + 1 - max > k) {
+                nums[s.charAt(left) - 'A']--;
+                left++;
+            }
+            right++;
+        }
+        return right - left;
+    }
+
+    /**
+     * 159. 至多包含两个不同字符的最长子串
+     * 给定一个字符串 s ，找出 至多 包含两个不同字符的最长子串 t ，并返回该子串的长度。
+     *
+     * 示例 1:
+     *
+     * 输入: "eceba"
+     * 输出: 3
+     * 解释: t 是 "ece"，长度为3。
+     * 示例 2:
+     *
+     * 输入: "ccaabbb"
+     * 输出: 5
+     * 解释: t 是 "aabbb"，长度为5。
+     *
+     * @param s s
+     * @return int
+     */
+    public int lengthOfLongestSubstringTwoDistinct(String s) {
+        int n = s.length();
+        if (n < 3) {
+            return n;
+        }
+        int left = 0;
+        int right = 0;
+        int k = 0;
+        int max = 0;
+        int[] nums = new int[128];
+
+        while (right < n) {
+            if (nums[s.charAt(right)] == 0) {
+                k++;
+            }
+            nums[s.charAt(right)]++;
+
+            while (k > 2) {
+                nums[s.charAt(left)]--;
+                if (nums[s.charAt(left)] == 0) {
+                    k--;
+                }
+                left++;
+                //right++;
+            }
+            max = Math.max(max, right - left + 1);
+            right++;
+        }
+        return max;
+    }
+
+    /**
+     * 340. 至多包含 K 个不同字符的最长子串
+     * 给定一个字符串 s ，找出 至多 包含 k 个不同字符的最长子串 T。
+     *
+     * 示例 1:
+     *
+     * 输入: s = "eceba", k = 2
+     * 输出: 3
+     * 解释: 则 T 为 "ece"，所以长度为 3。
+     * 示例 2:
+     *
+     * 输入: s = "aa", k = 1
+     * 输出: 2
+     * 解释: 则 T 为 "aa"，所以长度为 2。
+     *
+     * @param s s
+     * @param k k
+     * @return int
+     */
+    public int lengthOfLongestSubstringKDistinct(String s, int k) {
+        int n = s.length();
+        if (n <= k) {
+            return n;
+        }
+
+        int[] nums = new int[128];
+        int count = 0;
+        int left = 0;
+        int right = 0;
+        int max = 0;
+        while (right < n) {
+            if (nums[s.charAt(right)] == 0) {
+                count++;
+            }
+            nums[s.charAt(right)]++;
+            while (count > k) {
+                nums[s.charAt(left)]--;
+                if (nums[s.charAt(left)] == 0) {
+                    count--;
+                }
+                left++;
+            }
+            max = Math.max(max, right - left + 1);
+            right++;
+        }
+        return max;
+    }
+
+    /**
+     * 209. 长度最小的子数组
+     * 给定一个含有 n 个正整数的数组和一个正整数 target 。
+     *
+     * 找出该数组中满足其和 ≥ target 的长度最小的连续子数组 [numsl, numsl+1, ..., numsr-1, numsr] ，
+     * 并返回其长度。
+     * 如果不存在符合条件的子数组，返回 0 。
+     *
+     *
+     *
+     * 示例 1：
+     *
+     * 输入：target = 7, nums = [2,3,1,2,4,3]
+     * 输出：2
+     * 解释：子数组 [4,3] 是该条件下的长度最小的子数组。
+     * 示例 2：
+     *
+     * 输入：target = 4, nums = [1,4,4]
+     * 输出：1
+     * 示例 3：
+     *
+     * 输入：target = 11, nums = [1,1,1,1,1,1,1,1]
+     * 输出：0
+     *
+     *
+     * 提示：
+     *
+     * 1 <= target <= 10^9
+     * 1 <= nums.length <= 10^5
+     * 1 <= nums[i] <= 10^5
+     *
+     * @param target target
+     * @param nums nums
+     * @return int
+     */
+    public int minSubArrayLen(int target, int[] nums) {
+        int n = nums.length;
+        int left = 0;
+        int right = 0;
+        int min = n + 1;
+        int sum = 0;
+
+        while (right < n) {
+            sum += nums[right];
+            while (sum >= target) {
+                sum -= nums[left];
+                min = Math.min(min, right - left + 1);
+                left++;
+            }
+            right++;
+        }
+
+        return min == n + 1 ? 0 : min;
+    }
+
+    /**
+     * 76. 最小覆盖子串
+     * 给你一个字符串 s 、一个字符串 t 。返回 s 中涵盖 t 所有字符的最小子串。
+     * 如果 s 中不存在涵盖 t 所有字符的子串，则返回空字符串 "" 。
+     *
+     * 注意：如果 s 中存在这样的子串，我们保证它是唯一的答案。
+     *
+     * 示例 1：
+     *
+     * 输入：s = "ADOBECODEBANC", t = "ABC"
+     * 输出："BANC"
+     * 示例 2：
+     *
+     * 输入：s = "a", t = "a"
+     * 输出："a"
+     *
+     *
+     * 提示：
+     *
+     * 1 <= s.length, t.length <= 10^5
+     * s 和 t 由英文字母组成
+     *
+     * @param s s
+     * @param t t
+     * @return string
+     */
+    public String minWindow(String s, String t) {
+
+        Map<Character, Integer> map = new HashMap<>();
+
+        int[] trr = new int[128];
+        for (int i = 0; i < t.length(); i++) {
+            trr[t.charAt(i)]++;
+        }
+        int m = t.length();
+
+        int min = 0;
+        int max = s.length();
+        int window = 0;
+        int left = 0;
+        int right = 0;
+
+        // ADOBECODEBANC
+        // TODO: try use array
+        while (right < s.length()) {
+
+            if (trr[s.charAt(right)] > 0) {
+                Integer value = map.getOrDefault(s.charAt(right), 0);
+                if (value < trr[s.charAt(right)]) {
+                    window++;
+                }
+                map.put(s.charAt(right), value + 1);
+            }
+
+            while (window == m && left <= right) {
+                // 搜索，缩小左边
+                if (right - left < max - min) {
+                    min = left;
+                    max = right;
+                }
+                if (map.containsKey(s.charAt(left))) {
+                    if (map.get(s.charAt(left)) == trr[s.charAt(left)]) {
+                        window--;
+                    }
+                    map.put(s.charAt(left), map.get(s.charAt(left)) - 1);
+                }
+                left++;
+            }
+            right++;
+        }
+
+        return max == s.length() ? "" : s.substring(min, max + 1);
+    }
 
     /**
      * 992. K 个不同整数的子数组
@@ -56,7 +591,7 @@ public class SlidingWindow {
     }
 
     /**
-     * 恰好有K个不同整数的子串数目
+     * 最多有K个不同整数的子串数目
      * 1 <= A.length <= 20000
      * 1 <= A[i] <= A.length
      * 1 <= K <= A.length
