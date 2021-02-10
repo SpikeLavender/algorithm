@@ -10,6 +10,9 @@ import java.util.PriorityQueue;
  * <a href="https://leetcode-cn.com/problems/permutation-in-string/">567.字符串的排列</a>
  * {@link SlidingWindow#checkInclusion(java.lang.String, java.lang.String)}
  *
+ * <a href="https://leetcode-cn.com/problems/number-of-subarrays-with-bounded-maximum/">795.区间子数组个数</a>
+ * {@link SlidingWindow#numSubarrayBoundedMax(int[], int, int)}
+ *
  * <a href="https://leetcode-cn.com/problems/fruit-into-baskets/">904.水果成篮</a>
  * {@link SlidingWindow#totalFruit(int[])}
  *
@@ -102,8 +105,43 @@ public class SlidingWindow {
         return false;
     }
 
+    /**
+     * 795. 区间子数组个数
+     * 给定一个元素都是正整数的数组A ，正整数 L 以及 R (L <= R)。
+     *
+     * 求连续、非空且其中最大元素满足大于等于L 小于等于R的子数组个数。
+     *
+     * 例如 :
+     * 输入:
+     * A = [2, 1, 4, 3]
+     * L = 2
+     * R = 3
+     * 输出: 3
+     * 解释: 满足条件的子数组: [2], [2, 1], [3].
+     * 注意:
+     *
+     * L, R  和 A[i] 都是整数，范围在 [0, 10^9]。
+     * 数组 A 的长度范围在[1, 50000]。
+     *
+     * @param A A
+     * @param L L
+     * @param R R
+     * @return int
+     */
     public int numSubarrayBoundedMax(int[] A, int L, int R) {
-        return 0;
+        return doMumSubarrayBoundedMax(A, R) - doMumSubarrayBoundedMax(A, L - 1);
+    }
+
+    private int doMumSubarrayBoundedMax(int[] nums, int k) {
+        int ans = 0;
+        int left = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] > k) {
+                left = i + 1;
+            }
+            ans += i - left + 1;
+        }
+        return ans;
     }
 
     /**
@@ -554,6 +592,61 @@ public class SlidingWindow {
 
         return max == s.length() ? "" : s.substring(min, max + 1);
     }
+
+    /*
+    Map<Character, Integer> map = new HashMap<>();
+
+        int[] trr = new int[128];
+        boolean[] arr = new boolean[];
+        for (int i = 0; i < t.length(); i++) {
+            trr[t.charAt(i)]--;
+            arr[t.charAt(i)] = true;
+        }
+        int m = t.length();
+
+        int min = 0;
+        int max = s.length();
+        int window = 0;
+        int left = 0;
+        int right = 0;
+
+        // ADOBECODEBANC
+        while (right < s.length()) {
+            int index = s.charAt(right);
+            if (arr[index]) {
+                trr[index]++;
+                  Integer value = map.getOrDefault(s.charAt(right), 0);
+                  if (value < trr[s.charAt(right)]) {
+                      window++;
+                  }
+                  map.put(s.charAt(right), value + 1);
+            }
+
+            while (trr[index] > 0) {
+                if (arr[s.charAt(left)]) {
+                    trr[s.charAt(left)]--;
+                }
+                left++;
+            }
+            right++;
+
+              while (window == m && left <= right) {
+                  // 搜索，缩小左边
+                  if (right - left < max - min) {
+                      min = left;
+                      max = right;
+                  }
+                  if (map.containsKey(s.charAt(left))) {
+                      if (map.get(s.charAt(left)) == trr[s.charAt(left)]) {
+                          window--;
+                      }
+                      map.put(s.charAt(left), map.get(s.charAt(left)) - 1);
+                  }
+                  left++;
+              }
+              right++;
+        }
+     */
 
     /**
      * 992. K 个不同整数的子数组

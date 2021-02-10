@@ -54,6 +54,9 @@ import com.natsumes.leetcode.sliding.SlidingWindow;
  * <a href="https://leetcode-cn.com/problems/subarray-product-less-than-k/">713.乘积小于K的子数组</a>
  * {@link SlidingWindow#numSubarrayProductLessThanK(int[], int)}
  *
+ * <a href="https://leetcode-cn.com/problems/number-of-subarrays-with-bounded-maximum/">795.区间子数组个数</a>
+ * {@link SlidingWindow#numSubarrayBoundedMax(int[], int, int)}
+ *
  * <a href="https://leetcode-cn.com/problems/fruit-into-baskets/">904.水果成篮</a>
  * {@link SlidingWindow#totalFruit(int[])}
  *

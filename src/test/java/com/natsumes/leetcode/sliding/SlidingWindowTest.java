@@ -108,5 +108,7 @@ public class SlidingWindowTest {
 
     @Test
     public void numSubarrayBoundedMax() {
+        Assert.assertEquals(3, sw.numSubarrayBoundedMax(new int[] {2, 1, 4, 3}, 2, 3));
+        Assert.assertEquals(7, sw.numSubarrayBoundedMax(new int[] {2, 1, 4, 3, 2, 1}, 2, 3));
     }
 }
