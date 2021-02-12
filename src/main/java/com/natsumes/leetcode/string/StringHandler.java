@@ -131,7 +131,6 @@ public class StringHandler {
      * 1 <= s.length <= 2 * 10^4
      * s 由字母 'a'、'b' 和 'c' 组成
      *
-     * TODO: 2021-02-13
      *
      * @param s s
      * @return true or false
