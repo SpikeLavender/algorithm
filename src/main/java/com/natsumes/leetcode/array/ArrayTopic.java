@@ -1,9 +1,15 @@
 package com.natsumes.leetcode.array;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 /**
  * <h3>数组 + 双指针 + 二分查找</h3>
+ *
+ * <a href="https://leetcode-cn.com/problems/pascals-triangle-ii/">119.杨辉三角 II</a>
+ * {@link ArrayTopic#getRow(int)}
  *
  * =====================================================================================================================
  * <a href="https://leetcode-cn.com/problems/search-in-rotated-sorted-array/">33.搜索旋转排序数组</a>
@@ -26,13 +32,91 @@ import java.util.Random;
  *
  * {@link ArrayTopic#quickSort(int[]) 快速排序}
  *
+ * <a href="https://leetcode-cn.com/problems/merge-intervals/">56.合并区间</a>
+ * {@link ArrayTopic#merge(int[][])}
+ *
  * =====================================================================================================================
  * <a href="https://leetcode-cn.com/problems/non-decreasing-array/">665.非递减数列</a>
  * {@link ArrayTopic#checkPossibility(int[])}
  *
+ * <a href="https://leetcode-cn.com/problems/find-all-numbers-disappeared-in-an-array/">448.找到所有数组中消失的数字</a>
+ * {@link ArrayTopic#findDisappearedNumbers(int[])}
+ *
  * @author hetengjiao
  */
 public class ArrayTopic {
+
+    /**
+     * 119. 杨辉三角 II
+     * 给定一个非负索引 k，其中 k ≤ 33，返回杨辉三角的第 k 行。
+     *
+     *
+     *
+     * 在杨辉三角中，每个数是它左上方和右上方的数的和。
+     *
+     * 示例:
+     *
+     * 输入: 3
+     * 输出: [1,3,3,1]
+     *
+     * 进阶：
+     *
+     * 你可以优化你的算法到 O(k) 空间复杂度吗？
+     *
+     * @param rowIndex rowIndex
+     * @return {@link List<Integer>}
+     */
+    public List<Integer> getRow(int rowIndex) {
+        List<Integer> ans = new ArrayList<>();
+        ans.add(1);
+        //奇数
+
+        for (int i = 1; i <= rowIndex; i++) {
+            ans.add((int)((long)ans.get(i - 1) * (rowIndex - i + 1) / i));
+        }
+        return ans;
+    }
+
+    /**
+     * 56. 合并区间
+     * 以数组 intervals 表示若干个区间的集合，其中单个区间为 intervals[i] = [starti, endi] 。
+     * 请你合并所有重叠的区间，并返回一个不重叠的区间数组，该数组需恰好覆盖输入中的所有区间。
+     *
+     * 示例 1：
+     *
+     * 输入：intervals = [[1,3],[2,6],[8,10],[15,18]]
+     * 输出：[[1,6],[8,10],[15,18]]
+     * 解释：区间 [1,3] 和 [2,6] 重叠, 将它们合并为 [1,6].
+     * 示例 2：
+     *
+     * 输入：intervals = [[1,4],[4,5]]
+     * 输出：[[1,5]]
+     * 解释：区间 [1,4] 和 [4,5] 可被视为重叠区间。
+     *
+     *
+     * 提示：
+     *
+     * 1 <= intervals.length <= 10^4
+     * intervals[i].length == 2
+     * 0 <= starti <= endi <= 10^4
+     *
+     * @param intervals intervals
+     * @return int[][]
+     */
+    public int[][] merge(int[][] intervals) {
+        List<int[]> res = new ArrayList<>();
+        Arrays.sort(intervals, (o1, o2) -> o1[0] == o2[0] ? o2[1] - o1[1] : o1[0] - o2[0]);
+        for (int i = 0; i < intervals.length; i++) {
+            int l = intervals[i][0];
+            int r = intervals[i][1];
+            if (res.size() == 0 || res.get(res.size() - 1)[1] < l) {
+                res.add(new int[] {l, r});
+            } else {
+                res.get(res.size() - 1)[1] = Math.max(r, res.get(res.size() - 1)[1]);
+            }
+        }
+        return res.toArray(new int[res.size()][]);
+    }
 
     /**
      * 升序排列的整数数组 nums 在预先未知的某个点上进行了旋转（例如， [0,1,2,4,5,6,7] 经旋转后可能变为 [4,5,6,7,0,1,2] ）。
@@ -594,5 +678,41 @@ public class ArrayTopic {
             }
         }
         return true;
+    }
+
+    /**
+     * 448. 找到所有数组中消失的数字
+     * 给定一个范围在  1 ≤ a[i] ≤ n ( n = 数组大小 ) 的 整型数组，数组中的元素一些出现了两次，另一些只出现一次。
+     *
+     * 找到所有在 [1, n] 范围之间没有出现在数组中的数字。
+     *
+     * 您能在不使用额外空间且时间复杂度为O(n)的情况下完成这个任务吗? 你可以假定返回的数组不算在额外空间内。
+     *
+     * 示例:
+     *
+     * 输入:
+     * [4,3,2,7,8,2,3,1]
+     *
+     * 输出:
+     * [5,6]
+     *
+     * @param nums nums
+     * @return list
+     */
+    public List<Integer> findDisappearedNumbers(int[] nums) {
+        ArrayList<Integer> ans = new ArrayList<>();
+        int n = nums.length;
+        // 4,3,2,7,8,2,3,1
+        // 4,3,2,7,8,5,6,1
+        for (int i = 0; i < n; i++) {
+            int x = (nums[i] - 1) % n;
+            nums[x] += n;
+        }
+        for (int i = 0; i < n; i++) {
+            if (nums[i] <= n) {
+                ans.add(i + 1);
+            }
+        }
+        return ans;
     }
 }

@@ -18,6 +18,16 @@ import java.util.*;
  * <h4>1.dp 问题</h4>
  * {@link com.natsumes.leetcode.dp.DynamicProgram}
  *
+ * <a href="https://leetcode-cn.com/problems/generate-parentheses/">22.括号生成</a>
+ * {@link com.natsumes.leetcode.dp.DynamicProgram#generateParenthesis(int)}
+ *
+ * <a href="https://leetcode-cn.com/problems/remove-invalid-parentheses/">301.删除无效的括号</a>
+ * {@link com.natsumes.leetcode.dp.DynamicProgram#removeInvalidParentheses(java.lang.String)}
+ *
+ * <a href="https://leetcode-cn.com/problems/longest-valid-parentheses/">32.最长有效括号</a>
+ * {@link com.natsumes.leetcode.dp.DynamicProgram#longestValidParentheses(java.lang.String)}
+ * {@link com.natsumes.leetcode.dp.DynamicProgram#longestValidParentheses2(java.lang.String)}
+ *
  * <p><a href="https://leetcode-cn.com/problems/maximum-subarray/">53.最大子序和</a></p>
  * {@link com.natsumes.leetcode.dp.DynamicProgram#maxSubArray(int[])}
  *
@@ -86,6 +96,12 @@ import java.util.*;
  *
  * <a href="https://leetcode-cn.com/problems/maximum-number-of-balls-in-a-box/">1742.盒子中小球的最大数量</a>
  * {@link com.natsumes.company.ByteDance#countBalls(int, int)}
+ *
+ * <a href="https://leetcode-cn.com/problems/merge-intervals/">56.合并区间</a>
+ * {@link com.natsumes.leetcode.array.ArrayTopic#merge(int[][])}
+ *
+ * <a href="https://leetcode-cn.com/problems/kth-largest-element-in-an-array/">215.数组中的第K个最大元素</a>
+ * {@link com.natsumes.leetcode.array.ArrayTopic#findKthLargest(int[], int)}
  *
  * @author hetengjiao
  */

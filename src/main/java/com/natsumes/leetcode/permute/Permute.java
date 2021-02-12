@@ -1,20 +1,54 @@
 package com.natsumes.leetcode.permute;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * ============================================================================
  * <h3>排列问题</h3>
  * ----------------------------------------------------------------------------
  *
  * <a href="https://leetcode-cn.com/problems/next-permutation/">31.下一个排列</a>
- * @see Permute#nextPermutation(int[])
+ * {@link Permute#nextPermutation(int[])}
  *
- * <a>46.全排列</a>
- *
+ * <a href="https://leetcode-cn.com/problems/permutations/">46.全排列</a>
+ * {@link Permute#permute(int[])}
  *
  * ============================================================================
  * @author hetengjiao
  */
 public class Permute {
+
+    /**
+     * 46. 全排列
+     * 给定一个没有重复数字的序列，返回其所有可能的全排列。
+     * 示例:
+     * 输入: [1,2,3]
+     * 输出:
+     * [
+     *   [1,2,3],
+     *   [1,3,2],
+     *   [2,1,3],
+     *   [2,3,1],
+     *   [3,1,2],
+     *   [3,2,1]
+     * ]
+     *            O
+     *         1     2
+     *       O         O
+     *     2   3     1   3
+     *    O     O   O      O
+     *    3     2   3      1
+     *    O     O   O      O
+     *
+     * @param nums nums
+     * @return list
+     */
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> res = new ArrayList<>();
+
+        return res;
+    }
 
     /**
      * 31. 下一个排列

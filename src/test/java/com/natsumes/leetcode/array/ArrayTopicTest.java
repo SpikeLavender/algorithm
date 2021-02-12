@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author hetengjiao
@@ -67,5 +68,41 @@ public class ArrayTopicTest {
         Assert.assertTrue(at.checkPossibility(new int[] {4, 2}));
         Assert.assertTrue(at.checkPossibility(new int[] {4}));
         Assert.assertFalse(at.checkPossibility(new int[] {4, 2, 1}));
+    }
+
+    /**
+     * *
+     *       输入：intervals = [[1,3],[2,6],[8,10],[15,18]]
+     *       输出：[[1,6],[8,10],[15,18]]
+     *       解释：区间 [1,3] 和 [2,6] 重叠, 将它们合并为 [1,6].
+     *       示例 2：
+     *
+     *       输入：intervals = [[1,4],[4,5]]
+     *       输出：[[1,5]]
+     *       解释：区间 [1,4] 和 [4,5] 可被视为重叠区间。
+     */
+    @Test
+    public void merge() {
+        Assert.assertArrayEquals(new int[][] {{1, 6}, {8, 10}, {15, 18}},
+                at.merge(new int[][]{{1, 3}, {2, 6}, {8, 10}, {15, 18}}));
+
+        Assert.assertArrayEquals(new int[][] {{1, 5}},
+                at.merge(new int[][]{{1, 4}, {4, 5}}));
+    }
+
+    @Test
+    public void getRow() {
+        List<Integer> row = at.getRow(3);
+        System.out.println(row);
+        Assert.assertEquals(3, row.get(1).intValue());
+        Assert.assertEquals(3, row.get(2).intValue());
+    }
+
+    @Test
+    public void findDisappearedNumbers() {
+        List<Integer> numbers = at.findDisappearedNumbers(new int[]{4, 3, 2, 7, 8, 2, 3, 1});
+        System.out.println(numbers);
+        Assert.assertEquals(5, numbers.get(0).intValue());
+        Assert.assertEquals(6, numbers.get(1).intValue());
     }
 }

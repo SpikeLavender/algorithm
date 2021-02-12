@@ -3,6 +3,8 @@ package com.natsumes.leetcode.dp;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.List;
+
 /**
  * @author hetengjiao
  */
@@ -31,5 +33,41 @@ public class DynamicProgramTest {
         Assert.assertEquals(4, dp.patienceSorting(new int[] {10, 9, 2, 5, 3, 7, 101, 18}));
         Assert.assertEquals(4, dp.patienceSorting(new int[] {0, 1, 0, 3, 2, 3}));
         Assert.assertEquals(1, dp.patienceSorting(new int[] {7, 7, 7, 7, 7, 7, 7}));
+    }
+
+    @Test
+    public void longestValidParentheses() {
+        Assert.assertEquals(2, dp.longestValidParentheses("(()"));
+        Assert.assertEquals(2, dp.longestValidParentheses("())"));
+        Assert.assertEquals(4, dp.longestValidParentheses(")()())"));
+        Assert.assertEquals(6, dp.longestValidParentheses(")(()())"));
+        Assert.assertEquals(0, dp.longestValidParentheses(""));
+    }
+
+    @Test
+    public void longestValidParentheses2() {
+        Assert.assertEquals(2, dp.longestValidParentheses2("(()"));
+        Assert.assertEquals(2, dp.longestValidParentheses2("())"));
+        Assert.assertEquals(4, dp.longestValidParentheses2(")()())"));
+        Assert.assertEquals(6, dp.longestValidParentheses2(")(()())"));
+        Assert.assertEquals(0, dp.longestValidParentheses2(""));
+    }
+
+    @Test
+    public void generateParenthesis() {
+        List<String> strings = dp.generateParenthesis(3);
+        System.out.println(strings);
+    }
+
+    @Test
+    public void removeInvalidParentheses() {
+        List<String> strings = dp.removeInvalidParentheses("()())()");
+        System.out.println(strings);
+
+        strings = dp.removeInvalidParentheses("(a)())()");
+        System.out.println(strings);
+
+        strings = dp.removeInvalidParentheses(")(");
+        System.out.println(strings);
     }
 }
