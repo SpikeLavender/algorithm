@@ -31,4 +31,38 @@ public class StringHandlerTest {
         Assert.assertFalse(sh.isValidString("bac"));
         Assert.assertFalse(sh.isValidString("c"));
     }
+
+    @Test
+    public void myAtoi() {
+        Assert.assertEquals(-1, sh.myAtoi("-000000000000001"));
+        Assert.assertEquals(42, sh.myAtoi("42"));
+        Assert.assertEquals(-42, sh.myAtoi("   -42"));
+        Assert.assertEquals(4193, sh.myAtoi("4193 with words"));
+        Assert.assertEquals(0, sh.myAtoi("words and 987"));
+        Assert.assertEquals(-2147483648, sh.myAtoi("-91283472332"));
+        Assert.assertEquals(2147483647, sh.myAtoi("91283472332"));
+        Assert.assertEquals(-2147483648, sh.myAtoi("-2147483648"));
+        Assert.assertEquals(2147483647, sh.myAtoi("2147483647"));
+        Assert.assertEquals(2147483646, sh.myAtoi("2147483646"));
+        Assert.assertEquals(-2147483647, sh.myAtoi("-2147483647"));
+        Assert.assertEquals(2147483647, sh.myAtoi("2147483648"));
+        Assert.assertEquals(-2147483648, sh.myAtoi("-2147483649"));
+        Assert.assertEquals(0, sh.myAtoi(""));
+        Assert.assertEquals(0, sh.myAtoi("+"));
+    }
+
+    @Test
+    public void decodeString() {
+        Assert.assertEquals("aaabcbc", sh.decodeString("3[a]2[bc]"));
+        Assert.assertEquals("accaccacc", sh.decodeString("3[a2[c]]"));
+        Assert.assertEquals("abcabccdcdcdef", sh.decodeString("2[abc]3[cd]ef"));
+        Assert.assertEquals("abccdcdcdxyz", sh.decodeString("abc3[cd]xyz"));
+    }
+
+    @Test
+    public void convert() {
+        Assert.assertEquals("PAHNAPLSIIGYIR", sh.convert("PAYPALISHIRING", 3));
+        Assert.assertEquals("PINALSIGYAHRPI", sh.convert("PAYPALISHIRING", 4));
+        Assert.assertEquals("A", sh.convert("A", 1));
+    }
 }

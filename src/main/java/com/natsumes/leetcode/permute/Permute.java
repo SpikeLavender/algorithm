@@ -1,12 +1,15 @@
 package com.natsumes.leetcode.permute;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
- * ============================================================================
- * <h3>排列问题</h3>
- * ----------------------------------------------------------------------------
+ * =====================================================================================================================
+ * <h3>排列组合问题</h3>
+ *
+ * <a href="https://leetcode-cn.com/problems/combination-sum/">39.组合总和</a>
+ * {@link Permute#combinationSum(int[], int)}
  *
  * <a href="https://leetcode-cn.com/problems/next-permutation/">31.下一个排列</a>
  * {@link Permute#nextPermutation(int[])}
@@ -14,10 +17,77 @@ import java.util.List;
  * <a href="https://leetcode-cn.com/problems/permutations/">46.全排列</a>
  * {@link Permute#permute(int[])}
  *
- * ============================================================================
+ * =====================================================================================================================
  * @author hetengjiao
  */
 public class Permute {
+
+    /**
+     * 39. 组合总和
+     * 给定一个无重复元素的数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。
+     *
+     * candidates 中的数字可以无限制重复被选取。
+     *
+     * 说明：
+     *
+     * 所有数字（包括 target）都是正整数。
+     * 解集不能包含重复的组合。
+     * 示例 1：
+     *
+     * 输入：candidates = [2,3,6,7], target = 7,
+     * 所求解集为：
+     * [
+     *   [7],
+     *   [2,2,3]
+     * ]
+     * 示例 2：
+     *
+     * 输入：candidates = [2,3,5], target = 8,
+     * 所求解集为：
+     * [
+     *   [2,2,2,2],
+     *   [2,3,3],
+     *   [3,5]
+     * ]
+     *
+     *
+     * 提示：
+     *
+     * 1 <= candidates.length <= 30
+     * 1 <= candidates[i] <= 200
+     * candidate 中的每个元素都是独一无二的。
+     * 1 <= target <= 500
+     *
+     * @param candidates candidates
+     * @param target target
+     * @return list
+     */
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        // 零钱 dp[n + 1][target + 1]
+        List<List<Integer>> ans = new ArrayList<>();
+        List<Integer> path = new ArrayList<>();
+        Arrays.sort(candidates);
+        doCombinationSum(ans, path, candidates, target, 0, 0);
+        return ans;
+    }
+
+    private void doCombinationSum(List<List<Integer>> ans, List<Integer> path, int[] candidates,
+                                  int target, int sum, int start) {
+        if (sum == target) {
+            ans.add(new ArrayList<>(path));
+            return;
+        }
+        for (int i = start; i < candidates.length; i++) {
+            int rs = sum + candidates[i];
+            if (rs <= target) {
+                path.add(candidates[i]);
+                doCombinationSum(ans, path, candidates, target, rs, i);
+                path.remove(path.size() - 1);
+            } else {
+                break;
+            }
+        }
+    }
 
     /**
      * 46. 全排列

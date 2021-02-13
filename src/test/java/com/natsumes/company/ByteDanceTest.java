@@ -3,8 +3,6 @@ package com.natsumes.company;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.List;
-
 /**
  * @author hetengjiao
  */
@@ -63,22 +61,5 @@ public class ByteDanceTest {
         Assert.assertArrayEquals(new int[]{1, 2, 3, 4}, bd.restoreArray(new int[][]{{2, 1}, {3, 4}, {3, 2}}));
         Assert.assertArrayEquals(new int[]{-2, 4, 1, -3}, bd.restoreArray(new int[][]{{4, -2}, {1, 4}, {-3, 1}}));
         Assert.assertArrayEquals(new int[]{100000, -100000}, bd.restoreArray(new int[][]{{100000, -100000}}));
-    }
-
-    @Test
-    public void rightSideView() {
-        TreeNode treeNode = new TreeNode(1,
-                new TreeNode(2,
-                        null,
-                        new TreeNode(5)
-                ),
-                new TreeNode(3,
-                        null,
-                        new TreeNode(4)
-                )
-        );
-        List<Integer> list = bd.rightSideView(treeNode);
-        System.out.println(list);
-        //Assert.assertEquals(12, bd.findLastRightNode(treeNode).val);
     }
 }

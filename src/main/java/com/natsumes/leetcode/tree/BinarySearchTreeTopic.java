@@ -1,9 +1,13 @@
-package com.natsumes.leetcode;
+package com.natsumes.leetcode.tree;
 
 import java.util.*;
 
 /**
  * 二叉搜索树专题
+ *
+ * TODO: <a href="https://leetcode-cn.com/problems/unique-binary-search-trees/">96.不同的二叉搜索树</a>
+ * {@link BinarySearchTreeTopic#numTrees(int)}
+ *
  * @author hetengjiao
  */
 public class BinarySearchTreeTopic {
@@ -1026,7 +1030,7 @@ public class BinarySearchTreeTopic {
     /**
      * https://leetcode-cn.com/problems/unique-binary-search-trees/
      *
-     * 96. 不同的二叉搜索树
+     * TODO: 96.不同的二叉搜索树
      *
      * 给定一个整数 n，求以 1 ... n 为节点组成的二叉搜索树有多少种？
      *

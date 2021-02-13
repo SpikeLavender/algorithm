@@ -1,4 +1,4 @@
-package com.natsumes.leetcode;
+package com.natsumes.leetcode.tree;
 
 import org.junit.Assert;
 import org.junit.Test;

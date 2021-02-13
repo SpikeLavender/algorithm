@@ -1,12 +1,135 @@
-package com.natsumes.leetcode;
+package com.natsumes.leetcode.tree;
 
 import java.util.*;
 
 /**
  * 二叉树专题
+ *
+ * <a href="https://leetcode-cn.com/problems/binary-tree-right-side-view/">199.二叉树的右视图</a>
+ * {@link BinaryTreeTopic#rightSideView(com.natsumes.leetcode.tree.TreeNode)
+ * {@link BinaryTreeTopic#rightSideView01(com.natsumes.leetcode.tree.TreeNode)
+ *
+ * <a href="https://leetcode-cn.com/problems/binary-tree-zigzag-level-order-traversal/">103.二叉树的锯齿形层序遍历</a>
+ * {@link BinaryTreeTopic#zigzagLevelOrder(com.natsumes.leetcode.tree.TreeNode)}
+ *
  * @author hetengjiao
  */
 public class BinaryTreeTopic {
+
+    /**
+     * 199. 二叉树的右视图
+     * 给定一棵二叉树，想象自己站在它的右侧，按照从顶部到底部的顺序，返回从右侧所能看到的节点值。
+     *
+     * 示例:
+     *
+     * 输入: [1,2,3,null,5,null,4]
+     * 输出: [1, 3, 4]
+     * 解释:
+     *
+     *    1            {@literal <---}
+     *  /   \
+     * 2     3         {@literal <---}
+     *  \     \
+     *   5     4       {@literal <---}
+     *
+     * @param root root  @Nullable
+     * @return List
+     */
+    public List<Integer> rightSideView(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        doRightSideView(root, res, 1);
+        return res;
+    }
+
+    private void doRightSideView(TreeNode node, List<Integer> res, int num) {
+        if (node == null) {
+            return;
+        }
+        if (num > res.size()) {
+            res.add(node.val);
+        }
+        res.set(num - 1, node.val);
+        doRightSideView(node.left, res, num + 1);
+        doRightSideView(node.right, res, num + 1);
+    }
+
+    /**
+     * 199. 二叉树的右视图
+     * 迭代法
+     *
+     * @param root root
+     * @return list
+     */
+    public List<Integer> rightSideView01(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        if (root == null) {
+            return res;
+        }
+        // 层序遍历
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        int levelValue = root.val;
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                TreeNode node = queue.poll();
+                levelValue = Objects.requireNonNull(node).val;
+                if (node.left != null) {
+                    queue.offer(node.left);
+                }
+                if (node.right != null) {
+                    queue.offer(node.right);
+                }
+            }
+            res.add(levelValue);
+        }
+        return res;
+    }
+
+    /**
+     * 103. 二叉树的锯齿形层序遍历
+     * 给定一个二叉树，返回其节点值的锯齿形层序遍历。（即先从左往右，再从右往左进行下一层遍历，以此类推，层与层之间交替进行）。
+     *
+     * 例如：
+     * 给定二叉树 [3,9,20,null,null,15,7],
+     *
+     *     3
+     *    / \
+     *   9  20
+     *     /  \
+     *    15   7
+     * 返回锯齿形层序遍历如下：
+     *
+     * [
+     *   [3],
+     *   [20,9],
+     *   [15,7]
+     * ]
+     *
+     * @param root root
+     * @return list
+     */
+    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+        List<LinkedList<Integer>> ans = new ArrayList<>();
+        doZigzagLevelOrder(root, ans, 1);
+        return new ArrayList<>(ans);
+    }
+
+    private void doZigzagLevelOrder(TreeNode node, List<LinkedList<Integer>> ans, int num) {
+        if (node == null) {
+            return;
+        }
+        if (num > ans.size()) {
+            ans.add(new LinkedList<>());
+        }
+        if (num % 2 == 1) {
+            ans.get(num - 1).add(node.val);
+        } else {
+            ans.get(num - 1).addFirst(node.val);
+        }
+        doZigzagLevelOrder(node.left, ans, num + 1);
+        doZigzagLevelOrder(node.right, ans, num + 1);
+    }
 
     /**
      * LC 二叉树的前序遍历 || 144. 二叉树的前序遍历

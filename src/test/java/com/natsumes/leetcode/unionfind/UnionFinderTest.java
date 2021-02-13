@@ -233,4 +233,20 @@ public class UnionFinderTest {
         Assert.assertEquals(0,
                 uf.minMalwareSpread(new int[][]{{1, 0, 0}, {0, 1, 0}, {0, 0, 1}}, new int[] {0, 2}));
     }
+
+    @Test
+    public void maxAreaOfIsland() {
+        Assert.assertEquals(6, uf.maxAreaOfIsland(new int[][]{
+                {0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0},
+                {0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0},
+                {0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0}
+        }));
+
+        Assert.assertEquals(0, uf.maxAreaOfIsland(new int[][]{{0, 0, 0, 0, 0, 0, 0, 0}}));
+    }
 }

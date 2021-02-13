@@ -7,49 +7,52 @@ import java.util.*;
  * @author hetengjiao
  *
  * <a href="https://leetcode-cn.com/problems/number-of-connected-components-in-an-undirected-graph/">323.无向图中连通分量的数目</a>
- * @see UnionFinder#countComponents(int, int[][])
+ * {@link UnionFinder#countComponents(int, int[][]) }
  *
  * <a href="https://leetcode-cn.com/problems/graph-valid-tree/">261.以图判树</a>
- * @see UnionFinder#validTree(int, int[][])
+ * {@link UnionFinder#validTree(int, int[][])}
  *
  * <a href="https://leetcode-cn.com/problems/number-of-islands-ii/">305.岛屿数量 II</a>
- * @see UnionFinder#numIslands2(int, int, int[][])
+ * {@link UnionFinder#numIslands2(int, int, int[][])}
  *
  * <a href="https://leetcode-cn.com/problems/similar-string-groups/">839.相似字符串组</a>
- * @see UnionFinder#numSimilarGroups(java.lang.String[])
+ * {@link UnionFinder#numSimilarGroups(java.lang.String[])}
  *
  * <a href="https://leetcode-cn.com/problems/number-of-islands/">200.岛屿数量 </a>
- * @see UnionFinder#numIslands(char[][])
+ * {@link UnionFinder#numIslands(char[][])}
  *
  * <a href="https://leetcode-cn.com/problems/satisfiability-of-equality-equations/">990.等式方程的可满足性</a>
- * @see UnionFinder#equationsPossible(java.lang.String[])
+ * {@link UnionFinder#equationsPossible(java.lang.String[])}
  *
  * <a href="https://leetcode-cn.com/problems/surrounded-regions/">130.被围绕的区域</a>
- * @see UnionFinder#solve(char[][])
+ * {@link UnionFinder#solve(char[][])}
  *
  * <a href="https://leetcode-cn.com/problems/longest-consecutive-sequence/">128.最长连续序列</a>
- * @see UnionFinder#longestConsecutive(int[])
+ * {@link UnionFinder#longestConsecutive(int[])}
  *
  * <a href="https://leetcode-cn.com/problems/number-of-provinces/">547.省份数量</a>
- * @see UnionFinder#findCircleNum(int[][])
+ * {@link UnionFinder#findCircleNum(int[][])}
  *
  * <a href="https://leetcode-cn.com/problems/redundant-connection/">684.冗余连接</a>
- * @see UnionFinder#findRedundantConnection(int[][])
+ * {@link UnionFinder#findRedundantConnection(int[][])}
  *
  * <a href="https://leetcode-cn.com/problems/accounts-merge/">721.账户合并</a>
- * @see UnionFinder#accountsMerge(java.util.List)
+ * {@link UnionFinder#accountsMerge(java.util.List)}
  *
  * <a href="https://leetcode-cn.com/problems/bricks-falling-when-hit/">803.打砖块</a>
- * @see UnionFinder#hitBricks(int[][], int[][])
+ * {@link UnionFinder#hitBricks(int[][], int[][])}
  *
  * <a href="https://leetcode-cn.com/problems/couples-holding-hands/">765.情侣牵手</a>
- * @see UnionFinder#minSwapsCouples(int[])
+ * {@link UnionFinder#minSwapsCouples(int[])}
  *
  * <a href="https://leetcode-cn.com/problems/swim-in-rising-water/">778.水位上升的泳池中游泳</a>
- * @see UnionFinder#swimInWater(int[][])
+ * {@link UnionFinder#swimInWater(int[][])}
  *
  * <a href="https://leetcode-cn.com/problems/minimize-malware-spread/">924.尽量减少恶意软件的传播</a>
- * @see UnionFinder#minMalwareSpread(int[][], int[])
+ * {@link UnionFinder#minMalwareSpread(int[][], int[])}
+ *
+ * TODO: <a href="https://leetcode-cn.com/problems/max-area-of-island/">695.岛屿的最大面积</a>
+ * {@link UnionFinder#maxAreaOfIsland(int[][])}
  *
  */
 public class UnionFinder {
@@ -1061,10 +1064,47 @@ public class UnionFinder {
         return ans;
     }
 
-
-
     private boolean checkIndex(int x, int y, int m, int n) {
         return x >= 0 && y >= 0 && x < m && y < n;
+    }
+
+    /**
+     * TODO: 695.岛屿的最大面积
+     * 给定一个包含了一些 0 和 1 的非空二维数组 grid 。
+     *
+     * 一个 岛屿 是由一些相邻的 1 (代表土地) 构成的组合，这里的「相邻」要求两个 1 必须在水平或者竖直方向上相邻。
+     * 你可以假设 grid 的四个边缘都被 0（代表水）包围着。
+     *
+     * 找到给定的二维数组中最大的岛屿面积。(如果没有岛屿，则返回面积为 0 。)
+     *
+     *  
+     *
+     * 示例 1:
+     *
+     * [[0,0,1,0,0,0,0,1,0,0,0,0,0],
+     *  [0,0,0,0,0,0,0,1,1,1,0,0,0],
+     *  [0,1,1,0,1,0,0,0,0,0,0,0,0],
+     *  [0,1,0,0,1,1,0,0,1,0,1,0,0],
+     *  [0,1,0,0,1,1,0,0,1,1,1,0,0],
+     *  [0,0,0,0,0,0,0,0,0,0,1,0,0],
+     *  [0,0,0,0,0,0,0,1,1,1,0,0,0],
+     *  [0,0,0,0,0,0,0,1,1,0,0,0,0]]
+     * 对于上面这个给定矩阵应返回 6。注意答案不应该是 11 ，因为岛屿只能包含水平或垂直的四个方向的 1 。
+     *
+     * 示例 2:
+     *
+     * [[0,0,0,0,0,0,0,0]]
+     * 对于上面这个给定的矩阵, 返回 0。
+     *
+     *  
+     *
+     * 注意: 给定的矩阵grid 的长度和宽度都不超过 50。
+     *
+     * @param grid grid
+     * @return area
+     */
+    public int maxAreaOfIsland(int[][] grid) {
+        return 0;
     }
 
     /**

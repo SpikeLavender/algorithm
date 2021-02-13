@@ -27,6 +27,12 @@ import java.util.Random;
  * <a href="https://leetcode-cn.com/problems/kth-largest-element-in-an-array/">215.数组中的第K个最大元素</a>
  * {@link ArrayTopic#findKthLargest(int[], int)}
  *
+ * <a href="https://leetcode-cn.com/problems/search-a-2d-matrix/">74.搜索二维矩阵</a>
+ * {@link ArrayTopic#searchMatrix(int[][], int)}
+ *
+ * <a href="https://leetcode-cn.com/problems/search-a-2d-matrix-ii/">240.搜索二维矩阵 II</a>
+ * {@link ArrayTopic#searchMatrix2(int[][], int)}
+ *
  * =====================================================================================================================
  * <h4>排序</h4>
  *
@@ -35,6 +41,9 @@ import java.util.Random;
  * <a href="https://leetcode-cn.com/problems/merge-intervals/">56.合并区间</a>
  * {@link ArrayTopic#merge(int[][])}
  *
+ * <a href="https://leetcode-cn.com/problems/largest-number/">179.最大数</a>
+ * {@link ArrayTopic#largestNumber(int[])}
+ *
  * =====================================================================================================================
  * <a href="https://leetcode-cn.com/problems/non-decreasing-array/">665.非递减数列</a>
  * {@link ArrayTopic#checkPossibility(int[])}
@@ -42,9 +51,209 @@ import java.util.Random;
  * <a href="https://leetcode-cn.com/problems/find-all-numbers-disappeared-in-an-array/">448.找到所有数组中消失的数字</a>
  * {@link ArrayTopic#findDisappearedNumbers(int[])}
  *
+ * <a href="https://leetcode-cn.com/problems/spiral-matrix/">54.螺旋矩阵</a>
+ * {@link com.natsumes.leetcode.array.ArrayTopic#spiralOrder(int[][])}
+ *
+ * <a href="https://leetcode-cn.com/problems/spiral-matrix-ii/">59.螺旋矩阵 II</a>
+ * {@link ArrayTopic#generateMatrix(int)}
+ *
+ * TODO: <a href="https://leetcode-cn.com/problems/next-greater-element-i/">496.下一个更大元素 I</a>
+ * {@link ArrayTopic#nextGreaterElement(int[], int[])}
+ *
+ * TODO: <a href="https://leetcode-cn.com/problems/daily-temperatures/">739.每日温度</a>
+ * {@link ArrayTopic#dailyTemperatures(int[])}
+ *
+ * TODO: <a href="https://leetcode-cn.com/problems/top-k-frequent-elements/">347.前 K 个高频元素</a>
+ * {@link ArrayTopic#topKFrequent(int[], int)}
+ *
  * @author hetengjiao
  */
 public class ArrayTopic {
+
+    /**
+     * 179. 最大数
+     * 给定一组非负整数 nums，重新排列它们每个数字的顺序（每个数字不可拆分）使之组成一个最大的整数。
+     *
+     * 注意：输出结果可能非常大，所以你需要返回一个字符串而不是整数。
+     *
+     *
+     *
+     * 示例 1：
+     *
+     * 输入：nums = [10,2]
+     * 输出："210"
+     * 示例 2：
+     *
+     * 输入：nums = [3,30,34,5,9]
+     * 输出："9534330"
+     * 示例 3：
+     *
+     * 输入：nums = [1]
+     * 输出："1"
+     * 示例 4：
+     *
+     * 输入：nums = [10]
+     * 输出："10"
+     *
+     *
+     * 提示：
+     *
+     * 1 <= nums.length <= 100
+     * 0 <= nums[i] <= 10^9
+     *
+     * @param nums nums
+     * @return num
+     */
+    public String largestNumber(int[] nums) {
+        String[] arr = new String[nums.length];
+        for (int i = 0; i < nums.length; i++) {
+            arr[i] = String.valueOf(nums[i]);
+        }
+
+        quickSort4LargestNumber(arr, 0, nums.length - 1);
+        if ("0".equals(arr[0])) {
+            return "0";
+        }
+        StringBuilder ans = new StringBuilder();
+        for (String num : arr) {
+            ans.append(num);
+        }
+        return ans.toString();
+    }
+
+    private void quickSort4LargestNumber(String[] nums, int start, int end) {
+        if (start >= end) {
+            return;
+        }
+        int p = partition4LargestNumber(nums, start, end);
+        quickSort4LargestNumber(nums, start, p - 1);
+        quickSort4LargestNumber(nums, p + 1, end);
+    }
+
+    private int partition4LargestNumber(String[] nums, int left, int right) {
+        //int index = new Random().nextInt(right - left) + left;
+        //String pivot = nums[index];
+        //nums[index] = nums[left];
+        //nums[left] = pivot;
+        String pivot = nums[left];
+        while (left != right) {
+            while (left < right && compareNum(pivot, nums[right]) >= 0) {
+                right--;
+            }
+            nums[left] = nums[right];
+            while (left < right && compareNum(nums[left], pivot) >= 0) {
+                left++;
+            }
+            nums[right] = nums[left];
+        }
+        nums[left] = pivot;
+        return left;
+    }
+
+    /**
+     * 比较器
+     * @param x x
+     * @param y y
+     * @return 0: x = y, >0: x > y, <0: x < y
+     */
+    private int compareNum(String x, String y) {
+        String s1 = x + y;
+        String s2 = y + x;
+        return s1.compareTo(s2);
+    }
+
+    /**
+     * TODO: 347. 前 K 个高频元素
+     * 给定一个非空的整数数组，返回其中出现频率前 k 高的元素。
+     *
+     *
+     *
+     * 示例 1:
+     *
+     * 输入: nums = [1,1,1,2,2,3], k = 2
+     * 输出: [1,2]
+     * 示例 2:
+     *
+     * 输入: nums = [1], k = 1
+     * 输出: [1]
+     *
+     *
+     * 提示：
+     *
+     * 你可以假设给定的 k 总是合理的，且 1 ≤ k ≤ 数组中不相同的元素的个数。
+     * 你的算法的时间复杂度必须优于 O(n log n) , n 是数组的大小。
+     * 题目数据保证答案唯一，换句话说，数组中前 k 个高频元素的集合是唯一的。
+     * 你可以按任意顺序返回答案。
+     *
+     * @param nums nums
+     * @param k k
+     * @return int[]
+     */
+    public int[] topKFrequent(int[] nums, int k) {
+        return nums;
+    }
+
+    /**
+     * TODO: 496. 下一个更大元素 I
+     * 给你两个 没有重复元素 的数组 nums1 和 nums2 ，其中nums1 是 nums2 的子集。
+     *
+     * 请你找出 nums1 中每个元素在 nums2 中的下一个比其大的值。
+     *
+     * nums1 中数字 x 的下一个更大元素是指 x 在 nums2 中对应位置的右边的第一个比 x 大的元素。如果不存在，对应位置输出 -1 。
+     *
+     *
+     *
+     * 示例 1:
+     *
+     * 输入: nums1 = [4,1,2], nums2 = [1,3,4,2].
+     * 输出: [-1,3,-1]
+     * 解释:
+     *     对于 num1 中的数字 4 ，你无法在第二个数组中找到下一个更大的数字，因此输出 -1 。
+     *     对于 num1 中的数字 1 ，第二个数组中数字1右边的下一个较大数字是 3 。
+     *     对于 num1 中的数字 2 ，第二个数组中没有下一个更大的数字，因此输出 -1 。
+     * 示例 2:
+     *
+     * 输入: nums1 = [2,4], nums2 = [1,2,3,4].
+     * 输出: [3,-1]
+     * 解释:
+     *     对于 num1 中的数字 2 ，第二个数组中的下一个较大数字是 3 。
+     *     对于 num1 中的数字 4 ，第二个数组中没有下一个更大的数字，因此输出 -1 。
+     *
+     *
+     * 提示：
+     *
+     * 1 <= nums1.length <= nums2.length <= 1000
+     * 0 <= nums1[i], nums2[i] <= 104
+     * nums1和nums2中所有整数 互不相同
+     * nums1 中的所有整数同样出现在 nums2 中
+     *
+     *
+     * 进阶：你可以设计一个时间复杂度为 O(nums1.length + nums2.length) 的解决方案吗？
+     *
+     * @param nums1 nums1
+     * @param nums2 nums1
+     * @return int[]
+     */
+    public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+        return null;
+    }
+
+
+    /**
+     * TODO: 739. 每日温度
+     * 请根据每日 气温 列表，重新生成一个列表。对应位置的输出为：要想观测到更高的气温，至少需要等待的天数。
+     * 如果气温在这之后都不会升高，请在该位置用 0 来代替。
+     *
+     * 例如，给定一个列表 temperatures = [73, 74, 75, 71, 69, 72, 76, 73]，你的输出应该是 [1, 1, 4, 2, 1, 1, 0, 0]。
+     *
+     * 提示：气温 列表长度的范围是 [1, 30000]。每个气温的值的均为华氏度，都是在 [30, 100] 范围内的整数。
+     *
+     * @param T T
+     * @return day
+     */
+    public int[] dailyTemperatures(int[] T) {
+        return T;
+    }
 
     /**
      * 119. 杨辉三角 II
@@ -715,4 +924,225 @@ public class ArrayTopic {
         }
         return ans;
     }
+
+    /**
+     * 54.螺旋矩阵
+     *
+     * 给你一个 m 行 n 列的矩阵 matrix ，请按照 顺时针螺旋顺序 ，返回矩阵中的所有元素。
+     *
+     * 示例 1：
+     *
+     * 输入：matrix = [[1,2,3],[4,5,6],[7,8,9]]
+     * 输出：[1,2,3,6,9,8,7,4,5]
+     * 示例 2：
+     *
+     * 输入：matrix = [[1,2,3,4],[5,6,7,8],[9,10,11,12]]
+     * 输出：[1,2,3,4,8,12,11,10,9,5,6,7]
+     *  
+     *
+     * 提示：
+     *
+     * m == matrix.length
+     * n == matrix[i].length
+     * 1 <= m, n <= 10
+     * -100 <= matrix[i][j] <= 100
+     *
+     *
+     * @param matrix matrix
+     * @return list
+     */
+    public List<Integer> spiralOrder(int[][] matrix) {
+        List<Integer> ans = new ArrayList<>();
+        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
+            return ans;
+        }
+        int rows = matrix.length;
+        int columns = matrix[0].length;
+        int left = 0;
+        int right = columns - 1;
+        int top = 0;
+        int bottom = rows - 1;
+
+        while (left <= right && top <= bottom) {
+            for (int i = left; i <= right; i++) {
+                ans.add(matrix[top][i]);
+            }
+            for (int j = top + 1; j <= bottom; j++) {
+                ans.add(matrix[j][right]);
+            }
+            if (left < right && top < bottom) {
+                for (int i = right - 1; i > left; i--) {
+                    ans.add(matrix[bottom][i]);
+                }
+                for (int j = bottom; j > top; j--) {
+                    ans.add(matrix[j][left]);
+                }
+            }
+            left++;
+            right--;
+            top++;
+            bottom--;
+        }
+
+        return ans;
+    }
+
+    /**
+     * 59. 螺旋矩阵 II
+     * 给你一个正整数 n ，生成一个包含 1 到 n^2 所有元素，且元素按顺时针顺序螺旋排列的 n x n 正方形矩阵 matrix 。
+     *
+     *
+     *
+     * 示例 1：
+     *
+     *
+     * 输入：n = 3
+     * 输出：[[1,2,3],[8,9,4],[7,6,5]]
+     * 示例 2：
+     *
+     * 输入：n = 1
+     * 输出：[[1]]
+     *
+     *
+     * 提示：
+     *
+     * 1 <= n <= 20
+     *
+     * @param n n
+     * @return matrix
+     */
+    public int[][] generateMatrix(int n) {
+        int[][] ans = new int[n][n];
+        int left = 0;
+        int right = n - 1;
+        int top = 0;
+        int bottom = n - 1;
+        int num = 1;
+
+        while (left <= right && top <= bottom) {
+            for (int i = left; i <= right; i++) {
+                ans[top][i] = num++;
+            }
+            for (int j = top + 1; j <= bottom; j++) {
+                ans[j][right] = num++;
+            }
+            if (left < right && top < bottom) {
+                for (int i = right - 1; i > left; i--) {
+                    ans[bottom][i] = num++;
+                }
+                for (int j = bottom; j > top; j--) {
+                    ans[j][left] = num++;
+                }
+            }
+            left++;
+            right--;
+            top++;
+            bottom--;
+        }
+        return ans;
+    }
+
+    /**
+     * 74. 搜索二维矩阵
+     * 编写一个高效的算法来判断 m x n 矩阵中，是否存在一个目标值。该矩阵具有如下特性：
+     *
+     * 每行中的整数从左到右按升序排列。
+     * 每行的第一个整数大于前一行的最后一个整数。
+     *
+     *
+     * 示例 1：
+     *
+     *
+     * 输入：matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]], target = 3
+     * 输出：true
+     * 示例 2：
+     *
+     *
+     * 输入：matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]], target = 13
+     * 输出：false
+     *
+     *
+     * 提示：
+     *
+     * m == matrix.length
+     * n == matrix[i].length
+     * 1 <= m, n <= 100
+     * -104 <= matrix[i][j], target <= 104
+     *
+     * @param matrix matrix
+     * @param target target
+     * @return true or false
+     */
+    public boolean searchMatrix(int[][] matrix, int target) {
+        int m = matrix.length;
+        int n = matrix[0].length;
+        int left = 0;
+        int right = m * n - 1;
+
+        // 0,0 0  1,1 0,1          x * n + y = mid  => x = mid / n
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (matrix[mid / n][mid % n] == target) {
+                return true;
+            } else if (matrix[mid / n][mid % n] < target) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 240. 搜索二维矩阵 II
+     * 编写一个高效的算法来搜索 m x n 矩阵 matrix 中的一个目标值 target 。该矩阵具有以下特性：
+     *
+     * 每行的元素从左到右升序排列。
+     * 每列的元素从上到下升序排列。
+     *
+     *
+     * 示例 1：
+     *
+     *
+     * 输入：matrix = [[1,4,7,11,15],[2,5,8,12,19],[3,6,9,16,22],[10,13,14,17,24],[18,21,23,26,30]], target = 5
+     * 输出：true
+     * 示例 2：
+     *
+     *
+     * 输入：matrix = [[1,4,7,11,15],[2,5,8,12,19],[3,6,9,16,22],[10,13,14,17,24],[18,21,23,26,30]], target = 20
+     * 输出：false
+     *
+     *
+     * 提示：
+     *
+     * m == matrix.length
+     * n == matrix[i].length
+     * 1 <= n, m <= 300
+     * -10^9 <= matix[i][j] <= 10^9
+     * 每行的所有元素从左到右升序排列
+     * 每列的所有元素从上到下升序排列
+     * -10^9 <= target <= 10^9
+     *
+     * @param matrix matrix
+     * @param target target
+     * @return true or false
+     */
+    public boolean searchMatrix2(int[][] matrix, int target) {
+        int m = matrix.length;
+        int n = matrix[0].length;
+        int row = m - 1;
+        int col = 0;
+        while (row >= 0 && col < n) {
+            if (matrix[row][col] > target) {
+                row--;
+            } else if (matrix[row][col] < target){
+                col++;
+            } else {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
 }

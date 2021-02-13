@@ -1,6 +1,6 @@
 package com.natsumes.leetcode.list;
 
-import com.natsumes.leetcode.TreeNode;
+import com.natsumes.leetcode.tree.TreeNode;
 
 import java.util.*;
 

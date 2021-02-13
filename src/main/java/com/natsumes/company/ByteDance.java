@@ -1,12 +1,22 @@
 package com.natsumes.company;
 
-import java.util.*;
+
+import com.natsumes.leetcode.array.ArrayTopic;
+import com.natsumes.leetcode.dp.DynamicProgram;
+import com.natsumes.leetcode.permute.Permute;
+import com.natsumes.leetcode.string.StringHandler;
+import com.natsumes.leetcode.tree.BinarySearchTreeTopic;
+import com.natsumes.leetcode.unionfind.UnionFinder;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  *
  * <h3>字节跳动题库</h3>
  *
- * ============================================================================
+ * =====================================================================================================================
  * <h4>DFS 问题</h4>
  * <a href="https://leetcode-cn.com/problems/restore-ip-addresses/">93.复原IP地址</a>
  * {@link com.natsumes.leetcode.DfsAndBinarySearch#restoreIpAddresses(java.lang.String)}
@@ -14,9 +24,30 @@ import java.util.*;
  * <a href="https://leetcode-cn.com/problems/subsets/">78.子集</a>
  * {@link com.natsumes.leetcode.DfsAndBinarySearch#subsets(int[])}
  *
- * ============================================================================
+ * =====================================================================================================================
  * <h4>1.dp 问题</h4>
  * {@link com.natsumes.leetcode.dp.DynamicProgram}
+ *
+ * <a href="https://leetcode-cn.com/problems/maximal-square/">221.最大正方形</a>
+ * {@link com.natsumes.leetcode.dp.DynamicProgram#maximalSquare(char[][])}
+ *
+ * <a href="https://leetcode-cn.com/problems/coin-change/">322.零钱兑换</a>
+ * {@link com.natsumes.leetcode.dp.DynamicProgram#coinChange(int[], int)}
+ *
+ * TODO: <a href="https://leetcode-cn.com/problems/word-search/">79.单词搜索</a>
+ * {@link com.natsumes.leetcode.dp.DynamicProgram#exist(char[][], java.lang.String)}
+ *
+ * TODO: <a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/">309.最佳买卖股票时机含冷冻期</a>
+ * {@link com.natsumes.leetcode.dp.DynamicProgram#maxProfit(int[])}
+ *
+ * TODO: <a href="https://leetcode-cn.com/problems/minimum-path-sum/">64.最小路径和</a>
+ * {@link DynamicProgram#minPathSum(int[][])}
+ *
+ * TODO: <a href="https://leetcode-cn.com/problems/minimum-path-sum/">113.路径总和 II</a>
+ * {@link DynamicProgram#pathSum(com.natsumes.leetcode.dp.TreeNode, int)}
+ *
+ * TODO: <a href="https://leetcode-cn.com/problems/gas-station/">134.加油站</a>
+ * {@link DynamicProgram#canCompleteCircuit(int[], int[])}
  *
  * <a href="https://leetcode-cn.com/problems/generate-parentheses/">22.括号生成</a>
  * {@link com.natsumes.leetcode.dp.DynamicProgram#generateParenthesis(int)}
@@ -31,7 +62,7 @@ import java.util.*;
  * <p><a href="https://leetcode-cn.com/problems/maximum-subarray/">53.最大子序和</a></p>
  * {@link com.natsumes.leetcode.dp.DynamicProgram#maxSubArray(int[])}
  *
- * ============================================================================
+ * =====================================================================================================================
  * <h4>2.n sum 问题</h4>
  * {@link com.natsumes.leetcode.nsum.NumSums}
  *
@@ -44,22 +75,28 @@ import java.util.*;
  * <a href="https://leetcode-cn.com/problems/4sum/">18.四数之和</a>
  * {@link com.natsumes.leetcode.nsum.NumSums#fourSum(int[], int)}
  *
- * ============================================================================
+ * =====================================================================================================================
  * <h4>3.排列问题</h4>
  * {@link com.natsumes.leetcode.permute.Permute 排列问题}
  *
  * <a href="https://leetcode-cn.com/problems/next-permutation/">31.下一个排列</a>
  * {@link com.natsumes.leetcode.permute.Permute#nextPermutation(int[])}
  *
- * ============================================================================
+ * <a href="https://leetcode-cn.com/problems/combination-sum/">39.组合总和</a>
+ * {@link Permute#combinationSum(int[], int)}
+ *
+ * =====================================================================================================================
  * <a href="https://leetcode-cn.com/problems/median-of-two-sorted-arrays/">4.寻找两个正序数组的中位数</a>
  * {@link com.natsumes.leetcode.array.ArrayTopic#findMedianSortedArrays(int[], int[])}
  *
  * <a href="https://leetcode-cn.com/problems/longest-palindromic-substring/">5.最长回文子串</a>
  * {@link com.natsumes.company.ByteDance#longestPalindrome(String)}
  *
- * ============================================================================
- * <h4>链表问题</h4>
+ * <a href="https://leetcode-cn.com/problems/largest-number/">179.最大数</a>
+ * {@link ArrayTopic#largestNumber(int[])}
+ *
+ * =====================================================================================================================
+ * <h4>4.链表问题</h4>
  * {@link com.natsumes.leetcode.list.LinkedListTopic}
  *
  * <a href="https://leetcode-cn.com/problems/reverse-linked-list/">206.反转链表</a>
@@ -74,7 +111,7 @@ import java.util.*;
  * <a href="https://leetcode-cn.com/problems/insertion-sort-list/">147.对链表进行插入排序</a>
  * {@link com.natsumes.leetcode.list.LinkedListTopic#insertionSortList(com.natsumes.leetcode.list.ListNode)}
  *
- * ============================================================================
+ * =====================================================================================================================
  * <a href="https://leetcode-cn.com/problems/trapping-rain-water/">42.接雨水</a>
  * {@link com.natsumes.leetcode.array.ArrayTopic#trap(int[])}
  *
@@ -85,8 +122,12 @@ import java.util.*;
  *     5667.你能在你最喜欢的那天吃到你最喜欢的糖果吗？</a>
  * {@link com.natsumes.company.ByteDance#canEat(int[], int[][])}
  *
+ * <a href="https://leetcode-cn.com/problems/binary-tree-zigzag-level-order-traversal/">103.二叉树的锯齿形层序遍历</a>
+ * {@link com.natsumes.leetcode.tree.BinaryTreeTopic#zigzagLevelOrder(com.natsumes.leetcode.tree.TreeNode)}
+ *
  * <a href="https://leetcode-cn.com/problems/binary-tree-right-side-view/">199.二叉树的右视图</a>
- * {@link com.natsumes.company.ByteDance#rightSideView(com.natsumes.company.TreeNode)}
+ * {@link com.natsumes.leetcode.tree.BinaryTreeTopic#rightSideView(com.natsumes.leetcode.tree.TreeNode)
+ * {@link com.natsumes.leetcode.tree.BinaryTreeTopic#rightSideView01(com.natsumes.leetcode.tree.TreeNode)
  *
  * <a>查找完全二叉树的最后一层最右边的节点</a>
  * {@link com.natsumes.company.ByteDance#findLastRightNode(TreeNode)}
@@ -102,6 +143,47 @@ import java.util.*;
  *
  * <a href="https://leetcode-cn.com/problems/kth-largest-element-in-an-array/">215.数组中的第K个最大元素</a>
  * {@link com.natsumes.leetcode.array.ArrayTopic#findKthLargest(int[], int)}
+ *
+ * <a href="https://leetcode-cn.com/problems/spiral-matrix/">54.螺旋矩阵</a>
+ * {@link com.natsumes.leetcode.array.ArrayTopic#spiralOrder(int[][])}
+ *
+ * <a href="https://leetcode-cn.com/problems/spiral-matrix-ii/">59.螺旋矩阵 II</a>
+ * {@link ArrayTopic#generateMatrix(int)}
+ *
+ * <a href="https://leetcode-cn.com/problems/search-a-2d-matrix/">74.搜索二维矩阵</a>
+ * {@link com.natsumes.leetcode.array.ArrayTopic#searchMatrix(int[][], int)}
+ *
+ * <a href="https://leetcode-cn.com/problems/search-a-2d-matrix-ii/">240.搜索二维矩阵 II</a>
+ * {@link com.natsumes.leetcode.array.ArrayTopic#searchMatrix2(int[][], int)}
+ *
+ * <a href="https://leetcode-cn.com/problems/string-to-integer-atoi/">8.字符串转换整数 (atoi)</a>
+ * {@link StringHandler#myAtoi(String)}
+ *
+ * TODO: <a href="https://leetcode-cn.com/problems/decode-string/">394.字符串解码</a>
+ * {@link StringHandler#decodeString(java.lang.String)}
+ *
+ * <a href="https://leetcode-cn.com/problems/zigzag-conversion/">6.Z 字形变换</a>
+ * {@link StringHandler#convert(java.lang.String, int)}
+ *
+ * TODO: <a href="https://leetcode-cn.com/problems/next-greater-element-i/">496.下一个更大元素 I</a>
+ * {@link ArrayTopic#nextGreaterElement(int[], int[])}
+ *
+ * TODO: <a href="https://leetcode-cn.com/problems/daily-temperatures/">739.每日温度</a>
+ * {@link ArrayTopic#dailyTemperatures(int[])}
+ *
+ * TODO: <a href="https://leetcode-cn.com/problems/top-k-frequent-elements/">347.前 K 个高频元素</a>
+ * {@link ArrayTopic#topKFrequent(int[], int)}
+ *
+ * =====================================================================================================================
+ * <h4>并查集</h4>
+ *
+ * TODO: <a href="https://leetcode-cn.com/problems/max-area-of-island/">695.岛屿的最大面积</a>
+ * {@link UnionFinder#maxAreaOfIsland(int[][])}
+ *
+ * TODO: <a href="https://leetcode-cn.com/problems/unique-binary-search-trees/">96.不同的二叉搜索树</a>
+ * {@link BinarySearchTreeTopic#numTrees(int)}
+ *
+ * =====================================================================================================================
  *
  * @author hetengjiao
  */
@@ -487,146 +569,100 @@ public class ByteDance {
         return null;
     }
 
-    /**
-     * 199. 二叉树的右视图
-     * 给定一棵二叉树，想象自己站在它的右侧，按照从顶部到底部的顺序，返回从右侧所能看到的节点值。
-     *
-     * 示例:
-     *
-     * 输入: [1,2,3,null,5,null,4]
-     * 输出: [1, 3, 4]
-     * 解释:
-     *
-     *    1            {@literal <---}
-     *  /   \
-     * 2     3         {@literal <---}
-     *  \     \
-     *   5     4       {@literal <---}
-     *
-     * @param root root  @Nullable
-     * @return List
-     * @see ByteDance
-     */
-    public List<Integer> rightSideView(TreeNode root) {
-        List<Integer> res = new ArrayList<>();
-        if (root == null) {
-            return res;
-        }
-        // 层序遍历
-        Queue<TreeNode> queue = new LinkedList<>();
-        queue.offer(root);
-        int levelValue = root.val;
-        while (!queue.isEmpty()) {
-            int size = queue.size();
-            for (int i = 0; i < size; i++) {
-                TreeNode node = queue.poll();
-                levelValue = Objects.requireNonNull(node).val;
-                if (node.left != null) {
-                    queue.offer(node.left);
-                }
-                if (node.right != null) {
-                    queue.offer(node.right);
-                }
-            }
-            res.add(levelValue);
-        }
-        return res;
-    }
-
-    public static int count(String fileContent) {
-        // /**/\n, /*/\n, //\n, import * \n, @\n
-        // Pattern pattern1 = new Pattern("import*\n");
-        //Pattern pattern2 = new Pattern("@^\n");
-        //return fileContent.replace(pattern, "").trim().replaceAll(" ","").split("\n").length;
-        String[] strs =  fileContent.trim().split("\n");
-        int count = 0;
-
-        for(int i = 0; i < strs.length; i++) {
-            String str = strs[i].trim();
-            //   8
-            //   /
-            //  9
-            if("".equals(str)) {
-                continue;
-            }
-
-            if(str.length()>=2 && "/*".equals(str.substring(0, 2))) {
-                while(i < strs.length && !"*/".equals(strs[i].substring(strs[i].length() - 2))) {
-                    i++;
-                }
-
-                continue;
-            }
-
-            if(str.length() >= 7 && "import ".equals(str.substring(0, 7))) {
-                while(i < strs.length && !";".equals(strs[i].substring(strs[i].length() - 1))) {
-                    i++;
-                }
-                continue;
-            }
-
-            if(str.charAt(0) == '@') {
-                while(i < strs.length && !"public".equals(strs[i].substring(strs[i].length() - 2))) {
-                    i++;
-                }
-                continue;
-            }
-
-            if(str.length()>=2 && "//".equals(str.substring(0, 2))) {
-                continue;
-            }
-
-            count++;
-        }
-        return count;
-    }
-
-    public static void main(String[] args) {
-        String s = "/**\n" +
-                "     * 199. 二叉树的右视图\n" +
-                "     * 给定一棵二叉树，想象自己站在它的右侧，按照从顶部到底部的顺序，返回从右侧所能看到的节点值。\n" +
-                "     *\n" +
-                "     * 示例:\n" +
-                "     *\n" +
-                "     * 输入: [1,2,3,null,5,null,4]\n" +
-                "     * 输出: [1, 3, 4]\n" +
-                "     * 解释:\n" +
-                "     *\n" +
-                "     *    1            {@literal <---}\n" +
-                "     *  /   \\\n" +
-                "     * 2     3         {@literal <---}\n" +
-                "     *  \\     \\\n" +
-                "     *   5     4       {@literal <---}\n" +
-                "     *\n" +
-                "     * @param root root  @Nullable\n" +
-                "     * @return List\n" +
-                "     * @see ByteDance\n" +
-                "     */\n" +
-                "    public List<Integer> rightSideView(TreeNode root) {\n" +
-                "        List<Integer> res = new ArrayList<>();\n" +
-                "        if (root == null) {\n" +
-                "            return res;\n" +
-                "        }\n" +
-                "        // 层序遍历\n" +
-                "        Queue<TreeNode> queue = new LinkedList<>();\n" +
-                "        queue.offer(root);\n" +
-                "        int levelValue = root.val;\n" +
-                "        while (!queue.isEmpty()) {\n" +
-                "            int size = queue.size();\n" +
-                "            for (int i = 0; i < size; i++) {\n" +
-                "                TreeNode node = queue.poll();\n" +
-                "                levelValue = Objects.requireNonNull(node).val;\n" +
-                "                if (node.left != null) {\n" +
-                "                    queue.offer(node.left);\n" +
-                "                }\n" +
-                "                if (node.right != null) {\n" +
-                "                    queue.offer(node.right);\n" +
-                "                }\n" +
-                "            }\n" +
-                "            res.add(levelValue);\n" +
-                "        }\n" +
-                "        return res;\n" +
-                "    }\n";
-        System.out.println(count(s));
-    }
+//    public static int count(String fileContent) {
+//        // /**/\n, /*/\n, //\n, import * \n, @\n
+//        // Pattern pattern1 = new Pattern("import*\n");
+//        //Pattern pattern2 = new Pattern("@^\n");
+//        //return fileContent.replace(pattern, "").trim().replaceAll(" ","").split("\n").length;
+//        String[] strs =  fileContent.trim().split("\n");
+//        int count = 0;
+//
+//        for(int i = 0; i < strs.length; i++) {
+//            String str = strs[i].trim();
+//            //   8
+//            //   /
+//            //  9
+//            if("".equals(str)) {
+//                continue;
+//            }
+//
+//            if(str.length()>=2 && "/*".equals(str.substring(0, 2))) {
+//                while(i < strs.length && !"*/".equals(strs[i].substring(strs[i].length() - 2))) {
+//                    i++;
+//                }
+//
+//                continue;
+//            }
+//
+//            if(str.length() >= 7 && "import ".equals(str.substring(0, 7))) {
+//                while(i < strs.length && !";".equals(strs[i].substring(strs[i].length() - 1))) {
+//                    i++;
+//                }
+//                continue;
+//            }
+//
+//            if(str.charAt(0) == '@') {
+//                while(i < strs.length && !"public".equals(strs[i].substring(strs[i].length() - 2))) {
+//                    i++;
+//                }
+//                continue;
+//            }
+//
+//            if(str.length()>=2 && "//".equals(str.substring(0, 2))) {
+//                continue;
+//            }
+//
+//            count++;
+//        }
+//        return count;
+//    }
+//
+//    public static void main(String[] args) {
+//        String s = "/**\n" +
+//                "     * 199. 二叉树的右视图\n" +
+//                "     * 给定一棵二叉树，想象自己站在它的右侧，按照从顶部到底部的顺序，返回从右侧所能看到的节点值。\n" +
+//                "     *\n" +
+//                "     * 示例:\n" +
+//                "     *\n" +
+//                "     * 输入: [1,2,3,null,5,null,4]\n" +
+//                "     * 输出: [1, 3, 4]\n" +
+//                "     * 解释:\n" +
+//                "     *\n" +
+//                "     *    1            {@literal <---}\n" +
+//                "     *  /   \\\n" +
+//                "     * 2     3         {@literal <---}\n" +
+//                "     *  \\     \\\n" +
+//                "     *   5     4       {@literal <---}\n" +
+//                "     *\n" +
+//                "     * @param root root  @Nullable\n" +
+//                "     * @return List\n" +
+//                "     * @see ByteDance\n" +
+//                "     */\n" +
+//                "    public List<Integer> rightSideView(TreeNode root) {\n" +
+//                "        List<Integer> res = new ArrayList<>();\n" +
+//                "        if (root == null) {\n" +
+//                "            return res;\n" +
+//                "        }\n" +
+//                "        // 层序遍历\n" +
+//                "        Queue<TreeNode> queue = new LinkedList<>();\n" +
+//                "        queue.offer(root);\n" +
+//                "        int levelValue = root.val;\n" +
+//                "        while (!queue.isEmpty()) {\n" +
+//                "            int size = queue.size();\n" +
+//                "            for (int i = 0; i < size; i++) {\n" +
+//                "                TreeNode node = queue.poll();\n" +
+//                "                levelValue = Objects.requireNonNull(node).val;\n" +
+//                "                if (node.left != null) {\n" +
+//                "                    queue.offer(node.left);\n" +
+//                "                }\n" +
+//                "                if (node.right != null) {\n" +
+//                "                    queue.offer(node.right);\n" +
+//                "                }\n" +
+//                "            }\n" +
+//                "            res.add(levelValue);\n" +
+//                "        }\n" +
+//                "        return res;\n" +
+//                "    }\n";
+//        System.out.println(count(s));
+//    }
 }

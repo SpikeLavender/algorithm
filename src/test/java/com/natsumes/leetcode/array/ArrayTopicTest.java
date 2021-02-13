@@ -105,4 +105,65 @@ public class ArrayTopicTest {
         Assert.assertEquals(5, numbers.get(0).intValue());
         Assert.assertEquals(6, numbers.get(1).intValue());
     }
+
+    @Test
+    public void spiralOrder() {
+        /*
+         *  * 输入：matrix = [[1,2,3],[4,5,6],[7,8,9]]
+         *      * 输出：[1,2,3,6,9,8,7,4,5]
+         *      * 示例 2：
+         *      *
+         *      * 输入：matrix = [[1,2,3,4],[5,6,7,8],[9,10,11,12]]
+         *      * 输出：[1,2,3,4,8,12,11,10,9,5,6,7]
+         */
+        List<Integer> order = at.spiralOrder(new int[][]{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}});
+        System.out.println(order);
+
+        order = at.spiralOrder(new int[][]{{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}});
+        System.out.println(order);
+    }
+
+    @Test
+    public void searchMatrix() {
+        Assert.assertFalse(at.searchMatrix(new int[][] {{1, 1}}, 2));
+        int[][] matrix = new int[][]{
+                { 1,  3,  5,  7},
+                {10, 11, 16, 20},
+                {23, 30, 34, 60}
+        };
+        Assert.assertTrue(at.searchMatrix(matrix, 3));
+        Assert.assertFalse(at.searchMatrix(matrix, 13));
+    }
+
+    @Test
+    public void searchMatrix2() {
+        int[][] matrix = new int[][]{
+                { 1,  4,  7, 11, 15},
+                { 2,  5,  8, 12, 19},
+                { 3,  6,  9, 16, 22},
+                {10, 13, 14, 17, 24},
+                {18, 21, 23, 26, 30}
+        };
+        Assert.assertTrue(at.searchMatrix2(matrix, 5));
+        Assert.assertTrue(at.searchMatrix2(matrix, 13));
+        Assert.assertFalse(at.searchMatrix2(matrix, 20));
+    }
+
+    @Test
+    public void generateMatrix() {
+        Assert.assertArrayEquals(new int[][] {{1, 2, 3}, {8, 9, 4}, {7, 6, 5}}, at.generateMatrix(3));
+        Assert.assertArrayEquals(new int[][] {{1}}, at.generateMatrix(1));
+    }
+
+    @Test
+    public void largestNumber() {
+        Assert.assertEquals("0", at.largestNumber(new int[] {0, 0}));
+        Assert.assertEquals("210", at.largestNumber(new int[] {10, 2}));
+        Assert.assertEquals("9534330", at.largestNumber(new int[] {3, 30, 34, 5, 9}));
+        Assert.assertEquals("1", at.largestNumber(new int[] {1}));
+        Assert.assertEquals("10", at.largestNumber(new int[] {10}));
+        Assert.assertEquals("1113111311", at.largestNumber(new int[] {111311, 1113}));
+        Assert.assertEquals("83088308830", at.largestNumber(new int[] {8308, 8308, 830}));
+        Assert.assertEquals("9999999991", at.largestNumber(new int[] {999999991, 9}));
+    }
 }

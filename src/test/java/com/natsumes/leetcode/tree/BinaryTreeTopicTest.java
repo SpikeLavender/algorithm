@@ -1,4 +1,4 @@
-package com.natsumes.leetcode;
+package com.natsumes.leetcode.tree;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class BinaryTreeTopicTest {
 
-    private static BinaryTreeTopic BT = new BinaryTreeTopic();
+    private final BinaryTreeTopic bt = new BinaryTreeTopic();
 
     @Test
     public void codec() {
@@ -21,7 +21,7 @@ public class BinaryTreeTopicTest {
         root.left.right = new TreeNode(3);
         root.right.left = new TreeNode(6);
         root.right.right = new TreeNode(9);
-        BinaryTreeTopic.Codec codec = BT.codec();
+        BinaryTreeTopic.Codec codec = bt.codec();
         String serialize = codec.serialize(root);
         System.out.println(serialize);
 
@@ -41,7 +41,7 @@ public class BinaryTreeTopicTest {
     public void buildTree() {
         int[] preorder = new int[]{3, 9, 20, 15, 7};
         int[] inorder = new int[]{9, 3, 15, 20, 7};
-        TreeNode treeNode = BT.buildTree01(preorder, inorder);
+        TreeNode treeNode = bt.buildTree01(preorder, inorder);
 
         System.out.println(treeNode.toString());
     }
@@ -57,7 +57,7 @@ public class BinaryTreeTopicTest {
     public void buildTree02() {
         int[] postorder = new int[]{9, 15, 7, 20, 3};
         int[] inorder = new int[]{9, 3, 15, 20, 7};
-        TreeNode treeNode = BT.buildTree02(inorder, postorder);
+        TreeNode treeNode = bt.buildTree02(inorder, postorder);
 
         System.out.println(treeNode.toString());
     }
@@ -73,7 +73,7 @@ public class BinaryTreeTopicTest {
         root.left.left = new TreeNode(3);
         root.left.right = new TreeNode(4);
         root.right.right = new TreeNode(6);
-        BT.flatten(root);
+        bt.flatten(root);
         System.out.println(root);
     }
 
@@ -84,7 +84,7 @@ public class BinaryTreeTopicTest {
         root.right = new TreeNode(20);
         root.right.left = new TreeNode(15);
         root.right.right = new TreeNode(7);
-        int i = BT.maxPathSum(root);
+        int i = bt.maxPathSum(root);
         System.out.println(i);
     }
 
@@ -95,7 +95,7 @@ public class BinaryTreeTopicTest {
         root.right = new TreeNode(20);
         root.right.left = new TreeNode(15);
         root.right.right = new TreeNode(7);
-        List<Integer> list = BT.preorderTraversal(root);
+        List<Integer> list = bt.preorderTraversal(root);
         System.out.println(list);
     }
 
@@ -106,7 +106,7 @@ public class BinaryTreeTopicTest {
         root.right = new TreeNode(20);
         root.right.left = new TreeNode(15);
         root.right.right = new TreeNode(7);
-        List<Integer> list = BT.inorderTraversal(root);
+        List<Integer> list = bt.inorderTraversal(root);
         System.out.println(list);
     }
 
@@ -117,7 +117,7 @@ public class BinaryTreeTopicTest {
         root.right = new TreeNode(20);
         root.right.left = new TreeNode(15);
         root.right.right = new TreeNode(7);
-        List<Integer> list = BT.postorderTraversal(root);
+        List<Integer> list = bt.postorderTraversal(root);
         System.out.println(list);
     }
 
@@ -129,7 +129,7 @@ public class BinaryTreeTopicTest {
         root.right = new TreeNode(20);
         root.right.left = new TreeNode(15);
         root.right.right = new TreeNode(7);
-        List<List<Integer>> lists = BT.levelOrder(root);
+        List<List<Integer>> lists = bt.levelOrder(root);
         System.out.println(lists);
     }
 
@@ -140,7 +140,7 @@ public class BinaryTreeTopicTest {
         root.right = new TreeNode(20);
         root.right.left = new TreeNode(15);
         root.right.right = new TreeNode(7);
-        int i = BT.maxDepth(root);
+        int i = bt.maxDepth(root);
         System.out.println(i);
         Assert.assertEquals(3, i);
     }
@@ -154,7 +154,7 @@ public class BinaryTreeTopicTest {
         root.left.right = new TreeNode(4);
         root.right.left = new TreeNode(4);
         root.right.right = new TreeNode(3);
-        boolean i = BT.isSymmetric(root);
+        boolean i = bt.isSymmetric(root);
         System.out.println(i);
         Assert.assertTrue(i);
 
@@ -164,7 +164,7 @@ public class BinaryTreeTopicTest {
         root.right = new TreeNode(2);
         root.left.right = new TreeNode(3);
         root.right.right = new TreeNode(3);
-        i = BT.isSymmetric(root);
+        i = bt.isSymmetric(root);
         System.out.println(i);
         Assert.assertFalse(i);
     }
@@ -190,7 +190,7 @@ public class BinaryTreeTopicTest {
         root.left.left = new TreeNode(11, new TreeNode(7), new TreeNode(2));
         root.right.left = new TreeNode(13);
         root.right.right = new TreeNode(4, null, new TreeNode(1));
-        boolean i = BT.hasPathSum(root, 22);
+        boolean i = bt.hasPathSum(root, 22);
         System.out.println(i);
         Assert.assertTrue(i);
 
@@ -200,7 +200,7 @@ public class BinaryTreeTopicTest {
         root.right = new TreeNode(2);
         root.left.right = new TreeNode(3);
         root.right.right = new TreeNode(3);
-        i = BT.hasPathSum(root, 22);
+        i = bt.hasPathSum(root, 22);
         System.out.println(i);
         Assert.assertFalse(i);
     }
@@ -210,7 +210,7 @@ public class BinaryTreeTopicTest {
         Node root = new Node(1);
         root.left = new Node(2, new Node(4), new Node(5), null);
         root.right = new Node(3, new Node(6), new Node(7), null);
-        Node node = BT.connect(root);
+        Node node = bt.connect(root);
         System.out.println(node);
     }
 
@@ -219,7 +219,7 @@ public class BinaryTreeTopicTest {
         Node root = new Node(1);
         root.left = new Node(2, new Node(4), new Node(5), null);
         root.right = new Node(3, null, new Node(7), null);
-        Node node = BT.connect2(root);
+        Node node = bt.connect2(root);
         System.out.println(node);
     }
 
@@ -231,7 +231,7 @@ public class BinaryTreeTopicTest {
 
         TreeNode p = new TreeNode(5);
         TreeNode q = new TreeNode(1);
-        TreeNode node = BT.lowestCommonAncestor(root, p, q);
+        TreeNode node = bt.lowestCommonAncestor(root, p, q);
         int res = node == null ? -1 : node.val;
         System.out.println(res);
         Assert.assertEquals(3, res);
@@ -254,7 +254,7 @@ public class BinaryTreeTopicTest {
         root.right.left = new TreeNode(6);
         root.right.right = new TreeNode(9);
 
-        TreeNode treeNode = BT.invertTree(root);
+        TreeNode treeNode = bt.invertTree(root);
         System.out.println(treeNode);
     }
 
@@ -268,7 +268,7 @@ public class BinaryTreeTopicTest {
         root.left.right = new TreeNode(3);
         root.right.left = new TreeNode(6);
         root.right.right = new TreeNode(9);
-        TreeNode treeNode = BT.mirrorTree(root);
+        TreeNode treeNode = bt.mirrorTree(root);
         System.out.println(treeNode);
     }
 
@@ -279,7 +279,7 @@ public class BinaryTreeTopicTest {
         root.right = new TreeNode(3);
         root.left.left = new TreeNode(4);
         root.left.right = new TreeNode(5);
-        Assert.assertEquals(3, BT.diameterOfBinaryTree(root));
+        Assert.assertEquals(3, bt.diameterOfBinaryTree(root));
     }
 
     @Test
@@ -289,15 +289,15 @@ public class BinaryTreeTopicTest {
         root.right = new TreeNode(1);
         root.left.left = new TreeNode(1);
         root.left.right = new TreeNode(1);
-        Assert.assertTrue(BT.isUnivalTree(root));
+        Assert.assertTrue(bt.isUnivalTree(root));
 
-        Assert.assertTrue(BT.isUnivalTree(null));
+        Assert.assertTrue(bt.isUnivalTree(null));
         root = new TreeNode(1);
         root.left = new TreeNode(1);
         root.right = new TreeNode(1);
         root.left.left = new TreeNode(2);
         root.left.right = new TreeNode(1);
-        Assert.assertFalse(BT.isUnivalTree(root));
+        Assert.assertFalse(bt.isUnivalTree(root));
     }
 
     @Test
@@ -305,7 +305,7 @@ public class BinaryTreeTopicTest {
         TreeNode t1 = new TreeNode(1, new TreeNode(3, new TreeNode(5), null), new TreeNode(2));
         TreeNode t2 = new TreeNode(2, new TreeNode(1, null, new TreeNode(4)),
                 new TreeNode(3, null, new TreeNode(7)));
-        TreeNode node = BT.mergeTrees(t1, t2);
+        TreeNode node = bt.mergeTrees(t1, t2);
         System.out.println(node);
         Assert.assertEquals(3, node.val);
     }
@@ -315,8 +315,64 @@ public class BinaryTreeTopicTest {
 //        TreeNode t1 = new TreeNode(1, new TreeNode(3, new TreeNode(5), null), new TreeNode(2));
 //        TreeNode t2 = new TreeNode(2, new TreeNode(1, null, new TreeNode(4)),
 //                new TreeNode(3, null, new TreeNode(7)));
-//        TreeNode node = BT.mergeTrees0(t1, t2);
+//        TreeNode node = bt.mergeTrees0(t1, t2);
 //        System.out.println(node);
 //        Assert.assertEquals(3, node.val);
+    }
+
+    @Test
+    public void zigzagLevelOrder() {
+        TreeNode root = new TreeNode(3);
+        root.left = new TreeNode(9);
+        root.right = new TreeNode(20);
+        root.right.left = new TreeNode(15);
+        root.right.right = new TreeNode(7);
+        List<List<Integer>> lists = bt.zigzagLevelOrder(root);
+        System.out.println(lists);
+    }
+
+    @Test
+    public void rightSideView() {
+        TreeNode treeNode = new TreeNode(1,
+                new TreeNode(2,
+                        null,
+                        new TreeNode(5)
+                ),
+                new TreeNode(3,
+                        null,
+                        new TreeNode(4)
+                )
+        );
+        List<Integer> list = bt.rightSideView(treeNode);
+        System.out.println(list);
+
+        treeNode = new TreeNode(1,
+                new TreeNode(2,
+                        null,
+                        new TreeNode(5)
+                ),
+                new TreeNode(3,
+                        null,
+                        null
+                )
+        );
+        list = bt.rightSideView(treeNode);
+        System.out.println(list);
+    }
+
+    @Test
+    public void rightSideView01() {
+        TreeNode treeNode = new TreeNode(1,
+                new TreeNode(2,
+                        null,
+                        new TreeNode(5)
+                ),
+                new TreeNode(3,
+                        null,
+                        new TreeNode(4)
+                )
+        );
+        List<Integer> list = bt.rightSideView01(treeNode);
+        System.out.println(list);
     }
 }
