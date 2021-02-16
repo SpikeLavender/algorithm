@@ -392,4 +392,172 @@ public class StringHandler {
 
         return ans * sign;
     }
+
+    /**
+     * 5676. 生成交替二进制字符串的最少操作数
+     * 给你一个仅由字符 '0' 和 '1' 组成的字符串 s 。一步操作中，你可以将任一 '0' 变成 '1' ，或者将 '1' 变成 '0' 。
+     *
+     * 交替字符串 定义为：如果字符串中不存在相邻两个字符相等的情况，那么该字符串就是交替字符串。
+     * 例如，字符串 "010" 是交替字符串，而字符串 "0100" 不是。
+     *
+     * 返回使 s 变成 交替字符串 所需的 最少 操作数。
+     *
+     *
+     *
+     * 示例 1：
+     *
+     * 输入：s = "0100"
+     * 输出：1
+     * 解释：如果将最后一个字符变为 '1' ，s 就变成 "0101" ，即符合交替字符串定义。
+     * 示例 2：
+     *
+     * 输入：s = "10"
+     * 输出：0
+     * 解释：s 已经是交替字符串。
+     * 示例 3：
+     *
+     * 输入：s = "1111"
+     * 输出：2
+     * 解释：需要 2 步操作得到 "0101" 或 "1010" 。
+     *
+     *
+     * 提示：
+     *
+     * 1 <= s.length <= 104
+     * s[i] 是 '0' 或 '1'
+     *
+     * @param s s
+     * @return int
+     */
+    public static int minOperations(String s) {
+        char[] array = s.toCharArray();
+        int count1 = 0;
+        int count2 = 0;
+        // 第一个字符为 0，第一个字符为1
+        char[] ans1 = new char[s.length()];
+        char[] ans2 = new char[s.length()];
+        for (int i = 0; i < s.length(); i++) {
+            if (i % 2 == 0) {
+                ans1[i] = '0';
+                ans2[i] = '1';
+            } else {
+                ans1[i] = '1';
+                ans2[i] = '0';
+            }
+        }
+
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] != ans1[i]) {
+                count1++;
+            }
+            if (array[i] != ans2[i]) {
+                count2++;
+            }
+        }
+        return count1 < count2 ? count1 : count2;
+    }
+
+
+
+    /**
+     * 5677. 统计同构子字符串的数目
+     * 给你一个字符串 s ，返回 s 中 同构子字符串 的数目。由于答案可能很大，只需返回对 109 + 7 取余 后的结果。
+     *
+     * 同构字符串 的定义为：如果一个字符串中的所有字符都相同，那么该字符串就是同构字符串。
+     *
+     * 子字符串 是字符串中的一个连续字符序列。
+     *
+     *
+     *
+     * 示例 1：
+     *
+     * 输入：s = "abbcccaa"
+     * 输出：13
+     * 解释：同构子字符串如下所列：
+     * "a"   出现 3 次。
+     * "aa"  出现 1 次。
+     * "b"   出现 2 次。
+     * "bb"  出现 1 次。
+     * "c"   出现 3 次。
+     * "cc"  出现 2 次。
+     * "ccc" 出现 1 次。
+     * 3 + 1 + 2 + 1 + 3 + 2 + 1 = 13
+     * 示例 2：
+     *
+     * 输入：s = "xy"
+     * 输出：2
+     * 解释：同构子字符串是 "x" 和 "y" 。
+     * 示例 3：
+     *
+     * 输入：s = "zzzzz"
+     * 输出：15
+     *
+     * @param s s
+     * @return int
+     */
+    public static int countHomogenous(String s) {
+        int left = 0;
+        int right = 0;
+        int count = 0;
+        while (right < s.length()) {
+            while (right < s.length() && s.charAt(left) == s.charAt(right)) {
+                right++;
+                count = count % ((int) Math.pow(10, 9) + 7);
+                count += right - left;
+            }
+            left = right;
+        }
+
+        return count % ((int) Math.pow(10, 9) + 7);
+    }
+
+    /**
+     * 5678. 袋子里最少数目的球
+     * 给你一个整数数组 nums ，其中 nums[i] 表示第 i 个袋子里球的数目。同时给你一个整数 maxOperations 。
+     *
+     * 你可以进行如下操作至多 maxOperations 次：
+     *
+     * 选择任意一个袋子，并将袋子里的球分到 2 个新的袋子中，每个袋子里都有 正整数 个球。
+     * 比方说，一个袋子里有 5 个球，你可以把它们分到两个新袋子里，分别有 1 个和 4 个球，或者分别有 2 个和 3 个球。
+     * 你的开销是单个袋子里球数目的 最大值 ，你想要 最小化 开销。
+     *
+     * 请你返回进行上述操作后的最小开销。
+     *
+     *
+     *
+     * 示例 1：
+     *
+     * 输入：nums = [9], maxOperations = 2
+     * 输出：3
+     * 解释：
+     * - 将装有 9 个球的袋子分成装有 6 个和 3 个球的袋子。[9] -> [6,3] 。
+     * - 将装有 6 个球的袋子分成装有 3 个和 3 个球的袋子。[6,3] -> [3,3,3] 。
+     * 装有最多球的袋子里装有 3 个球，所以开销为 3 并返回 3 。
+     * 示例 2：
+     *
+     * 输入：nums = [2,4,8,2], maxOperations = 4
+     * 输出：2
+     * 解释：
+     * - 将装有 8 个球的袋子分成装有 4 个和 4 个球的袋子。[2,4,8,2] -> [2,4,4,4,2] 。
+     * - 将装有 4 个球的袋子分成装有 2 个和 2 个球的袋子。[2,4,4,4,2] -> [2,2,2,4,4,2] 。
+     * - 将装有 4 个球的袋子分成装有 2 个和 2 个球的袋子。[2,2,2,4,4,2] -> [2,2,2,2,2,4,2] 。
+     * - 将装有 4 个球的袋子分成装有 2 个和 2 个球的袋子。[2,2,2,2,2,4,2] -> [2,2,2,2,2,2,2,2] 。
+     * 装有最多球的袋子里装有 2 个球，所以开销为 2 并返回 2 。
+     * 示例 3：
+     *
+     * 输入：nums = [7,17], maxOperations = 2
+     * 输出：7
+     *
+     * @param nums nums
+     * @param maxOperations maxOperations
+     * @return int
+     */
+    public static int minimumSize(int[] nums, int maxOperations) {
+        return 0;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(minimumSize(new int[] {9}, 2));
+        System.out.println(minimumSize(new int[] {10}, 2));
+    }
 }

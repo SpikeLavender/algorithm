@@ -1196,4 +1196,22 @@ public class UnionFinder {
             return size[root];
         }
     }
+
+    public int minTrioDegree(int n, int[][] edges) {
+        Union union = new Union(n);
+        int m = edges.length;
+        for (int i = 0; i < m; i++) {
+            union.union(edges[i][0] - 1, edges[i][1] - 1);
+        }
+        for (int i = 0; i < n; i++) {
+            int i1 = union.find(i);
+        }
+
+        return 0;
+    }
+
+    public static void main(String[] args) {
+        UnionFinder unionFinder = new UnionFinder();
+        unionFinder.minTrioDegree(6, new int[][]{{1,2},{1,3},{3,2},{4,1},{5,2},{3,6}});
+    }
 }

@@ -76,6 +76,8 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  *
  * <a href="https://leetcode-cn.com/problems/trapping-rain-water/">42.接雨水</a>
  * {@link ArrayTopic#trap(int[])}
+ * {@link ArrayTopic#trap02(int[])}
+ * {@link ArrayTopic#trap01(int[])}
  *
  * <a href="https://leetcode-cn.com/problems/permutations/">46.全排列</a>
  * {@link Permute#permute(int[])}
@@ -192,8 +194,8 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * <a href="https://leetcode-cn.com/problems/longest-substring-with-at-most-k-distinct-characters/">340.至多包含K个不同字符的最长子串</a>
  * {@link SlidingWindow#lengthOfLongestSubstringKDistinct(java.lang.String, int)}
  *
- * TODO: <a href="https://leetcode-cn.com/problems/top-k-frequent-elements/">347.前 K 个高频元素</a>
- * {@link ArrayTopic#topKFrequent(int[], int)}
+ * <a href="https://leetcode-cn.com/problems/top-k-frequent-elements/">347.前 K 个高频元素</a>
+ * {@link ArrayTopic#topKsFrequent(int[], int)}
  *
  * TODO: <a href="https://leetcode-cn.com/problems/decode-string/">394.字符串解码</a>
  * {@link StringHandler#decodeString(java.lang.String)}
@@ -207,11 +209,23 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * <a href="https://leetcode-cn.com/problems/sliding-window-median/">480.滑动窗口中位数</a>
  * {@link SlidingWindow#medianSlidingWindow(int[], int)}
  *
- * TODO: <a href="https://leetcode-cn.com/problems/next-greater-element-i/">496.下一个更大元素 I</a>
+ * <a href="https://leetcode-cn.com/problems/max-consecutive-ones/">485.最大连续1的个数</a>
+ * {@link SlidingWindow#findMaxConsecutiveOnes(int[])}
+ *
+ * <a href="https://leetcode-cn.com/problems/next-greater-element-i/">496.下一个更大元素 I</a>
  * {@link ArrayTopic#nextGreaterElement(int[], int[])}
+ *
+ * <a href="https://leetcode-cn.com/problems/next-greater-element-ii/">503.下一个更大元素 II</a>
+ * {@link ArrayTopic#nextGreaterElements(int[])}
  *
  * <a href="https://leetcode-cn.com/problems/number-of-provinces/">547.省份数量</a>
  * {@link UnionFinder#findCircleNum(int[][])}
+ *
+ * <a href="https://leetcode-cn.com/problems/next-greater-element-iii/">556.下一个更大元素 III</a>
+ * {@link ArrayTopic#nextGreaterElement(int)}
+ *
+ * <a href="https://leetcode-cn.com/problems/array-partition-i/">561.数组拆分 I</a>
+ * {@link ArrayTopic#arrayPairSum(int[])}
  *
  * <a href="https://leetcode-cn.com/problems/permutation-in-string/">567.字符串的排列</a>
  * {@link SlidingWindow#checkInclusion(java.lang.String, java.lang.String)}
@@ -228,7 +242,7 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * <a href="https://leetcode-cn.com/problems/accounts-merge/">721.账户合并</a>
  * {@link UnionFinder#accountsMerge(java.util.List)}
  *
- * TODO: <a href="https://leetcode-cn.com/problems/daily-temperatures/">739.每日温度</a>
+ * <a href="https://leetcode-cn.com/problems/daily-temperatures/">739.每日温度</a>
  * {@link ArrayTopic#dailyTemperatures(int[])}
  *
  * <a href="https://leetcode-cn.com/problems/couples-holding-hands/">765.情侣牵手</a>

@@ -111,4 +111,9 @@ public class SlidingWindowTest {
         Assert.assertEquals(3, sw.numSubarrayBoundedMax(new int[] {2, 1, 4, 3}, 2, 3));
         Assert.assertEquals(7, sw.numSubarrayBoundedMax(new int[] {2, 1, 4, 3, 2, 1}, 2, 3));
     }
+
+    @Test
+    public void findMaxConsecutiveOnes() {
+        Assert.assertEquals(3, sw.findMaxConsecutiveOnes(new int[] {1, 1, 0, 1, 1, 1}));
+    }
 }

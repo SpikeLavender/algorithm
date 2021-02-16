@@ -166,4 +166,60 @@ public class ArrayTopicTest {
         Assert.assertEquals("83088308830", at.largestNumber(new int[] {8308, 8308, 830}));
         Assert.assertEquals("9999999991", at.largestNumber(new int[] {999999991, 9}));
     }
+
+    @Test
+    public void arrayPairSum() {
+        Assert.assertEquals(4, at.arrayPairSum(new int[] {1, 4, 3, 2}));
+        Assert.assertEquals(9, at.arrayPairSum(new int[] {6,2,6,5,1,2}));
+    }
+
+    @Test
+    public void nextGreaterElement() {
+        Assert.assertArrayEquals(new int[]{-1, 3, -1}, at.nextGreaterElement(new int[]{4, 1, 2}, new int[]{1, 3, 4, 2}));
+        Assert.assertArrayEquals(new int[]{3, -1}, at.nextGreaterElement(new int[]{2, 4}, new int[]{1, 2, 3, 4}));
+    }
+
+    @Test
+    public void nextGreaterElements() {
+        Assert.assertArrayEquals(new int[]{2, -1, 2}, at.nextGreaterElements(new int[]{1, 2, 1}));
+    }
+
+    @Test
+    public void nextGreaterElement1() {
+        Assert.assertEquals(1243, at.nextGreaterElement(1234));
+        Assert.assertEquals(21, at.nextGreaterElement(12));
+        Assert.assertEquals(-1, at.nextGreaterElement(21));
+        Assert.assertEquals(-1, at.nextGreaterElement(2147483647));
+        Assert.assertEquals(-1, at.nextGreaterElement(2147483387));
+    }
+
+    @Test
+    public void dailyTemperatures() {
+        Assert.assertArrayEquals(new int[]{1, 1, 4, 2, 1, 1, 0, 0},
+                at.dailyTemperatures(new int[]{73, 74, 75, 71, 69, 72, 76, 73}));
+    }
+
+    @Test
+    public void trap() {
+        Assert.assertEquals(6, at.trap(new int[]{0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1}));
+        Assert.assertEquals(9, at.trap(new int[]{4, 2, 0, 3, 2, 5}));
+    }
+
+    @Test
+    public void trap02() {
+        Assert.assertEquals(6, at.trap02(new int[]{0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1}));
+        Assert.assertEquals(9, at.trap02(new int[]{4, 2, 0, 3, 2, 5}));
+    }
+
+    @Test
+    public void trap01() {
+        Assert.assertEquals(6, at.trap01(new int[]{0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1}));
+        Assert.assertEquals(9, at.trap01(new int[]{4, 2, 0, 3, 2, 5}));
+    }
+
+    @Test
+    public void topKsFrequent() {
+        Assert.assertArrayEquals(new int[]{2, 1}, at.topKsFrequent(new int[]{1, 1, 1, 2, 2, 3}, 2));
+        Assert.assertArrayEquals(new int[]{1}, at.topKsFrequent(new int[]{1}, 1));
+    }
 }

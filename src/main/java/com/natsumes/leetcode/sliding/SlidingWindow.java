@@ -7,6 +7,9 @@ import java.util.PriorityQueue;
 /**
  * 滑动窗口
  *
+ * <a href="https://leetcode-cn.com/problems/max-consecutive-ones/">485.最大连续1的个数</a>
+ * {@link SlidingWindow#findMaxConsecutiveOnes(int[])}
+ *
  * <a href="https://leetcode-cn.com/problems/permutation-in-string/">567.字符串的排列</a>
  * {@link SlidingWindow#checkInclusion(java.lang.String, java.lang.String)}
  *
@@ -49,6 +52,38 @@ import java.util.PriorityQueue;
  * @author hetengjiao
  */
 public class SlidingWindow {
+
+    /**
+     * 485. 最大连续1的个数
+     * 给定一个二进制数组， 计算其中最大连续1的个数。
+     *
+     * 示例 1:
+     *
+     * 输入: [1,1,0,1,1,1]
+     * 输出: 3
+     * 解释: 开头的两位和最后的三位都是连续1，所以最大连续1的个数是 3.
+     * 注意：
+     *
+     * 输入的数组只包含 0 和1。
+     * 输入数组的长度是正整数，且不超过 10,000。
+     *
+     * @param nums nums
+     * @return int
+     */
+    public int findMaxConsecutiveOnes(int[] nums) {
+        int left;
+        int right = 0;
+        int ans = 0;
+        while (right < nums.length) {
+            left = right;
+            while (right < nums.length && nums[right] == 1) {
+                right++;
+            }
+            ans = Math.max(right - left, ans);
+            right++;
+        }
+        return ans;
+    }
 
     /**
      * 567. 字符串的排列

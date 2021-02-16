@@ -1,9 +1,6 @@
 package com.natsumes.leetcode.array;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 /**
  * <h3>数组 + 双指针 + 二分查找</h3>
@@ -44,6 +41,9 @@ import java.util.Random;
  * <a href="https://leetcode-cn.com/problems/largest-number/">179.最大数</a>
  * {@link ArrayTopic#largestNumber(int[])}
  *
+ * <a href="https://leetcode-cn.com/problems/array-partition-i/">561.数组拆分 I</a>
+ * {@link ArrayTopic#arrayPairSum(int[])}
+ *
  * =====================================================================================================================
  * <a href="https://leetcode-cn.com/problems/non-decreasing-array/">665.非递减数列</a>
  * {@link ArrayTopic#checkPossibility(int[])}
@@ -57,18 +57,94 @@ import java.util.Random;
  * <a href="https://leetcode-cn.com/problems/spiral-matrix-ii/">59.螺旋矩阵 II</a>
  * {@link ArrayTopic#generateMatrix(int)}
  *
- * TODO: <a href="https://leetcode-cn.com/problems/next-greater-element-i/">496.下一个更大元素 I</a>
+ * <a href="https://leetcode-cn.com/problems/next-greater-element-i/">496.下一个更大元素 I</a>
  * {@link ArrayTopic#nextGreaterElement(int[], int[])}
  *
- * TODO: <a href="https://leetcode-cn.com/problems/daily-temperatures/">739.每日温度</a>
+ * <a href="https://leetcode-cn.com/problems/next-greater-element-ii/">503.下一个更大元素 II</a>
+ * {@link ArrayTopic#nextGreaterElements(int[])}
+ *
+ * <a href="https://leetcode-cn.com/problems/next-greater-element-iii/">556.下一个更大元素 III</a>
+ * {@link ArrayTopic#nextGreaterElement(int)}
+ *
+ * <a href="https://leetcode-cn.com/problems/daily-temperatures/">739.每日温度</a>
  * {@link ArrayTopic#dailyTemperatures(int[])}
  *
- * TODO: <a href="https://leetcode-cn.com/problems/top-k-frequent-elements/">347.前 K 个高频元素</a>
- * {@link ArrayTopic#topKFrequent(int[], int)}
+ * <a href="https://leetcode-cn.com/problems/top-k-frequent-elements/">347.前 K 个高频元素</a>
+ * {@link ArrayTopic#topKsFrequent(int[], int)}
  *
  * @author hetengjiao
  */
 public class ArrayTopic {
+
+    /**
+     * 561. 数组拆分 I
+     * 给定长度为 2n 的整数数组 nums ，你的任务是将这些数分成 n 对, 例如 (a1, b1), (a2, b2), ..., (an, bn) ，
+     * 使得从 1 到 n 的 min(ai, bi) 总和最大。
+     *
+     * 返回该 最大总和 。
+     *
+     *
+     *
+     * 示例 1：
+     *
+     * 输入：nums = [1,4,3,2]
+     * 输出：4
+     * 解释：所有可能的分法（忽略元素顺序）为：
+     * 1. (1, 4), (2, 3) -> min(1, 4) + min(2, 3) = 1 + 2 = 3
+     * 2. (1, 3), (2, 4) -> min(1, 3) + min(2, 4) = 1 + 2 = 3
+     * 3. (1, 2), (3, 4) -> min(1, 2) + min(3, 4) = 1 + 3 = 4
+     * 所以最大总和为 4
+     * 示例 2：
+     *
+     * 输入：nums = [6,2,6,5,1,2]
+     * 输出：9
+     * 解释：最优的分法为 (2, 1), (2, 5), (6, 6). min(2, 1) + min(2, 5) + min(6, 6) = 1 + 2 + 6 = 9
+     *
+     *
+     * 提示：
+     *
+     * 1 <= n <= 104
+     * nums.length == 2 * n
+     * -104 <= nums[i] <= 10^4
+     *
+     * @param nums nums
+     * @return max
+     */
+    public int arrayPairSum(int[] nums) {
+        doArrayPairSum(nums, 0, nums.length -  1);
+        int max = 0;
+        for (int i = 0; i < nums.length; i += 2) {
+            max += nums[i];
+        }
+        return max;
+    }
+
+
+    private void doArrayPairSum(int[] nums, int start, int end) {
+        if (start >= end) {
+            return;
+        }
+        int p = partition4ArrayPairSum(nums, start, end);
+        doArrayPairSum(nums, start, p - 1);
+        doArrayPairSum(nums, p + 1, end);
+    }
+
+    private int partition4ArrayPairSum(int[] nums, int left, int right) {
+        int pivot = nums[left];
+
+        while (left != right) {
+            while (left < right && pivot <= nums[right]) {
+                right--;
+            }
+            nums[left] = nums[right];
+            while (left < right && pivot >= nums[left]) {
+                left++;
+            }
+            nums[right] = nums[left];
+        }
+        nums[left] = pivot;
+        return left;
+    }
 
     /**
      * 179. 最大数
@@ -163,7 +239,7 @@ public class ArrayTopic {
     }
 
     /**
-     * TODO: 347. 前 K 个高频元素
+     * 347. 前 K 个高频元素
      * 给定一个非空的整数数组，返回其中出现频率前 k 高的元素。
      *
      *
@@ -189,12 +265,38 @@ public class ArrayTopic {
      * @param k k
      * @return int[]
      */
-    public int[] topKFrequent(int[] nums, int k) {
-        return nums;
+    public int[] topKsFrequent(int[] nums, int k) {
+        // k小顶堆
+
+        Map<Integer, Integer> map = new HashMap<>(16);
+        for (int num : nums) {
+            map.put(num, map.getOrDefault(num, 0) + 1);
+        }
+
+        PriorityQueue<int[]> queue = new PriorityQueue<>(Comparator.comparingInt(o -> o[1]));
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            Integer key = entry.getKey();
+            Integer value = entry.getValue();
+            if (queue.size() == k) {
+                if (Objects.requireNonNull(queue.peek())[1] < value) {
+                    queue.poll();
+                    queue.offer(new int[]{key, value});
+                }
+            } else {
+                queue.offer(new int[]{key, value});
+            }
+        }
+        int[] ans = new int[k];
+        for (int i = 0; i < k; i++) {
+            ans[i] = Objects.requireNonNull(queue.poll())[0];
+        }
+        return ans;
     }
 
+
+
     /**
-     * TODO: 496. 下一个更大元素 I
+     * 496. 下一个更大元素 I
      * 给你两个 没有重复元素 的数组 nums1 和 nums2 ，其中nums1 是 nums2 的子集。
      *
      * 请你找出 nums1 中每个元素在 nums2 中的下一个比其大的值。
@@ -235,12 +337,138 @@ public class ArrayTopic {
      * @return int[]
      */
     public int[] nextGreaterElement(int[] nums1, int[] nums2) {
-        return null;
+        // 单调栈
+        Map<Integer, Integer> greaterElement = nextGreaterElement(nums2);
+
+        int[] ans = new int[nums1.length];
+
+        for (int i = 0; i < ans.length; i++) {
+            ans[i] = greaterElement.getOrDefault(nums1[i], -1);
+        }
+
+        return ans;
     }
 
+    private Map<Integer, Integer> nextGreaterElement(int[] nums) {
+        Map<Integer, Integer> ans = new HashMap<>();
+        //int[] ans = new int[nums.length];
+        Stack<Integer> stack = new Stack<>();
+
+        for (int i = nums.length - 1; i >= 0; i--) {
+            while (!stack.isEmpty() && stack.peek() <= nums[i]) {
+                stack.pop();
+            }
+            ans.put(nums[i], stack.isEmpty() ? -1 : stack.peek());
+            stack.push(nums[i]);
+        }
+        return ans;
+    }
 
     /**
-     * TODO: 739. 每日温度
+     * 503. 下一个更大元素 II
+     * 给定一个循环数组（最后一个元素的下一个元素是数组的第一个元素），输出每个元素的下一个更大元素。
+     * 数字 x 的下一个更大的元素是按数组遍历顺序，这个数字之后的第一个比它更大的数，这意味着你应该循环地搜索它的下一个更大的数。
+     * 如果不存在，则输出 -1。
+     *
+     * 示例 1:
+     *
+     * 输入: [1,2,1]
+     * 输出: [2,-1,2]
+     * 解释: 第一个 1 的下一个更大的数是 2；
+     * 数字 2 找不到下一个更大的数；
+     * 第二个 1 的下一个最大的数需要循环搜索，结果也是 2。
+     *
+     * @param nums nums
+     * @return ans
+     */
+    public int[] nextGreaterElements(int[] nums) {
+        int n = nums.length;
+        //单调栈
+        int[] ans = new int[n];
+        Stack<Integer> s = new Stack<>();
+        for (int i = 2 * n - 1; i >= 0; i--) {
+            while (!s.isEmpty() && s.peek() <= nums[i % n]) {
+                s.pop();
+            }
+            ans[i % n] = s.isEmpty() ? -1 : s.peek();
+            s.push(nums[i % n]);
+        }
+
+        return ans;
+    }
+
+    /**
+     * 556. 下一个更大元素 III
+     * 给你一个正整数 n ，请你找出符合条件的最小整数，其由重新排列 n 中存在的每位数字组成，并且其值大于 n 。
+     * 如果不存在这样的正整数，则返回 -1 。
+     *
+     * 注意 ，返回的整数应当是一个 32 位整数 ，如果存在满足题意的答案，但不是 32 位整数 ，同样返回 -1 。
+     *
+     *
+     *
+     * 示例 1：
+     *
+     * 输入：n = 12
+     * 输出：21
+     * 示例 2：
+     *
+     * 输入：n = 21
+     * 输出：-1
+     *
+     *
+     * 提示：
+     *
+     * 1 <= n <= 2^31 - 1
+     *
+     * @param n n
+     * @return max
+     */
+    public int nextGreaterElement(int n) {
+        String str = String.valueOf(n);
+        int m = str.length();
+        int[] nums = new int[m];
+        for (int i = 0; i < m; i++) {
+            nums[i] = str.charAt(i) - '0';
+        }
+        // 134876923431586532
+        int i;
+        for (i = m - 1; i > 0; i--) {
+            if (nums[i] > nums[i - 1]) {
+                break;
+            }
+        }
+        if (i == 0) {
+            return -1;
+        }
+        int j = m - 1;
+        while (j >= i && nums[j] <= nums[i - 1]) {
+            j--;
+        }
+        int tmp = nums[j];
+        nums[j] = nums[i - 1];
+        nums[i - 1] = tmp;
+        // 逆序输出
+        int max = Integer.MAX_VALUE;
+        int ans = 0;
+        for (int k = 0; k < i; k++) {
+            if ((max - nums[k]) / 10 < ans) {
+                return -1;
+            }
+            ans = ans * 10 + nums[k];
+        }
+
+        for (int k = m - 1; k >= i; k--) {
+            if ((max - nums[k]) / 10 < ans) {
+                return -1;
+            }
+            ans = ans * 10 + nums[k];
+        }
+        return ans;
+    }
+
+    /**
+     * 739. 每日温度
+     *
      * 请根据每日 气温 列表，重新生成一个列表。对应位置的输出为：要想观测到更高的气温，至少需要等待的天数。
      * 如果气温在这之后都不会升高，请在该位置用 0 来代替。
      *
@@ -248,11 +476,23 @@ public class ArrayTopic {
      *
      * 提示：气温 列表长度的范围是 [1, 30000]。每个气温的值的均为华氏度，都是在 [30, 100] 范围内的整数。
      *
-     * @param T T
+     * @param t t
      * @return day
+     *
+     * {@link #nextGreaterElements(int[])}
      */
-    public int[] dailyTemperatures(int[] T) {
-        return T;
+    public int[] dailyTemperatures(int[] t) {
+        int n = t.length;
+        int[] ans = new int[n];
+        Stack<Integer> stack = new Stack<>();
+        for (int i = n - 1; i >= 0; i--) {
+            while (!stack.isEmpty() && t[stack.peek()] <= t[i]) {
+                stack.pop();
+            }
+            ans[i] = stack.isEmpty() ? 0 : stack.peek() - i;
+            stack.push(i);
+        }
+        return ans;
     }
 
     /**
@@ -315,11 +555,12 @@ public class ArrayTopic {
     public int[][] merge(int[][] intervals) {
         List<int[]> res = new ArrayList<>();
         Arrays.sort(intervals, (o1, o2) -> o1[0] == o2[0] ? o2[1] - o1[1] : o1[0] - o2[0]);
-        for (int i = 0; i < intervals.length; i++) {
-            int l = intervals[i][0];
-            int r = intervals[i][1];
+        //for (int i = 0; i < intervals.length; i++) {
+        for (int[] interval : intervals) {
+            int l = interval[0];
+            int r = interval[1];
             if (res.size() == 0 || res.get(res.size() - 1)[1] < l) {
-                res.add(new int[] {l, r});
+                res.add(new int[]{l, r});
             } else {
                 res.get(res.size() - 1)[1] = Math.max(r, res.get(res.size() - 1)[1]);
             }
@@ -328,6 +569,8 @@ public class ArrayTopic {
     }
 
     /**
+     * 33.搜索旋转排序数组
+     *
      * 升序排列的整数数组 nums 在预先未知的某个点上进行了旋转（例如， [0,1,2,4,5,6,7] 经旋转后可能变为 [4,5,6,7,0,1,2] ）。
      *
      * 请你在数组中搜索 target ，如果数组中存在这个目标值，则返回它的索引，否则返回 -1 。
@@ -434,7 +677,6 @@ public class ArrayTopic {
      *
      * @param height height
      * @return int
-     * @see ArrayTopic
      */
     public int maxArea(int[] height) {
         if (height == null || height.length == 0) {
@@ -464,6 +706,7 @@ public class ArrayTopic {
      * https://leetcode-cn.com/problems/trapping-rain-water/
      *
      * 42.接雨水
+     *
      * 给定 n 个非负整数表示每个宽度为 1 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。
      *
      * 示例 1：
@@ -481,9 +724,10 @@ public class ArrayTopic {
      * @param height height
      * @return int
      *
-     * @see ArrayTopic#trap(int[]) 双指针法
-     * @see ArrayTopic#trap02(int[]) 备忘录解法
-     * @see ArrayTopic#trap01(int[]) 暴力解法
+     * 双指针法
+     *
+     * {@link ArrayTopic#trap02(int[]) 备忘录解法}
+     * {@link ArrayTopic#trap01(int[]) 暴力解法}
      */
     public int trap(int[] height) {
         if (height == null || height.length == 0) {
@@ -550,9 +794,10 @@ public class ArrayTopic {
     public int trap01(int[] height) {
         int len = height.length;
         int res = 0;
-        int lMax = 0;
-        int rMax = 0;
+
         for (int i = 0; i < len; i++) {
+            int lMax = 0;
+            int rMax = 0;
             for (int j = i; j < len; j++) {
                 if (height[j] > rMax) {
                     rMax = height[j];

@@ -114,6 +114,8 @@ import java.util.List;
  * =====================================================================================================================
  * <a href="https://leetcode-cn.com/problems/trapping-rain-water/">42.接雨水</a>
  * {@link com.natsumes.leetcode.array.ArrayTopic#trap(int[])}
+ * {@link com.natsumes.leetcode.array.ArrayTopic#trap02(int[])}
+ * {@link com.natsumes.leetcode.array.ArrayTopic#trap01(int[])}
  *
  * <a href="https://leetcode-cn.com/problems/restore-the-array-from-adjacent-pairs/">5665.从相邻元素对还原数组</a>
  * {@link com.natsumes.company.ByteDance#restoreArray(int[][])}
@@ -165,14 +167,20 @@ import java.util.List;
  * <a href="https://leetcode-cn.com/problems/zigzag-conversion/">6.Z 字形变换</a>
  * {@link StringHandler#convert(java.lang.String, int)}
  *
- * TODO: <a href="https://leetcode-cn.com/problems/next-greater-element-i/">496.下一个更大元素 I</a>
+ * <a href="https://leetcode-cn.com/problems/next-greater-element-i/">496.下一个更大元素 I</a>
  * {@link ArrayTopic#nextGreaterElement(int[], int[])}
  *
- * TODO: <a href="https://leetcode-cn.com/problems/daily-temperatures/">739.每日温度</a>
+ * <a href="https://leetcode-cn.com/problems/next-greater-element-ii/">503.下一个更大元素 II</a>
+ * {@link ArrayTopic#nextGreaterElements(int[])}
+ *
+ * <a href="https://leetcode-cn.com/problems/next-greater-element-iii/">556.下一个更大元素 III</a>
+ * {@link ArrayTopic#nextGreaterElement(int)}
+ *
+ * <a href="https://leetcode-cn.com/problems/daily-temperatures/">739.每日温度</a>
  * {@link ArrayTopic#dailyTemperatures(int[])}
  *
- * TODO: <a href="https://leetcode-cn.com/problems/top-k-frequent-elements/">347.前 K 个高频元素</a>
- * {@link ArrayTopic#topKFrequent(int[], int)}
+ * <a href="https://leetcode-cn.com/problems/top-k-frequent-elements/">347.前 K 个高频元素</a>
+ * {@link ArrayTopic#topKsFrequent(int[], int)}
  *
  * =====================================================================================================================
  * <h4>并查集</h4>
