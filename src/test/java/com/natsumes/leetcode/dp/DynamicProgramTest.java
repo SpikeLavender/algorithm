@@ -366,4 +366,18 @@ public class DynamicProgramTest {
         Assert.assertEquals(3, dp.uniquePaths(3, 2));
         Assert.assertEquals(6, dp.uniquePaths(3, 3));
     }
+
+    @Test
+    public void climbStairs() {
+        Assert.assertEquals(1, dp.climbStairs(1));
+        Assert.assertEquals(2, dp.climbStairs(2));
+        Assert.assertEquals(3, dp.climbStairs(3));
+        Assert.assertEquals(8, dp.climbStairs(5));
+    }
+
+    @Test
+    public void minCostClimbingStairs() {
+        Assert.assertEquals(15, dp.minCostClimbingStairs(new int[]{10, 15, 20}));
+        Assert.assertEquals(6, dp.minCostClimbingStairs(new int[]{1, 100, 1, 1, 1, 100, 1, 1, 100, 1}));
+    }
 }

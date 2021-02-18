@@ -116,6 +116,9 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * <a href="https://leetcode-cn.com/problems/minimum-path-sum/">64.最小路径和</a>
  * {@link DynamicProgram#minPathSum(int[][])}
  *
+ * <a href="https://leetcode-cn.com/problems/climbing-stairs/">70.爬楼梯</a>
+ * {@link DynamicProgram#climbStairs(int)}
+ *
  * <a href="https://leetcode-cn.com/problems/edit-distance/">72.编辑距离</a>
  * {@link DynamicProgram#minDistance(java.lang.String, java.lang.String)}
  *
@@ -329,6 +332,9 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  *
  * <a href="https://leetcode-cn.com/problems/daily-temperatures/">739.每日温度</a>
  * {@link ArrayTopic#dailyTemperatures(int[])}
+ *
+ * <a href="https://leetcode-cn.com/problems/min-cost-climbing-stairs/">746.使用最小花费爬楼梯</a>
+ * {@link DynamicProgram#minCostClimbingStairs(int[])}
  *
  * <a href="https://leetcode-cn.com/problems/couples-holding-hands/">765.情侣牵手</a>
  * {@link UnionFinder#minSwapsCouples(int[])}
