@@ -13,6 +13,15 @@ public class ArrayTopicTest {
 
     private final ArrayTopic at = new ArrayTopic();
 
+    @Test
+    public void reverse() {
+        Assert.assertEquals(321, at.reverse(123));
+        Assert.assertEquals(-321, at.reverse(-123));
+        Assert.assertEquals(21, at.reverse(120));
+        Assert.assertEquals(0, at.reverse(0));
+        Assert.assertEquals(0, at.reverse(2147483647));
+        Assert.assertEquals(0, at.reverse(-2147483648));
+    }
 
     @Test
     public void findMedianSortedArrays() {

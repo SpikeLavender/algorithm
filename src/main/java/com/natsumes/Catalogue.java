@@ -35,6 +35,9 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * <a href="https://leetcode-cn.com/problems/zigzag-conversion/">6.Z 字形变换</a>
  * {@link StringHandler#convert(java.lang.String, int)}
  *
+ * <a href="https://leetcode-cn.com/problems/reverse-integer/">7.整数反转</a>
+ * {@link ArrayTopic#reverse(int)}
+ *
  * <a href="https://leetcode-cn.com/problems/string-to-integer-atoi/">8.字符串转换整数 (atoi)</a>
  * {@link StringHandler#myAtoi(String)}
  *
