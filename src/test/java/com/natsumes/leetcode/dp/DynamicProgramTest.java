@@ -296,4 +296,18 @@ public class DynamicProgramTest {
                 {1, 1, 0}
         }));
     }
+
+    @Test
+    public void longestCommonSubsequence() {
+        Assert.assertEquals(3, dp.longestCommonSubsequence("abcde", "ace"));
+        Assert.assertEquals(3, dp.longestCommonSubsequence("abc", "abc"));
+        Assert.assertEquals(0, dp.longestCommonSubsequence("abc", "def"));
+    }
+
+    @Test
+    public void minDistance() {
+        Assert.assertEquals(1, dp.minDistance("", "a"));
+        Assert.assertEquals(3, dp.minDistance("horse", "ros"));
+        Assert.assertEquals(5, dp.minDistance("intention", "execution"));
+    }
 }

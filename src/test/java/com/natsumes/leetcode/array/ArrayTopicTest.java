@@ -249,4 +249,76 @@ public class ArrayTopicTest {
         Assert.assertArrayEquals(new int[][]{{1, 2, 3, 4}}, at.matrixReshape(new int[][]{{1, 2}, {3, 4}}, 1, 4));
         Assert.assertArrayEquals(new int[][]{{1, 2}, {3, 4}}, at.matrixReshape(new int[][]{{1, 2}, {3, 4}}, 2, 4));
     }
+
+    @Test
+    public void searchRange() {
+        Assert.assertArrayEquals(new int[]{2, 5}, at.searchRange(new int[]{1, 2, 3, 3, 3, 3, 4, 5, 9}, 3));
+        Assert.assertArrayEquals(new int[]{3, 4}, at.searchRange(new int[]{5, 7, 7, 8, 8, 10}, 8));
+        Assert.assertArrayEquals(new int[]{-1, -1}, at.searchRange(new int[]{5, 7, 7, 8, 8, 10}, 6));
+        Assert.assertArrayEquals(new int[]{-1, -1}, at.searchRange(new int[]{}, 0));
+    }
+
+    @Test
+    public void largestRectangleArea() {
+        Assert.assertEquals(0, at.largestRectangleArea(new int[]{0, 0}));
+        Assert.assertEquals(2, at.largestRectangleArea(new int[]{1, 2}));
+        Assert.assertEquals(2, at.largestRectangleArea(new int[]{2, 1}));
+        Assert.assertEquals(10, at.largestRectangleArea(new int[]{2, 1, 5, 6, 2, 3}));
+    }
+
+    @Test
+    public void largestRectangleArea01() {
+        Assert.assertEquals(0, at.largestRectangleArea01(new int[]{0, 0}));
+        Assert.assertEquals(2, at.largestRectangleArea01(new int[]{1, 2}));
+        Assert.assertEquals(2, at.largestRectangleArea01(new int[]{2, 1}));
+        Assert.assertEquals(10, at.largestRectangleArea01(new int[]{2, 1, 5, 6, 2, 3}));
+    }
+
+    @Test
+    public void maximalRectangleCommon() {
+        char[][] matrix = new char[][]{
+                {'1', '0', '1', '0' , '0'},
+                {'1', '0', '1', '1' , '1'},
+                {'1', '1', '1', '1' , '1'},
+                {'1', '0', '0', '1' , '0'}
+        };
+
+        Assert.assertEquals(6, at.maximalRectangleCommon(matrix));
+
+        matrix = new char[][] {};
+        Assert.assertEquals(0, at.maximalRectangleCommon(matrix));
+
+        matrix = new char[][] {{'0'}};
+        Assert.assertEquals(0, at.maximalRectangleCommon(matrix));
+
+        matrix = new char[][] {{'1'}};
+        Assert.assertEquals(1, at.maximalRectangleCommon(matrix));
+
+        matrix = new char[][] {{'0', '0'}};
+        Assert.assertEquals(0, at.maximalRectangleCommon(matrix));
+    }
+
+    @Test
+    public void maximalRectangle() {
+        char[][] matrix = new char[][]{
+                {'1', '0', '1', '0' , '0'},
+                {'1', '0', '1', '1' , '1'},
+                {'1', '1', '1', '1' , '1'},
+                {'1', '0', '0', '1' , '0'}
+        };
+
+        Assert.assertEquals(6, at.maximalRectangle(matrix));
+
+        matrix = new char[][] {};
+        Assert.assertEquals(0, at.maximalRectangle(matrix));
+
+        matrix = new char[][] {{'0'}};
+        Assert.assertEquals(0, at.maximalRectangle(matrix));
+
+        matrix = new char[][] {{'1'}};
+        Assert.assertEquals(1, at.maximalRectangle(matrix));
+
+        matrix = new char[][] {{'0', '0'}};
+        Assert.assertEquals(0, at.maximalRectangle(matrix));
+    }
 }

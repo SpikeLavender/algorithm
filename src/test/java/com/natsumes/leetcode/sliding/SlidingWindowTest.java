@@ -116,4 +116,11 @@ public class SlidingWindowTest {
     public void findMaxConsecutiveOnes() {
         Assert.assertEquals(3, sw.findMaxConsecutiveOnes(new int[] {1, 1, 0, 1, 1, 1}));
     }
+
+    @Test
+    public void minKBitFlips() {
+        Assert.assertEquals(2, sw.minKBitFlips(new int[]{0, 1, 0}, 1));
+        Assert.assertEquals(-1, sw.minKBitFlips(new int[]{1, 1, 0}, 2));
+        Assert.assertEquals(3, sw.minKBitFlips(new int[]{0, 0, 0, 1, 0, 1, 1, 0}, 3));
+    }
 }

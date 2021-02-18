@@ -2,6 +2,7 @@ package com.natsumes.leetcode.sliding;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.PriorityQueue;
 
 /**
@@ -48,6 +49,9 @@ import java.util.PriorityQueue;
  *
  * <a href="https://leetcode-cn.com/problems/sliding-window-median/">480.滑动窗口中位数</a>
  * {@link SlidingWindow#medianSlidingWindow(int[], int)}
+ *
+ * <a href="https://leetcode-cn.com/problems/minimum-number-of-k-consecutive-bit-flips/">995.K连续位的最小翻转次数</a>
+ * {@link SlidingWindow#minKBitFlips(int[], int)}
  *
  * @author hetengjiao
  */
@@ -880,7 +884,7 @@ public class SlidingWindow {
 
         private int smallSize, largeSize;
 
-        public DualHeap(int k) {
+        DualHeap(int k) {
             this.small = new PriorityQueue<>(((o1, o2) -> o2 - o1));
             this.large = new PriorityQueue<>();
             this.delayed = new HashMap<>();
@@ -889,11 +893,12 @@ public class SlidingWindow {
             this.largeSize = 0;
         }
 
-        public double getMedian() {
-            return (k & 1) == 1 ? small.peek() : ((double)small.peek() + large.peek())/ 2.0;
+        double getMedian() {
+            return (k & 1) == 1 ? Objects.requireNonNull(small.peek()) :
+                    ((double)Objects.requireNonNull(small.peek()) + Objects.requireNonNull(large.peek()))/ 2.0;
         }
 
-        public void insert(int num) {
+        void insert(int num) {
             if (small.isEmpty() || num <= small.peek()) {
                 small.offer(num);
                 ++smallSize;
@@ -904,16 +909,16 @@ public class SlidingWindow {
             makeBalance();
         }
 
-        public void erase(int num) {
+        void erase(int num) {
             delayed.put(num, delayed.getOrDefault(num, 0) + 1);
-            if (num <= small.peek()) {
+            if (num <= Objects.requireNonNull(small.peek())) {
                 --smallSize;
                 if (num == small.peek()) {
                     prune(small);
                 }
             } else {
                 --largeSize;
-                if (num == large.peek()) {
+                if (num == Objects.requireNonNull(large.peek())) {
                     prune(large);
                 }
             }
@@ -937,16 +942,76 @@ public class SlidingWindow {
 
         private void makeBalance() {
             if (smallSize > largeSize + 1) {
-                large.offer(small.poll());
+                large.offer(small.remove());
                 --smallSize;
                 ++largeSize;
                 prune(small);
             } else if (smallSize < largeSize) {
-                small.offer(large.poll());
+                small.offer(large.remove());
                 ++smallSize;
                 --largeSize;
                 prune(large);
             }
         }
+    }
+
+    /**
+     * 995. K 连续位的最小翻转次数
+     *
+     * 在仅包含 0 和 1 的数组 A 中，一次 K 位翻转包括选择一个长度为 K 的（连续）子数组，
+     * 同时将子数组中的每个 0 更改为 1，而每个 1 更改为 0。
+     *
+     * 返回所需的 K 位翻转的最小次数，以便数组没有值为 0 的元素。如果不可能，返回 -1。
+     *
+     *
+     *
+     * 示例 1：
+     *
+     * 输入：A = [0,1,0], K = 1
+     * 输出：2
+     * 解释：先翻转 A[0]，然后翻转 A[2]。
+     * 示例 2：
+     *
+     * 输入：A = [1,1,0], K = 2
+     * 输出：-1
+     * 解释：无论我们怎样翻转大小为 2 的子数组，我们都不能使数组变为 [1,1,1]。
+     * 示例 3：
+     *
+     * 输入：A = [0,0,0,1,0,1,1,0], K = 3
+     * 输出：3
+     * 解释：
+     * 翻转 A[0],A[1],A[2]: A变成 [1,1,1,1,0,1,1,0]
+     * 翻转 A[4],A[5],A[6]: A变成 [1,1,1,1,1,0,0,0]
+     * 翻转 A[5],A[6],A[7]: A变成 [1,1,1,1,1,1,1,1]
+     *
+     *
+     * 提示：
+     *
+     * 1 <= A.length <= 30000
+     * 1 <= K <= A.length
+     *
+     * @param A A
+     * @param K K
+     * @return int
+     */
+    public int minKBitFlips(int[] A, int K) {
+        int n = A.length;
+        int reverse = 0;
+        int ans = 0;
+        for (int i = 0; i < n; i++) {
+            if (i >= K && A[i - K] > 1) {
+                reverse ^= 1;
+                A[i - K] -= 2;
+            }
+            if (A[i] == reverse) {
+                if (i + K > n) {
+                    return -1;
+                }
+                ++ans;
+                reverse ^= 1;
+                A[i] += 2;
+            }
+        }
+        return ans;
     }
 }

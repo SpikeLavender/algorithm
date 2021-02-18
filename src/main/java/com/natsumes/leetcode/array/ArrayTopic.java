@@ -30,6 +30,9 @@ import java.util.*;
  * <a href="https://leetcode-cn.com/problems/search-a-2d-matrix-ii/">240.搜索二维矩阵 II</a>
  * {@link ArrayTopic#searchMatrix2(int[][], int)}
  *
+ * <a href="https://leetcode-cn.com/problems/find-first-and-last-position-of-element-in-sorted-array/">34.在排序数组中查找元素的第一个和最后一个位置</a>
+ * {@link ArrayTopic#searchRange(int[], int)}
+ *
  * =====================================================================================================================
  * <h4>排序</h4>
  *
@@ -83,6 +86,14 @@ import java.util.*;
  *
  * <a href="https://leetcode-cn.com/problems/reshape-the-matrix/">566.重塑矩阵</a>
  * {@link ArrayTopic#matrixReshape(int[][], int, int)}
+ *
+ * <a href="https://leetcode-cn.com/problems/largest-rectangle-in-histogram/">84.柱状图中最大的矩形</a>
+ * {@link ArrayTopic#largestRectangleArea(int[])}
+ * {@link ArrayTopic#largestRectangleArea01(int[])}
+ *
+ * <a href="https://leetcode-cn.com/problems/maximal-rectangle/">85.最大矩形</a>
+ * {@link ArrayTopic#maximalRectangle(char[][])}
+ * {@link ArrayTopic#maximalRectangleCommon(char[][])}
  *
  * @author hetengjiao
  */
@@ -1402,6 +1413,71 @@ public class ArrayTopic {
     }
 
     /**
+     * 34. 在排序数组中查找元素的第一个和最后一个位置
+     *
+     * 给定一个按照升序排列的整数数组 nums，和一个目标值 target。找出给定目标值在数组中的开始位置和结束位置。
+     *
+     * 如果数组中不存在目标值 target，返回 [-1, -1]。
+     *
+     * 进阶：
+     *
+     * 你可以设计并实现时间复杂度为 O(log n) 的算法解决此问题吗？
+     *
+     *
+     * 示例 1：
+     *
+     * 输入：nums = [5,7,7,8,8,10], target = 8
+     * 输出：[3,4]
+     * 示例 2：
+     *
+     * 输入：nums = [5,7,7,8,8,10], target = 6
+     * 输出：[-1,-1]
+     * 示例 3：
+     *
+     * 输入：nums = [], target = 0
+     * 输出：[-1,-1]
+     *
+     *
+     * 提示：
+     *
+     * 0 <= nums.length <= 105
+     * -109 <= nums[i] <= 109
+     * nums 是一个非递减数组
+     * -109 <= target <= 109
+     *
+     * @param nums nums
+     * @param target target
+     * @return index
+     */
+    public int[] searchRange(int[] nums, int target) {
+        if (nums == null || nums.length == 0) {
+            return new int[]{-1, -1};
+        }
+        int n = nums.length;
+        int left = 0;
+        int right = n - 1;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] < target) {
+                left = mid + 1;
+            } else if (nums[mid] > target) {
+                right = mid - 1;
+            } else {
+                int s = mid;
+                int f = mid;
+                while (s >= 0 && nums[s] == target) {
+                    s--;
+                }
+                while (f < n && nums[f] == target) {
+                    f++;
+                }
+                return new int[]{s + 1, f - 1};
+            }
+        }
+        return new int[]{-1, -1};
+    }
+
+    /**
      * 1760. 袋子里最少数目的球
      *
      * 给你一个整数数组 nums ，其中 nums[i] 表示第 i 个袋子里球的数目。同时给你一个整数 maxOperations 。
@@ -1655,5 +1731,149 @@ public class ArrayTopic {
             }
         }
         return ans;
+    }
+
+    /**
+     * 84. 柱状图中最大的矩形
+     * 给定 n 个非负整数，用来表示柱状图中各个柱子的高度。每个柱子彼此相邻，且宽度为 1 。
+     *
+     * 求在该柱状图中，能够勾勒出来的矩形的最大面积。
+     *
+     * 以上是柱状图的示例，其中每个柱子的宽度为 1，给定的高度为 [2,1,5,6,2,3]。
+     *
+     * 图中阴影部分为所能勾勒出的最大矩形面积，其面积为 10 个单位。
+     *
+     * 示例:
+     *
+     * 输入: [2,1,5,6,2,3]
+     * 输出: 10
+     *
+     * @param heights heights
+     * @return area
+     */
+    public int largestRectangleArea(int[] heights) {
+        int n = heights.length;
+        int[] left = new int[n];
+        int[] right = new int[n];
+        int ans = 0;
+        Arrays.fill(right, n);
+
+        Deque<Integer> stack = new LinkedList<>();
+
+        for (int i = 0; i < n; i++) {
+            while (!stack.isEmpty() && heights[stack.peekLast()] >= heights[i]) {
+                right[stack.removeLast()] = i;
+            }
+            left[i] = stack.isEmpty() ? -1 : stack.peekLast();
+            stack.addLast(i);
+        }
+        for (int i = 0; i < n; i++) {
+            ans = Math.max((right[i] - left[i] - 1) * heights[i], ans);
+        }
+        return ans;
+    }
+
+    public int largestRectangleArea01(int[] heights) {
+        int n = heights.length;
+        int ans = 0;
+        Deque<Integer> stack = new LinkedList<>();
+
+        for (int i = 0; i <= n; i++) {
+            int height = i == n ? 0 : heights[i];
+            while (!stack.isEmpty() && heights[stack.peekLast()] >= height) {
+                int cur = stack.removeLast();
+                int l = stack.isEmpty() ? -1 : stack.peekLast();
+                ans = Math.max((i - l - 1) * heights[cur], ans);
+            }
+            stack.addLast(i);
+        }
+        return ans;
+    }
+
+    /**
+     *
+     * 85.最大矩形
+     *
+     * 给定一个仅包含 0 和 1 、大小为 rows x cols 的二维二进制矩阵，找出只包含 1 的最大矩形，并返回其面积。
+     *
+     *  
+     *
+     * 示例 1：
+     *      1   0   1   0   0
+     *      1   0   1   1   1
+     *      1   1   1   1   1
+     *      1   0   0   1   0
+     *
+     * 输入：matrix = [["1","0","1","0","0"],["1","0","1","1","1"],["1","1","1","1","1"],["1","0","0","1","0"]]
+     * 输出：6
+     * 解释：最大矩形如上图所示。
+     * 示例 2：
+     *
+     * 输入：matrix = []
+     * 输出：0
+     * 示例 3：
+     *
+     * 输入：matrix = [["0"]]
+     * 输出：0
+     * 示例 4：
+     *
+     * 输入：matrix = [["1"]]
+     * 输出：1
+     * 示例 5：
+     *
+     * 输入：matrix = [["0","0"]]
+     * 输出：0
+     *  
+     *
+     * 提示：
+     *
+     * rows == matrix.length
+     * cols == matrix[0].length
+     * 0 <= row, cols <= 200
+     * matrix[i][j] 为 '0' 或 '1'
+     *
+     * 来源：力扣（LeetCode）
+     * 链接：https://leetcode-cn.com/problems/maximal-rectangle
+     * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+     */
+    public int maximalRectangle(char[][] matrix) {
+        /*
+         * 解法二： 单调队列 todo
+         */
+        return 0;
+    }
+
+
+    /**
+     * 暴力破解法
+     */
+    public int maximalRectangleCommon(char[][] matrix) {
+        if (matrix.length == 0) {
+            return 0;
+        }
+        int maxArea = 0;
+        int[][] width = new int[matrix.length][matrix[0].length];
+        for (int row = 0; row < matrix.length; row++) {
+            for (int col = 0; col < matrix[0].length; col++) {
+                if (matrix[row][col] == '1') {
+                    if (col == 0) {
+                        width[row][col] = 1;
+                    } else {
+                        // 递归思想，数学归纳法
+                        width[row][col] = width[row][col - 1] + 1;
+                    }
+                } else {
+                    width[row][col] = 0;
+                }
+                //记录所有行中最小的数
+                int minWidth = width[row][col];
+                for (int up = row; up >= 0; up--) {
+                    int height = row - up + 1;
+                    minWidth = Math.min(minWidth, width[up][col]);
+                    maxArea = Math.max(maxArea, height * minWidth);
+                }
+            }
+        }
+        return maxArea;
     }
 }

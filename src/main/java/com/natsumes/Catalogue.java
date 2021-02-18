@@ -72,6 +72,9 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * <a href="https://leetcode-cn.com/problems/search-in-rotated-sorted-array/">33.搜索旋转排序数组</a>
  * {@link ArrayTopic#search(int[], int)}
  *
+ * <a href="https://leetcode-cn.com/problems/find-first-and-last-position-of-element-in-sorted-array/">34.在排序数组中查找元素的第一个和最后一个位置</a>
+ * {@link ArrayTopic#searchRange(int[], int)}
+ *
  * <a href="https://leetcode-cn.com/problems/combination-sum/">39.组合总和</a>
  * {@link Permute#combinationSum(int[], int)}
  *
@@ -98,6 +101,9 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * <a href="https://leetcode-cn.com/problems/minimum-path-sum/">64.最小路径和</a>
  * {@link DynamicProgram#minPathSum(int[][])}
  *
+ * <a href="https://leetcode-cn.com/problems/edit-distance/">72.编辑距离</a>
+ * {@link DynamicProgram#minDistance(java.lang.String, java.lang.String)}
+ *
  * <a href="https://leetcode-cn.com/problems/search-a-2d-matrix/">74.搜索二维矩阵</a>
  * {@link ArrayTopic#searchMatrix(int[][], int)}
  *
@@ -109,6 +115,14 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  *
  * <a href="https://leetcode-cn.com/problems/word-search/">79.单词搜索</a>
  * {@link DynamicProgram#exist(char[][], java.lang.String)}
+ *
+ * <a href="https://leetcode-cn.com/problems/largest-rectangle-in-histogram/">84.柱状图中最大的矩形</a>
+ * {@link ArrayTopic#largestRectangleArea(int[])}
+ * {@link ArrayTopic#largestRectangleArea01(int[])}
+ *
+ * <a href="https://leetcode-cn.com/problems/maximal-rectangle/">85.最大矩形</a>
+ * {@link ArrayTopic#maximalRectangle(char[][]) TODO}
+ * {@link ArrayTopic#maximalRectangleCommon(char[][])}
  *
  * <a href="https://leetcode-cn.com/problems/restore-ip-addresses/">93.复原IP地址</a>
  * {@link DfsAndBinarySearch#restoreIpAddresses(java.lang.String)}
@@ -322,8 +336,14 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * <a href="https://leetcode-cn.com/problems/satisfiability-of-equality-equations/">990.等式方程的可满足性</a>
  * {@link UnionFinder#equationsPossible(java.lang.String[])}
  *
+ * <a href="https://leetcode-cn.com/problems/minimum-number-of-k-consecutive-bit-flips/">995.K连续位的最小翻转次数</a>
+ * {@link SlidingWindow#minKBitFlips(int[], int)}
+ *
  * <a href="https://leetcode-cn.com/problems/check-if-word-is-valid-after-substitutions/">1003.检查替换后的词是否有效</a>
  * {@link StringHandler#isValidString(java.lang.String)}
+ *
+ * <a href="https://leetcode-cn.com/problems/longest-common-subsequence/">1143.最长公共子序列</a>
+ * {@link DynamicProgram#longestCommonSubsequence(java.lang.String, java.lang.String)}
  *
  * <a href="https://leetcode-cn.com/problems/count-square-submatrices-with-all-ones/">1277.统计全为1的正方形子矩阵</a>
  * {@link DynamicProgram#countSquares(int[][])}

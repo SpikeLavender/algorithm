@@ -81,6 +81,12 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * <p><a href="https://leetcode-cn.com/problems/maximum-subarray/">53.最大子序和</a></p>
  * {@link com.natsumes.leetcode.dp.DynamicProgram#maxSubArray(int[])}
  *
+ * <a href="https://leetcode-cn.com/problems/longest-common-subsequence/">1143.最长公共子序列</a>
+ * {@link DynamicProgram#longestCommonSubsequence(java.lang.String, java.lang.String)}
+ *
+ * <a href="https://leetcode-cn.com/problems/edit-distance/">72.编辑距离</a>
+ * {@link DynamicProgram#minDistance(java.lang.String, java.lang.String)}
+ *
  * =====================================================================================================================
  * <h4>2.n sum 问题</h4>
  * {@link com.natsumes.leetcode.nsum.NumSums}
@@ -191,6 +197,12 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  *
  * <a href="https://leetcode-cn.com/problems/top-k-frequent-elements/">347.前 K 个高频元素</a>
  * {@link ArrayTopic#topKsFrequent(int[], int)}
+ *
+ * <a href="https://leetcode-cn.com/problems/find-first-and-last-position-of-element-in-sorted-array/">34.在排序数组中查找元素的第一个和最后一个位置</a>
+ * {@link ArrayTopic#searchRange(int[], int)}
+ *
+ * <a href="https://leetcode-cn.com/problems/largest-rectangle-in-histogram/">84.柱状图中最大的矩形</a>
+ * {@link ArrayTopic#largestRectangleArea(int[])}
  *
  * =====================================================================================================================
  * <h4>并查集</h4>
