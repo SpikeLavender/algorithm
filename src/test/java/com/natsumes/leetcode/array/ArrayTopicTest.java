@@ -222,4 +222,31 @@ public class ArrayTopicTest {
         Assert.assertArrayEquals(new int[]{2, 1}, at.topKsFrequent(new int[]{1, 1, 1, 2, 2, 3}, 2));
         Assert.assertArrayEquals(new int[]{1}, at.topKsFrequent(new int[]{1}, 1));
     }
+
+    @Test
+    public void minimumSize() {
+        Assert.assertEquals(3, at.minimumSize(new int[]{9}, 2));
+        Assert.assertEquals(2, at.minimumSize(new int[]{2, 4, 8, 2}, 4));
+        Assert.assertEquals(7, at.minimumSize(new int[]{7, 17}, 2));
+    }
+
+    @Test
+    public void countBalls() {
+        Assert.assertEquals(2, at.countBalls(1, 10));
+        Assert.assertEquals(2, at.countBalls(5, 15));
+        Assert.assertEquals(2, at.countBalls(19, 28));
+    }
+
+    @Test
+    public void restoreArray() {
+        Assert.assertArrayEquals(new int[]{1, 2, 3, 4}, at.restoreArray(new int[][]{{2, 1}, {3, 4}, {3, 2}}));
+        Assert.assertArrayEquals(new int[]{-2, 4, 1, -3}, at.restoreArray(new int[][]{{4, -2}, {1, 4}, {-3, 1}}));
+        Assert.assertArrayEquals(new int[]{100000, -100000}, at.restoreArray(new int[][]{{100000, -100000}}));
+    }
+
+    @Test
+    public void matrixReshape() {
+        Assert.assertArrayEquals(new int[][]{{1, 2, 3, 4}}, at.matrixReshape(new int[][]{{1, 2}, {3, 4}}, 1, 4));
+        Assert.assertArrayEquals(new int[][]{{1, 2}, {3, 4}}, at.matrixReshape(new int[][]{{1, 2}, {3, 4}}, 2, 4));
+    }
 }

@@ -6,11 +6,8 @@ import com.natsumes.leetcode.dp.DynamicProgram;
 import com.natsumes.leetcode.permute.Permute;
 import com.natsumes.leetcode.string.StringHandler;
 import com.natsumes.leetcode.tree.BinarySearchTreeTopic;
+import com.natsumes.leetcode.tree.BinaryTreeTopic;
 import com.natsumes.leetcode.unionfind.UnionFinder;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 /**
  *
@@ -34,19 +31,41 @@ import java.util.List;
  * <a href="https://leetcode-cn.com/problems/coin-change/">322.零钱兑换</a>
  * {@link com.natsumes.leetcode.dp.DynamicProgram#coinChange(int[], int)}
  *
- * TODO: <a href="https://leetcode-cn.com/problems/word-search/">79.单词搜索</a>
+ * <a href="https://leetcode-cn.com/problems/word-search/">79.单词搜索</a>
  * {@link com.natsumes.leetcode.dp.DynamicProgram#exist(char[][], java.lang.String)}
  *
- * TODO: <a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/">309.最佳买卖股票时机含冷冻期</a>
+ * <a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock">121.买卖股票的最佳时机</a>
+ * {@link DynamicProgram#maxProfit01(int[])}
+ * {@link DynamicProgram#maxProfitBySearch(int[])}
+ *
+ * <a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/">309.最佳买卖股票时机含冷冻期</a>
  * {@link com.natsumes.leetcode.dp.DynamicProgram#maxProfit(int[])}
  *
- * TODO: <a href="https://leetcode-cn.com/problems/minimum-path-sum/">64.最小路径和</a>
+ * <a href="https://leetcode-cn.com/problems/minimum-path-sum/">64.最小路径和</a>
  * {@link DynamicProgram#minPathSum(int[][])}
  *
- * TODO: <a href="https://leetcode-cn.com/problems/minimum-path-sum/">113.路径总和 II</a>
- * {@link DynamicProgram#pathSum(com.natsumes.leetcode.dp.TreeNode, int)}
+ * <a href="https://leetcode-cn.com/problems/binary-tree-paths/">257.二叉树的所有路径</a>
+ * {@link BinaryTreeTopic#binaryTreePaths(com.natsumes.leetcode.tree.TreeNode)}
  *
- * TODO: <a href="https://leetcode-cn.com/problems/gas-station/">134.加油站</a>
+ * <a href="https://leetcode-cn.com/problems/path-sum/">112.路径总和</a>
+ * {@link BinaryTreeTopic#hasPathSum(com.natsumes.leetcode.tree.TreeNode, int)}
+ *
+ * <a href="https://leetcode-cn.com/problems/path-sum-ii/">113.路径总和 II</a>
+ * {@link BinaryTreeTopic#pathSum(com.natsumes.leetcode.tree.TreeNode, int)}
+ *
+ * TODO: <a href="https://leetcode-cn.com/problems/path-sum-iii/">437.路径总和 III</a>
+ * {@link BinaryTreeTopic#pathSumIII(com.natsumes.leetcode.tree.TreeNode, int)}
+ *
+ * <a href="https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/">124.二叉树中的最大路径和</a>
+ * {@link BinaryTreeTopic#maxPathSum(com.natsumes.leetcode.tree.TreeNode)}
+ *
+ * TODO: <a href="https://leetcode-cn.com/problems/sum-root-to-leaf-numbers/">129.求根到叶子节点数字之和</a>
+ * {@link BinaryTreeTopic#sumNumbers(com.natsumes.leetcode.tree.TreeNode)}
+ *
+ * TODO: <a href="https://leetcode-cn.com/problems/smallest-string-starting-from-leaf/">988.从叶结点开始的最小字符串</a>
+ * {@link BinaryTreeTopic#smallestFromLeaf(com.natsumes.leetcode.tree.TreeNode)}
+ *
+ * <a href="https://leetcode-cn.com/problems/gas-station/">134.加油站</a>
  * {@link DynamicProgram#canCompleteCircuit(int[], int[])}
  *
  * <a href="https://leetcode-cn.com/problems/generate-parentheses/">22.括号生成</a>
@@ -90,7 +109,7 @@ import java.util.List;
  * {@link com.natsumes.leetcode.array.ArrayTopic#findMedianSortedArrays(int[], int[])}
  *
  * <a href="https://leetcode-cn.com/problems/longest-palindromic-substring/">5.最长回文子串</a>
- * {@link com.natsumes.company.ByteDance#longestPalindrome(String)}
+ * {@link DynamicProgram#longestPalindrome(java.lang.String)}
  *
  * <a href="https://leetcode-cn.com/problems/largest-number/">179.最大数</a>
  * {@link ArrayTopic#largestNumber(int[])}
@@ -117,9 +136,6 @@ import java.util.List;
  * {@link com.natsumes.leetcode.array.ArrayTopic#trap02(int[])}
  * {@link com.natsumes.leetcode.array.ArrayTopic#trap01(int[])}
  *
- * <a href="https://leetcode-cn.com/problems/restore-the-array-from-adjacent-pairs/">5665.从相邻元素对还原数组</a>
- * {@link com.natsumes.company.ByteDance#restoreArray(int[][])}
- *
  * <a href="https://leetcode-cn.com/problems/can-you-eat-your-favorite-candy-on-your-favorite-day/">
  *     5667.你能在你最喜欢的那天吃到你最喜欢的糖果吗？</a>
  * {@link com.natsumes.company.ByteDance#canEat(int[], int[][])}
@@ -132,13 +148,7 @@ import java.util.List;
  * {@link com.natsumes.leetcode.tree.BinaryTreeTopic#rightSideView01(com.natsumes.leetcode.tree.TreeNode)
  *
  * <a>查找完全二叉树的最后一层最右边的节点</a>
- * {@link com.natsumes.company.ByteDance#findLastRightNode(TreeNode)}
- *
- * <a href="https://leetcode-cn.com/problems/palindrome-partitioning-iv/">1745.回文串分割 IV</a>
- * {@link com.natsumes.company.ByteDance#checkPartitioning(String)}
- *
- * <a href="https://leetcode-cn.com/problems/maximum-number-of-balls-in-a-box/">1742.盒子中小球的最大数量</a>
- * {@link com.natsumes.company.ByteDance#countBalls(int, int)}
+ * {@link BinaryTreeTopic#findLastRightNode(com.natsumes.leetcode.tree.TreeNode)}
  *
  * <a href="https://leetcode-cn.com/problems/merge-intervals/">56.合并区间</a>
  * {@link com.natsumes.leetcode.array.ArrayTopic#merge(int[][])}
@@ -161,7 +171,7 @@ import java.util.List;
  * <a href="https://leetcode-cn.com/problems/string-to-integer-atoi/">8.字符串转换整数 (atoi)</a>
  * {@link StringHandler#myAtoi(String)}
  *
- * TODO: <a href="https://leetcode-cn.com/problems/decode-string/">394.字符串解码</a>
+ * <a href="https://leetcode-cn.com/problems/decode-string/">394.字符串解码</a>
  * {@link StringHandler#decodeString(java.lang.String)}
  *
  * <a href="https://leetcode-cn.com/problems/zigzag-conversion/">6.Z 字形变换</a>
@@ -185,8 +195,9 @@ import java.util.List;
  * =====================================================================================================================
  * <h4>并查集</h4>
  *
- * TODO: <a href="https://leetcode-cn.com/problems/max-area-of-island/">695.岛屿的最大面积</a>
+ * <a href="https://leetcode-cn.com/problems/max-area-of-island/">695.岛屿的最大面积</a>
  * {@link UnionFinder#maxAreaOfIsland(int[][])}
+ * {@link DynamicProgram#maxAreaOfIsland(int[][])}
  *
  * TODO: <a href="https://leetcode-cn.com/problems/unique-binary-search-trees/">96.不同的二叉搜索树</a>
  * {@link BinarySearchTreeTopic#numTrees(int)}
@@ -198,345 +209,10 @@ import java.util.List;
 public class ByteDance {
 
     /**
-     *
-     * https://leetcode-cn.com/problems/longest-palindromic-substring/
-     *
-     * 5. 最长回文子串
-     * 给你一个字符串 s，找到 s 中最长的回文子串。
-     *
-     *
-     *
-     * 示例 1：
-     *
-     * 输入：s = "babad"
-     * 输出："bab"
-     * 解释："aba" 同样是符合题意的答案。
-     * 示例 2：
-     *
-     * 输入：s = "cbbd"
-     * 输出："bb"
-     * 示例 3：
-     *
-     * 输入：s = "a"
-     * 输出："a"
-     * 示例 4：
-     *
-     * 输入：s = "ac"
-     * 输出："a"
-     *
-     *
-     * 提示：
-     *
-     * {@literal 1 <= s.length <= 1000}
-     * s 仅由数字和英文字母（大写和/或小写）组成
-     * @param s s
-     * @return String
-     * @see ByteDance
-     */
-    public String longestPalindrome(String s) {
-        if (s == null || s.length() == 0) {
-            return "";
-        }
-        int n = s.length();
-        int start = 0;
-        int end = 0;
-
-        for (int i = 0; i < n; i++) {
-            int len1 = palindrome(s, i, i);
-            int len2 = palindrome(s, i, i + 1);
-            int len = Math.max(len1, len2);
-            if (end - start < len) {
-                start = i - (len - 1) / 2;
-                end = i + len / 2;
-            }
-        }
-        return s.substring(start, end + 1);
-    }
-
-    private int palindrome(String s, int l, int r) {
-        while (l >= 0 && r < s.length() && s.charAt(l) == s.charAt(r)) {
-            l--;
-            r++;
-        }
-        return r - l - 1;
-    }
-
-    /**
-     * 查找完全二叉树的最后一层最右边的节点
-     *
-     * 对每个子树的根节点，先从它的右子树开始，沿着左分支一直走到最后一层，如果深度等于树的深度
-     * 且该最后节点右边没有节点，则为所求；
-     * 否则，右侧右节点，则遍历右子树，深度小于树的深度，则遍历左子树
-     *
-     *            1
-     *          /  \
-     *         2    2
-     *        / \  / \
-     *       3  4 4   3
-     *
-     * @param treeNode treeNode
-     * @return treeNode
-     * @see ByteDance
-     */
-    public TreeNode findLastRightNode(TreeNode treeNode) {
-        if (treeNode == null) {
-            return null;
-        }
-        if (treeNode.left == null && treeNode.right == null) {
-            return treeNode;
-        }
-
-        TreeNode curTreeNode = treeNode;
-        int depth = 0;
-        while (curTreeNode != null) {
-            curTreeNode = curTreeNode.left;
-            depth++;
-        }
-        int level = 0;
-        int tempDepth;
-        while (treeNode != null) {
-            level++;
-            if (level == depth) {
-                break;
-            }
-            if (treeNode.right != null) {
-                curTreeNode = treeNode.right;
-                TreeNode preTreeNode = curTreeNode;
-                tempDepth = level + 1;
-                while (curTreeNode.left != null) {
-                    tempDepth++;
-                    preTreeNode = curTreeNode;
-                    curTreeNode = curTreeNode.left;
-                }
-                if (tempDepth < depth) {
-                    treeNode = treeNode.left;
-                } else if (preTreeNode.right == null || preTreeNode.right == curTreeNode) {
-                    return curTreeNode;
-                } else {
-                    treeNode = treeNode.right;
-                }
-            } else {
-                treeNode = treeNode.left;
-            }
-        }
-
-        return treeNode;
-    }
-
-    /**
-     * 1742. 盒子中小球的最大数量
-     *
-     * 你在一家生产小球的玩具厂工作，有 n 个小球，编号从 lowLimit 开始，到 highLimit 结束（包括 lowLimit 和 highLimit ，
-     * 即 n == highLimit - lowLimit + 1）。另有无限数量的盒子，编号从 1 到 infinity 。
-     *
-     * 你的工作是将每个小球放入盒子中，其中盒子的编号应当等于小球编号上每位数字的和。
-     * 例如，编号 321 的小球应当放入编号 3 + 2 + 1 = 6 的盒子，而编号 10 的小球应当放入编号 1 + 0 = 1 的盒子。
-     *
-     * 给你两个整数 lowLimit 和 highLimit ，返回放有最多小球的盒子中的小球数量。如果有多个盒子都满足放有最多小球，
-     * 只需返回其中任一盒子的小球数量。
-     *
-     *
-     *
-     * 示例 1：
-     *
-     * 输入：lowLimit = 1, highLimit = 10
-     * 输出：2
-     * 解释：
-     * 盒子编号：1 2 3 4 5 6 7 8 9 10 11 ...
-     * 小球数量：2 1 1 1 1 1 1 1 1 0  0  ...
-     * 编号 1 的盒子放有最多小球，小球数量为 2 。
-     * 示例 2：
-     *
-     * 输入：lowLimit = 5, highLimit = 15
-     * 输出：2
-     * 解释：
-     * 盒子编号：1 2 3 4 5 6 7 8 9 10 11 ...
-     * 小球数量：1 1 1 1 2 2 1 1 1 0  0  ...
-     * 编号 5 和 6 的盒子放有最多小球，每个盒子中的小球数量都是 2 。
-     * 示例 3：
-     *
-     * 输入：lowLimit = 19, highLimit = 28
-     * 输出：2
-     * 解释：
-     * 盒子编号：1 2 3 4 5 6 7 8 9 10 11 12 ...
-     * 小球数量：0 1 1 1 1 1 1 1 1 2  0  0  ...
-     * 编号 10 的盒子放有最多小球，小球数量为 2 。
-     *
-     *
-     * 提示：
-     *
-     * {@literal 1 <= lowLimit <= highLimit <= 105}
-     *
-     * @param lowLimit lowLimit
-     * @param highLimit highLimit
-     * @return int
-     * @see ByteDance
-     */
-    public int countBalls(int lowLimit, int highLimit) {
-        int[] res = new int[55];
-
-        for (int i = lowLimit; i <= highLimit; i++) {
-            int cur = i;
-            int sum = 0;
-            while (cur > 0) {
-                sum += cur % 10;
-                cur = cur / 10;
-            }
-            res[sum] = res[sum] + 1;
-        }
-        int max = 0;
-        for (int re : res) {
-            if (re > max) {
-                max = re;
-            }
-        }
-        return max;
-    }
-
-    /**
-     * 1745. 回文串分割 IV
-     *
-     * 给你一个字符串 s ，如果可以将它分割成三个 非空 回文子字符串，那么返回 true ，否则返回 false 。
-     *
-     * 当一个字符串正着读和反着读是一模一样的，就称其为 回文字符串 。
-     *
-     * 示例 1：
-     *
-     * 输入：s = "abcbdd"
-     * 输出：true
-     * 解释："abcbdd" = "a" + "bcb" + "dd"，三个子字符串都是回文的。
-     * 示例 2：
-     *
-     * 输入：s = "bcbddxy"
-     * 输出：false
-     * 解释：s 没办法被分割成 3 个回文子字符串。
-     *  
-     *
-     * 提示：
-     *
-     * {@literal 3 <= s.length <= 2000}
-     * s​​​​​​ 只包含小写英文字母。
-     *
-     * @param s s
-     * @return b
-     * @see ByteDance
-     */
-    public boolean checkPartitioning(String s) {
-        int n = s.length();
-        boolean[][] dp = new boolean[n][n];
-        for (int i = 0; i < n; i++) {
-            int k = i;
-            int j = i;
-            while (k >= 0 && j < n && s.charAt(k) == s.charAt(j)) {
-                dp[k][j] = true;
-                k--;
-                j++;
-            }
-            k = i;
-            j = i + 1;
-            while (k >= 0 && j < n && s.charAt(k) == s.charAt(j)) {
-                dp[k][j] = true;
-                k--;
-                j++;
-            }
-        }
-
-        for (int i = 0; i < n - 2; i++) {
-            for (int j = i + 1; j < n - 1; j++) {
-                if (dp[0][i] && dp[i + 1][j] && dp[j + 1][n - 1]) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    /**
-     * https://leetcode-cn.com/problems/restore-the-array-from-adjacent-pairs/
-     *
-     * 5665.从相邻元素对还原数组
-     * 存在一个由 n 个不同元素组成的整数数组 nums ，但你已经记不清具体内容。好在你还记得 nums 中的每一对相邻元素。
-     *
-     * 给你一个二维整数数组 adjacentPairs ，大小为 n - 1 ，
-     * 其中每个 adjacentPairs[i] = [ui, vi] 表示元素 ui 和 vi 在 nums 中相邻。
-     *
-     * 题目数据保证所有由元素 nums[i] 和 nums[i+1] 组成的相邻元素对都存在于 adjacentPairs 中，
-     * 存在形式可能是 [nums[i], nums[i+1]] ，也可能是 [nums[i+1], nums[i]] 。这些相邻元素对可以 按任意顺序 出现。
-     *
-     * 返回 原始数组 nums 。如果存在多种解答，返回 其中任意一个 即可。
-     *
-     *
-     *
-     * 示例 1：
-     *
-     * 输入：adjacentPairs = [[2,1],[3,4],[3,2]]
-     * 输出：[1,2,3,4]
-     * 解释：数组的所有相邻元素对都在 adjacentPairs 中。
-     * 特别要注意的是，adjacentPairs[i] 只表示两个元素相邻，并不保证其 左-右 顺序。
-     * 示例 2：
-     *
-     * 输入：adjacentPairs = [[4,-2],[1,4],[-3,1]]
-     * 输出：[-2,4,1,-3]
-     * 解释：数组中可能存在负数。
-     * 另一种解答是 [-3,1,4,-2] ，也会被视作正确答案。
-     * 示例 3：
-     *
-     * 输入：adjacentPairs = [[100000,-100000]]
-     * 输出：[100000,-100000]
-     *
-     *
-     * 提示：
-     *
-     * nums.length == n
-     * adjacentPairs.length == n - 1
-     * adjacentPairs[i].length == 2
-     * {@literal 2 <= n <= 105}
-     * {@literal -105 <= nums[i], ui, vi <= 105}
-     * 题目数据保证存在一些以 adjacentPairs 作为元素对的数组 nums
-     *
-     * @param adjacentPairs adj
-     * @return int[]
-     * @see ByteDance
-     */
-    public int[] restoreArray(int[][] adjacentPairs) {
-        //用list保存前后两个数
-        HashMap<Integer, List<Integer>> map = new HashMap<>();
-        for (int[] adjacentPair : adjacentPairs) {
-            int first = adjacentPair[0];
-            int second = adjacentPair[1];
-            List<Integer> list = map.getOrDefault(first, new ArrayList<>());
-            list.add(second);
-            map.put(first, list);
-            list = map.getOrDefault(second, new ArrayList<>());
-            list.add(first);
-            map.put(second, list);
-        }
-        int i = 0;
-        int pre = 0;
-        int[] res = new int[adjacentPairs.length + 1];
-        for (int k : map.keySet()) {
-            if (map.get(k).size() == 1) {
-                res[i++] = k;
-                pre = k;
-                break;
-            }
-        }
-        // 1 -> 2 -> 1, 3
-        while (i <= adjacentPairs.length) {
-           List<Integer> list = map.get(pre);
-           pre = list.get(0);
-           if (list.size() > 1 && res[i - 2] == pre) {
-               pre = list.get(1);
-           }
-           res[i++] = pre;
-        }
-        return res;
-    }
-
-    /**
      * https://leetcode-cn.com/problems/can-you-eat-your-favorite-candy-on-your-favorite-day/
      *
-     * 5667. 你能在你最喜欢的那天吃到你最喜欢的糖果吗？
+     * 1744.你能在你最喜欢的那天吃到你最喜欢的糖果吗？
+     *
      * 给你一个下标从 0 开始的正整数数组 candiesCount ，其中 candiesCount[i] 表示你拥有的第 i 类糖果的数目。
      * 同时给你一个二维数组 queries ，其中 queries[i] = [favoriteTypei, favoriteDayi, dailyCapi] 。
      *
@@ -577,100 +253,4 @@ public class ByteDance {
         return null;
     }
 
-//    public static int count(String fileContent) {
-//        // /**/\n, /*/\n, //\n, import * \n, @\n
-//        // Pattern pattern1 = new Pattern("import*\n");
-//        //Pattern pattern2 = new Pattern("@^\n");
-//        //return fileContent.replace(pattern, "").trim().replaceAll(" ","").split("\n").length;
-//        String[] strs =  fileContent.trim().split("\n");
-//        int count = 0;
-//
-//        for(int i = 0; i < strs.length; i++) {
-//            String str = strs[i].trim();
-//            //   8
-//            //   /
-//            //  9
-//            if("".equals(str)) {
-//                continue;
-//            }
-//
-//            if(str.length()>=2 && "/*".equals(str.substring(0, 2))) {
-//                while(i < strs.length && !"*/".equals(strs[i].substring(strs[i].length() - 2))) {
-//                    i++;
-//                }
-//
-//                continue;
-//            }
-//
-//            if(str.length() >= 7 && "import ".equals(str.substring(0, 7))) {
-//                while(i < strs.length && !";".equals(strs[i].substring(strs[i].length() - 1))) {
-//                    i++;
-//                }
-//                continue;
-//            }
-//
-//            if(str.charAt(0) == '@') {
-//                while(i < strs.length && !"public".equals(strs[i].substring(strs[i].length() - 2))) {
-//                    i++;
-//                }
-//                continue;
-//            }
-//
-//            if(str.length()>=2 && "//".equals(str.substring(0, 2))) {
-//                continue;
-//            }
-//
-//            count++;
-//        }
-//        return count;
-//    }
-//
-//    public static void main(String[] args) {
-//        String s = "/**\n" +
-//                "     * 199. 二叉树的右视图\n" +
-//                "     * 给定一棵二叉树，想象自己站在它的右侧，按照从顶部到底部的顺序，返回从右侧所能看到的节点值。\n" +
-//                "     *\n" +
-//                "     * 示例:\n" +
-//                "     *\n" +
-//                "     * 输入: [1,2,3,null,5,null,4]\n" +
-//                "     * 输出: [1, 3, 4]\n" +
-//                "     * 解释:\n" +
-//                "     *\n" +
-//                "     *    1            {@literal <---}\n" +
-//                "     *  /   \\\n" +
-//                "     * 2     3         {@literal <---}\n" +
-//                "     *  \\     \\\n" +
-//                "     *   5     4       {@literal <---}\n" +
-//                "     *\n" +
-//                "     * @param root root  @Nullable\n" +
-//                "     * @return List\n" +
-//                "     * @see ByteDance\n" +
-//                "     */\n" +
-//                "    public List<Integer> rightSideView(TreeNode root) {\n" +
-//                "        List<Integer> res = new ArrayList<>();\n" +
-//                "        if (root == null) {\n" +
-//                "            return res;\n" +
-//                "        }\n" +
-//                "        // 层序遍历\n" +
-//                "        Queue<TreeNode> queue = new LinkedList<>();\n" +
-//                "        queue.offer(root);\n" +
-//                "        int levelValue = root.val;\n" +
-//                "        while (!queue.isEmpty()) {\n" +
-//                "            int size = queue.size();\n" +
-//                "            for (int i = 0; i < size; i++) {\n" +
-//                "                TreeNode node = queue.poll();\n" +
-//                "                levelValue = Objects.requireNonNull(node).val;\n" +
-//                "                if (node.left != null) {\n" +
-//                "                    queue.offer(node.left);\n" +
-//                "                }\n" +
-//                "                if (node.right != null) {\n" +
-//                "                    queue.offer(node.right);\n" +
-//                "                }\n" +
-//                "            }\n" +
-//                "            res.add(levelValue);\n" +
-//                "        }\n" +
-//                "        return res;\n" +
-//                "    }\n";
-//        System.out.println(count(s));
-//    }
 }

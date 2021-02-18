@@ -65,4 +65,18 @@ public class StringHandlerTest {
         Assert.assertEquals("PINALSIGYAHRPI", sh.convert("PAYPALISHIRING", 4));
         Assert.assertEquals("A", sh.convert("A", 1));
     }
+
+    @Test
+    public void minOperations() {
+        Assert.assertEquals(1, sh.minOperations("0100"));
+        Assert.assertEquals(0, sh.minOperations("10"));
+        Assert.assertEquals(2, sh.minOperations("1111"));
+    }
+
+    @Test
+    public void countHomogenous() {
+        Assert.assertEquals(13, sh.countHomogenous("abbcccaa"));
+        Assert.assertEquals(2, sh.countHomogenous("xy"));
+        Assert.assertEquals(15, sh.countHomogenous("zzzzz"));
+    }
 }

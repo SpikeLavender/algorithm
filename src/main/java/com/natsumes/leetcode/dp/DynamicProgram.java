@@ -20,6 +20,7 @@ import java.util.*;
  * <a href="https://leetcode-cn.com/problems/maximum-subarray/">53.最大子序和</a>
  * {@link DynamicProgram#maxSubArray(int[])}
  *
+ * ---------------------------------------------------------------------------------------------------------------------
  * <a href="https://leetcode-cn.com/problems/house-robber/">198.打家劫舍</a>
  * {@link DynamicProgram#rob1(int[])}
  *
@@ -28,21 +29,42 @@ import java.util.*;
  *
  * <a href="https://leetcode-cn.com/problems/house-robber-iii/">337.打家劫舍 III</a>
  * {@link DynamicProgram#rob(com.natsumes.leetcode.dp.TreeNode)}
+ * ---------------------------------------------------------------------------------------------------------------------
  *
  * <a href="https://leetcode-cn.com/problems/maximal-square/">221.最大正方形</a>
  * {@link DynamicProgram#maximalSquare(char[][])}
  *
- * TODO: <a href="https://leetcode-cn.com/problems/word-search/">79.单词搜索</a>
+ * <a href="https://leetcode-cn.com/problems/count-square-submatrices-with-all-ones/">1277.统计全为 1 的正方形子矩阵</a>
+ * {@link DynamicProgram#countSquares(int[][])}
+ *
+ * <a href="https://leetcode-cn.com/problems/word-search/">79.单词搜索</a>
  * {@link DynamicProgram#exist(char[][], java.lang.String)}
  *
- * TODO: <a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/">309.最佳买卖股票时机含冷冻期</a>
+ * ---------------------------------------------------------------------------------------------------------------------
+ *
+ * <a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock">121.买卖股票的最佳时机</a>
+ * {@link DynamicProgram#maxProfit01(int[])}
+ * {@link DynamicProgram#maxProfitBySearch(int[])}
+ *
+ * <a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/">122.买卖股票的最佳时机 II</a>
+ * {@link DynamicProgram#maxProfit02(int[])}
+ *
+ * <a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iii/">123.买卖股票的最佳时机 III</a>
+ * {@link DynamicProgram#maxProfit03(int[])}
+ *
+ * <a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iv/">188.买卖股票的最佳时机 IV</a>
+ * {@link DynamicProgram#maxProfit04(int, int[])}
+ *
+ * <a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/">309.最佳买卖股票时机含冷冻期</a>
  * {@link DynamicProgram#maxProfit(int[])}
  *
- * TODO: <a href="https://leetcode-cn.com/problems/minimum-path-sum/">64.最小路径和</a>
- * {@link DynamicProgram#minPathSum(int[][])}
+ * <a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/">714.买卖股票的最佳时机含手续费</a>
+ * {@link DynamicProgram#maxProfit(int[], int)}
  *
- * TODO: <a href="https://leetcode-cn.com/problems/minimum-path-sum/">113.路径总和 II</a>
- * {@link DynamicProgram#pathSum(com.natsumes.leetcode.dp.TreeNode, int)}
+ * ---------------------------------------------------------------------------------------------------------------------
+ *
+ * <a href="https://leetcode-cn.com/problems/minimum-path-sum/">64.最小路径和</a>
+ * {@link DynamicProgram#minPathSum(int[][])}
  *
  * =====================================================================================================================
  * <h4>DFS 深度优先搜索（回溯算法）</h4>
@@ -53,14 +75,20 @@ import java.util.*;
  * <a href="https://leetcode-cn.com/problems/remove-invalid-parentheses/">301.删除无效的括号</a>
  * {@link DynamicProgram#removeInvalidParentheses(java.lang.String)}
  *
+ * <a href="https://leetcode-cn.com/problems/max-area-of-island/">695.岛屿的最大面积</a>
+ * {@link DynamicProgram#maxAreaOfIsland(int[][])}
+ *
  * =====================================================================================================================
  * <h4>BFS 广度优先搜索</h4>
  *
  * =====================================================================================================================
  * <h4>贪心算法</h4>
  *
- * TODO: <a href="https://leetcode-cn.com/problems/gas-station/">134.加油站</a>
+ * <a href="https://leetcode-cn.com/problems/gas-station/">134.加油站</a>
  * {@link DynamicProgram#canCompleteCircuit(int[], int[])}
+ *
+ * <a href="https://leetcode-cn.com/problems/palindrome-partitioning-iv/">1745.回文串分割 IV</a>
+ * {@link DynamicProgram#checkPartitioning(String)}
  *
  * @author hetengjiao
  */
@@ -634,15 +662,87 @@ public class DynamicProgram {
     }
 
     /**
-     * TODO: 221.最大正方形
-     * 在一个由 '0' 和 '1' 组成的二维矩阵内，找到只包含 '1' 的最大正方形，并返回其面积。
+     * 1277.统计全为 1 的正方形子矩阵
+     * 给你一个 m * n 的矩阵，矩阵中的元素不是 0 就是 1，请你统计并返回其中完全由 1 组成的 正方形 子矩阵的个数。
      *
-     *  
+     *
+     *
+     * 示例 1：
+     *
+     * 输入：matrix =
+     * [
+     *   [0,1,1,1],
+     *   [1,1,1,1],
+     *   [0,1,1,1]
+     * ]
+     * 输出：15
+     * 解释：
+     * 边长为 1 的正方形有 10 个。
+     * 边长为 2 的正方形有 4 个。
+     * 边长为 3 的正方形有 1 个。
+     * 正方形的总数 = 10 + 4 + 1 = 15.
+     * 示例 2：
+     *
+     * 输入：matrix =
+     * [
+     *   [1,0,1],
+     *   [1,1,0],
+     *   [1,1,0]
+     * ]
+     * 输出：7
+     * 解释：
+     * 边长为 1 的正方形有 6 个。
+     * 边长为 2 的正方形有 1 个。
+     * 正方形的总数 = 6 + 1 = 7.
+     *
+     *
+     * 提示：
+     *
+     * 1 <= arr.length <= 300
+     * 1 <= arr[0].length <= 300
+     * 0 <= arr[i][j] <= 1
+     *
+     * @param matrix matrix
+     * @return count
+     */
+    public int countSquares(int[][] matrix) {
+        // dp[i][j]: 表示以 (i, j) 为右下角的正方形的最大边长
+        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
+            return 0;
+        }
+
+        int m = matrix.length;
+        int n = matrix[0].length;
+        int[][] dp = new int[m][n];
+        int ans = 0;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (matrix[i][j] == 1) {
+                    if (i == 0 || j == 0) {
+                        dp[i][j] = 1;
+                    } else {
+                        dp[i][j] = Math.min(dp[i - 1][j - 1], Math.min(dp[i - 1][j], dp[i][j - 1])) + 1;
+                    }
+                    ans += dp[i][j];
+                }
+            }
+        }
+        return ans;
+    }
+
+    /**
+     * 221.最大正方形
+     * 在一个由 '0' 和 '1' 组成的二维矩阵内，找到只包含 '1' 的最大正方形，并返回其面积。
      *
      * 示例 1：
      *
      *
-     * 输入：matrix = [["1","0","1","0","0"],["1","0","1","1","1"],["1","1","1","1","1"],["1","0","0","1","0"]]
+     * 输入：matrix = [
+     *      ["1","0","1","0","0"],
+     *      ["1","0","1","1","1"],
+     *      ["1","1","1","1","1"],
+     *      ["1","0","0","1","0"]
+     * ]
      * 输出：4
      * 示例 2：
      *
@@ -662,16 +762,89 @@ public class DynamicProgram {
      * 1 <= m, n <= 300
      * matrix[i][j] 为 '0' 或 '1'
      *
+     * 动态规划
      *
      * @param matrix matrix
      * @return int
      */
     public int maximalSquare(char[][] matrix) {
-        return 0;
+        // 动态规划
+        // dp[i][j] 表示以(i, j) 为右下角的正方形的最大边长
+        // matrix[i][j] = 0 :   dp[i][j] = 0, 当前位置不可能在正方形中
+        // matrix[i][j] = 1:    dp[i][j] = min(dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1]) + 1
+        //                      i = 0 || j = 0 : dp[i][j] = 1
+        int maxSide = 0;
+        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
+            return maxSide;
+        }
+
+        int m = matrix.length;
+        int n = matrix[0].length;
+        int[][] dp = new int[m][n];
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (matrix[i][j] == '1') {
+                    if (i == 0 || j == 0) {
+                        dp[i][j] = 1;
+                    } else {
+                        dp[i][j] = Math.min(dp[i - 1][j], dp[i][j - 1]);
+                        dp[i][j] = Math.min(dp[i - 1][j - 1], dp[i][j]);
+                        dp[i][j] += 1;
+                    }
+                    maxSide = Math.max(dp[i][j], maxSide);
+                }
+            }
+        }
+        return maxSide * maxSide;
     }
 
     /**
-     * TODO: 79.单词搜索
+     * 暴力解法
+     *
+     * @param matrix matrix
+     * @return int
+     */
+    public int maximalSquare01(char[][] matrix) {
+        int maxSide = 0;
+        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
+            return maxSide;
+        }
+
+        int m = matrix.length;
+        int n = matrix[0].length;
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                // 判断新增的是否都是1
+                if (matrix[i][j] == '1') {
+                    maxSide = Math.max(maxSide, 1);
+                    int curMaxSide = Math.min(m - i, n - j);
+                    for (int k = 1; k < curMaxSide; k++) {
+                        boolean flag = true;
+                        if (matrix[i + k][j + k] == '0') {
+                            break;
+                        }
+                        for (int x = 0; x < k; x++) {
+                            if (matrix[i + x][j + k] == '0' || matrix[i + k][j + x] == '0') {
+                                flag = false;
+                                break;
+                            }
+                        }
+                        if (flag) {
+                            maxSide = Math.max(maxSide, k + 1);
+                        } else {
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        return maxSide * maxSide;
+    }
+
+    /**
+     * 79.单词搜索
      * 给定一个二维网格和一个单词，找出该单词是否存在于网格中。
      *
      * 单词必须按照字母顺序，通过相邻的单元格内的字母构成，其中“相邻”单元格是那些水平相邻或垂直相邻的单元格。
@@ -700,16 +873,347 @@ public class DynamicProgram {
      * 1 <= board[i].length <= 200
      * 1 <= word.length <= 10^3
      *
+     * 深度优先搜索
+     *
      * @param board board
      * @param word word
      * @return true or false
      */
     public boolean exist(char[][] board, String word) {
-        return true;
+        int m = board.length;
+        int n = board[0].length;
+        boolean[][] visited = new boolean[m][n];
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (check(board, visited, i, j, word, 0)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     /**
-     * TODO: 309.最佳买卖股票时机含冷冻期
+     * dfs 检查是否存在
+     *
+     * @param board 字符数组
+     * @param visited 是否已使用
+     * @param i 当前横坐标
+     * @param j 当前纵坐标
+     * @param s 字符串
+     * @param k 当前字符位置
+     * @return true or false
+     */
+    private boolean check(char[][] board, boolean[][] visited, int i, int j, String s, int k) {
+        // 回溯结束条件
+        // 提前结束
+        if (board[i][j] != s.charAt(k)) {
+            return false;
+        }
+        // 查找到匹配项, 结束
+        if (k == s.length() - 1) {
+            return true;
+        }
+
+        // 回溯开始
+        visited[i][j] = true;
+        // 定义方向数组
+        int[][] dks = new int[][]{{0, 1}, {0, -1}, {-1, 0}, {1, 0}};
+        boolean res = false;
+        for (int[] dk : dks) {
+            int x = i + dk[0];
+            int y = j + dk[1];
+            if (x >= 0 && x < board.length && y >= 0 && y < board[0].length) {
+                if (!visited[x][y]) {
+                    if (check(board, visited, x, y, s, k + 1)) {
+                        res = true;
+                        break;
+                    }
+                }
+            }
+        }
+        // 结束
+        visited[i][j] = false;
+        return res;
+    }
+
+    /**
+     * 121. 买卖股票的最佳时机 || 剑指 Offer 63. 股票的最大利润
+     *
+     * 给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。
+     *
+     * 如果你最多只允许完成一笔交易（即买入和卖出一支股票一次），设计一个算法来计算你所能获取的最大利润。
+     *
+     * 注意：你不能在买入股票前卖出股票。
+     *
+     * 示例 1:
+     *
+     * 输入: [7,1,5,3,6,4]
+     * 输出: 5
+     * 解释: 在第 2 天（股票价格 = 1）的时候买入，在第 5 天（股票价格 = 6）的时候卖出，最大利润 = 6-1 = 5 。
+     *      注意利润不能是 7-1 = 6, 因为卖出价格需要大于买入价格；同时，你不能在买入前卖出股票。
+     * 示例 2:
+     *
+     * 输入: [7,6,4,3,1]
+     * 输出: 0
+     * 解释: 在这种情况下, 没有交易完成, 所以最大利润为 0。
+     *
+     * @param prices prices
+     * @return profit
+     *
+     */
+    public int maxProfit01(int[] prices) {
+        if (prices == null || prices.length == 0) {
+            return 0;
+        }
+        // dp[i][0] 表示当前持股状态下的最大收益
+        // dp[i][1] 表示当前不持股状态下的最大收益
+        // dp[i][0] = max(-prices[i], dp[i - 1][0])
+        // dp[i][1] = max(dp[i - 1][0] + prices[i], dp[i - 1][1])
+        // ans = max(dp[n - 1][1])
+        // dp[0][0] = -prices[0]
+        // dp[0][1] = 0
+        int n = prices.length;
+        int[][] dp = new int[n][2];
+        dp[0][0] = -1 * prices[0];
+        for (int i = 1; i < prices.length; i++) {
+            dp[i][0] = Math.max(-prices[i], dp[i - 1][0]);
+            dp[i][1] = Math.max(dp[i - 1][0] + prices[i], dp[i - 1][1]);
+        }
+        return dp[n - 1][1];
+    }
+
+    /**
+     * 121. 买卖股票的最佳时机 || 剑指 Offer 63. 股票的最大利润
+     * 一次遍历
+     *
+     * @param prices prices
+     * @return profit
+     */
+    public int maxProfitBySearch(int[] prices) {
+        int min = Integer.MAX_VALUE;
+        int maxProfit = 0;
+        for (int price : prices) {
+            if (price < min) {
+                min = price;
+            } else if (price - min > maxProfit) {
+                maxProfit = price - min;
+            }
+        }
+        return maxProfit;
+    }
+
+
+    /**
+     * 122. 买卖股票的最佳时机 II
+     * 给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。
+     *
+     * 设计一个算法来计算你所能获取的最大利润。你可以尽可能地完成更多的交易（多次买卖一支股票）。
+     *
+     * 注意：你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。
+     *
+     *
+     *
+     * 示例 1:
+     *
+     * 输入: [7,1,5,3,6,4]
+     * 输出: 7
+     * 解释: 在第 2 天（股票价格 = 1）的时候买入，在第 3 天（股票价格 = 5）的时候卖出, 这笔交易所能获得利润 = 5-1 = 4 。
+     *      随后，在第 4 天（股票价格 = 3）的时候买入，在第 5 天（股票价格 = 6）的时候卖出, 这笔交易所能获得利润 = 6-3 = 3 。
+     * 示例 2:
+     *
+     * 输入: [1,2,3,4,5]
+     * 输出: 4
+     * 解释: 在第 1 天（股票价格 = 1）的时候买入，在第 5 天 （股票价格 = 5）的时候卖出, 这笔交易所能获得利润 = 5-1 = 4 。
+     *      注意你不能在第 1 天和第 2 天接连购买股票，之后再将它们卖出。
+     *      因为这样属于同时参与了多笔交易，你必须在再次购买前出售掉之前的股票。
+     * 示例 3:
+     *
+     * 输入: [7,6,4,3,1]
+     * 输出: 0
+     * 解释: 在这种情况下, 没有交易完成, 所以最大利润为 0
+     *
+     * @param prices prices
+     * @return profit
+     */
+    public int maxProfit02(int[] prices) {
+        if (prices == null || prices.length == 0) {
+            return 0;
+        }
+        /*
+         * dp[i][0] 表示当前持股状态下的最大收益
+         * dp[i][1] 表示当前不持股状态下的最大收益
+         * dp[i][0] = max(dp[i - 1][1] - prices[i], dp[i - 1][0])
+         * dp[i][1] = max(dp[i - 1][0] + prices[i], dp[i - 1][1])
+         * ans = max(dp[n - 1][1])
+         * dp[0][0] = -prices[0]
+         * dp[0][1] = 0
+         */
+        int n = prices.length;
+        int[][] dp = new int[n][2];
+        dp[0][0] = -1 * prices[0];
+        for (int i = 1; i < n; i++) {
+            dp[i][0] = Math.max(dp[i - 1][1] - prices[i], dp[i - 1][0]);
+            dp[i][1] = Math.max(dp[i - 1][0] + prices[i], dp[i - 1][1]);
+        }
+        return dp[n - 1][1];
+    }
+
+    public int maxProfit0202(int[] prices) {
+        if (prices == null || prices.length == 0) {
+            return 0;
+        }
+        /*
+         * dp[i][0] 表示当前持股状态下的最大收益
+         * dp[i][1] 表示当前不持股状态下的最大收益
+         * dp[i][0] = max(dp[i - 1][1] - prices[i], dp[i - 1][0])
+         * dp[i][1] = max(dp[i - 1][0] + prices[i], dp[i - 1][1])
+         * ans = max(dp[n - 1][1])
+         * dp[0][0] = -prices[0]
+         * dp[0][1] = 0
+         */
+        int n = prices.length;
+        int dp00 = -prices[0], dp01;
+        int dp10 = 0, dp11;
+        for (int i = 1; i < n; i++) {
+            dp01 = Math.max(dp10 - prices[i], dp00);
+            dp11 = Math.max(dp00 + prices[i], dp10);
+            dp00 = dp01;
+            dp10 = dp11;
+        }
+        return dp10;
+    }
+
+    /**
+     * 123. 买卖股票的最佳时机 III
+     * 给定一个数组，它的第 i 个元素是一支给定的股票在第 i 天的价格。
+     *
+     * 设计一个算法来计算你所能获取的最大利润。你最多可以完成 两笔 交易。
+     *
+     * 注意：你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。
+     *
+     * 示例 1:
+     *
+     * 输入：prices = [3,3,5,0,0,3,1,4]
+     * 输出：6
+     * 解释：在第 4 天（股票价格 = 0）的时候买入，在第 6 天（股票价格 = 3）的时候卖出，这笔交易所能获得利润 = 3-0 = 3 。
+     *      随后，在第 7 天（股票价格 = 1）的时候买入，在第 8 天 （股票价格 = 4）的时候卖出，这笔交易所能获得利润 = 4-1 = 3 。
+     * 示例 2：
+     *
+     * 输入：prices = [1,2,3,4,5]
+     * 输出：4
+     * 解释：在第 1 天（股票价格 = 1）的时候买入，在第 5 天 （股票价格 = 5）的时候卖出, 这笔交易所能获得利润 = 5-1 = 4 。
+     *      注意你不能在第 1 天和第 2 天接连购买股票，之后再将它们卖出。
+     *      因为这样属于同时参与了多笔交易，你必须在再次购买前出售掉之前的股票。
+     * 示例 3：
+     *
+     * 输入：prices = [7,6,4,3,1]
+     * 输出：0
+     * 解释：在这个情况下, 没有交易完成, 所以最大利润为 0。
+     * 示例 4：
+     *
+     * 输入：prices = [1]
+     * 输出：0
+     *
+     *
+     * 提示：
+     *
+     * 1 <= prices.length <= 105
+     * 0 <= prices[i] <= 105
+     * @param prices prices
+     * @return profit
+     */
+    public int maxProfit03(int[] prices) {
+        /*
+         * 当天的状态:
+         *      不进行任何交易
+         *    buy01   已进行过一次买入
+         *    sell01  已进行过一次交易, 即买入卖出一次
+         *    buy02   已进行过一次交易, 又买入一次
+         *    sell02  已进行过两次交易, 即买入卖出两次
+         *
+         * buy01  = max(buy01, -prices[i])
+         * sell01 = max(sell01, buy01 + prices[i])
+         * buy02  = max(buy02, sell01 - prices[i])
+         * sell02 = max(sell02, buy02 + prices[i])
+         *
+         */
+        int buy01 = -prices[0], sell01 = 0, buy02 = -prices[0], sell02 = 0;
+        int buy11, sell11, buy12, sell12;
+        for (int price : prices) {
+            buy11 = Math.max(buy01, -price);
+            sell11 = Math.max(sell01, buy01 + price);
+            buy12 = Math.max(buy02, sell01 - price);
+            sell12 = Math.max(sell02, buy02 + price);
+            buy01 = buy11;
+            sell01 = sell11;
+            buy02 = buy12;
+            sell02 = sell12;
+        }
+
+        return Math.max(sell01, sell02);
+    }
+
+    /**
+     * 188. 买卖股票的最佳时机 IV
+     * 给定一个整数数组 prices ，它的第 i 个元素 prices[i] 是一支给定的股票在第 i 天的价格。
+     *
+     * 设计一个算法来计算你所能获取的最大利润。你最多可以完成 k 笔交易。
+     *
+     * 注意：你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。
+     *
+     *
+     *
+     * 示例 1：
+     *
+     * 输入：k = 2, prices = [2,4,1]
+     * 输出：2
+     * 解释：在第 1 天 (股票价格 = 2) 的时候买入，在第 2 天 (股票价格 = 4) 的时候卖出，这笔交易所能获得利润 = 4-2 = 2 。
+     * 示例 2：
+     *
+     * 输入：k = 2, prices = [3,2,6,5,0,3]
+     * 输出：7
+     * 解释：在第 2 天 (股票价格 = 2) 的时候买入，在第 3 天 (股票价格 = 6) 的时候卖出, 这笔交易所能获得利润 = 6-2 = 4 。
+     *      随后，在第 5 天 (股票价格 = 0) 的时候买入，在第 6 天 (股票价格 = 3) 的时候卖出, 这笔交易所能获得利润 = 3-0 = 3 。
+     *
+     *
+     * 提示：
+     *
+     * 0 <= k <= 100
+     * 0 <= prices.length <= 1000
+     * 0 <= prices[i] <= 1000
+     *
+     * @param k k
+     * @param prices prices
+     * @return profit
+     */
+    public int maxProfit04(int k, int[] prices) {
+
+        /*
+         * 当天的状态:
+         *      不进行任何交易
+         *    buy01   已进行过一次买入
+         *    sell01  已进行过一次交易, 即买入卖出一次
+         *    buy02   已进行过一次交易, 又买入一次
+         *    sell02  已进行过两次交易, 即买入卖出两次
+         *
+         * buy01  = max(buy01, -prices[i])
+         * sell01 = max(sell01, buy01 + prices[i])
+         * buy02  = max(buy02, sell01 - prices[i])
+         * sell02 = max(sell02, buy02 + prices[i])
+         *
+         * buys[i][j] 进行恰好j笔交易, 手上还有一支股票
+         * sells[i][j] 进行恰好j笔交易, 手上没有一支股票
+         *
+         */
+
+        return 0;
+    }
+
+    /**
+     * 309.最佳买卖股票时机含冷冻期
+     *
      * 给定一个整数数组，其中第 i 个元素代表了第 i 天的股票价格 。​
      *
      * 设计一个算法计算出最大利润。在满足以下约束条件下，你可以尽可能地完成更多的交易（多次买卖一支股票）:
@@ -726,16 +1230,72 @@ public class DynamicProgram {
      * @return int
      */
     public int maxProfit(int[] prices) {
+        // dp[i][0]: 表示当前持有股票, 对应的累计最大收益
+        // dp[i][1]: 表示当前不持有股票且处于冷静期, 对应的累计最大收益
+        // dp[i][2]: 表示当前不持有股票且不处于冷静期, 对应的累计最大收益
+
+        // dp[i][0] = max(dp[i - 1][0], dp[i - 1][2] - prices[i])
+        // dp[i][1] = dp[i - 1][0] + prices[i]
+        // dp[i][2] = max(dp[i - 1][1], dp[i - 1][2])
+        // dp[0][0] = -prices[0]
+        // dp[0][1] = 0
+        // dp[0][2] = 0
+        // ans = max(dp[n - 1][0], dp[n - 1][1], dp[n - 1][2])
+        // ans = max(dp[n - 1][1], dp[n - 1][2]) 最后一天持有股票没有意义
+        if (prices == null || prices.length == 0) {
+            return 0;
+        }
+        int n = prices.length;
+        int[][] dp = new int[n][3];
+        dp[0][0] = -1 * prices[0];
+        for (int i = 1; i < n; i++) {
+            dp[i][0] = Math.max(dp[i - 1][0], dp[i - 1][2] - prices[i]);
+            dp[i][1] = dp[i - 1][0] + prices[i];
+            dp[i][2] = Math.max(dp[i - 1][1], dp[i - 1][2]);
+        }
+
+        return Math.max(dp[n - 1][1], dp[n - 1][2]);
+    }
+
+    /**
+     * 714. 买卖股票的最佳时机含手续费
+     * 给定一个整数数组 prices，其中第 i 个元素代表了第 i 天的股票价格 ；非负整数 fee 代表了交易股票的手续费用。
+     *
+     * 你可以无限次地完成交易，但是你每笔交易都需要付手续费。如果你已经购买了一个股票，在卖出它之前你就不能再继续购买股票了。
+     *
+     * 返回获得利润的最大值。
+     *
+     * 注意：这里的一笔交易指买入持有并卖出股票的整个过程，每笔交易你只需要为支付一次手续费。
+     *
+     * 示例 1:
+     *
+     * 输入: prices = [1, 3, 2, 8, 4, 9], fee = 2
+     * 输出: 8
+     * 解释: 能够达到的最大利润:
+     * 在此处买入 prices[0] = 1
+     * 在此处卖出 prices[3] = 8
+     * 在此处买入 prices[4] = 4
+     * 在此处卖出 prices[5] = 9
+     * 总利润: ((8 - 1) - 2) + ((9 - 4) - 2) = 8.
+     * 注意:
+     *
+     * 0 < prices.length <= 50000.
+     * 0 < prices[i] < 50000.
+     * 0 <= fee < 50000
+     *
+     * @param prices prices
+     * @param fee fee
+     * @return profit
+     */
+    public int maxProfit(int[] prices, int fee) {
         return 0;
     }
 
     /**
-     * TODO: 64.最小路径和
+     * 64.最小路径和
      * 给定一个包含非负整数的 m x n 网格 grid ，请找出一条从左上角到右下角的路径，使得路径上的数字总和为最小。
      *
      * 说明：每次只能向下或者向右移动一步。
-     *
-     *
      *
      * 示例 1：
      *
@@ -752,42 +1312,34 @@ public class DynamicProgram {
      * @return int
      */
     public int minPathSum(int[][] grid) {
-        return 0;
+        //dp[m][n]: 从左上角到 (m, n) 位置的最小路径和
+        // i > 0 && j = 0: dp[i][0] = dp[i - 1] + grid[i][0]
+        // i = 0 && j > 0: dp[0][j] = dp[0][j - 1] + grid[0][j]
+        // i > 0 && j > 0: dp[i][j] = min(dp[i - 1][j], dp[i][j - 1]) + grid[0][j]
+
+        int m = grid.length;
+        int n = grid[0].length;
+        int[][] dp = new int[m][n];
+        dp[0][0] = grid[0][0];
+
+        for (int i = 1; i < m; i++) {
+            dp[i][0] = dp[i - 1][0] + grid[i][0];
+        }
+
+        for (int j = 1; j < n; j++) {
+            dp[0][j] = dp[0][j - 1] + grid[0][j];
+        }
+
+        for (int i = 1; i < m; i++) {
+            for (int j = 1; j < n; j++) {
+                dp[i][j] = Math.min(dp[i - 1][j], dp[i][j - 1]) + grid[i][j];
+            }
+        }
+        return dp[m - 1][n - 1];
     }
 
     /**
-     * TODO: 113. 路径总和 II
-     * 给定一个二叉树和一个目标和，找到所有从根节点到叶子节点路径总和等于给定目标和的路径。
-     *
-     * 说明: 叶子节点是指没有子节点的节点。
-     *
-     * 示例:
-     * 给定如下二叉树，以及目标和 sum = 22，
-     *
-     *               5
-     *              / \
-     *             4   8
-     *            /   / \
-     *           11  13  4
-     *          /  \    / \
-     *         7    2  5   1
-     * 返回:
-     *
-     * [
-     *    [5,4,11,2],
-     *    [5,8,4,5]
-     * ]
-     *
-     * @param root root
-     * @param targetSum targetSum
-     * @return list
-     */
-    public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
-        return null;
-    }
-
-    /**
-     * TODO: 134.加油站
+     * 134.加油站
      * 在一条环路上有 N 个加油站，其中第 i 个加油站有汽油 gas[i] 升。
      *
      * 你有一辆油箱容量无限的的汽车，从第 i 个加油站开往第 i+1 个加油站需要消耗汽油 cost[i] 升。
@@ -837,6 +1389,212 @@ public class DynamicProgram {
      * @return int
      */
     public int canCompleteCircuit(int[] gas, int[] cost) {
-        return 0;
+        // 如果从 x 无法到达 y 的下一个加油站
+        // 则从 [x, y]中间的任何一个加油站出发，都没法到达 y 的下一个加油站
+        int n = gas.length;
+        int i = 0;
+        while (i < n) {
+            int gasSum = 0;
+            int costSum = 0;
+            int count = 0;
+            while (count < n) {
+                int j = (i + count) % n;
+                gasSum += gas[j];
+                costSum += cost[j];
+                if (costSum > gasSum) {
+                    break;
+                }
+                count++;
+            }
+            if (count == n) {
+                return i;
+            } else {
+                // 从无法到达的第一个加油站开始继续检查
+                i = i + count + 1;
+            }
+        }
+        return -1;
     }
+
+    /**
+     * 1745. 回文串分割 IV
+     *
+     * 给你一个字符串 s ，如果可以将它分割成三个 非空 回文子字符串，那么返回 true ，否则返回 false 。
+     *
+     * 当一个字符串正着读和反着读是一模一样的，就称其为 回文字符串 。
+     *
+     * 示例 1：
+     *
+     * 输入：s = "abcbdd"
+     * 输出：true
+     * 解释："abcbdd" = "a" + "bcb" + "dd"，三个子字符串都是回文的。
+     * 示例 2：
+     *
+     * 输入：s = "bcbddxy"
+     * 输出：false
+     * 解释：s 没办法被分割成 3 个回文子字符串。
+     *  
+     *
+     * 提示：
+     *
+     * {@literal 3 <= s.length <= 2000}
+     * s​​​​​​ 只包含小写英文字母。
+     *
+     * @param s s
+     * @return b
+     */
+    public boolean checkPartitioning(String s) {
+        int n = s.length();
+        boolean[][] dp = new boolean[n][n];
+        for (int i = 0; i < n; i++) {
+            int k = i;
+            int j = i;
+            while (k >= 0 && j < n && s.charAt(k) == s.charAt(j)) {
+                dp[k][j] = true;
+                k--;
+                j++;
+            }
+            k = i;
+            j = i + 1;
+            while (k >= 0 && j < n && s.charAt(k) == s.charAt(j)) {
+                dp[k][j] = true;
+                k--;
+                j++;
+            }
+        }
+
+        for (int i = 0; i < n - 2; i++) {
+            for (int j = i + 1; j < n - 1; j++) {
+                if (dp[0][i] && dp[i + 1][j] && dp[j + 1][n - 1]) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 5. 最长回文子串
+     *
+     * 给你一个字符串 s，找到 s 中最长的回文子串。
+     *
+     * 示例 1：
+     *
+     * 输入：s = "babad"
+     * 输出："bab"
+     * 解释："aba" 同样是符合题意的答案。
+     * 示例 2：
+     *
+     * 输入：s = "cbbd"
+     * 输出："bb"
+     * 示例 3：
+     *
+     * 输入：s = "a"
+     * 输出："a"
+     * 示例 4：
+     *
+     * 输入：s = "ac"
+     * 输出："a"
+     *
+     *
+     * 提示：
+     *
+     * {@literal 1 <= s.length <= 1000}
+     * s 仅由数字和英文字母（大写和/或小写）组成
+     * @param s s
+     * @return String
+     */
+    public String longestPalindrome(String s) {
+        if (s == null || s.length() == 0) {
+            return "";
+        }
+        int n = s.length();
+        int start = 0;
+        int end = 0;
+
+        for (int i = 0; i < n; i++) {
+            int len1 = palindrome(s, i, i);
+            int len2 = palindrome(s, i, i + 1);
+            int len = Math.max(len1, len2);
+            if (end - start < len) {
+                start = i - (len - 1) / 2;
+                end = i + len / 2;
+            }
+        }
+        return s.substring(start, end + 1);
+    }
+
+    private int palindrome(String s, int l, int r) {
+        while (l >= 0 && r < s.length() && s.charAt(l) == s.charAt(r)) {
+            l--;
+            r++;
+        }
+        return r - l - 1;
+    }
+
+    /**
+     * 695.岛屿的最大面积
+     *
+     * 给定一个包含了一些 0 和 1 的非空二维数组 grid 。
+     *
+     * 一个 岛屿 是由一些相邻的 1 (代表土地) 构成的组合，这里的「相邻」要求两个 1 必须在水平或者竖直方向上相邻。
+     * 你可以假设 grid 的四个边缘都被 0（代表水）包围着。
+     *
+     * 找到给定的二维数组中最大的岛屿面积。(如果没有岛屿，则返回面积为 0 。)
+     *
+     *  
+     *
+     * 示例 1:
+     *
+     * [[0,0,1,0,0,0,0,1,0,0,0,0,0],
+     *  [0,0,0,0,0,0,0,1,1,1,0,0,0],
+     *  [0,1,1,0,1,0,0,0,0,0,0,0,0],
+     *  [0,1,0,0,1,1,0,0,1,0,1,0,0],
+     *  [0,1,0,0,1,1,0,0,1,1,1,0,0],
+     *  [0,0,0,0,0,0,0,0,0,0,1,0,0],
+     *  [0,0,0,0,0,0,0,1,1,1,0,0,0],
+     *  [0,0,0,0,0,0,0,1,1,0,0,0,0]]
+     * 对于上面这个给定矩阵应返回 6。注意答案不应该是 11 ，因为岛屿只能包含水平或垂直的四个方向的 1 。
+     *
+     * 示例 2:
+     *
+     * [[0,0,0,0,0,0,0,0]]
+     * 对于上面这个给定的矩阵, 返回 0。
+     *
+     *  
+     *
+     * 注意: 给定的矩阵grid 的长度和宽度都不超过 50。
+     *
+     * @param grid grid
+     * @return area
+     */
+    public int maxAreaOfIsland(int[][] grid) {
+        int m = grid.length;
+        int n = grid[0].length;
+        int[][] drs = new int[][]{{0, 1}, {1, 0}, {-1, 0}, {0, -1}};
+        int max = 0;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (grid[i][j] == 1) {
+                    max = Math.max(doMaxAreaOfIslandByDfs(grid, i, j, drs), max);
+                }
+            }
+        }
+        return max;
+    }
+
+    private int doMaxAreaOfIslandByDfs(int[][] grid, int i, int j, int[][] drs) {
+        if (i < 0 || i >= grid.length || j < 0 || j >= grid[0].length || grid[i][j] == 0) {
+            return 0;
+        }
+        grid[i][j] = 0;
+        int ans = 1;
+        for (int[] dr : drs) {
+            int x = i + dr[0];
+            int y = j + dr[1];
+            ans += doMaxAreaOfIslandByDfs(grid, x, y, drs);
+        }
+        return ans;
+    }
+
 }

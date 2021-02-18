@@ -12,6 +12,12 @@ public class BinaryTreeTopicTest {
 
     private final BinaryTreeTopic bt = new BinaryTreeTopic();
 
+    private final BinaryTreeTopic.Codec codec = new BinaryTreeTopic().codec();
+
+    public TreeNode buildNode(String data) {
+        return codec.deserialize03(data);
+    }
+
     @Test
     public void codec() {
         TreeNode root = new TreeNode(4);
@@ -203,6 +209,18 @@ public class BinaryTreeTopicTest {
         i = bt.hasPathSum(root, 22);
         System.out.println(i);
         Assert.assertFalse(i);
+
+        root = new TreeNode(1);
+        root.left = new TreeNode(2);
+        i = bt.hasPathSum(root, 1);
+        System.out.println(i);
+        Assert.assertTrue(i);
+
+        root = new TreeNode(1);
+        root.left = new TreeNode(2);
+        i = bt.hasPathSum(root, 0);
+        System.out.println(i);
+        Assert.assertFalse(i);
     }
 
     @Test
@@ -374,5 +392,74 @@ public class BinaryTreeTopicTest {
         );
         List<Integer> list = bt.rightSideView01(treeNode);
         System.out.println(list);
+    }
+
+    @Test
+    public void findLastRightNode() {
+        TreeNode treeNode = new TreeNode(1,
+                new TreeNode(2, new TreeNode(4, new TreeNode(7), new TreeNode(8)), new TreeNode(5)),
+                new TreeNode(3, new TreeNode(6), new TreeNode(9))
+        );
+        Assert.assertEquals(8, bt.findLastRightNode(treeNode).val);
+
+        treeNode = new TreeNode(1,
+                new TreeNode(2,
+                        new TreeNode(4, new TreeNode(7), new TreeNode(8)),
+                        new TreeNode(5, new TreeNode(10), new TreeNode(11))
+                ),
+                new TreeNode(3,
+                        new TreeNode(6, new TreeNode(12), null),
+                        new TreeNode(9)
+                )
+        );
+        Assert.assertEquals(12, bt.findLastRightNode(treeNode).val);
+    }
+
+    @Test
+    public void trimBST() {
+    }
+
+    @Test
+    public void pathSum() {
+        TreeNode root = new TreeNode(5,
+                new TreeNode(4, new TreeNode(11, new TreeNode(7), new TreeNode(2)), null),
+                new TreeNode(8, new TreeNode(13), new TreeNode(4, new TreeNode(5), new TreeNode(1)))
+        );
+        List<List<Integer>> lists = bt.pathSum(root, 22);
+        System.out.println(lists);
+    }
+
+    @Test
+    public void sumNumbers() {
+        TreeNode root = new TreeNode(2,
+                new TreeNode(2),
+                new TreeNode(3)
+        );
+        Assert.assertEquals(25, bt.sumNumbers(root));
+
+        root = new TreeNode(4,
+                new TreeNode(9, new TreeNode(5), new TreeNode(1)),
+                new TreeNode(0)
+        );
+        Assert.assertEquals(1026, bt.sumNumbers(root));
+    }
+
+    @Test
+    public void binaryTreePaths() {
+        List<String> lists = bt.binaryTreePaths(buildNode("1,2,3,null,5"));
+        System.out.println(lists);
+    }
+
+    @Test
+    public void pathSumIII() {
+        TreeNode node = buildNode("[10,5,-3,3,2,null,11,3,-2,null,1]");
+        Assert.assertEquals(3, bt.pathSumIII(node, 8));
+    }
+
+    @Test
+    public void smallestFromLeaf() {
+        Assert.assertEquals("dba", bt.smallestFromLeaf(buildNode("[0,1,2,3,4,3,4]")));
+        Assert.assertEquals("adz", bt.smallestFromLeaf(buildNode("[25,1,3,1,3,0,2]")));
+        Assert.assertEquals("abc", bt.smallestFromLeaf(buildNode("[2,2,1,null,1,0,null,0]")));
     }
 }

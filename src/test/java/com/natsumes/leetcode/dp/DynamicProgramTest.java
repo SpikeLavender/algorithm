@@ -147,6 +147,23 @@ public class DynamicProgramTest {
         Assert.assertEquals(0, dp.maximalSquare(new char[][]{{'0'}}));
     }
 
+    @Test
+    public void maximalSquare01() {
+        Assert.assertEquals(4, dp.maximalSquare01(new char[][]{
+                {'1', '0', '1', '0', '0'},
+                {'1', '0', '1', '1', '1'},
+                {'1', '1', '1', '1', '1'},
+                {'1', '0', '0', '1', '0'}
+        }));
+
+        Assert.assertEquals(1, dp.maximalSquare01(new char[][]{
+                {'0', '1'},
+                {'1', '0'}
+        }));
+
+        Assert.assertEquals(0, dp.maximalSquare01(new char[][]{{'0'}}));
+    }
+
     /**
      * board =
      * [
@@ -173,6 +190,40 @@ public class DynamicProgramTest {
     }
 
     @Test
+    public void maxProfit01() {
+        Assert.assertEquals(5, dp.maxProfit01(new int[] {7,1,5,3,6,4}));
+        Assert.assertEquals(0, dp.maxProfit01(new int[] {7,6,4,3,1}));
+    }
+
+    @Test
+    public void maxProfitBySearch() {
+        Assert.assertEquals(5, dp.maxProfitBySearch(new int[] {7,1,5,3,6,4}));
+        Assert.assertEquals(0, dp.maxProfitBySearch(new int[] {7,6,4,3,1}));
+    }
+
+    @Test
+    public void maxProfit02() {
+        Assert.assertEquals(7, dp.maxProfit02(new int[] {7,1,5,3,6,4}));
+        Assert.assertEquals(0, dp.maxProfit02(new int[] {7,6,4,3,1}));
+        Assert.assertEquals(4, dp.maxProfit02(new int[] {1,2,3,4,5}));
+    }
+
+    @Test
+    public void maxProfit0202() {
+        Assert.assertEquals(7, dp.maxProfit0202(new int[] {7,1,5,3,6,4}));
+        Assert.assertEquals(0, dp.maxProfit0202(new int[] {7,6,4,3,1}));
+        Assert.assertEquals(4, dp.maxProfit0202(new int[] {1,2,3,4,5}));
+    }
+
+    @Test
+    public void maxProfit03() {
+        Assert.assertEquals(6, dp.maxProfit03(new int[] {3, 3, 5, 0, 0, 3, 1, 4}));
+        Assert.assertEquals(4, dp.maxProfit03(new int[] {1, 2, 3, 4, 5}));
+        Assert.assertEquals(0, dp.maxProfit03(new int[] {7, 6, 4, 3, 1}));
+        Assert.assertEquals(0, dp.maxProfit03(new int[] {1}));
+    }
+
+    @Test
     public void maxProfit() {
         Assert.assertEquals(3, dp.maxProfit(new int[]{1, 2, 3, 0, 2}));
     }
@@ -188,6 +239,61 @@ public class DynamicProgramTest {
         Assert.assertEquals(12, dp.minPathSum(new int[][]{
                 {1, 2, 3},
                 {4, 5, 6}
+        }));
+    }
+
+    @Test
+    public void checkPartitioning() {
+        Assert.assertTrue(dp.checkPartitioning("juchzcedhfesefhdeczhcujzzvbmoeombv"));
+        Assert.assertTrue(dp.checkPartitioning("aaa"));
+        Assert.assertTrue(dp.checkPartitioning("aac"));
+        Assert.assertTrue(dp.checkPartitioning("abcbdd"));
+        Assert.assertFalse(dp.checkPartitioning("aa"));
+        Assert.assertFalse(dp.checkPartitioning("bcbddxy"));
+    }
+
+    @Test
+    public void longestPalindrome() {
+        Assert.assertEquals("aba", dp.longestPalindrome("babad"));
+        Assert.assertEquals("bb", dp.longestPalindrome("cbbd"));
+        Assert.assertEquals("a", dp.longestPalindrome("a"));
+        Assert.assertEquals("c", dp.longestPalindrome("ac"));
+    }
+
+    @Test
+    public void canCompleteCircuit() {
+        Assert.assertEquals(3, dp.canCompleteCircuit(new int[]{1, 2, 3, 4, 5}, new int[]{3, 4, 5, 1, 2}));
+        Assert.assertEquals(-1, dp.canCompleteCircuit(new int[]{2, 3, 4}, new int[]{3, 4, 3}));
+    }
+
+    @Test
+    public void maxAreaOfIsland() {
+        Assert.assertEquals(6, dp.maxAreaOfIsland(new int[][]{
+                {0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0},
+                {0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0},
+                {0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0}
+        }));
+
+        Assert.assertEquals(0, dp.maxAreaOfIsland(new int[][]{{0, 0, 0, 0, 0, 0, 0, 0}}));
+    }
+
+    @Test
+    public void countSquares() {
+        Assert.assertEquals(15, dp.countSquares(new int[][]{
+                {0, 1, 1, 1},
+                {1, 1, 1, 1},
+                {0, 1, 1, 1}
+        }));
+
+        Assert.assertEquals(7, dp.countSquares(new int[][]{
+                {1, 0, 1},
+                {1, 1, 0},
+                {1, 1, 0}
         }));
     }
 }

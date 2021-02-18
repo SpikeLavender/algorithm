@@ -249,4 +249,12 @@ public class UnionFinderTest {
 
         Assert.assertEquals(0, uf.maxAreaOfIsland(new int[][]{{0, 0, 0, 0, 0, 0, 0, 0}}));
     }
+
+    @Test
+    public void minTrioDegree() {
+        Assert.assertEquals(3,
+                uf.minTrioDegree(6, new int[][]{{1, 2},{1, 3},{3, 2},{4, 1},{5, 2},{3, 6}}));
+        Assert.assertEquals(0, uf.minTrioDegree(7,
+                new int[][]{{1, 3},{4, 1},{4, 3},{2, 5},{5, 6},{6, 7},{7, 5},{2, 6}}));
+    }
 }

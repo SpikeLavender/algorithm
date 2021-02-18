@@ -1,5 +1,6 @@
 package com.natsumes;
 
+import com.natsumes.company.ByteDance;
 import com.natsumes.leetcode.DfsAndBinarySearch;
 import com.natsumes.leetcode.array.ArrayTopic;
 import com.natsumes.leetcode.dp.DynamicProgram;
@@ -29,7 +30,7 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * {@link ArrayTopic#findMedianSortedArrays02(int[], int[])}}
  *
  * <a href="https://leetcode-cn.com/problems/longest-palindromic-substring/">5.最长回文子串</a>
- * {@link com.natsumes.company.ByteDance#longestPalindrome(String)}
+ * {@link DynamicProgram#longestPalindrome(java.lang.String)}
  *
  * <a href="https://leetcode-cn.com/problems/zigzag-conversion/">6.Z 字形变换</a>
  * {@link StringHandler#convert(java.lang.String, int)}
@@ -94,7 +95,7 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * <a href="https://leetcode-cn.com/problems/spiral-matrix-ii/">59.螺旋矩阵 II</a>
  * {@link ArrayTopic#generateMatrix(int)}
  *
- * TODO: <a href="https://leetcode-cn.com/problems/minimum-path-sum/">64.最小路径和</a>
+ * <a href="https://leetcode-cn.com/problems/minimum-path-sum/">64.最小路径和</a>
  * {@link DynamicProgram#minPathSum(int[][])}
  *
  * <a href="https://leetcode-cn.com/problems/search-a-2d-matrix/">74.搜索二维矩阵</a>
@@ -106,7 +107,7 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * <a href="https://leetcode-cn.com/problems/subsets/">78.子集</a>
  * {@link DfsAndBinarySearch#subsets(int[])}
  *
- * TODO: <a href="https://leetcode-cn.com/problems/word-search/">79.单词搜索</a>
+ * <a href="https://leetcode-cn.com/problems/word-search/">79.单词搜索</a>
  * {@link DynamicProgram#exist(char[][], java.lang.String)}
  *
  * <a href="https://leetcode-cn.com/problems/restore-ip-addresses/">93.复原IP地址</a>
@@ -118,19 +119,39 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * <a href="https://leetcode-cn.com/problems/binary-tree-zigzag-level-order-traversal/">103.二叉树的锯齿形层序遍历</a>
  * {@link BinaryTreeTopic#zigzagLevelOrder(com.natsumes.leetcode.tree.TreeNode)}
  *
- * TODO: <a href="https://leetcode-cn.com/problems/minimum-path-sum/">113.路径总和 II</a>
- * {@link DynamicProgram#pathSum(com.natsumes.leetcode.dp.TreeNode, int)}
+ * <a href="https://leetcode-cn.com/problems/path-sum/">112.路径总和</a>
+ * {@link BinaryTreeTopic#hasPathSum(com.natsumes.leetcode.tree.TreeNode, int)}
+ *
+ * <a href="https://leetcode-cn.com/problems/path-sum-ii/">113.路径总和 II</a>
+ * {@link BinaryTreeTopic#pathSum(com.natsumes.leetcode.tree.TreeNode, int)}
  *
  * <a href="https://leetcode-cn.com/problems/pascals-triangle-ii/">119.杨辉三角 II</a>
  * {@link ArrayTopic#getRow(int)}
  *
+ * TODO: <a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock">121.买卖股票的最佳时机</a>
+ * {@link DynamicProgram#maxProfit01(int[])}
+ * {@link DynamicProgram#maxProfitBySearch(int[])}
+ *
+ * <a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/">122.买卖股票的最佳时机 II</a>
+ * {@link DynamicProgram#maxProfit02(int[])}
+ * {@link DynamicProgram#maxProfit0202(int[])}
+ *
+ * <a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iii/">123.买卖股票的最佳时机 III</a>
+ * {@link DynamicProgram#maxProfit03(int[])}
+ *
+ * <a href="https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/">124.二叉树中的最大路径和</a>
+ * {@link BinaryTreeTopic#maxPathSum(com.natsumes.leetcode.tree.TreeNode)}
+ *
  * <a href="https://leetcode-cn.com/problems/longest-consecutive-sequence/">128.最长连续序列</a>
  * {@link UnionFinder#longestConsecutive(int[])}
+ *
+ * TODO: <a href="https://leetcode-cn.com/problems/sum-root-to-leaf-numbers/">129.求根到叶子节点数字之和</a>
+ * {@link BinaryTreeTopic#sumNumbers(com.natsumes.leetcode.tree.TreeNode)}
  *
  * <a href="https://leetcode-cn.com/problems/surrounded-regions/">130.被围绕的区域</a>
  * {@link UnionFinder#solve(char[][])}
  *
- * TODO: <a href="https://leetcode-cn.com/problems/gas-station/">134.加油站</a>
+ * <a href="https://leetcode-cn.com/problems/gas-station/">134.加油站</a>
  * {@link DynamicProgram#canCompleteCircuit(int[], int[])}
  *
  * <a href="https://leetcode-cn.com/problems/longest-substring-with-at-most-two-distinct-characters/">159.至多包含两个不同字符的最长子串</a>
@@ -140,6 +161,9 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  *
  * <a href="https://leetcode-cn.com/problems/largest-number/">179.最大数</a>
  * {@link ArrayTopic#largestNumber(int[])}
+ *
+ * TODO: <a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iv/">188.买卖股票的最佳时机 IV</a>
+ * {@link DynamicProgram#maxProfit04(int, int[])}
  *
  * <a href="https://leetcode-cn.com/problems/house-robber/">198.打家劫舍</a>
  * {@link DynamicProgram#rob1(int[])}
@@ -160,11 +184,17 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * <a href="https://leetcode-cn.com/problems/kth-largest-element-in-an-array/">215.数组中的第K个最大元素</a>
  * {@link ArrayTopic#findKthLargest(int[], int)}
  *
- * TODO: <a href="https://leetcode-cn.com/problems/maximal-square/">221.最大正方形</a>
+ * <a href="https://leetcode-cn.com/problems/maximal-square/">221.最大正方形</a>
  * {@link DynamicProgram#maximalSquare(char[][])}
  *
  * <a href="https://leetcode-cn.com/problems/search-a-2d-matrix-ii/">240.搜索二维矩阵 II</a>
  * {@link ArrayTopic#searchMatrix2(int[][], int)}
+ *
+ * TODO: <a href="https://leetcode-cn.com/problems/count-univalue-subtrees/">250.统计同值子树</a>
+ * {@link BinaryTreeTopic#countUnivalSubtrees(com.natsumes.leetcode.tree.TreeNode)}
+ *
+ * <a href="https://leetcode-cn.com/problems/binary-tree-paths/">257.二叉树的所有路径</a>
+ * {@link BinaryTreeTopic#binaryTreePaths(com.natsumes.leetcode.tree.TreeNode)}
  *
  * <a href="https://leetcode-cn.com/problems/graph-valid-tree/">261.以图判树</a>
  * {@link UnionFinder#validTree(int, int[][])}
@@ -179,7 +209,7 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * <a href="https://leetcode-cn.com/problems/number-of-islands-ii/">305.岛屿数量 II</a>
  * {@link UnionFinder#numIslands2(int, int, int[][])}
  *
- * TODO: <a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/">309.最佳买卖股票时机含冷冻期</a>
+ * <a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/">309.最佳买卖股票时机含冷冻期</a>
  * {@link DynamicProgram#maxProfit(int[])}
  *
  * <a href="https://leetcode-cn.com/problems/coin-change/">322.零钱兑换</a>
@@ -197,11 +227,15 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * <a href="https://leetcode-cn.com/problems/top-k-frequent-elements/">347.前 K 个高频元素</a>
  * {@link ArrayTopic#topKsFrequent(int[], int)}
  *
- * TODO: <a href="https://leetcode-cn.com/problems/decode-string/">394.字符串解码</a>
+ * TODO: 复习
+ * <a href="https://leetcode-cn.com/problems/decode-string/">394.字符串解码</a>
  * {@link StringHandler#decodeString(java.lang.String)}
  *
  * <a href="https://leetcode-cn.com/problems/longest-repeating-character-replacement/">424.替换后的最长重复字符</a>
  * {@link SlidingWindow#characterReplacement(java.lang.String, int)}
+ *
+ * TODO: <a href="https://leetcode-cn.com/problems/path-sum-iii/">437.路径总和 III</a>
+ * {@link BinaryTreeTopic#pathSumIII(com.natsumes.leetcode.tree.TreeNode, int)}
  *
  * <a href="https://leetcode-cn.com/problems/find-all-numbers-disappeared-in-an-array/">448.找到所有数组中消失的数字</a>
  * {@link ArrayTopic#findDisappearedNumbers(int[])}
@@ -227,17 +261,33 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * <a href="https://leetcode-cn.com/problems/array-partition-i/">561.数组拆分 I</a>
  * {@link ArrayTopic#arrayPairSum(int[])}
  *
+ * <a href="https://leetcode-cn.com/problems/reshape-the-matrix/">566.重塑矩阵</a>
+ * {@link ArrayTopic#matrixReshape(int[][], int, int)}
+ *
  * <a href="https://leetcode-cn.com/problems/permutation-in-string/">567.字符串的排列</a>
  * {@link SlidingWindow#checkInclusion(java.lang.String, java.lang.String)}
+ *
+ * TODO: <a href="https://leetcode-cn.com/problems/path-sum-iv/">666.路径总和 IV</a>
+ * {@link BinaryTreeTopic#pathSum(int[])}
+ *
+ * <a href="https://leetcode-cn.com/problems/trim-a-binary-search-tree/submissions/">669.修剪二叉搜索树</a>
+ * {@link BinaryTreeTopic#trimBST(com.natsumes.leetcode.tree.TreeNode, int, int)}
  *
  * <a href="https://leetcode-cn.com/problems/redundant-connection/">684.冗余连接</a>
  * {@link UnionFinder#findRedundantConnection(int[][])}
  *
- * TODO: <a href="https://leetcode-cn.com/problems/max-area-of-island/">695.岛屿的最大面积</a>
+ * TODO: <a href="https://leetcode-cn.com/problems/longest-univalue-path/">687.最长同值路径</a>
+ * {@link BinaryTreeTopic#longestUnivaluePath(com.natsumes.leetcode.tree.TreeNode)}
+ *
+ * <a href="https://leetcode-cn.com/problems/max-area-of-island/">695.岛屿的最大面积</a>
  * {@link UnionFinder#maxAreaOfIsland(int[][])}
+ * {@link DynamicProgram#maxAreaOfIsland(int[][]) 深度优先搜索解法}
  *
  * <a href="https://leetcode-cn.com/problems/subarray-product-less-than-k/">713.乘积小于K的子数组</a>
  * {@link SlidingWindow#numSubarrayProductLessThanK(int[], int)}
+ *
+ * TODO: <a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/">714.买卖股票的最佳时机含手续费</a>
+ * {@link DynamicProgram#maxProfit(int[], int)}
  *
  * <a href="https://leetcode-cn.com/problems/accounts-merge/">721.账户合并</a>
  * {@link UnionFinder#accountsMerge(java.util.List)}
@@ -266,11 +316,41 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * <a href="https://leetcode-cn.com/problems/minimize-malware-spread/">924.尽量减少恶意软件的传播</a>
  * {@link UnionFinder#minMalwareSpread(int[][], int[])}
  *
+ * TODO: <a href="https://leetcode-cn.com/problems/smallest-string-starting-from-leaf/">988.从叶结点开始的最小字符串</a>
+ * {@link BinaryTreeTopic#smallestFromLeaf(com.natsumes.leetcode.tree.TreeNode)}
+ *
  * <a href="https://leetcode-cn.com/problems/satisfiability-of-equality-equations/">990.等式方程的可满足性</a>
  * {@link UnionFinder#equationsPossible(java.lang.String[])}
  *
  * <a href="https://leetcode-cn.com/problems/check-if-word-is-valid-after-substitutions/">1003.检查替换后的词是否有效</a>
  * {@link StringHandler#isValidString(java.lang.String)}
+ *
+ * <a href="https://leetcode-cn.com/problems/count-square-submatrices-with-all-ones/">1277.统计全为1的正方形子矩阵</a>
+ * {@link DynamicProgram#countSquares(int[][])}
+ *
+ * <a href="https://leetcode-cn.com/problems/maximum-number-of-balls-in-a-box/">1742.盒子中小球的最大数量</a>
+ * {@link ArrayTopic#countBalls(int, int)}
+ *
+ * <a href="https://leetcode-cn.com/problems/restore-the-array-from-adjacent-pairs/">1743.从相邻元素对还原数组</a>
+ * {@link ArrayTopic#restoreArray(int[][])}
+ *
+ * TODO: <a href="https://leetcode-cn.com/problems/can-you-eat-your-favorite-candy-on-your-favorite-day/">1744.你能在你最喜欢的那天吃到你最喜欢的糖果吗？</a>
+ * {@link ByteDance#canEat(int[], int[][])}
+ *
+ * <a href="https://leetcode-cn.com/problems/palindrome-partitioning-iv/">1745.回文串分割 IV</a>
+ * {@link DynamicProgram#checkPartitioning(String)}
+ *
+ * <a href="https://leetcode-cn.com/problems/minimum-changes-to-make-alternating-binary-string/">1758.生成交替二进制字符串的最少操作数</a>
+ * {@link StringHandler#minOperations(java.lang.String)}
+ *
+ * <a href="https://leetcode-cn.com/contest/weekly-contest-228/problems/count-number-of-homogenous-substrings/">1759.统计同构子字符串的数目</a>
+ * {@link StringHandler#countHomogenous(java.lang.String)}
+ *
+ * TODO: <a href="https://leetcode-cn.com/problems/minimum-limit-of-balls-in-a-bag/">1760.袋子里最少数目的球</a>
+ * {@link ArrayTopic#minimumSize(int[], int)}
+ *
+ * TODO: <a href="https://leetcode-cn.com/problems/minimum-degree-of-a-connected-trio-in-a-graph/">1761.一个图中连通三元组的最小度数</a>
+ * {@link UnionFinder#minTrioDegree(int, int[][])}
  *
  */
 public class Catalogue {

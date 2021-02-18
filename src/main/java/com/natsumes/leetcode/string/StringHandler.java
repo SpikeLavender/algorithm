@@ -1,5 +1,6 @@
 package com.natsumes.leetcode.string;
 
+import java.util.Collections;
 import java.util.Deque;
 import java.util.LinkedList;
 
@@ -25,6 +26,11 @@ import java.util.LinkedList;
  * <a href="https://leetcode-cn.com/problems/zigzag-conversion/">6.Z 字形变换</a>
  * {@link StringHandler#convert(java.lang.String, int)}
  *
+ * <a href="https://leetcode-cn.com/problems/minimum-changes-to-make-alternating-binary-string/">1758. 生成交替二进制字符串的最少操作数</a>
+ * {@link StringHandler#minOperations(java.lang.String)}
+ *
+ * <a href="https://leetcode-cn.com/contest/weekly-contest-228/problems/count-number-of-homogenous-substrings/">1759.统计同构子字符串的数目</a>
+ * {@link StringHandler#countHomogenous(java.lang.String)}
  * @author hetengjiao
  */
 public class StringHandler {
@@ -127,7 +133,47 @@ public class StringHandler {
      * @return s
      */
     public String decodeString(String s) {
-        return s;
+        int n = s.length();
+        int ptr = 0;
+        LinkedList<String> stack = new LinkedList<>();
+
+        while (ptr < n) {
+            char cur = s.charAt(ptr);
+            if (Character.isDigit(cur)) {
+                StringBuilder sb = new StringBuilder();
+                while (Character.isDigit(s.charAt(ptr))) {
+                    sb.append(s.charAt(ptr++));
+                }
+                stack.addLast(sb.toString());
+            } else if (Character.isLetter(cur) || cur == '[') {
+                stack.addLast(String.valueOf(s.charAt(ptr++)));
+            } else {
+                ++ptr;
+                LinkedList<String> sub = new LinkedList<>();
+                while (!"[".equals(stack.peekLast())) {
+                    sub.addLast(stack.removeLast());
+                }
+                Collections.reverse(sub);
+                stack.removeLast();
+                int repTime = Integer.parseInt(stack.removeLast());
+                StringBuilder t = new StringBuilder();
+                String o = getString(sub);
+                while (repTime-- > 0) {
+                    t.append(o);
+                }
+                stack.addLast(t.toString());
+            }
+        }
+
+        return getString(stack);
+    }
+
+    private String getString(LinkedList<String> v) {
+        StringBuilder ret = new StringBuilder();
+        for (String s : v) {
+            ret.append(s);
+        }
+        return ret.toString();
     }
 
     /**
@@ -394,7 +440,7 @@ public class StringHandler {
     }
 
     /**
-     * 5676. 生成交替二进制字符串的最少操作数
+     * 1758. 生成交替二进制字符串的最少操作数
      * 给你一个仅由字符 '0' 和 '1' 组成的字符串 s 。一步操作中，你可以将任一 '0' 变成 '1' ，或者将 '1' 变成 '0' 。
      *
      * 交替字符串 定义为：如果字符串中不存在相邻两个字符相等的情况，那么该字符串就是交替字符串。
@@ -429,7 +475,7 @@ public class StringHandler {
      * @param s s
      * @return int
      */
-    public static int minOperations(String s) {
+    public int minOperations(String s) {
         char[] array = s.toCharArray();
         int count1 = 0;
         int count2 = 0;
@@ -460,7 +506,7 @@ public class StringHandler {
 
 
     /**
-     * 5677. 统计同构子字符串的数目
+     * 1759. 统计同构子字符串的数目
      * 给你一个字符串 s ，返回 s 中 同构子字符串 的数目。由于答案可能很大，只需返回对 109 + 7 取余 后的结果。
      *
      * 同构字符串 的定义为：如果一个字符串中的所有字符都相同，那么该字符串就是同构字符串。
@@ -495,7 +541,7 @@ public class StringHandler {
      * @param s s
      * @return int
      */
-    public static int countHomogenous(String s) {
+    public int countHomogenous(String s) {
         int left = 0;
         int right = 0;
         int count = 0;
@@ -509,55 +555,5 @@ public class StringHandler {
         }
 
         return count % ((int) Math.pow(10, 9) + 7);
-    }
-
-    /**
-     * 5678. 袋子里最少数目的球
-     * 给你一个整数数组 nums ，其中 nums[i] 表示第 i 个袋子里球的数目。同时给你一个整数 maxOperations 。
-     *
-     * 你可以进行如下操作至多 maxOperations 次：
-     *
-     * 选择任意一个袋子，并将袋子里的球分到 2 个新的袋子中，每个袋子里都有 正整数 个球。
-     * 比方说，一个袋子里有 5 个球，你可以把它们分到两个新袋子里，分别有 1 个和 4 个球，或者分别有 2 个和 3 个球。
-     * 你的开销是单个袋子里球数目的 最大值 ，你想要 最小化 开销。
-     *
-     * 请你返回进行上述操作后的最小开销。
-     *
-     *
-     *
-     * 示例 1：
-     *
-     * 输入：nums = [9], maxOperations = 2
-     * 输出：3
-     * 解释：
-     * - 将装有 9 个球的袋子分成装有 6 个和 3 个球的袋子。[9] -> [6,3] 。
-     * - 将装有 6 个球的袋子分成装有 3 个和 3 个球的袋子。[6,3] -> [3,3,3] 。
-     * 装有最多球的袋子里装有 3 个球，所以开销为 3 并返回 3 。
-     * 示例 2：
-     *
-     * 输入：nums = [2,4,8,2], maxOperations = 4
-     * 输出：2
-     * 解释：
-     * - 将装有 8 个球的袋子分成装有 4 个和 4 个球的袋子。[2,4,8,2] -> [2,4,4,4,2] 。
-     * - 将装有 4 个球的袋子分成装有 2 个和 2 个球的袋子。[2,4,4,4,2] -> [2,2,2,4,4,2] 。
-     * - 将装有 4 个球的袋子分成装有 2 个和 2 个球的袋子。[2,2,2,4,4,2] -> [2,2,2,2,2,4,2] 。
-     * - 将装有 4 个球的袋子分成装有 2 个和 2 个球的袋子。[2,2,2,2,2,4,2] -> [2,2,2,2,2,2,2,2] 。
-     * 装有最多球的袋子里装有 2 个球，所以开销为 2 并返回 2 。
-     * 示例 3：
-     *
-     * 输入：nums = [7,17], maxOperations = 2
-     * 输出：7
-     *
-     * @param nums nums
-     * @param maxOperations maxOperations
-     * @return int
-     */
-    public static int minimumSize(int[] nums, int maxOperations) {
-        return 0;
-    }
-
-    public static void main(String[] args) {
-        System.out.println(minimumSize(new int[] {9}, 2));
-        System.out.println(minimumSize(new int[] {10}, 2));
     }
 }

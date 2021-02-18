@@ -8,25 +8,25 @@ import java.util.*;
  * <h3>链表专题</h3>
  *
  * <a href="https://leetcode-cn.com/problems/add-two-numbers/">2.两数相加</a>
- * {@link LinkedListTopic#addTwoNumbers(ListNode, ListNode)}
+ * {@link LinkedListTopic#addTwoNumbers(com.natsumes.leetcode.list.ListNode, com.natsumes.leetcode.list.ListNode)}
  *
  * <a href="https://leetcode-cn.com/problems/merge-two-sorted-lists/">21.合并两个有序链表</a>
- * {@link LinkedListTopic#mergeTwoLists(ListNode, ListNode)}
+ * {@link LinkedListTopic#mergeTwoLists(com.natsumes.leetcode.list.ListNode, com.natsumes.leetcode.list.ListNode)}
  *
  * <a href="https://leetcode-cn.com/problems/reorder-list/">143.重排链表</a>
- * {@link LinkedListTopic#reorderList(ListNode)}
+ * {@link LinkedListTopic#reorderList(com.natsumes.leetcode.list.ListNode)}
  *
  * <a href="https://leetcode-cn.com/problems/sort-list/">148.排序链表</a>
- * {@link LinkedListTopic#sortList(ListNode)}
+ * {@link LinkedListTopic#sortList(com.natsumes.leetcode.list.ListNode)}
  *
  * <a href="https://leetcode-cn.com/problems/insertion-sort-list/">147.对链表进行插入排序</a>
- * {@link LinkedListTopic#insertionSortList(ListNode)}
+ * {@link LinkedListTopic#insertionSortList(com.natsumes.leetcode.list.ListNode)}
  *
  * <a href="https://leetcode-cn.com/problems/reverse-nodes-in-k-group/">25.K 个一组翻转链表</a>
- * {@link LinkedListTopic#reverseKGroup(ListNode, int)}
+ * {@link LinkedListTopic#reverseKGroup(com.natsumes.leetcode.list.ListNode, int)}
  *
  * <a href="https://leetcode-cn.com/problems/merge-k-sorted-lists/">23.合并K个升序链表</a>
- * {@link LinkedListTopic#mergeKLists(ListNode[])}
+ * {@link LinkedListTopic#mergeKLists(com.natsumes.leetcode.list.ListNode[])}
  *
  * @author hetengjiao
  */

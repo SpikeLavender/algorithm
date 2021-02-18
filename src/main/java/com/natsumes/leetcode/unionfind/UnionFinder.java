@@ -51,8 +51,11 @@ import java.util.*;
  * <a href="https://leetcode-cn.com/problems/minimize-malware-spread/">924.尽量减少恶意软件的传播</a>
  * {@link UnionFinder#minMalwareSpread(int[][], int[])}
  *
- * TODO: <a href="https://leetcode-cn.com/problems/max-area-of-island/">695.岛屿的最大面积</a>
+ * <a href="https://leetcode-cn.com/problems/max-area-of-island/">695.岛屿的最大面积</a>
  * {@link UnionFinder#maxAreaOfIsland(int[][])}
+ *
+ * <a href="https://leetcode-cn.com/problems/minimum-degree-of-a-connected-trio-in-a-graph/">1761.一个图中连通三元组的最小度数</a>
+ * {@link UnionFinder#minTrioDegree(int, int[][])}
  *
  */
 public class UnionFinder {
@@ -1069,7 +1072,7 @@ public class UnionFinder {
     }
 
     /**
-     * TODO: 695.岛屿的最大面积
+     * 695.岛屿的最大面积
      * 给定一个包含了一些 0 和 1 的非空二维数组 grid 。
      *
      * 一个 岛屿 是由一些相邻的 1 (代表土地) 构成的组合，这里的「相邻」要求两个 1 必须在水平或者竖直方向上相邻。
@@ -1104,6 +1107,90 @@ public class UnionFinder {
      * @return area
      */
     public int maxAreaOfIsland(int[][] grid) {
+        int m = grid.length;
+        int n = grid[0].length;
+        int dummy = m * n;
+        Union union = new Union(m * n + 1);
+        int[][] drs = new int[][]{{0, 1}, {1, 0}, {-1, 0}, {0, -1}};
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (grid[i][j] == 1) {
+                    for (int[] dr : drs) {
+                        int x = i + dr[0];
+                        int y = j + dr[1];
+                        if (x >= 0 && x < m && y >= 0 && y < n && grid[x][y] == 1) {
+                            union.union(i * n + j, x * n + y);
+                        }
+                    }
+                } else {
+                    union.union(i * n + j, dummy);
+                }
+            }
+        }
+
+        int max = 0;
+        for (int i = 0; i < m * n; i++) {
+            int root = union.find(i);
+            if (root != dummy) {
+                max = Math.max(max, union.size[root]);
+            }
+        }
+        return max;
+    }
+
+    /**
+     * 1761.一个图中连通三元组的最小度数
+     *
+     * 给你一个无向图，整数 n 表示图中节点的数目，edges 数组表示图中的边，
+     * 其中 edges[i] = [ui, vi] ，表示 ui 和 vi 之间有一条无向边。
+     *
+     * 一个 连通三元组 指的是 三个 节点组成的集合且这三个点之间 两两 有边。
+     *
+     * 连通三元组的度数 是所有满足此条件的边的数目：一个顶点在这个三元组内，而另一个顶点不在这个三元组内。
+     *
+     * 请你返回所有连通三元组中度数的 最小值 ，如果图中没有连通三元组，那么返回 -1 。
+     *
+     *
+     *
+     * 示例 1：
+     *
+     *
+     * 输入：n = 6, edges = [[1,2],[1,3],[3,2],[4,1],[5,2],[3,6]]
+     * 输出：3
+     * 解释：只有一个三元组 [1,2,3] 。构成度数的边在上图中已被加粗。
+     * 示例 2：
+     *
+     *
+     * 输入：n = 7, edges = [[1,3],[4,1],[4,3],[2,5],[5,6],[6,7],[7,5],[2,6]]
+     * 输出：0
+     * 解释：有 3 个三元组：
+     * 1) [1,4,3]，度数为 0 。
+     * 2) [2,5,6]，度数为 2 。
+     * 3) [5,6,7]，度数为 2 。
+     *
+     *
+     * 提示：
+     *
+     * 2 <= n <= 400
+     * edges[i].length == 2
+     * 1 <= edges.length <= n * (n-1) / 2
+     * 1 <= ui, vi <= n
+     * ui != vi
+     * 图中没有重复的边。
+     *
+     * @param n n
+     * @param edges edges
+     * @return int
+     */
+    public int minTrioDegree(int n, int[][] edges) {
+        Union union = new Union(n);
+        int m = edges.length;
+        for (int i = 0; i < m; i++) {
+            union.union(edges[i][0] - 1, edges[i][1] - 1);
+        }
+        for (int i = 0; i < n; i++) {
+            int i1 = union.find(i);
+        }
         return 0;
     }
 
@@ -1195,23 +1282,5 @@ public class UnionFinder {
             int root = find(x);
             return size[root];
         }
-    }
-
-    public int minTrioDegree(int n, int[][] edges) {
-        Union union = new Union(n);
-        int m = edges.length;
-        for (int i = 0; i < m; i++) {
-            union.union(edges[i][0] - 1, edges[i][1] - 1);
-        }
-        for (int i = 0; i < n; i++) {
-            int i1 = union.find(i);
-        }
-
-        return 0;
-    }
-
-    public static void main(String[] args) {
-        UnionFinder unionFinder = new UnionFinder();
-        unionFinder.minTrioDegree(6, new int[][]{{1,2},{1,3},{3,2},{4,1},{5,2},{3,6}});
     }
 }

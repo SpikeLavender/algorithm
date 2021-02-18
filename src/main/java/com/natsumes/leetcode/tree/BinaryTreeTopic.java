@@ -12,6 +12,42 @@ import java.util.*;
  * <a href="https://leetcode-cn.com/problems/binary-tree-zigzag-level-order-traversal/">103.二叉树的锯齿形层序遍历</a>
  * {@link BinaryTreeTopic#zigzagLevelOrder(com.natsumes.leetcode.tree.TreeNode)}
  *
+ * <a href="https://leetcode-cn.com/problems/binary-tree-paths/">257.二叉树的所有路径</a>
+ * {@link BinaryTreeTopic#binaryTreePaths(com.natsumes.leetcode.tree.TreeNode)}
+ *
+ * <a href="https://leetcode-cn.com/problems/path-sum/">112.路径总和</a>
+ * {@link BinaryTreeTopic#hasPathSum(com.natsumes.leetcode.tree.TreeNode, int)}
+ *
+ * <a href="https://leetcode-cn.com/problems/path-sum-ii/">113.路径总和 II</a>
+ * {@link BinaryTreeTopic#pathSum(com.natsumes.leetcode.tree.TreeNode, int)}
+ *
+ * <a href="https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/">124.二叉树中的最大路径和</a>
+ * {@link BinaryTreeTopic#maxPathSum(com.natsumes.leetcode.tree.TreeNode)}
+ *
+ * TODO: <a href="https://leetcode-cn.com/problems/sum-root-to-leaf-numbers/">129.求根到叶子节点数字之和</a>
+ * {@link BinaryTreeTopic#sumNumbers(com.natsumes.leetcode.tree.TreeNode)}
+ *
+ * TODO: <a href="https://leetcode-cn.com/problems/path-sum-iii/">437.路径总和 III</a>
+ * {@link BinaryTreeTopic#pathSumIII(com.natsumes.leetcode.tree.TreeNode, int)}
+ *
+ * TODO: <a href="https://leetcode-cn.com/problems/path-sum-iv/">666.路径总和 IV</a>
+ * {@link BinaryTreeTopic#pathSum(int[])}
+ *
+ * TODO: <a href="https://leetcode-cn.com/problems/count-univalue-subtrees/">250.统计同值子树</a>
+ * {@link BinaryTreeTopic#countUnivalSubtrees(com.natsumes.leetcode.tree.TreeNode)}
+ *
+ * TODO: <a href="https://leetcode-cn.com/problems/longest-univalue-path/">687.最长同值路径</a>
+ * {@link BinaryTreeTopic#longestUnivaluePath(com.natsumes.leetcode.tree.TreeNode)}
+ *
+ * TODO: <a href="https://leetcode-cn.com/problems/smallest-string-starting-from-leaf/">988.从叶结点开始的最小字符串</a>
+ * {@link BinaryTreeTopic#smallestFromLeaf(com.natsumes.leetcode.tree.TreeNode)}
+ *
+ * <a>查找完全二叉树的最后一层最右边的节点</a>
+ * {@link BinaryTreeTopic#findLastRightNode(com.natsumes.leetcode.tree.TreeNode)}
+ *
+ * <a href="https://leetcode-cn.com/problems/trim-a-binary-search-tree/submissions/">669.修剪二叉搜索树</a>
+ * {@link BinaryTreeTopic#trimBST(com.natsumes.leetcode.tree.TreeNode, int, int)}
+ *
  * @author hetengjiao
  */
 public class BinaryTreeTopic {
@@ -633,9 +669,53 @@ public class BinaryTreeTopic {
     }
 
     /**
-     * 是否存在根节点到叶子节点的路径
+     * 257. 二叉树的所有路径
+     * 给定一个二叉树，返回所有从根节点到叶子节点的路径。
+     *
+     * 说明: 叶子节点是指没有子节点的节点。
+     *
+     * 示例:
+     *
+     * 输入:
+     *
+     *    1
+     *  /   \
+     * 2     3
+     *  \
+     *   5
+     *
+     * 输出: ["1->2->5", "1->3"]
+     *
+     * 解释: 所有根节点到叶子节点的路径为: 1->2->5, 1->3
+     *
+     * @param root root
+     * @return paths
      */
-    private boolean hasPathSum;
+    public List<String> binaryTreePaths(TreeNode root) {
+        List<String> res = new ArrayList<>();
+        doBinaryTreePaths(root, res, new ArrayList<>());
+        return res;
+    }
+
+    private void doBinaryTreePaths(TreeNode node, List<String> res, List<Integer> trace) {
+        if (node == null) {
+            return;
+        }
+        trace.add(node.val);
+        if (node.left == null && node.right == null) {
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < trace.size(); i++) {
+                sb.append(trace.get(i));
+                if (i < trace.size() - 1) {
+                    sb.append("->");
+                }
+            }
+            res.add(sb.toString());
+        }
+        doBinaryTreePaths(node.left, res, trace);
+        doBinaryTreePaths(node.right, res, trace);
+        trace.remove(trace.size() - 1);
+    }
 
     /**
      * LC 路径总和  || 112. 路径总和
@@ -661,43 +741,246 @@ public class BinaryTreeTopic {
      * 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
      */
     public boolean hasPathSum(TreeNode root, int sum) {
-        hasPathSum = false;
-        hasPathSumTop(root, sum);
-        //hasPathSumBottom(root, sum);
-        return hasPathSum;
-    }
-
-    /**
-     * 递归 -- 自顶向下
-     */
-    private void hasPathSumTop(TreeNode root, int sum) {
         // 如果已经有满足条件的，就不需要再遍历了
-        if (root == null || hasPathSum) {
-            return;
+        if (root == null) {
+            return false;
         }
 
-        if (root.left == null && root.right == null && sum == root.val) {
-            hasPathSum = true;
-            return;
+        if (root.left == null && root.right == null ) {
+            return sum == root.val;
         }
-        hasPathSumTop(root.left, sum - root.val);
-        hasPathSumTop(root.right, sum - root.val);
+        return hasPathSum(root.left, sum - root.val) || hasPathSum(root.right, sum - root.val);
     }
 
     /**
-     * 递归 -- 自底向上
+     * 113. 路径总和 II
+     * 给定一个二叉树和一个目标和，找到所有从根节点到叶子节点路径总和等于给定目标和的路径。
+     *
+     * 说明: 叶子节点是指没有子节点的节点。
+     *
+     * 示例:
+     * 给定如下二叉树，以及目标和 sum = 22，
+     *
+     *               5
+     *              / \
+     *             4   8
+     *            /   / \
+     *           11  13  4
+     *          /  \    / \
+     *         7    2  5   1
+     * 返回:
+     *
+     * [
+     *    [5,4,11,2],
+     *    [5,8,4,5]
+     * ]
+     *
+     * @param root root
+     * @param targetSum targetSum
+     * @return list
      */
-    private void hasPathSumBottom(TreeNode root, int sum) {
-        if (root == null || hasPathSum) {
+    public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
+        List<List<Integer>> res = new ArrayList<>();
+        List<Integer> track = new LinkedList<>();
+        doPathSum(root, res, track, targetSum);
+        return res;
+    }
+
+    private void doPathSum(TreeNode node, List<List<Integer>> res, List<Integer> track, int sum) {
+        if (node == null) {
             return;
         }
-        sum -= root.val;
-        hasPathSumBottom(root.left, sum);
-        hasPathSumBottom(root.right, sum);
-        if (sum == 0) {
-            hasPathSum = true;
+        track.add(node.val);
+        sum -= node.val;
+        if (sum == 0 && node.left == null && node.right == null) {
+            res.add(new ArrayList<>(track));
         }
+        doPathSum(node.left, res, track, sum);
+        doPathSum(node.right, res, track, sum);
+        track.remove(track.size() - 1);
     }
+
+    /**
+     * 437. 路径总和 III
+     * 给定一个二叉树，它的每个结点都存放着一个整数值。
+     *
+     * 找出路径和等于给定数值的路径总数。
+     *
+     * 路径不需要从根节点开始，也不需要在叶子节点结束，但是路径方向必须是向下的（只能从父节点到子节点）。
+     *
+     * 二叉树不超过1000个节点，且节点数值范围是 [-1000000,1000000] 的整数。
+     *
+     * 示例：
+     *
+     * root = [10,5,-3,3,2,null,11,3,-2,null,1], sum = 8
+     *
+     *       10
+     *      /  \
+     *     5   -3
+     *    / \    \
+     *   3   2   11
+     *  / \   \
+     * 3  -2   1
+     *
+     * 返回 3。和等于 8 的路径有:
+     *
+     * 1.  5 -> 3
+     * 2.  5 -> 2 -> 1
+     * 3.  -3 -> 11
+     *
+     * @param root root
+     * @param sum sum
+     * @return ans
+     */
+    public int pathSumIII(TreeNode root, int sum) {
+
+        return 0;
+    }
+
+    /**
+     * 666. 路径总和 IV
+     * 对于一棵深度小于 5 的树，可以用一组三位十进制整数来表示。
+     *
+     * 对于每个整数：
+     *
+     * 百位上的数字表示这个节点的深度 D，1 <= D <= 4。
+     * 十位上的数字表示这个节点在当前层所在的位置 P， 1 <= P <= 8。位置编号与一棵满二叉树的位置编号相同。
+     * 个位上的数字表示这个节点的权值 V，0 <= V <= 9。
+     * 给定一个包含三位整数的升序数组，表示一棵深度小于 5 的二叉树，请你返回从根到所有叶子结点的路径之和。
+     *
+     *
+     *
+     * 示例 1：
+     *
+     * 输入: [113, 215, 221]
+     * 输出: 12
+     * 解释:
+     * 这棵树形状如下:
+     *     3
+     *    / \
+     *   5   1
+     *
+     * 路径和 = (3 + 5) + (3 + 1) = 12.
+     * 示例 2：
+     *
+     * 输入: [113, 221]
+     * 输出: 4
+     * 解释:
+     * 这棵树形状如下:
+     *     3
+     *      \
+     *       1
+     *
+     * 路径和 = (3 + 1) = 4.
+     *
+     * @param nums nums
+     * @return ans
+     */
+    public int pathSum(int[] nums) {
+        return 0;
+    }
+
+    /**
+     * 250. 统计同值子树
+     * 给定一个二叉树，统计该二叉树数值相同的子树个数。
+     *
+     * 同值子树是指该子树的所有节点都拥有相同的数值。
+     *
+     * 示例：
+     *
+     * 输入: root = [5,1,5,5,5,null,5]
+     *
+     *               5
+     *              / \
+     *             1   5
+     *            / \   \
+     *           5   5   5
+     *
+     * 输出: 4
+     *
+     * @param root root
+     * @return ans
+     */
+    public int countUnivalSubtrees(TreeNode root) {
+        return 0;
+    }
+
+    /**
+     * 687. 最长同值路径
+     * 给定一个二叉树，找到最长的路径，这个路径中的每个节点具有相同值。 这条路径可以经过也可以不经过根节点。
+     *
+     * 注意：两个节点之间的路径长度由它们之间的边数表示。
+     *
+     * 示例 1:
+     *
+     * 输入:
+     *
+     *               5
+     *              / \
+     *             4   5
+     *            / \   \
+     *           1   1   5
+     * 输出:
+     *
+     * 2
+     * 示例 2:
+     *
+     * 输入:
+     *
+     *               1
+     *              / \
+     *             4   5
+     *            / \   \
+     *           4   4   5
+     * 输出:
+     *
+     * 2
+     * 注意: 给定的二叉树不超过10000个结点。 树的高度不超过1000。
+     *
+     * @param root root
+     * @return ans
+     */
+    public int longestUnivaluePath(TreeNode root) {
+        return 0;
+    }
+
+    /**
+     * 988. 从叶结点开始的最小字符串
+     * 给定一颗根结点为 root 的二叉树，树中的每一个结点都有一个从 0 到 25 的值，
+     * 分别代表字母 'a' 到 'z'：值 0 代表 'a'，值 1 代表 'b'，依此类推。
+     *
+     * 找出按字典序最小的字符串，该字符串从这棵树的一个叶结点开始，到根结点结束。
+     *
+     * （小贴士：字符串中任何较短的前缀在字典序上都是较小的：例如，在字典序上 "ab" 比 "aba" 要小。叶结点是指没有子结点的结点。）
+     *
+     * 示例 1：
+     *
+     * 输入：[0,1,2,3,4,3,4]
+     * 输出："dba"
+     *
+     * 示例 2：
+     *
+     * 输入：[25,1,3,1,3,0,2]
+     * 输出："adz"
+     *
+     * 示例 3：
+     *
+     * 输入：[2,2,1,null,1,0,null,0]
+     * 输出："abc"
+     *
+     *
+     * 提示：
+     *
+     * 给定树的结点数介于 1 和 8500 之间。
+     * 树中的每个结点都有一个介于 0 和 25 之间的值。
+     *
+     * @param root root
+     * @return leaf string
+     */
+    public String smallestFromLeaf(TreeNode root) {
+        return "";
+    }
+
 
     /**
      * LC 填充每个节点的下一个右侧节点指针 || 116. 填充每个节点的下一个右侧节点指针
@@ -1156,9 +1439,6 @@ public class BinaryTreeTopic {
         p.right = right;
     }
 
-
-
-    private int ans = Integer.MIN_VALUE;
     /**
      * 124. 二叉树中的最大路径和
      * 给定一个非空二叉树，返回其最大路径和。
@@ -1192,27 +1472,78 @@ public class BinaryTreeTopic {
      * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
      */
     public int maxPathSum(TreeNode root) {
-        oneSideMax(root);
-        return ans;
+        int[] ans = new int[]{Integer.MIN_VALUE};
+        onSideMax(root, ans);
+        return ans[0];
     }
 
-    private int oneSideMax(TreeNode root) {
-        if (root == null) {
+    /**
+     * 计算二叉树中的一个节点的最大贡献值
+     * @param node node
+     * @param ans 记录结果
+     * @return 节点的最大贡献值
+     */
+    private int onSideMax(TreeNode node, int[] ans) {
+        if (node == null) {
             return 0;
         }
-        int left = Math.max(0, oneSideMax(root.left));
-        int right = Math.max(0, oneSideMax(root.right));
-        // 后序遍历
-        ans = Math.max(ans, left + right + root.val);
-        return Math.max(left, right) + root.val;
+        int left = Math.max(0, onSideMax(node.left, ans));
+        int right = Math.max(0, onSideMax(node.right, ans));
+        ans[0] = Math.max(left + right + node.val, ans[0]);
+        return Math.max(left, right) + node.val;
+    }
+
+    /**
+     * 129. 求根到叶子节点数字之和
+     * 给定一个二叉树，它的每个结点都存放一个 0-9 的数字，每条从根到叶子节点的路径都代表一个数字。
+     *
+     * 例如，从根到叶子节点路径 1->2->3 代表数字 123。
+     *
+     * 计算从根到叶子节点生成的所有数字之和。
+     *
+     * 说明: 叶子节点是指没有子节点的节点。
+     *
+     * 示例 1:
+     *
+     * 输入: [1,2,3]
+     *     1
+     *    / \
+     *   2   3
+     * 输出: 25
+     * 解释:
+     * 从根到叶子节点路径 1->2 代表数字 12.
+     * 从根到叶子节点路径 1->3 代表数字 13.
+     * 因此，数字总和 = 12 + 13 = 25.
+     * 示例 2:
+     *
+     * 输入: [4,9,0,5,1]
+     *     4
+     *    / \
+     *   9   0
+     *  / \
+     * 5   1
+     * 输出: 1026
+     * 解释:
+     * 从根到叶子节点路径 4->9->5 代表数字 495.
+     * 从根到叶子节点路径 4->9->1 代表数字 491.
+     * 从根到叶子节点路径 4->0 代表数字 40.
+     * 因此，数字总和 = 495 + 491 + 40 = 1026
+     *
+     * @param root root
+     * @return res
+     */
+    public int sumNumbers(TreeNode root) {
+        return 0;
     }
 
     /**
      * 297. 二叉树的序列化与反序列化
      *
-     * 序列化是将一个数据结构或者对象转换为连续的比特位的操作，进而可以将转换后的数据存储在一个文件或者内存中，同时也可以通过网络传输到另一个计算机环境，采取相反方式重构得到原数据。
+     * 序列化是将一个数据结构或者对象转换为连续的比特位的操作，进而可以将转换后的数据存储在一个文件或者内存中，
+     * 同时也可以通过网络传输到另一个计算机环境，采取相反方式重构得到原数据。
      *
-     * 请设计一个算法来实现二叉树的序列化与反序列化。这里不限定你的序列 / 反序列化算法执行逻辑，你只需要保证一个二叉树可以被序列化为一个字符串并且将这个字符串反序列化为原始的树结构。
+     * 请设计一个算法来实现二叉树的序列化与反序列化。这里不限定你的序列 / 反序列化算法执行逻辑，
+     * 你只需要保证一个二叉树可以被序列化为一个字符串并且将这个字符串反序列化为原始的树结构。
      *
      * 示例: 
      *
@@ -1345,7 +1676,7 @@ public class BinaryTreeTopic {
         /**
          * 层级遍历
          */
-        private void serialize03(TreeNode root, StringBuilder str) {
+        public void serialize03(TreeNode root, StringBuilder str) {
             if (root == null) {
                 return;
             }
@@ -1368,7 +1699,7 @@ public class BinaryTreeTopic {
         /**
          * 层级遍历
          */
-        private TreeNode deserialize03(String data) {
+        public TreeNode deserialize03(String data) {
             if (data.isEmpty()) {
                 return null;
             }
@@ -1640,6 +1971,7 @@ public class BinaryTreeTopic {
 
     /**
      * 669. 修剪二叉搜索树
+     *
      * 给你二叉搜索树的根节点 root ，同时给定最小边界low 和最大边界 high。通过修剪二叉搜索树，
      * 使得所有节点的值在[low, high]中。修剪树不应该改变保留在树中的元素的相对结构（即，如果没有被移除，
      * 原有的父代子代关系都应当保留）。 可以证明，存在唯一的答案。
@@ -1698,4 +2030,64 @@ public class BinaryTreeTopic {
         return root;
     }
 
+    /**
+     * 查找完全二叉树的最后一层最右边的节点
+     *
+     * 对每个子树的根节点，先从它的右子树开始，沿着左分支一直走到最后一层，如果深度等于树的深度
+     * 且该最后节点右边没有节点，则为所求；
+     * 否则，右侧右节点，则遍历右子树，深度小于树的深度，则遍历左子树
+     *
+     *            1
+     *          /  \
+     *         2    2
+     *        / \  / \
+     *       3  4 4   3
+     *
+     * @param treeNode treeNode
+     * @return treeNode
+     */
+    public TreeNode findLastRightNode(TreeNode treeNode) {
+        if (treeNode == null) {
+            return null;
+        }
+        if (treeNode.left == null && treeNode.right == null) {
+            return treeNode;
+        }
+
+        TreeNode curTreeNode = treeNode;
+        int depth = 0;
+        while (curTreeNode != null) {
+            curTreeNode = curTreeNode.left;
+            depth++;
+        }
+        int level = 0;
+        int tempDepth;
+        while (treeNode != null) {
+            level++;
+            if (level == depth) {
+                break;
+            }
+            if (treeNode.right != null) {
+                curTreeNode = treeNode.right;
+                TreeNode preTreeNode = curTreeNode;
+                tempDepth = level + 1;
+                while (curTreeNode.left != null) {
+                    tempDepth++;
+                    preTreeNode = curTreeNode;
+                    curTreeNode = curTreeNode.left;
+                }
+                if (tempDepth < depth) {
+                    treeNode = treeNode.left;
+                } else if (preTreeNode.right == null || preTreeNode.right == curTreeNode) {
+                    return curTreeNode;
+                } else {
+                    treeNode = treeNode.right;
+                }
+            } else {
+                treeNode = treeNode.left;
+            }
+        }
+
+        return treeNode;
+    }
 }
