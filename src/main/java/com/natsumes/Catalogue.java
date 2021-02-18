@@ -81,6 +81,9 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * <a href="https://leetcode-cn.com/problems/combination-sum/">39.组合总和</a>
  * {@link Permute#combinationSum(int[], int)}
  *
+ * <a href="https://leetcode-cn.com/problems/first-missing-positive/submissions/">41.缺失的第一个正数</a>
+ * {@link ArrayTopic#firstMissingPositive(int[])}
+ *
  * <a href="https://leetcode-cn.com/problems/trapping-rain-water/">42.接雨水</a>
  * {@link ArrayTopic#trap(int[])}
  * {@link ArrayTopic#trap02(int[])}

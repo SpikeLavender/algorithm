@@ -20,30 +20,6 @@ public class DailyPracticeTest {
     }
 
     @Test
-    public void maximalRectangle() {
-        char[][] matrix = new char[][]{
-                {'1', '0', '1', '0' , '0'},
-                {'1', '0', '1', '1' , '1'},
-                {'1', '1', '1', '1' , '1'},
-                {'1', '0', '0', '1' , '0'}
-        };
-
-        Assert.assertEquals(6, dp.doMaximalRectangleCommon(matrix));
-
-        matrix = new char[][] {};
-        Assert.assertEquals(0, dp.doMaximalRectangleCommon(matrix));
-
-        matrix = new char[][] {{'0'}};
-        Assert.assertEquals(0, dp.doMaximalRectangleCommon(matrix));
-
-        matrix = new char[][] {{'1'}};
-        Assert.assertEquals(1, dp.doMaximalRectangleCommon(matrix));
-
-        matrix = new char[][] {{'0', '0'}};
-        Assert.assertEquals(0, dp.doMaximalRectangleCommon(matrix));
-    }
-
-    @Test
     public void findContentChildren() {
         Assert.assertEquals(2, dp.findContentChildren(new int[]{7, 8, 9, 10}, new int[]{5, 6, 7, 8}));
         Assert.assertEquals(1, dp.findContentChildren(new int[]{1, 2, 3}, new int[]{1, 1}));

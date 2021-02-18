@@ -216,6 +216,9 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * <a href="https://leetcode-cn.com/problems/largest-rectangle-in-histogram/">84.柱状图中最大的矩形</a>
  * {@link ArrayTopic#largestRectangleArea(int[])}
  *
+ * <a href="https://leetcode-cn.com/problems/first-missing-positive/submissions/">41.缺失的第一个正数</a>
+ * {@link ArrayTopic#firstMissingPositive(int[])}
+ *
  * =====================================================================================================================
  * <h4>并查集</h4>
  *

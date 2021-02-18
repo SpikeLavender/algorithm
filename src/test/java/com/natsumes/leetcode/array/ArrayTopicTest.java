@@ -321,4 +321,11 @@ public class ArrayTopicTest {
         matrix = new char[][] {{'0', '0'}};
         Assert.assertEquals(0, at.maximalRectangle(matrix));
     }
+
+    @Test
+    public void firstMissingPositive() {
+        Assert.assertEquals(2, at.firstMissingPositive(new int[]{3, 4, -1, 1}));
+        Assert.assertEquals(3, at.firstMissingPositive(new int[]{1, 2, 0}));
+        Assert.assertEquals(1, at.firstMissingPositive(new int[]{7, 8, 9, 11, 12}));
+    }
 }
