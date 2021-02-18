@@ -41,6 +41,9 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * <a href="https://leetcode-cn.com/problems/string-to-integer-atoi/">8.字符串转换整数 (atoi)</a>
  * {@link StringHandler#myAtoi(String)}
  *
+ * <a href="https://leetcode-cn.com/problems/palindrome-number/">9.回文数</a>
+ * {@link ArrayTopic#isPalindrome(int)}
+ *
  * <a href="https://leetcode-cn.com/problems/regular-expression-matching/">10.正则表达式匹配</a>
  * {@link DynamicProgram#isMatch(String, String)}
  *

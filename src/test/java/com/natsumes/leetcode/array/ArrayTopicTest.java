@@ -24,6 +24,14 @@ public class ArrayTopicTest {
     }
 
     @Test
+    public void isPalindrome() {
+        Assert.assertTrue(at.isPalindrome(121));
+        Assert.assertFalse(at.isPalindrome(-121));
+        Assert.assertFalse(at.isPalindrome(10));
+        Assert.assertFalse(at.isPalindrome(-101));
+    }
+
+    @Test
     public void findMedianSortedArrays() {
         Assert.assertEquals(2.0d, at.findMedianSortedArrays(new int[] {1, 3}, new int[] {2}), 0.0);
         Assert.assertEquals(2.5d, at.findMedianSortedArrays(new int[] {1, 2}, new int[] {3, 4}), 0.0);
