@@ -12,6 +12,12 @@ import java.util.*;
  * <a href="https://leetcode-cn.com/problems/min-cost-climbing-stairs/">746.使用最小花费爬楼梯</a>
  * {@link DynamicProgram#minCostClimbingStairs(int[])}
  *
+ * <a href="https://leetcode-cn.com/problems/fibonacci-number/">509.斐波那契数</a>
+ * {@link DynamicProgram#fib(int)}
+ *
+ * <a href="https://leetcode-cn.com/problems/n-th-tribonacci-number/">1137.第 N 个泰波那契数</a>
+ * {@link DynamicProgram#tribonacci(int)}
+ *
  * <a href="https://leetcode-cn.com/problems/coin-change/">322.零钱兑换</a>
  * {@link DynamicProgram#coinChange(int[], int)}
  *
@@ -2416,6 +2422,174 @@ public class DynamicProgram {
             dp[i] = Math.min(dp[i - 1] + cost[i - 1], dp[i - 2] + cost[i - 2]);
         }
 
+        return dp[n];
+    }
+
+    /**
+     * 509. 斐波那契数
+     *
+     * 斐波那契数，通常用 F(n) 表示，形成的序列称为 斐波那契数列 。
+     * 该数列由 0 和 1 开始，后面的每一项数字都是前面两项数字的和。也就是：
+     *
+     * F(0) = 0，F(1) = 1
+     * F(n) = F(n - 1) + F(n - 2)，其中 n > 1
+     * 给你 n ，请计算 F(n) 。
+     *
+     *
+     *
+     * 示例 1：
+     *
+     * 输入：2
+     * 输出：1
+     * 解释：F(2) = F(1) + F(0) = 1 + 0 = 1
+     *
+     * 示例 2：
+     *
+     * 输入：3
+     * 输出：2
+     * 解释：F(3) = F(2) + F(1) = 1 + 1 = 2
+     *
+     * 示例 3：
+     *
+     * 输入：4
+     * 输出：3
+     * 解释：F(4) = F(3) + F(2) = 2 + 1 = 3
+     *
+     *
+     * 提示：
+     *
+     * 0 <= n <= 30
+     *
+     * @param n n
+     * @return ans
+     */
+    public int fib(int n) {
+        // dp[i] = dp[i - 1] + dp[i - 2]
+        if (n <= 1) {
+            return n;
+        }
+        int dp0 = 0;
+        int dp1 = 1;
+        int dp2 = 0;
+        for (int i = 2; i <= n; i++) {
+            dp2 = dp0 + dp1;
+            dp0 = dp1;
+            dp1 = dp2;
+        }
+        return dp2;
+    }
+
+    /**
+     * 斐波那契数列： DP
+     * dp(n) = dp(n-1) + dp(n-2)
+     *
+     * 使用动态规划四个步骤
+     * 1. 把当前的复杂问题转化成一个个简单的子问题（分治）
+     * 2. 寻找子问题的最优解法（最优子结构）
+     * 3. 把子问题的解合并，存储中间状态
+     * 4. 递归+记忆搜索或自底而上的形成递推方程(dp方程)
+     *
+     * 时间复杂度
+     * 新的斐波那契数列实现时间复杂度为O(n)
+     * 优缺点
+     * 优点：时间复杂度和空间复杂度都相当较低
+     * 缺点：难，有些场景不适用
+     * 适用场景
+     * 尽管动态规划比回溯算法高效，但是，并不是所有问题，都可以用动态规划来解决。能用动态规划解决
+     * 的问题，需要满足三个特征，最优子结构、无后效性和重复子问题。在重复子问题这一点上，动态规划
+     * 和分治算法的区分非常明显。分治算法要求分割成的子问题，不能有重复子问题，而动态规划正好相
+     * 反，动态规划之所以高效，就是因为回溯算法实现中存在大量的重复子问题。
+     *
+     * @param n n
+     * @return int
+     */
+    public int fib01(int n) {
+        // dp[i] = dp[i - 1] + dp[i - 2]
+        if (n <= 1) {
+            return n;
+        }
+        int[] dp = new int[n + 1];
+        dp[0] = 0;
+        dp[1] = 1;
+        for (int i = 2; i <= n; i++) {
+            dp[i] = dp[i - 2] + dp[i - 1];
+        }
+        return dp[n];
+    }
+
+    public int fib02(int n) {
+        // fib(n) = fib(n - 1) + fib(n - 2)
+        if (n <= 1) {
+            return n;
+        }
+        return fib02(n - 1) + fib02(n - 2);
+    }
+
+    /**
+     * 斐波那契数列： 递归分治+记忆搜索(备忘录)
+     */
+    public int fib03(int n) {
+        if (n <= 1) {
+            return n;
+        }
+        int[] sub = new int[31];
+        return doFib(n, sub);
+    }
+
+    private int doFib(int n, int[] sub) {
+        if (n <= 1) {
+            return n;
+        }
+        if (sub[n] == 0) {
+            sub[n] = doFib(n - 1, sub) + doFib(n - 2, sub);
+        }
+        return sub[n];
+    }
+
+    /**
+     * 1137. 第 N 个泰波那契数
+     *
+     * 泰波那契序列 Tn 定义如下：
+     *
+     * T0 = 0, T1 = 1, T2 = 1, 且在 n >= 0 的条件下 Tn+3 = Tn + Tn+1 + Tn+2
+     *
+     * 给你整数 n，请返回第 n 个泰波那契数 Tn 的值。
+     *
+     *
+     *
+     * 示例 1：
+     *
+     * 输入：n = 4
+     * 输出：4
+     * 解释：
+     * T_3 = 0 + 1 + 1 = 2
+     * T_4 = 1 + 1 + 2 = 4
+     * 示例 2：
+     *
+     * 输入：n = 25
+     * 输出：1389537
+     *
+     *
+     * 提示：
+     *
+     * 0 <= n <= 37
+     * 答案保证是一个 32 位整数，即 answer <= 2^31 - 1。
+     *
+     * @param n n
+     * @return ans
+     */
+    public int tribonacci(int n) {
+        int[] dp = new int[n + 1];
+        dp[0] = 0;
+        if (n >= 1) {
+            dp[1] = 1;
+        }
+        if (n >= 2) {
+            dp[2] = 1;
+        }
+        for (int i = 3; i <= n; i++) {
+            dp[i] = dp[i - 1] + dp[i - 2] + dp[i - 3];
+        }
         return dp[n];
     }
 }

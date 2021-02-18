@@ -380,4 +380,38 @@ public class DynamicProgramTest {
         Assert.assertEquals(15, dp.minCostClimbingStairs(new int[]{10, 15, 20}));
         Assert.assertEquals(6, dp.minCostClimbingStairs(new int[]{1, 100, 1, 1, 1, 100, 1, 1, 100, 1}));
     }
+
+    @Test
+    public void fib() {
+        Assert.assertEquals(1, dp.fib(2));
+        Assert.assertEquals(2, dp.fib(3));
+        Assert.assertEquals(3, dp.fib(4));
+    }
+
+    @Test
+    public void fib01() {
+        Assert.assertEquals(1, dp.fib01(2));
+        Assert.assertEquals(2, dp.fib01(3));
+        Assert.assertEquals(3, dp.fib01(4));
+    }
+
+    @Test
+    public void fib02() {
+        Assert.assertEquals(1, dp.fib02(2));
+        Assert.assertEquals(2, dp.fib02(3));
+        Assert.assertEquals(3, dp.fib02(4));
+    }
+
+    @Test
+    public void fib03() {
+        Assert.assertEquals(1, dp.fib03(2));
+        Assert.assertEquals(2, dp.fib03(3));
+        Assert.assertEquals(3, dp.fib03(4));
+    }
+
+    @Test
+    public void tribonacci() {
+        Assert.assertEquals(4, dp.tribonacci(4));
+        Assert.assertEquals(1389537, dp.tribonacci(25));
+    }
 }

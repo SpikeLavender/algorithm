@@ -3,7 +3,6 @@ package com.natsumes.alth;
 import com.natsumes.alth.back.NQueens;
 import com.natsumes.alth.divide.CharUpCase;
 import com.natsumes.alth.divide.Pow;
-import com.natsumes.alth.dp.Fibonacci;
 import com.natsumes.alth.greedy.Goods;
 import com.natsumes.alth.greedy.GreedyBag;
 import org.junit.Assert;
@@ -56,26 +55,6 @@ public class AlthTest {
         queens.setQueens(0);
     }
 
-    @Test
-    public void testFibonacci() {
-        long l = Fibonacci.commonFib(8);
-        System.out.println(l);
-        Assert.assertEquals(21, l);
-    }
-
-    @Test
-    public void testFib() {
-        long l = Fibonacci.fib(64);
-        System.out.println(l);
-        Assert.assertEquals(10610209857723L, l);
-    }
-
-    @Test
-    public void testDpFib() {
-        long l = Fibonacci.dp4fib(64);
-        System.out.println(l);
-        Assert.assertEquals(10610209857723L, l);
-    }
 
     @Test
     public void testDp() {

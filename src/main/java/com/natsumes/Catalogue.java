@@ -287,6 +287,9 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * <a href="https://leetcode-cn.com/problems/next-greater-element-ii/">503.下一个更大元素 II</a>
  * {@link ArrayTopic#nextGreaterElements(int[])}
  *
+ * <a href="https://leetcode-cn.com/problems/fibonacci-number/">509.斐波那契数</a>
+ * {@link DynamicProgram#fib(int)}
+ *
  * <a href="https://leetcode-cn.com/problems/longest-palindromic-subsequence/">516.最长回文子序列</a>
  * {@link DynamicProgram#longestPalindromeSubseq(java.lang.String)}
  *
@@ -371,6 +374,9 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  *
  * <a href="https://leetcode-cn.com/problems/check-if-word-is-valid-after-substitutions/">1003.检查替换后的词是否有效</a>
  * {@link StringHandler#isValidString(java.lang.String)}
+ *
+ * <a href="https://leetcode-cn.com/problems/n-th-tribonacci-number/">1137.第 N 个泰波那契数</a>
+ * {@link DynamicProgram#tribonacci(int)}
  *
  * <a href="https://leetcode-cn.com/problems/longest-common-subsequence/">1143.最长公共子序列</a>
  * {@link DynamicProgram#longestCommonSubsequence(java.lang.String, java.lang.String)}

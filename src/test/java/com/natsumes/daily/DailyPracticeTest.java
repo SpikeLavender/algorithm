@@ -78,13 +78,6 @@ public class DailyPracticeTest {
     }
 
     @Test
-    public void testFib() {
-        Assert.assertEquals(1, dp.fib(2));
-        Assert.assertEquals(2, dp.fib(3));
-        Assert.assertEquals(3, dp.fib(4));
-    }
-
-    @Test
     public void testLargeGroupPositions() {
         System.out.println(dp.largeGroupPositions("abbxxxxzzy"));
         System.out.println(dp.largeGroupPositions("abc"));
