@@ -78,11 +78,10 @@ public class SlidingWindow {
      * @return int
      */
     public int findMaxConsecutiveOnes(int[] nums) {
-        int left;
         int right = 0;
         int ans = 0;
         while (right < nums.length) {
-            left = right;
+            int left = right;
             while (right < nums.length && nums[right] == 1) {
                 right++;
             }
