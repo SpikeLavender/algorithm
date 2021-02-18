@@ -93,6 +93,9 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * <a href="https://leetcode-cn.com/problems/regular-expression-matching/">10.正则表达式匹配</a>
  * {@link DynamicProgram#isMatch(String, String)}
  *
+ * <a href="https://leetcode-cn.com/problems/super-egg-drop/">887.鸡蛋掉落</a>
+ * {@link DynamicProgram#superEggDrop(int, int)}
+ *
  * =====================================================================================================================
  * <h4>2.n sum 问题</h4>
  * {@link com.natsumes.leetcode.nsum.NumSums}

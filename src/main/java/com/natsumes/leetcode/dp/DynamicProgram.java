@@ -38,6 +38,9 @@ import java.util.*;
  * <a href="https://leetcode-cn.com/problems/regular-expression-matching/">10.正则表达式匹配</a>
  * {@link DynamicProgram#isMatch(String, String)}
  *
+ * <a href="https://leetcode-cn.com/problems/super-egg-drop/">887.鸡蛋掉落</a>
+ * {@link DynamicProgram#superEggDrop(int, int)}
+ *
  * ---------------------------------------------------------------------------------------------------------------------
  * <a href="https://leetcode-cn.com/problems/house-robber/">198.打家劫舍</a>
  * {@link DynamicProgram#rob1(int[])}
@@ -1996,7 +1999,8 @@ public class DynamicProgram {
     }
 
     /**
-     * 887. 鸡蛋掉落
+     * 887.鸡蛋掉落
+     *
      * 你将获得 K 个鸡蛋，并可以使用一栋从 1 到 N  共有 N 层楼的建筑。
      *
      * 每个蛋的功能都是一样的，如果一个蛋碎了，你就不能再把它掉下去。
@@ -2035,12 +2039,54 @@ public class DynamicProgram {
      * 1 <= K <= 100
      * 1 <= N <= 10000
      *
-     * @param K k
-     * @param N n
+     * @param K 鸡蛋数
+     * @param N 楼层数
      * @return ans
      */
     public int superEggDrop(int K, int N) {
-        return 0;
+        Map<Integer, Integer> memo = new HashMap<>(K);
+        return doSuperEggDrop(memo, K, N);
+    }
+
+    /**
+     * 扔鸡蛋
+     * @param memo 备忘录
+     * @param k 鸡蛋数
+     * @param n 楼层数
+     * @return 次数
+     */
+    private int doSuperEggDrop(Map<Integer, Integer> memo, int k, int n) {
+        if (k == 1) {
+            return n;
+        }
+        if (n == 0) {
+            return 0;
+        }
+        if (memo.containsKey(n * 100 + k)) {
+            return memo.get(n * 100 + k);
+        }
+
+        int res = Integer.MAX_VALUE;
+
+        int left = 1;
+        int right = n;
+
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            // 碎了
+            int broken = doSuperEggDrop(memo, k - 1, mid - 1);
+            // 没碎
+            int noBroken = doSuperEggDrop(memo, k, n - mid);
+            if (broken > noBroken) {
+                right = mid - 1;
+                res = Math.min(res, broken + 1);
+            } else {
+                left = mid + 1;
+                res = Math.min(res, noBroken + 1);
+            }
+        }
+        memo.put(n * 100 + k, res);
+        return res;
     }
 
 }
