@@ -32,6 +32,12 @@ import java.util.*;
  * <a href="https://leetcode-cn.com/problems/longest-palindromic-subsequence/">516.最长回文子序列</a>
  * {@link DynamicProgram#longestPalindromeSubseq(java.lang.String)}
  *
+ * <a href="https://leetcode-cn.com/problems/minimum-insertion-steps-to-make-a-string-palindrome/">1312.让字符串成为回文串的最少插入次数</a>
+ * {@link DynamicProgram#minInsertions(java.lang.String)}
+ *
+ * <a href="https://leetcode-cn.com/problems/regular-expression-matching/">10.正则表达式匹配</a>
+ * {@link DynamicProgram#isMatch(String, String)}
+ *
  * ---------------------------------------------------------------------------------------------------------------------
  * <a href="https://leetcode-cn.com/problems/house-robber/">198.打家劫舍</a>
  * {@link DynamicProgram#rob1(int[])}
@@ -1804,6 +1810,237 @@ public class DynamicProgram {
             }
         }
         return dp[0][n - 1];
+    }
+
+    /**
+     * 1312. 让字符串成为回文串的最少插入次数
+     *
+     * 给你一个字符串 s ，每一次操作你都可以在字符串的任意位置插入任意字符。
+     *
+     * 请你返回让 s 成为回文串的 最少操作次数 。
+     *
+     * 「回文串」是正读和反读都相同的字符串。
+     *
+     *
+     *
+     * 示例 1：
+     *
+     * 输入：s = "zzazz"
+     * 输出：0
+     * 解释：字符串 "zzazz" 已经是回文串了，所以不需要做任何插入操作。
+     * 示例 2：
+     *
+     * 输入：s = "mbadm"
+     * 输出：2
+     * 解释：字符串可变为 "mbdadbm" 或者 "mdbabdm" 。
+     * 示例 3：
+     *
+     * 输入：s = "leetcode"
+     * 输出：5
+     * 解释：插入 5 个字符后字符串变为 "leetcodocteel" 。
+     * 示例 4：
+     *
+     * 输入：s = "g"
+     * 输出：0
+     * 示例 5：
+     *
+     * 输入：s = "no"
+     * 输出：1
+     *
+     *
+     * 提示：
+     *
+     * 1 <= s.length <= 500
+     * s 中所有字符都是小写字母。
+     *
+     * @param s s
+     * @return count
+     */
+    public int minInsertions(String s) {
+        /*
+         * dp[i][j]: 对于字符串s[i...j], 最少要进行dp[i][j]次插入可成为回文串
+         *
+         * s[i] == s[j]: dp[i][j] = dp[i + 1][j - 1]
+         * s[i] != s[j]: dp[i][j] = min(dp[i][j - 1], dp[i + 1][j]) + 1
+         *
+         * dp[i][i] = 0
+         * ans = dp[0][n - 1]
+         */
+        int n = s.length();
+        int[][] dp = new int[n][n];
+
+        for (int i = n - 2; i >= 0; i--) {
+            for (int j = i + 1; j < n; j++) {
+                if (s.charAt(i) == s.charAt(j)) {
+                    dp[i][j] = dp[i + 1][j - 1];
+                } else {
+                    dp[i][j] = Math.min(dp[i + 1][j], dp[i][j - 1]) + 1;
+                }
+            }
+        }
+        return dp[0][n - 1];
+    }
+
+    /**
+     * 10. 正则表达式匹配
+     *
+     * 给你一个字符串 s 和一个字符规律 p，请你来实现一个支持 '.' 和 '*' 的正则表达式匹配。
+     *
+     * '.' 匹配任意单个字符
+     * '*' 匹配零个或多个前面的那一个元素
+     * 所谓匹配，是要涵盖 整个 字符串 s的，而不是部分字符串。
+     *
+     *
+     * 示例 1：
+     *
+     * 输入：s = "aa" p = "a"
+     * 输出：false
+     * 解释："a" 无法匹配 "aa" 整个字符串。
+     * 示例 2:
+     *
+     * 输入：s = "aa" p = "a*"
+     * 输出：true
+     * 解释：因为 '*' 代表可以匹配零个或多个前面的那一个元素, 在这里前面的元素就是 'a'。因此，字符串 "aa" 可被视为 'a' 重复了一次。
+     * 示例 3：
+     *
+     * 输入：s = "ab" p = ".*"
+     * 输出：true
+     * 解释：".*" 表示可匹配零个或多个（'*'）任意字符（'.'）。
+     * 示例 4：
+     *
+     * 输入：s = "aab" p = "c*a*b"
+     * 输出：true
+     * 解释：因为 '*' 表示零个或多个，这里 'c' 为 0 个, 'a' 被重复一次。因此可以匹配字符串 "aab"。
+     * 示例 5：
+     *
+     * 输入：s = "mississippi" p = "mis*is*p*."
+     * 输出：false
+     *
+     *
+     * 提示：
+     *
+     * 0 <= s.length <= 20
+     * 0 <= p.length <= 30
+     * s 可能为空，且只包含从 a-z 的小写字母。
+     * p 可能为空，且只包含从 a-z 的小写字母，以及字符 . 和 *。
+     * 保证每次出现字符 * 时，前面都匹配到有效的字符
+     *
+     * @param s s
+     * @param p p
+     * @return true or false
+     */
+    public boolean isMatch(String s, String p) {
+        int m = s.length();
+        int n = p.length();
+        Map<Integer, Boolean> track = new HashMap<>();
+        return doIsMatch(s, 0, p, 0, track, m, n);
+    }
+
+    /**
+     * s[i..] 与 p[j..]是否可以匹配
+     * @param s s
+     * @param i i
+     * @param p p
+     * @param j j
+     * @param track 记录已经计算过的结果
+     * @param m s.length
+     * @param n p.length
+     * @return true: s[i..] 与 p[j..]可以匹配, false:  s[i..] 与 p[j..]不可以匹配
+     */
+    private boolean doIsMatch(String s, int i, String p, int j, Map<Integer, Boolean> track, int m, int n) {
+        if (j == n) {
+            return i == m;
+        }
+
+        if (i == m) {
+            // 如果能匹配空串, 一定是字符和'*'成对出现
+            if ((n - j) % 2 == 1) {
+                return false;
+            }
+            // 检查是否为 x*y*z* 格式
+            for (; j + 1 < n; j += 2) {
+                if (p.charAt(j + 1) != '*') {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        boolean res;
+        int key = i * n + j;
+        if (track.containsKey(key)) {
+            return track.get(key);
+        }
+        boolean match = j < p.length() - 1 && p.charAt(j + 1) == '*';
+        if (s.charAt(i) == p.charAt(j) || p.charAt(j) == '.') {
+            // 1 匹配
+            if (match) {
+                // 1-1 通配符匹配 0 次或多次
+                res = doIsMatch(s, i, p, j + 2, track, m, n) || doIsMatch(s, i + 1, p, j, track, m, n);
+            } else {
+                // 1-2 常规匹配1次
+                res = doIsMatch(s, i + 1, p, j + 1, track, m, n);
+            }
+        } else {
+            // 2 不匹配
+            if (match) {
+                // 2-1 通配符匹配 0 次
+                res = doIsMatch(s, i, p, j + 2, track, m, n);
+            } else {
+                // 2-2 无法继续匹配
+                res = false;
+            }
+        }
+        track.put(key, res);
+        return res;
+    }
+
+    /**
+     * 887. 鸡蛋掉落
+     * 你将获得 K 个鸡蛋，并可以使用一栋从 1 到 N  共有 N 层楼的建筑。
+     *
+     * 每个蛋的功能都是一样的，如果一个蛋碎了，你就不能再把它掉下去。
+     *
+     * 你知道存在楼层 F ，满足 0 <= F <= N 任何从高于 F 的楼层落下的鸡蛋都会碎，从 F 楼层或比它低的楼层落下的鸡蛋都不会破。
+     *
+     * 每次移动，你可以取一个鸡蛋（如果你有完整的鸡蛋）并把它从任一楼层 X 扔下（满足 1 <= X <= N）。
+     *
+     * 你的目标是确切地知道 F 的值是多少。
+     *
+     * 无论 F 的初始值如何，你确定 F 的值的最小移动次数是多少？
+     *
+     *
+     *
+     * 示例 1：
+     *
+     * 输入：K = 1, N = 2
+     * 输出：2
+     * 解释：
+     * 鸡蛋从 1 楼掉落。如果它碎了，我们肯定知道 F = 0 。
+     * 否则，鸡蛋从 2 楼掉落。如果它碎了，我们肯定知道 F = 1 。
+     * 如果它没碎，那么我们肯定知道 F = 2 。
+     * 因此，在最坏的情况下我们需要移动 2 次以确定 F 是多少。
+     * 示例 2：
+     *
+     * 输入：K = 2, N = 6
+     * 输出：3
+     * 示例 3：
+     *
+     * 输入：K = 3, N = 14
+     * 输出：4
+     *
+     *
+     * 提示：
+     *
+     * 1 <= K <= 100
+     * 1 <= N <= 10000
+     *
+     * @param K k
+     * @param N n
+     * @return ans
+     */
+    public int superEggDrop(int K, int N) {
+        return 0;
     }
 
 }

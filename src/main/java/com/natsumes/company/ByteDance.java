@@ -90,6 +90,9 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * <a href="https://leetcode-cn.com/problems/longest-palindromic-subsequence/">516.最长回文子序列</a>
  * {@link DynamicProgram#longestPalindromeSubseq(java.lang.String)}
  *
+ * <a href="https://leetcode-cn.com/problems/regular-expression-matching/">10.正则表达式匹配</a>
+ * {@link DynamicProgram#isMatch(String, String)}
+ *
  * =====================================================================================================================
  * <h4>2.n sum 问题</h4>
  * {@link com.natsumes.leetcode.nsum.NumSums}

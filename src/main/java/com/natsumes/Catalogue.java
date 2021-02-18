@@ -38,6 +38,9 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * <a href="https://leetcode-cn.com/problems/string-to-integer-atoi/">8.字符串转换整数 (atoi)</a>
  * {@link StringHandler#myAtoi(String)}
  *
+ * <a href="https://leetcode-cn.com/problems/regular-expression-matching/">10.正则表达式匹配</a>
+ * {@link DynamicProgram#isMatch(String, String)}
+ *
  * <a href="https://leetcode-cn.com/problems/container-with-most-water/">11.盛最多水的容器</a>
  * {@link ArrayTopic#maxArea(int[])}
  *
@@ -350,6 +353,9 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  *
  * <a href="https://leetcode-cn.com/problems/count-square-submatrices-with-all-ones/">1277.统计全为1的正方形子矩阵</a>
  * {@link DynamicProgram#countSquares(int[][])}
+ *
+ * <a href="https://leetcode-cn.com/problems/minimum-insertion-steps-to-make-a-string-palindrome/">1312.让字符串成为回文串的最少插入次数</a>
+ * {@link DynamicProgram#minInsertions(java.lang.String)}
  *
  * <a href="https://leetcode-cn.com/problems/maximum-number-of-balls-in-a-box/">1742.盒子中小球的最大数量</a>
  * {@link ArrayTopic#countBalls(int, int)}

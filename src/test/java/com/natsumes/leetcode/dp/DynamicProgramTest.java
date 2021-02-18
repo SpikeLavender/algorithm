@@ -316,4 +316,22 @@ public class DynamicProgramTest {
         Assert.assertEquals(4, dp.longestPalindromeSubseq("bbbab"));
         Assert.assertEquals(2, dp.longestPalindromeSubseq("cbbd"));
     }
+
+    @Test
+    public void minInsertions() {
+        Assert.assertEquals(0, dp.minInsertions("zzazz"));
+        Assert.assertEquals(2, dp.minInsertions("mbadm"));
+        Assert.assertEquals(5, dp.minInsertions("leetcode"));
+        Assert.assertEquals(0, dp.minInsertions("g"));
+        Assert.assertEquals(1, dp.minInsertions("no"));
+    }
+
+    @Test
+    public void isMatch() {
+        Assert.assertFalse(dp.isMatch("aa", "a"));
+        Assert.assertTrue(dp.isMatch("aa", "a*"));
+        Assert.assertTrue(dp.isMatch("ab", ".*"));
+        Assert.assertTrue(dp.isMatch("aab", "c*a*b"));
+        Assert.assertFalse(dp.isMatch("mississippi", "mis*is*p*."));
+    }
 }
