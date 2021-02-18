@@ -229,6 +229,9 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * <a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/">309.最佳买卖股票时机含冷冻期</a>
  * {@link DynamicProgram#maxProfit(int[])}
  *
+ * <a href="https://leetcode-cn.com/problems/burst-balloons/">312.戳气球</a>
+ * {@link DynamicProgram#maxCoins(int[])}
+ *
  * <a href="https://leetcode-cn.com/problems/coin-change/">322.零钱兑换</a>
  * {@link DynamicProgram#coinChange(int[], int)}
  *

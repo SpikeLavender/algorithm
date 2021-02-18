@@ -341,4 +341,10 @@ public class DynamicProgramTest {
         Assert.assertEquals(3, dp.superEggDrop(2, 6));
         Assert.assertEquals(4, dp.superEggDrop(3, 14));
     }
+
+    @Test
+    public void maxCoins() {
+        Assert.assertEquals(167, dp.maxCoins(new int[]{3, 1, 5, 8}));
+        Assert.assertEquals(10, dp.maxCoins(new int[]{1, 5}));
+    }
 }
