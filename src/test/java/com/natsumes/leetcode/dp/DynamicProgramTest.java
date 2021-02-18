@@ -310,4 +310,10 @@ public class DynamicProgramTest {
         Assert.assertEquals(3, dp.minDistance("horse", "ros"));
         Assert.assertEquals(5, dp.minDistance("intention", "execution"));
     }
+
+    @Test
+    public void longestPalindromeSubseq() {
+        Assert.assertEquals(4, dp.longestPalindromeSubseq("bbbab"));
+        Assert.assertEquals(2, dp.longestPalindromeSubseq("cbbd"));
+    }
 }

@@ -266,6 +266,9 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * <a href="https://leetcode-cn.com/problems/next-greater-element-ii/">503.下一个更大元素 II</a>
  * {@link ArrayTopic#nextGreaterElements(int[])}
  *
+ * <a href="https://leetcode-cn.com/problems/longest-palindromic-subsequence/">516.最长回文子序列</a>
+ * {@link DynamicProgram#longestPalindromeSubseq(java.lang.String)}
+ *
  * <a href="https://leetcode-cn.com/problems/number-of-provinces/">547.省份数量</a>
  * {@link UnionFinder#findCircleNum(int[][])}
  *

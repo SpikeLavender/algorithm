@@ -26,6 +26,12 @@ import java.util.*;
  * <a href="https://leetcode-cn.com/problems/edit-distance/">72.编辑距离</a>
  * {@link DynamicProgram#minDistance(java.lang.String, java.lang.String)}
  *
+ * <a href="https://leetcode-cn.com/problems/longest-palindromic-substring/">5.最长回文子串</a>
+ * {@link DynamicProgram#longestPalindrome(java.lang.String)}
+ *
+ * <a href="https://leetcode-cn.com/problems/longest-palindromic-subsequence/">516.最长回文子序列</a>
+ * {@link DynamicProgram#longestPalindromeSubseq(java.lang.String)}
+ *
  * ---------------------------------------------------------------------------------------------------------------------
  * <a href="https://leetcode-cn.com/problems/house-robber/">198.打家劫舍</a>
  * {@link DynamicProgram#rob1(int[])}
@@ -1480,65 +1486,6 @@ public class DynamicProgram {
     }
 
     /**
-     * 5. 最长回文子串
-     *
-     * 给你一个字符串 s，找到 s 中最长的回文子串。
-     *
-     * 示例 1：
-     *
-     * 输入：s = "babad"
-     * 输出："bab"
-     * 解释："aba" 同样是符合题意的答案。
-     * 示例 2：
-     *
-     * 输入：s = "cbbd"
-     * 输出："bb"
-     * 示例 3：
-     *
-     * 输入：s = "a"
-     * 输出："a"
-     * 示例 4：
-     *
-     * 输入：s = "ac"
-     * 输出："a"
-     *
-     *
-     * 提示：
-     *
-     * {@literal 1 <= s.length <= 1000}
-     * s 仅由数字和英文字母（大写和/或小写）组成
-     * @param s s
-     * @return String
-     */
-    public String longestPalindrome(String s) {
-        if (s == null || s.length() == 0) {
-            return "";
-        }
-        int n = s.length();
-        int start = 0;
-        int end = 0;
-
-        for (int i = 0; i < n; i++) {
-            int len1 = palindrome(s, i, i);
-            int len2 = palindrome(s, i, i + 1);
-            int len = Math.max(len1, len2);
-            if (end - start < len) {
-                start = i - (len - 1) / 2;
-                end = i + len / 2;
-            }
-        }
-        return s.substring(start, end + 1);
-    }
-
-    private int palindrome(String s, int l, int r) {
-        while (l >= 0 && r < s.length() && s.charAt(l) == s.charAt(r)) {
-            l--;
-            r++;
-        }
-        return r - l - 1;
-    }
-
-    /**
      * 695.岛屿的最大面积
      *
      * 给定一个包含了一些 0 和 1 的非空二维数组 grid 。
@@ -1741,6 +1688,122 @@ public class DynamicProgram {
             }
         }
         return dp[m][n];
+    }
+
+    /**
+     * 5. 最长回文子串
+     *
+     * 给你一个字符串 s，找到 s 中最长的回文子串。
+     *
+     * 示例 1：
+     *
+     * 输入：s = "babad"
+     * 输出："bab"
+     * 解释："aba" 同样是符合题意的答案。
+     * 示例 2：
+     *
+     * 输入：s = "cbbd"
+     * 输出："bb"
+     * 示例 3：
+     *
+     * 输入：s = "a"
+     * 输出："a"
+     * 示例 4：
+     *
+     * 输入：s = "ac"
+     * 输出："a"
+     *
+     *
+     * 提示：
+     *
+     * {@literal 1 <= s.length <= 1000}
+     * s 仅由数字和英文字母（大写和/或小写）组成
+     * @param s s
+     * @return String
+     */
+    public String longestPalindrome(String s) {
+        if (s == null || s.length() == 0) {
+            return "";
+        }
+        int n = s.length();
+        int start = 0;
+        int end = 0;
+
+        for (int i = 0; i < n; i++) {
+            int len1 = palindrome(s, i, i);
+            int len2 = palindrome(s, i, i + 1);
+            int len = Math.max(len1, len2);
+            if (end - start < len) {
+                start = i - (len - 1) / 2;
+                end = i + len / 2;
+            }
+        }
+        return s.substring(start, end + 1);
+    }
+
+    private int palindrome(String s, int l, int r) {
+        while (l >= 0 && r < s.length() && s.charAt(l) == s.charAt(r)) {
+            l--;
+            r++;
+        }
+        return r - l - 1;
+    }
+
+    /**
+     * 516. 最长回文子序列
+     *
+     * 给定一个字符串 s ，找到其中最长的回文子序列，并返回该序列的长度。可以假设 s 的最大长度为 1000 。
+     *
+     * 示例 1:
+     * 输入:
+     *
+     * "bbbab"
+     * 输出:
+     *
+     * 4
+     * 一个可能的最长回文子序列为 "bbbb"。
+     *
+     * 示例 2:
+     * 输入:
+     *
+     * "cbbd"
+     * 输出:
+     *
+     * 2
+     * 一个可能的最长回文子序列为 "bb"。
+     *
+     * 提示：
+     *
+     * 1 <= s.length <= 1000
+     * s 只包含小写英文字母
+     *
+     * @param s s
+     * @return length
+     */
+    public int longestPalindromeSubseq(String s) {
+        /*
+         * dp[i][j]: s[i...j]中最长的回文子序列
+         *
+         * s[i] == s[j]: dp[i][j] = dp[i + 1][j - 1] + 2
+         * s[i] != s[j]: dp[i][j] = max(dp[i][j - 1], dp[i + 1][j])
+         * dp[i][i] = 1;
+         */
+        int n = s.length();
+        int[][] dp = new int[n][n];
+        for (int i = 0; i < n; i++) {
+            dp[i][i] = 1;
+        }
+
+        for (int i = n - 2; i >= 0; i--) {
+            for (int j = i + 1; j < n; j++) {
+                if (s.charAt(i) == s.charAt(j)) {
+                    dp[i][j] = dp[i + 1][j - 1] + 2;
+                } else {
+                    dp[i][j] = Math.max(dp[i][j - 1], dp[i + 1][j]);
+                }
+            }
+        }
+        return dp[0][n - 1];
     }
 
 }
