@@ -2144,8 +2144,8 @@ public class DynamicProgram {
             m++;
         }
         int[][] dp = new int[n + 2][n + 2];
-        for (int i = n - 1; i >= 0; i--) {
-            for (int j = i + 2; j <= n + 1; j++) {
+        for (int i = n; i >= 0; i--) {
+            for (int j = i + 1; j <= n + 1; j++) {
                 for (int k = i + 1; k < j; k++) {
                     int sum = points[i] * points[k] * points[j];
                     sum += dp[i][k] + dp[k][j];
