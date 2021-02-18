@@ -257,7 +257,7 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * {@link DynamicProgram#rob(com.natsumes.leetcode.dp.TreeNode)}
  *
  * <a href="https://leetcode-cn.com/problems/longest-substring-with-at-most-k-distinct-characters/">340.至多包含K个不同字符的最长子串</a>
- * {@link SlidingWindow#lengthOfLongestSubstringKDistinct(java.lang.String, int)}
+ * {@link SlidingWindow#lengthOfLongestSubstringKsDistinct(java.lang.String, int)}
  *
  * <a href="https://leetcode-cn.com/problems/top-k-frequent-elements/">347.前 K 个高频元素</a>
  * {@link ArrayTopic#topKsFrequent(int[], int)}
@@ -370,10 +370,13 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * {@link UnionFinder#equationsPossible(java.lang.String[])}
  *
  * <a href="https://leetcode-cn.com/problems/minimum-number-of-k-consecutive-bit-flips/">995.K连续位的最小翻转次数</a>
- * {@link SlidingWindow#minKBitFlips(int[], int)}
+ * {@link SlidingWindow#minKsBitFlips(int[], int)}
  *
  * <a href="https://leetcode-cn.com/problems/check-if-word-is-valid-after-substitutions/">1003.检查替换后的词是否有效</a>
  * {@link StringHandler#isValidString(java.lang.String)}
+ *
+ * <a href="https://leetcode-cn.com/problems/max-consecutive-ones-iii/">1004.最大连续1的个数 III</a>
+ * {@link SlidingWindow#longestOnes(int[], int)}
  *
  * <a href="https://leetcode-cn.com/problems/n-th-tribonacci-number/">1137.第 N 个泰波那契数</a>
  * {@link DynamicProgram#tribonacci(int)}

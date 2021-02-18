@@ -40,8 +40,8 @@ public class SlidingWindowTest {
 
     @Test
     public void subarraysWithKDistinct() {
-        Assert.assertEquals(7, sw.subarraysWithKDistinct(new int[] {1,2,1,2,3}, 2));
-        Assert.assertEquals(3, sw.subarraysWithKDistinct(new int[] {1,2,1,3,4}, 3));
+        Assert.assertEquals(7, sw.subArraysWithKthDistinct(new int[] {1,2,1,2,3}, 2));
+        Assert.assertEquals(3, sw.subArraysWithKthDistinct(new int[] {1,2,1,3,4}, 3));
     }
 
     @Test
@@ -80,8 +80,8 @@ public class SlidingWindowTest {
 
     @Test
     public void lengthOfLongestSubstringKDistinct() {
-        Assert.assertEquals(3, sw.lengthOfLongestSubstringKDistinct("eceba", 2));
-        Assert.assertEquals(2, sw.lengthOfLongestSubstringKDistinct("aa", 1));
+        Assert.assertEquals(3, sw.lengthOfLongestSubstringKsDistinct("eceba", 2));
+        Assert.assertEquals(2, sw.lengthOfLongestSubstringKsDistinct("aa", 1));
     }
 
     @Test
@@ -119,8 +119,15 @@ public class SlidingWindowTest {
 
     @Test
     public void minKBitFlips() {
-        Assert.assertEquals(2, sw.minKBitFlips(new int[]{0, 1, 0}, 1));
-        Assert.assertEquals(-1, sw.minKBitFlips(new int[]{1, 1, 0}, 2));
-        Assert.assertEquals(3, sw.minKBitFlips(new int[]{0, 0, 0, 1, 0, 1, 1, 0}, 3));
+        Assert.assertEquals(2, sw.minKsBitFlips(new int[]{0, 1, 0}, 1));
+        Assert.assertEquals(-1, sw.minKsBitFlips(new int[]{1, 1, 0}, 2));
+        Assert.assertEquals(3, sw.minKsBitFlips(new int[]{0, 0, 0, 1, 0, 1, 1, 0}, 3));
+    }
+
+    @Test
+    public void longestOnes() {
+        Assert.assertEquals(6, sw.longestOnes(new int[]{1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0}, 2));
+        Assert.assertEquals(10,
+                sw.longestOnes(new int[]{0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1}, 3));
     }
 }

@@ -33,7 +33,7 @@ import java.util.PriorityQueue;
  * {@link SlidingWindow#lengthOfLongestSubstringTwoDistinct(java.lang.String)}
  *
  * <a href="https://leetcode-cn.com/problems/longest-substring-with-at-most-k-distinct-characters/">340.至多包含 K 个不同字符的最长子串</a>
- * {@link SlidingWindow#lengthOfLongestSubstringKDistinct(java.lang.String, int)}
+ * {@link SlidingWindow#lengthOfLongestSubstringKsDistinct(java.lang.String, int)}
  *
  * <a href="https://leetcode-cn.com/problems/minimum-size-subarray-sum/">209.长度最小的子数组</a>
  * {@link SlidingWindow#minSubArrayLen(int, int[])}
@@ -42,7 +42,7 @@ import java.util.PriorityQueue;
  * {@link SlidingWindow#minWindow(java.lang.String, java.lang.String)}
  *
  * <a href="https://leetcode-cn.com/problems/subarrays-with-k-different-integers/">992.K个不同整数的子数组</a>
- * {@link SlidingWindow#subarraysWithKDistinct(int[], int)}
+ * {@link SlidingWindow#subArraysWithKthDistinct(int[], int)}
  *
  * <a href="https://leetcode-cn.com/problems/longest-turbulent-subarray/">978.最长湍流子数组</a>
  * {@link SlidingWindow#maxTurbulenceSize(int[])}
@@ -51,7 +51,10 @@ import java.util.PriorityQueue;
  * {@link SlidingWindow#medianSlidingWindow(int[], int)}
  *
  * <a href="https://leetcode-cn.com/problems/minimum-number-of-k-consecutive-bit-flips/">995.K连续位的最小翻转次数</a>
- * {@link SlidingWindow#minKBitFlips(int[], int)}
+ * {@link SlidingWindow#minKsBitFlips(int[], int)}
+ *
+ * <a href="https://leetcode-cn.com/problems/max-consecutive-ones-iii/">1004.最大连续1的个数 III</a>
+ * {@link SlidingWindow#longestOnes(int[], int)}
  *
  * @author hetengjiao
  */
@@ -152,23 +155,23 @@ public class SlidingWindow {
      *
      * 例如 :
      * 输入:
-     * A = [2, 1, 4, 3]
+     * a = [2, 1, 4, 3]
      * L = 2
      * R = 3
      * 输出: 3
      * 解释: 满足条件的子数组: [2], [2, 1], [3].
      * 注意:
      *
-     * L, R  和 A[i] 都是整数，范围在 [0, 10^9]。
-     * 数组 A 的长度范围在[1, 50000]。
+     * L, R  和 a[i] 都是整数，范围在 [0, 10^9]。
+     * 数组 a 的长度范围在[1, 50000]。
      *
-     * @param A A
-     * @param L L
-     * @param R R
+     * @param a a
+     * @param l L
+     * @param r R
      * @return int
      */
-    public int numSubarrayBoundedMax(int[] A, int L, int R) {
-        return doMumSubarrayBoundedMax(A, R) - doMumSubarrayBoundedMax(A, L - 1);
+    public int numSubarrayBoundedMax(int[] a, int l, int r) {
+        return doMumSubarrayBoundedMax(a, r) - doMumSubarrayBoundedMax(a, l - 1);
     }
 
     private int doMumSubarrayBoundedMax(int[] nums, int k) {
@@ -474,7 +477,7 @@ public class SlidingWindow {
      * @param k k
      * @return int
      */
-    public int lengthOfLongestSubstringKDistinct(String s, int k) {
+    public int lengthOfLongestSubstringKsDistinct(String s, int k) {
         int n = s.length();
         if (n <= k) {
             return n;
@@ -586,7 +589,7 @@ public class SlidingWindow {
      */
     public String minWindow(String s, String t) {
 
-        Map<Character, Integer> map = new HashMap<>();
+        Map<Character, Integer> map = new HashMap<>(16);
 
         int[] trr = new int[128];
         for (int i = 0; i < t.length(); i++) {
@@ -601,7 +604,6 @@ public class SlidingWindow {
         int right = 0;
 
         // ADOBECODEBANC
-        // TODO: try use array
         while (right < s.length()) {
 
             if (trr[s.charAt(right)] > 0) {
@@ -632,61 +634,6 @@ public class SlidingWindow {
         return max == s.length() ? "" : s.substring(min, max + 1);
     }
 
-    /*
-    Map<Character, Integer> map = new HashMap<>();
-
-        int[] trr = new int[128];
-        boolean[] arr = new boolean[];
-        for (int i = 0; i < t.length(); i++) {
-            trr[t.charAt(i)]--;
-            arr[t.charAt(i)] = true;
-        }
-        int m = t.length();
-
-        int min = 0;
-        int max = s.length();
-        int window = 0;
-        int left = 0;
-        int right = 0;
-
-        // ADOBECODEBANC
-        while (right < s.length()) {
-            int index = s.charAt(right);
-            if (arr[index]) {
-                trr[index]++;
-                  Integer value = map.getOrDefault(s.charAt(right), 0);
-                  if (value < trr[s.charAt(right)]) {
-                      window++;
-                  }
-                  map.put(s.charAt(right), value + 1);
-            }
-
-            while (trr[index] > 0) {
-                if (arr[s.charAt(left)]) {
-                    trr[s.charAt(left)]--;
-                }
-                left++;
-            }
-            right++;
-
-              while (window == m && left <= right) {
-                  // 搜索，缩小左边
-                  if (right - left < max - min) {
-                      min = left;
-                      max = right;
-                  }
-                  if (map.containsKey(s.charAt(left))) {
-                      if (map.get(s.charAt(left)) == trr[s.charAt(left)]) {
-                          window--;
-                      }
-                      map.put(s.charAt(left), map.get(s.charAt(left)) - 1);
-                  }
-                  left++;
-              }
-              right++;
-        }
-     */
-
     /**
      * 992. K 个不同整数的子数组
      * 给定一个正整数数组 A，如果 A 的某个子数组中不同整数的个数恰好为 K，则称 A 的这个连续、不一定独立的子数组为好子数组。
@@ -714,12 +661,12 @@ public class SlidingWindow {
      * 1 <= A.length <= 20000
      * 1 <= A[i] <= A.length
      * 1 <= K <= A.length
-     * @param A A
-     * @param K K
+     * @param a A
+     * @param k K
      * @return A 中好子数组的数目
      */
-    public int subarraysWithKDistinct(int[] A, int K) {
-        return kMostDistinct(A, K) - kMostDistinct(A, K - 1);
+    public int subArraysWithKthDistinct(int[] a, int k) {
+        return kMostDistinct(a, k) - kMostDistinct(a, k - 1);
     }
 
     /**
@@ -990,27 +937,82 @@ public class SlidingWindow {
      * 1 <= A.length <= 30000
      * 1 <= K <= A.length
      *
-     * @param A A
-     * @param K K
+     * @param a A
+     * @param k K
      * @return int
      */
-    public int minKBitFlips(int[] A, int K) {
-        int n = A.length;
+    public int minKsBitFlips(int[] a, int k) {
+        int n = a.length;
         int reverse = 0;
         int ans = 0;
         for (int i = 0; i < n; i++) {
-            if (i >= K && A[i - K] > 1) {
+            if (i >= k && a[i - k] > 1) {
                 reverse ^= 1;
-                A[i - K] -= 2;
+                a[i - k] -= 2;
             }
-            if (A[i] == reverse) {
-                if (i + K > n) {
+            if (a[i] == reverse) {
+                if (i + k > n) {
                     return -1;
                 }
                 ++ans;
                 reverse ^= 1;
-                A[i] += 2;
+                a[i] += 2;
             }
+        }
+        return ans;
+    }
+
+    /**
+     * 1004. 最大连续1的个数 III
+     * 给定一个由若干 0 和 1 组成的数组 A，我们最多可以将 K 个值从 0 变成 1 。
+     *
+     * 返回仅包含 1 的最长（连续）子数组的长度。
+     *
+     *
+     *
+     * 示例 1：
+     *
+     * 输入：A = [1,1,1,0,0,0,1,1,1,1,0], K = 2
+     * 输出：6
+     * 解释：
+     * [1,1,1,0,0,1,1,1,1,1,1]
+     * 粗体数字从 0 翻转到 1，最长的子数组长度为 6。
+     * 示例 2：
+     *
+     * 输入：A = [0,0,1,1,0,0,1,1,1,0,1,1,0,0,0,1,1,1,1], K = 3
+     * 输出：10
+     * 解释：
+     * [0,0,1,1,1,1,1,1,1,1,1,1,0,0,0,1,1,1,1]
+     * 粗体数字从 0 翻转到 1，最长的子数组长度为 10。
+     *
+     *
+     * 提示：
+     *
+     * 1 <= A.length <= 20000
+     * 0 <= K <= A.length
+     * A[i] 为 0 或 1
+     *
+     * @param a a
+     * @param k k
+     * @return ans
+     */
+    public int longestOnes(int[] a, int k) {
+        int n = a.length;
+        int left = 0;
+        int right = 0;
+        int ans = 0;
+        while (right < n) {
+            if (a[right] == 0) {
+                k--;
+            }
+            while (k < 0 && left <= right) {
+                if (a[left] == 0) {
+                    k++;
+                }
+                left++;
+            }
+            ans = Math.max(right - left + 1, ans);
+            right++;
         }
         return ans;
     }
