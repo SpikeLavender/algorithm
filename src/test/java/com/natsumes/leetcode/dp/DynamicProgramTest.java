@@ -358,4 +358,12 @@ public class DynamicProgramTest {
     public void jump() {
         Assert.assertEquals(2, dp.jump(new int[]{2, 3, 1, 1, 4}));
     }
+
+    @Test
+    public void uniquePaths() {
+        Assert.assertEquals(28, dp.uniquePaths(7, 3));
+        Assert.assertEquals(28, dp.uniquePaths(3, 7));
+        Assert.assertEquals(3, dp.uniquePaths(3, 2));
+        Assert.assertEquals(6, dp.uniquePaths(3, 3));
+    }
 }

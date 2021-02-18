@@ -110,6 +110,9 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * <a href="https://leetcode-cn.com/problems/spiral-matrix-ii/">59.螺旋矩阵 II</a>
  * {@link ArrayTopic#generateMatrix(int)}
  *
+ * <a href="https://leetcode-cn.com/problems/unique-paths/">62.不同路径</a>
+ * {@link DynamicProgram#uniquePaths(int, int)}
+ *
  * <a href="https://leetcode-cn.com/problems/minimum-path-sum/">64.最小路径和</a>
  * {@link DynamicProgram#minPathSum(int[][])}
  *
