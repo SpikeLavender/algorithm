@@ -89,6 +89,9 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * {@link ArrayTopic#trap02(int[])}
  * {@link ArrayTopic#trap01(int[])}
  *
+ * <a href="https://leetcode-cn.com/problems/jump-game-ii/">45.跳跃游戏 II</a>
+ * {@link DynamicProgram#jump(int[])}
+ *
  * <a href="https://leetcode-cn.com/problems/permutations/">46.全排列</a>
  * {@link Permute#permute(int[])}
  *
@@ -97,6 +100,9 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  *
  * <a href="https://leetcode-cn.com/problems/spiral-matrix/">54.螺旋矩阵</a>
  * {@link ArrayTopic#spiralOrder(int[][])}
+ *
+ * <a href="https://leetcode-cn.com/problems/jump-game/">55.跳跃游戏</a>
+ * {@link DynamicProgram#canJump(int[])}
  *
  * <a href="https://leetcode-cn.com/problems/merge-intervals/">56.合并区间</a>
  * {@link ArrayTopic#merge(int[][])}

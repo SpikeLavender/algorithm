@@ -99,6 +99,12 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * <a href="https://leetcode-cn.com/problems/burst-balloons/">312.戳气球</a>
  * {@link DynamicProgram#maxCoins(int[])}
  *
+ * <a href="https://leetcode-cn.com/problems/jump-game-ii/">45.跳跃游戏 II</a>
+ * {@link DynamicProgram#jump(int[])}
+ *
+ * <a href="https://leetcode-cn.com/problems/jump-game/">55.跳跃游戏</a>
+ * {@link DynamicProgram#canJump(int[])}
+ *
  * =====================================================================================================================
  * <h4>2.n sum 问题</h4>
  * {@link com.natsumes.leetcode.nsum.NumSums}

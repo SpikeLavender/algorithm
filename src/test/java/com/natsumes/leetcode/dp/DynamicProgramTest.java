@@ -347,4 +347,15 @@ public class DynamicProgramTest {
         Assert.assertEquals(167, dp.maxCoins(new int[]{3, 1, 5, 8}));
         Assert.assertEquals(10, dp.maxCoins(new int[]{1, 5}));
     }
+
+    @Test
+    public void canJump() {
+        Assert.assertTrue(dp.canJump(new int[]{2, 3, 1, 1, 4}));
+        Assert.assertFalse(dp.canJump(new int[]{3, 2, 1, 0, 4}));
+    }
+
+    @Test
+    public void jump() {
+        Assert.assertEquals(2, dp.jump(new int[]{2, 3, 1, 1, 4}));
+    }
 }
