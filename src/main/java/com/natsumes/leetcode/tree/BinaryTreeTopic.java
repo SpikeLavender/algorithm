@@ -2053,30 +2053,29 @@ public class BinaryTreeTopic {
         if (treeNode.left == null && treeNode.right == null) {
             return treeNode;
         }
-
         TreeNode curTreeNode = treeNode;
         int depth = 0;
         while (curTreeNode != null) {
-            curTreeNode = curTreeNode.left;
             depth++;
+            curTreeNode = curTreeNode.left;
         }
+
         int level = 0;
-        int tempDepth;
         while (treeNode != null) {
             level++;
             if (level == depth) {
                 break;
             }
             if (treeNode.right != null) {
+                int tmpDepth = level + 1;
                 curTreeNode = treeNode.right;
                 TreeNode preTreeNode = curTreeNode;
-                tempDepth = level + 1;
                 while (curTreeNode.left != null) {
-                    tempDepth++;
+                    tmpDepth++;
                     preTreeNode = curTreeNode;
                     curTreeNode = curTreeNode.left;
                 }
-                if (tempDepth < depth) {
+                if (tmpDepth < depth) {
                     treeNode = treeNode.left;
                 } else if (preTreeNode.right == null || preTreeNode.right == curTreeNode) {
                     return curTreeNode;
@@ -2087,7 +2086,6 @@ public class BinaryTreeTopic {
                 treeNode = treeNode.left;
             }
         }
-
         return treeNode;
     }
 }

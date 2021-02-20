@@ -130,4 +130,10 @@ public class SlidingWindowTest {
         Assert.assertEquals(10,
                 sw.longestOnes(new int[]{0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1}, 3));
     }
+
+    @Test
+    public void findShortestSubArray() {
+        Assert.assertEquals(2, sw.findShortestSubArray(new int[]{1, 2, 2, 3, 1}));
+        Assert.assertEquals(6, sw.findShortestSubArray(new int[]{1, 2, 2, 3, 1, 4, 2}));
+    }
 }

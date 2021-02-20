@@ -183,7 +183,7 @@ public class DynamicProgram {
      * @return int
      */
     public int coinChange(int[] coins, int amount) {
-        // dp[i]: 当目标金额为i时，至少需要d[i]枚硬币凑出
+        // dp[i][j]: 当目标金额为i时，至少需要d[i]枚硬币凑出j面额
         // dp[i][j] = min(dp[i - 1][j], dp[i][j - coins[i]] + 1), dp[0][0] = 0, dp[0][i] = inf
         int[] dp = new int[amount + 1];
         Arrays.fill(dp, amount + 1);

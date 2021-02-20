@@ -330,6 +330,9 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * {@link UnionFinder#maxAreaOfIsland(int[][])}
  * {@link DynamicProgram#maxAreaOfIsland(int[][]) 深度优先搜索解法}
  *
+ * <a href="https://leetcode-cn.com/problems/degree-of-an-array/">697.数组的度</a>
+ * {@link SlidingWindow#findShortestSubArray(int[])}
+ *
  * <a href="https://leetcode-cn.com/problems/subarray-product-less-than-k/">713.乘积小于K的子数组</a>
  * {@link SlidingWindow#numSubarrayProductLessThanK(int[], int)}
  *
