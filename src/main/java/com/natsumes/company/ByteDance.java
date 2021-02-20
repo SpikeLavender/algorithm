@@ -3,6 +3,7 @@ package com.natsumes.company;
 
 import com.natsumes.leetcode.array.ArrayTopic;
 import com.natsumes.leetcode.dp.DynamicProgram;
+import com.natsumes.leetcode.graph.Graph;
 import com.natsumes.leetcode.permute.Permute;
 import com.natsumes.leetcode.string.StringHandler;
 import com.natsumes.leetcode.tree.BinarySearchTreeTopic;
@@ -242,6 +243,11 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * {@link BinarySearchTreeTopic#numTrees(int)}
  *
  * =====================================================================================================================
+ * <h4>图</h4>
+ *
+ * <a href="https://leetcode-cn.com/problems/k-th-smallest-in-lexicographical-order/">440.字典序的第K小数字</a>
+ * {@link Graph#findKthNumber(int, int)}
+ *
  *
  * @author hetengjiao
  */

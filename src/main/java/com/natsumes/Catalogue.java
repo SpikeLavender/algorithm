@@ -4,6 +4,7 @@ import com.natsumes.company.ByteDance;
 import com.natsumes.leetcode.DfsAndBinarySearch;
 import com.natsumes.leetcode.array.ArrayTopic;
 import com.natsumes.leetcode.dp.DynamicProgram;
+import com.natsumes.leetcode.graph.Graph;
 import com.natsumes.leetcode.list.LinkedListTopic;
 import com.natsumes.leetcode.nsum.NumSums;
 import com.natsumes.leetcode.permute.Permute;
@@ -277,6 +278,9 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  *
  * TODO: <a href="https://leetcode-cn.com/problems/path-sum-iii/">437.路径总和 III</a>
  * {@link BinaryTreeTopic#pathSumIII(com.natsumes.leetcode.tree.TreeNode, int)}
+ *
+ * <a href="https://leetcode-cn.com/problems/k-th-smallest-in-lexicographical-order/">440.字典序的第K小数字</a>
+ * {@link Graph#findKthNumber(int, int)}
  *
  * <a href="https://leetcode-cn.com/problems/find-all-numbers-disappeared-in-an-array/">448.找到所有数组中消失的数字</a>
  * {@link ArrayTopic#findDisappearedNumbers(int[])}
