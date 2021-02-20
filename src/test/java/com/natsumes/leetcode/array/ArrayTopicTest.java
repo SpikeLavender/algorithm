@@ -345,4 +345,11 @@ public class ArrayTopicTest {
         Assert.assertEquals(3, at.firstMissingPositive(new int[]{1, 2, 0}));
         Assert.assertEquals(1, at.firstMissingPositive(new int[]{7, 8, 9, 11, 12}));
     }
+
+    @Test
+    public void longestSubarray() {
+        Assert.assertEquals(2, at.longestSubarray(new int[]{8, 2, 4, 7}, 4));
+        Assert.assertEquals(4, at.longestSubarray(new int[]{10, 1, 2, 4, 7, 2}, 5));
+        Assert.assertEquals(3, at.longestSubarray(new int[]{4, 2, 2, 2, 4, 4, 2, 2}, 0));
+    }
 }

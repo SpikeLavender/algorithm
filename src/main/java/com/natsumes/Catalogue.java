@@ -403,6 +403,9 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * <a href="https://leetcode-cn.com/problems/minimum-insertion-steps-to-make-a-string-palindrome/">1312.让字符串成为回文串的最少插入次数</a>
  * {@link DynamicProgram#minInsertions(java.lang.String)}
  *
+ * <a href="https://leetcode-cn.com/problems/longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit/">1438.绝对差不超过限制的最长连续子数组</a>
+ * {@link ArrayTopic#longestSubarray(int[], int)}
+ *
  * <a href="https://leetcode-cn.com/problems/maximum-number-of-balls-in-a-box/">1742.盒子中小球的最大数量</a>
  * {@link ArrayTopic#countBalls(int, int)}
  *
