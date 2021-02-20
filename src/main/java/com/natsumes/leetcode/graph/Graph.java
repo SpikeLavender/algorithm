@@ -33,7 +33,9 @@ public class Graph {
      */
     public int findKthNumber(int n, int k) {
         /*
-         *                           1
+         *                                    root
+         *                               /     |     \
+         *                           1         2        3
          *                     /   /   \  \
          *                    0   1     8   9
          *                 //  \\
