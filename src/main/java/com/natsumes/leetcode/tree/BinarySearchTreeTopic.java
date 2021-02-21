@@ -9,6 +9,9 @@ import java.util.*;
  * {@link BinarySearchTreeTopic#numTrees(int)}
  * {@link BinarySearchTreeTopic#numTrees01(int)}
  *
+ * <a href="https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-search-tree/">235.二叉搜索树的最近公共祖先</a>
+ * {@link BinarySearchTreeTopic#lowestCommonAncestor(com.natsumes.leetcode.tree.TreeNode, com.natsumes.leetcode.tree.TreeNode, com.natsumes.leetcode.tree.TreeNode)}
+ *
  * @author hetengjiao
  */
 public class BinarySearchTreeTopic {
@@ -696,9 +699,6 @@ public class BinarySearchTreeTopic {
      * 例如，给定如下二叉搜索树:  root = [6,2,8,0,4,7,9,null,null,3,5]
      *
      *
-     *
-     *  
-     *
      * 示例 1:
      *
      * 输入: root = [6,2,8,0,4,7,9,null,null,3,5], p = 2, q = 8
@@ -716,10 +716,6 @@ public class BinarySearchTreeTopic {
      * 所有节点的值都是唯一的。
      * p、q 为不同节点且均存在于给定的二叉搜索树中。
      *
-     * 作者：力扣 (LeetCode)
-     * 链接：https://leetcode-cn.com/leetbook/read/introduction-to-data-structure-binary-search-tree/xpf523/
-     * 来源：力扣（LeetCode）
-     * 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
      */
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         if (root == null) {
@@ -737,7 +733,7 @@ public class BinarySearchTreeTopic {
         if (left == null && right == null) {
             return null;
         }
-        return left == null ? right : left;
+        return left != null ? left : right;
     }
 
     /**

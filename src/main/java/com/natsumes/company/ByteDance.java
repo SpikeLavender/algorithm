@@ -253,6 +253,9 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * <a href="https://leetcode-cn.com/problems/k-th-smallest-in-lexicographical-order/">440.字典序的第K小数字</a>
  * {@link Graph#findKthNumber(int, int)}
  *
+ * <a href="https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-search-tree/">235.二叉搜索树的最近公共祖先</a>
+ * {@link BinarySearchTreeTopic#lowestCommonAncestor(com.natsumes.leetcode.tree.TreeNode, com.natsumes.leetcode.tree.TreeNode, com.natsumes.leetcode.tree.TreeNode)}
+ * @author hetengjiao
  *
  * @author hetengjiao
  */
