@@ -201,4 +201,10 @@ public class BinarySearchTreeTopicTest {
         Assert.assertEquals(5, bst.numTrees(3));
         Assert.assertEquals(1430, bst.numTrees(8));
     }
+
+    @Test
+    public void numTrees01() {
+        Assert.assertEquals(5, bst.numTrees01(3));
+        Assert.assertEquals(1430, bst.numTrees01(8));
+    }
 }

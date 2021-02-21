@@ -152,8 +152,9 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * <a href="https://leetcode-cn.com/problems/restore-ip-addresses/">93.复原IP地址</a>
  * {@link DfsAndBinarySearch#restoreIpAddresses(java.lang.String)}
  *
- * TODO: <a href="https://leetcode-cn.com/problems/unique-binary-search-trees/">96.不同的二叉搜索树</a>
+ * <a href="https://leetcode-cn.com/problems/unique-binary-search-trees/">96.不同的二叉搜索树</a>
  * {@link BinarySearchTreeTopic#numTrees(int)}
+ * {@link BinarySearchTreeTopic#numTrees01(int)}
  *
  * <a href="https://leetcode-cn.com/problems/binary-tree-zigzag-level-order-traversal/">103.二叉树的锯齿形层序遍历</a>
  * {@link BinaryTreeTopic#zigzagLevelOrder(com.natsumes.leetcode.tree.TreeNode)}

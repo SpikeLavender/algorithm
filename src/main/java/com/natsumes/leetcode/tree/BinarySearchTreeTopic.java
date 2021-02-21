@@ -5,8 +5,9 @@ import java.util.*;
 /**
  * 二叉搜索树专题
  *
- * TODO: <a href="https://leetcode-cn.com/problems/unique-binary-search-trees/">96.不同的二叉搜索树</a>
+ * <a href="https://leetcode-cn.com/problems/unique-binary-search-trees/">96.不同的二叉搜索树</a>
  * {@link BinarySearchTreeTopic#numTrees(int)}
+ * {@link BinarySearchTreeTopic#numTrees01(int)}
  *
  * @author hetengjiao
  */
@@ -1028,9 +1029,7 @@ public class BinarySearchTreeTopic {
     }
 
     /**
-     * https://leetcode-cn.com/problems/unique-binary-search-trees/
-     *
-     * TODO: 96.不同的二叉搜索树
+     * 96.不同的二叉搜索树
      *
      * 给定一个整数 n，求以 1 ... n 为节点组成的二叉搜索树有多少种？
      *
@@ -1046,24 +1045,41 @@ public class BinarySearchTreeTopic {
      *      3     2     1      1   3      2
      *     /     /       \                 \
      *    2     1         2                 3
+     *
+     * @param n n
+     * @return num
      */
     public int numTrees(int n) {
-        if (n == 0) {
-            return 0;
+        /*
+         * G(n): 长度为 n 的序列能构成的不同二叉搜索树的个数。
+         * F(i, n): 以 i 为根、序列长度为 n 的不同二叉搜索树个数 (1 ≤ i ≤ n)。
+         * G(n) = F(0, n) + ... + F(n, n); G(0) = 1, G(1) = 1
+         * F(i, n) = G(i - 1) * G(n - i);
+         * G(n) = G(0)*G(n - 1) + ... + G(n - 1) * G(0)
+         *
+         */
+        int[] G = new int[n + 1];
+        G[0] = 1;
+        G[1] = 1;
+        for (int i = 2; i <= n; i++) {
+            for (int j = 1; j <= i; j++) {
+                G[i] += G[j - 1] * G[i - j];
+            }
         }
-        return numTrees(1, n);
+        return G[n];
     }
 
-    private int numTrees(int start, int end) {
-        int res = 0;
-        if (start > end) {
-            return 1;
+    /**
+     * 卡塔兰数
+     * @param n n
+     * @return num
+     */
+    public int numTrees01(int n) {
+        long c = 1;
+        for (int i = 0; i < n; i++) {
+
+            c = c * 2 * (2 * i + 1) / (i + 2);
         }
-        for (int i = start; i <= end; i++) {
-            int leftNum = numTrees(start, i - 1);
-            int rightNum = numTrees(i + 1, end);
-            res += leftNum * rightNum;
-        }
-        return res;
+        return (int) c;
     }
 }

@@ -243,8 +243,9 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * {@link UnionFinder#maxAreaOfIsland(int[][])}
  * {@link DynamicProgram#maxAreaOfIsland(int[][])}
  *
- * TODO: <a href="https://leetcode-cn.com/problems/unique-binary-search-trees/">96.不同的二叉搜索树</a>
+ * <a href="https://leetcode-cn.com/problems/unique-binary-search-trees/">96.不同的二叉搜索树</a>
  * {@link BinarySearchTreeTopic#numTrees(int)}
+ * {@link BinarySearchTreeTopic#numTrees01(int)}
  *
  * =====================================================================================================================
  * <h4>图</h4>
