@@ -726,19 +726,25 @@ public class BinarySearchTreeTopic {
         if (root == null) {
             return null;
         }
-        if (root == p || root == q) {
-            return root;
+
+        int maxValue = p.val;
+        int minValue = q.val;
+        if (p.val < q.val) {
+            maxValue = q.val;
+            minValue = p.val;
+        }
+        return doLowestCommonAncestor(root, maxValue, minValue);
+    }
+
+    private TreeNode doLowestCommonAncestor(TreeNode root, int maxValue, int minValue) {
+        if (root.val > maxValue) {
+            return doLowestCommonAncestor(root.left, maxValue, minValue);
         }
 
-        TreeNode left = lowestCommonAncestor(root.left, p, q);
-        TreeNode right = lowestCommonAncestor(root.right, p, q);
-        if (left != null && right != null) {
-            return root;
+        if (root.val < minValue) {
+            return doLowestCommonAncestor(root.right, maxValue, minValue);
         }
-        if (left == null && right == null) {
-            return null;
-        }
-        return left != null ? left : right;
+        return root;
     }
 
     /**

@@ -234,6 +234,10 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * <a href="https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-search-tree/">235.二叉搜索树的最近公共祖先</a>
  * {@link BinarySearchTreeTopic#lowestCommonAncestor(com.natsumes.leetcode.tree.TreeNode, com.natsumes.leetcode.tree.TreeNode, com.natsumes.leetcode.tree.TreeNode)}
  *
+ * <a href="https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/">236.二叉树的最近公共祖先</a>
+ * {@link BinaryTreeTopic#lowestCommonAncestor(com.natsumes.leetcode.tree.TreeNode, com.natsumes.leetcode.tree.TreeNode, com.natsumes.leetcode.tree.TreeNode)}
+ * {@link BinaryTreeTopic#lowestCommonAncestorA(com.natsumes.leetcode.tree.TreeNode, com.natsumes.leetcode.tree.TreeNode, com.natsumes.leetcode.tree.TreeNode)}
+ *
  * <a href="https://leetcode-cn.com/problems/search-a-2d-matrix-ii/">240.搜索二维矩阵 II</a>
  * {@link ArrayTopic#searchMatrix2(int[][], int)}
  *
