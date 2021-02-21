@@ -414,4 +414,16 @@ public class DynamicProgramTest {
         Assert.assertEquals(4, dp.tribonacci(4));
         Assert.assertEquals(1389537, dp.tribonacci(25));
     }
+
+    @Test
+    public void candy() {
+        Assert.assertEquals(5, dp.candy(new int[]{1, 0, 2}));
+        Assert.assertEquals(4, dp.candy(new int[]{1, 2, 2}));
+    }
+
+    @Test
+    public void candy01() {
+        Assert.assertEquals(5, dp.candy01(new int[]{1, 0, 2}));
+        Assert.assertEquals(4, dp.candy01(new int[]{1, 2, 2}));
+    }
 }

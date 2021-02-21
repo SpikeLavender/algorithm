@@ -193,6 +193,10 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * <a href="https://leetcode-cn.com/problems/gas-station/">134.加油站</a>
  * {@link DynamicProgram#canCompleteCircuit(int[], int[])}
  *
+ * <a href="https://leetcode-cn.com/problems/candy/">135.分发糖果</a>
+ * {@link DynamicProgram#candy(int[])}
+ * {@link DynamicProgram#candy01(int[])}
+ *
  * <a href="https://leetcode-cn.com/problems/longest-substring-with-at-most-two-distinct-characters/">159.至多包含两个不同字符的最长子串</a>
  * {@link SlidingWindow#lengthOfLongestSubstringTwoDistinct(java.lang.String)}
  *

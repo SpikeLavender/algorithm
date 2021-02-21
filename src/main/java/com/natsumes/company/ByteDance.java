@@ -112,6 +112,10 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * <a href="https://leetcode-cn.com/problems/climbing-stairs/">70.爬楼梯</a>
  * {@link DynamicProgram#climbStairs(int)}
  *
+ * <a href="https://leetcode-cn.com/problems/candy/">135.分发糖果</a>
+ * {@link DynamicProgram#candy(int[])}
+ * {@link DynamicProgram#candy01(int[])}
+ *
  * =====================================================================================================================
  * <h4>2.n sum 问题</h4>
  * {@link com.natsumes.leetcode.nsum.NumSums}
