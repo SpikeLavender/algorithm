@@ -426,4 +426,23 @@ public class DynamicProgramTest {
         Assert.assertEquals(5, dp.candy01(new int[]{1, 0, 2}));
         Assert.assertEquals(4, dp.candy01(new int[]{1, 2, 2}));
     }
+
+    @Test
+    public void longestIncreasingPath() {
+
+        Assert.assertEquals(1, dp.longestIncreasingPath(new int[][]{{1}}));
+
+        Assert.assertEquals(4, dp.longestIncreasingPath(new int[][]{
+                {9, 9, 4},
+                {6, 6, 8},
+                {2, 1, 1}
+        }));
+
+        Assert.assertEquals(4, dp.longestIncreasingPath(new int[][]{
+                {3, 4, 5},
+                {3, 2, 6},
+                {2, 2, 1}
+        }));
+
+    }
 }
