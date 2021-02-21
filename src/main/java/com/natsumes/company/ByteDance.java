@@ -119,6 +119,9 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * {@link DynamicProgram#candy(int[])}
  * {@link DynamicProgram#candy01(int[])}
  *
+ * <a href="https://leetcode-cn.com/problems/n-queens/">51.N皇后</a>
+ * {@link DynamicProgram#solveNQueens(int)}
+ *
  * =====================================================================================================================
  * <h4>2.n sum 问题</h4>
  * {@link com.natsumes.leetcode.nsum.NumSums}

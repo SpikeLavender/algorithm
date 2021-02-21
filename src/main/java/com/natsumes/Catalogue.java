@@ -102,6 +102,9 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * <a href="https://leetcode-cn.com/problems/permutations/">46.全排列</a>
  * {@link Permute#permute(int[])}
  *
+ * <a href="https://leetcode-cn.com/problems/n-queens/">51.N皇后</a>
+ * {@link DynamicProgram#solveNQueens(int)}
+ *
  * <a href="https://leetcode-cn.com/problems/maximum-subarray/">53.最大子序和</a>
  * {@link DynamicProgram#maxSubArray(int[])}
  *

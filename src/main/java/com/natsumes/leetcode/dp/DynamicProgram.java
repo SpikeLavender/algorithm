@@ -117,6 +117,9 @@ import java.util.*;
  * <a href="https://leetcode-cn.com/problems/max-area-of-island/">695.岛屿的最大面积</a>
  * {@link DynamicProgram#maxAreaOfIsland(int[][])}
  *
+ * <a href="https://leetcode-cn.com/problems/n-queens/">51.N皇后</a>
+ * {@link DynamicProgram#solveNQueens(int)}
+ *
  * =====================================================================================================================
  * <h4>BFS 广度优先搜索</h4>
  *
@@ -2757,5 +2760,88 @@ public class DynamicProgram {
 
     private boolean checkMatrixIndex(int i, int m, int j, int n) {
         return i >= 0 && i < m && j >= 0 && j < n;
+    }
+
+    /**
+     * 51. N 皇后
+     * n 皇后问题 研究的是如何将 n 个皇后放置在 n×n 的棋盘上，并且使皇后彼此之间不能相互攻击。
+     *
+     * 给你一个整数 n ，返回所有不同的 n 皇后问题 的解决方案。
+     *
+     * 每一种解法包含一个不同的 n 皇后问题 的棋子放置方案，该方案中 'Q' 和 '.' 分别代表了皇后和空位。
+     *
+     *
+     *
+     * 示例 1：
+     *
+     *
+     * 输入：n = 4
+     * 输出：[[".Q..","...Q","Q...","..Q."],["..Q.","Q...","...Q",".Q.."]]
+     * 解释：如上图所示，4 皇后问题存在两个不同的解法。
+     * 示例 2：
+     *
+     * 输入：n = 1
+     * 输出：[["Q"]]
+     *
+     *
+     * 提示：
+     *
+     * 1 <= n <= 9
+     * 皇后彼此不能相互攻击，也就是说：任何两个皇后都不能处于同一条横行、纵行或斜线上。
+     *
+     * @param n n
+     * @return list
+     */
+    public List<List<String>> solveNQueens(int n) {
+        //下标表示行,值表示queen存储在哪一列
+        int[] result = new int[n];
+        List<List<String>> ans = new ArrayList<>();
+        doSolveNQueens(ans, result, n, 0);
+        return ans;
+    }
+
+    private void doSolveNQueens(List<List<String>> ans, int[] result, int n, int row) {
+        if (row == n) {
+            List<String> track = new ArrayList<>();
+            for (int i = 0; i < n; i++) {
+                StringBuilder sb = new StringBuilder();
+                for (int j = 0; j < n; j++) {
+                    if (result[i] == j) {
+                        sb.append('Q');
+                    } else {
+                        sb.append('.');
+                    }
+                }
+                track.add(sb.toString());
+            }
+            ans.add(track);
+            return;
+        }
+        for (int col = 0; col < n; col++) {
+            if (isQueenOk(row, col, result)) {
+                result[row] = col;
+                doSolveNQueens(ans, result, n, row + 1);
+            }
+        }
+    }
+
+    private boolean isQueenOk(int row, int col, int[] result) {
+        int left = col - 1;
+        int right = col + 1;
+
+        for (int i = row - 1; i >= 0; i--) {
+            if (result[i] == col) {
+                return false;
+            }
+            if (left >= 0 && result[i] == left) {
+                return false;
+            }
+            if (right < result.length && result[i] == right) {
+                return false;
+            }
+            left--;
+            right++;
+        }
+        return true;
     }
 }

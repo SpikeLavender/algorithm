@@ -445,4 +445,13 @@ public class DynamicProgramTest {
         }));
 
     }
+
+    @Test
+    public void solveNQueens() {
+        List<List<String>> lists = dp.solveNQueens(4);
+        System.out.println(lists);
+
+        lists = dp.solveNQueens(1);
+        System.out.println(lists);
+    }
 }
