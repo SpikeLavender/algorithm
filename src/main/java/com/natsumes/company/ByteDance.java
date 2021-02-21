@@ -45,6 +45,9 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * <a href="https://leetcode-cn.com/problems/minimum-path-sum/">64.最小路径和</a>
  * {@link DynamicProgram#minPathSum(int[][])}
  *
+ * <a href="https://leetcode-cn.com/problems/longest-increasing-path-in-a-matrix/submissions/">329.矩阵中的最长递增路径</a>
+ * {@link DynamicProgram#longestIncreasingPath(int[][])}
+ *
  * <a href="https://leetcode-cn.com/problems/binary-tree-paths/">257.二叉树的所有路径</a>
  * {@link BinaryTreeTopic#binaryTreePaths(com.natsumes.leetcode.tree.TreeNode)}
  *

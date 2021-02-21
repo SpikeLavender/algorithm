@@ -102,6 +102,9 @@ import java.util.*;
  * <a href="https://leetcode-cn.com/problems/minimum-path-sum/">64.最小路径和</a>
  * {@link DynamicProgram#minPathSum(int[][])}
  *
+ * <a href="https://leetcode-cn.com/problems/longest-increasing-path-in-a-matrix/submissions/">329.矩阵中的最长递增路径</a>
+ * {@link DynamicProgram#longestIncreasingPath(int[][])}
+ *
  * =====================================================================================================================
  * <h4>DFS 深度优先搜索（回溯算法）</h4>
  *

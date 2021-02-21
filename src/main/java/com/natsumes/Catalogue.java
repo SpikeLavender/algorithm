@@ -272,6 +272,9 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * <a href="https://leetcode-cn.com/problems/number-of-connected-components-in-an-undirected-graph/">323.无向图中连通分量的数目</a>
  * {@link UnionFinder#countComponents(int, int[][])}
  *
+ * <a href="https://leetcode-cn.com/problems/longest-increasing-path-in-a-matrix/submissions/">329.矩阵中的最长递增路径</a>
+ * {@link DynamicProgram#longestIncreasingPath(int[][])}
+ *
  * <a href="https://leetcode-cn.com/problems/house-robber-iii/">337.打家劫舍 III</a>
  * {@link DynamicProgram#rob(com.natsumes.leetcode.dp.TreeNode)}
  *
