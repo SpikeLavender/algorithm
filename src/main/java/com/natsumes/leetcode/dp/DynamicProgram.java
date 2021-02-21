@@ -2627,23 +2627,27 @@ public class DynamicProgram {
     public int candy(int[] ratings) {
         int n = ratings.length;
         int ans = 1;
+
+        // 最近的递增序列的长度
         int inc = 1;
+        // 当前递减序列的长度
         int dec = 0;
-        int pre = 1;
+        // 上升序列中当前小朋友的糖果数
+        int num = 1;
 
         for (int i = 1; i < n; i++) {
             if (ratings[i] >= ratings[i - 1]) {
                 dec = 0;
-                pre = ratings[i] == ratings[i - 1] ? 1 : pre + 1;
-                ans += pre;
-                inc = pre;
+                num = ratings[i] == ratings[i - 1] ? 1 : num + 1;
+                ans += num;
+                inc = num;
             } else {
                 dec++;
                 if (dec == inc) {
                     dec++;
                 }
                 ans += dec;
-                pre = 1;
+                num = 1;
             }
         }
 
