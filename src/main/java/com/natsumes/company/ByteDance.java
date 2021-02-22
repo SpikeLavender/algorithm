@@ -209,6 +209,9 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * <a href="https://leetcode-cn.com/problems/search-a-2d-matrix-ii/">240.搜索二维矩阵 II</a>
  * {@link com.natsumes.leetcode.array.ArrayTopic#searchMatrix2(int[][], int)}
  *
+ * <a href="https://leetcode-cn.com/problems/super-pow/">372.超级次方</a>
+ * {@link ArrayTopic#superPow(int, int[])}
+ *
  * <a href="https://leetcode-cn.com/problems/string-to-integer-atoi/">8.字符串转换整数 (atoi)</a>
  * {@link StringHandler#myAtoi(String)}
  *

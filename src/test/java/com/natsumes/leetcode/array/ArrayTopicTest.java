@@ -352,4 +352,12 @@ public class ArrayTopicTest {
         Assert.assertEquals(4, at.longestSubarray(new int[]{10, 1, 2, 4, 7, 2}, 5));
         Assert.assertEquals(3, at.longestSubarray(new int[]{4, 2, 2, 2, 4, 4, 2, 2}, 0));
     }
+
+    @Test
+    public void superPow() {
+        Assert.assertEquals(8, at.superPow(2, new int[]{3}));
+        Assert.assertEquals(1024, at.superPow(2, new int[]{1, 0}));
+        Assert.assertEquals(1, at.superPow(1, new int[]{4, 3, 3, 8, 5, 2}));
+        Assert.assertEquals(1198, at.superPow(2147483647, new int[]{2, 0, 0}));
+    }
 }

@@ -106,6 +106,10 @@ import java.util.*;
  *
  * <a href="https://leetcode-cn.com/problems/longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit/">1438.绝对差不超过限制的最长连续子数组</a>
  * {@link ArrayTopic#longestSubarray(int[], int)}
+ *
+ * <a href="https://leetcode-cn.com/problems/super-pow/">372.超级次方</a>
+ * {@link ArrayTopic#superPow(int, int[])}
+ *
  * @author hetengjiao
  */
 public class ArrayTopic {
@@ -2122,5 +2126,71 @@ public class ArrayTopic {
             }
         }
         return max;
+    }
+
+    /**
+     * 372. 超级次方
+     * 你的任务是计算 ab 对 1337 取模，a 是一个正整数，b 是一个非常大的正整数且会以数组形式给出。
+     *
+     *
+     *
+     * 示例 1：
+     *
+     * 输入：a = 2, b = [3]
+     * 输出：8
+     * 示例 2：
+     *
+     * 输入：a = 2, b = [1,0]
+     * 输出：1024
+     * 示例 3：
+     *
+     * 输入：a = 1, b = [4,3,3,8,5,2]
+     * 输出：1
+     * 示例 4：
+     *
+     * 输入：a = 2147483647, b = [2,0,0]
+     * 输出：1198
+     *
+     *
+     * 提示：
+     *
+     * 1 <= a <= 231 - 1
+     * 1 <= b.length <= 2000
+     * 0 <= b[i] <= 9
+     * b 不含前导 0
+     *
+     * @param a a
+     * @param b b
+     * @return res
+     */
+    public int superPow(int a, int[] b) {
+        if (b == null || b.length == 0) {
+            return 1;
+        }
+        return doSuperPow(a, b, b.length);
+    }
+
+    private int doSuperPow(int a, int[] b, int len) {
+        if (len == 0) {
+            return 1;
+        }
+
+        int pow1 = myPow(a, b[len - 1]);
+        int pow2 = myPow(doSuperPow(a, b, len - 1), 10);
+        return (pow1 * pow2) % 1337;
+    }
+
+    private int myPow(int a, int k) {
+        if (k == 0) {
+            return 1;
+        }
+        a = a % 1337;
+
+        if (k % 2 == 1) {
+            return (a * myPow(a, k - 1)) % 1337;
+        } else {
+            int sub = myPow(a, k / 2);
+            return (sub * sub) % 1337;
+        }
     }
 }

@@ -287,6 +287,9 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * <a href="https://leetcode-cn.com/problems/top-k-frequent-elements/">347.前 K 个高频元素</a>
  * {@link ArrayTopic#topKsFrequent(int[], int)}
  *
+ * <a href="https://leetcode-cn.com/problems/super-pow/">372.超级次方</a>
+ * {@link ArrayTopic#superPow(int, int[])}
+ *
  * TODO: 复习
  * <a href="https://leetcode-cn.com/problems/decode-string/">394.字符串解码</a>
  * {@link StringHandler#decodeString(java.lang.String)}
