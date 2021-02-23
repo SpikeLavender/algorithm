@@ -376,6 +376,9 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * <a href="https://leetcode-cn.com/problems/couples-holding-hands/">765.情侣牵手</a>
  * {@link UnionFinder#minSwapsCouples(int[])}
  *
+ * <a href="https://leetcode-cn.com/problems/toeplitz-matrix/">766.托普利茨矩阵</a>
+ * {@link ArrayTopic#isToeplitzMatrix(int[][])}
+ *
  * <a href="https://leetcode-cn.com/problems/swim-in-rising-water/">778.水位上升的泳池中游泳</a>
  * {@link UnionFinder#swimInWater(int[][])}
  *

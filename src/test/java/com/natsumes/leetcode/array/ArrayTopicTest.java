@@ -360,4 +360,10 @@ public class ArrayTopicTest {
         Assert.assertEquals(1, at.superPow(1, new int[]{4, 3, 3, 8, 5, 2}));
         Assert.assertEquals(1198, at.superPow(2147483647, new int[]{2, 0, 0}));
     }
+
+    @Test
+    public void isToeplitzMatrix() {
+        Assert.assertTrue(at.isToeplitzMatrix(new int[][]{{1, 2, 3, 4},{5, 1, 2, 3},{9, 5, 1, 2}}));
+        Assert.assertFalse(at.isToeplitzMatrix(new int[][]{{1, 2},{2, 2}}));
+    }
 }
