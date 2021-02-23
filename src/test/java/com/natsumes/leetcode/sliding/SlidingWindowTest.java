@@ -136,4 +136,26 @@ public class SlidingWindowTest {
         Assert.assertEquals(2, sw.findShortestSubArray(new int[]{1, 2, 2, 3, 1}));
         Assert.assertEquals(6, sw.findShortestSubArray(new int[]{1, 2, 2, 3, 1, 4, 2}));
     }
+
+    @Test
+    public void maxSatisfied() {
+
+        Assert.assertEquals(17, sw.maxSatisfied(
+                new int[]{2, 6, 6, 9},
+                new int[]{0, 0, 1, 1},
+                1)
+        );
+
+        Assert.assertEquals(3, sw.maxSatisfied(
+                new int[]{3},
+                new int[]{1},
+                1)
+        );
+
+        Assert.assertEquals(16, sw.maxSatisfied(
+                new int[]{1, 0, 1, 2, 1, 1, 7, 5},
+                new int[]{0, 1, 0, 1, 0, 1, 0, 1},
+                3)
+        );
+    }
 }

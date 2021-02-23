@@ -415,6 +415,9 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * <a href="https://leetcode-cn.com/problems/max-consecutive-ones-iii/">1004.最大连续1的个数 III</a>
  * {@link SlidingWindow#longestOnes(int[], int)}
  *
+ * <a href="https://leetcode-cn.com/problems/grumpy-bookstore-owner/">1052.爱生气的书店老板</a>
+ * {@link SlidingWindow#maxSatisfied(int[], int[], int)}
+ *
  * <a href="https://leetcode-cn.com/problems/n-th-tribonacci-number/">1137.第 N 个泰波那契数</a>
  * {@link DynamicProgram#tribonacci(int)}
  *
