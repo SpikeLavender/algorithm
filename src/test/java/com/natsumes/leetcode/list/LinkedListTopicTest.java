@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.List;
 
 
 /**
@@ -476,5 +477,35 @@ public class LinkedListTopicTest {
         System.out.println(llt.mergeKLists(new ListNode[]{}));
 
         System.out.println(llt.mergeKLists(new ListNode[]{null}));
+    }
+
+    @Test
+    public void removeElement() {
+        int[] nums = new int[] {3, 2, 2, 3};
+        int element = llt.removeElement(nums, 3);
+        Assert.assertArrayEquals(new int[] {2, 2, 2, 3}, nums);
+        Assert.assertEquals(2, element);
+
+        nums = new int[] {0, 1, 2, 2, 3, 0, 4, 2};
+        element = llt.removeElement(nums, 2);
+        Assert.assertArrayEquals(new int[] {0, 1, 4, 0, 3, 0, 4, 2}, nums);
+        Assert.assertEquals(5, element);
+
+        nums = new int[] {1};
+        element = llt.removeElement(nums, 1);
+        Assert.assertArrayEquals(new int[] {1}, nums);
+        Assert.assertEquals(0, element);
+    }
+
+    @Test
+    public void permuteUnique() {
+        int[] nums = new int[]{1, 2, 3};
+
+        List<List<Integer>> permute = llt.permuteUnique(nums);
+        System.out.println(permute);
+
+        nums = new int[] {1, 1, 2};
+        permute = llt.permuteUnique(nums);
+        System.out.println(permute);
     }
 }

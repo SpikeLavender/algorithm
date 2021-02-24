@@ -51,11 +51,29 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * <a href="https://leetcode-cn.com/problems/container-with-most-water/">11.盛最多水的容器</a>
  * {@link ArrayTopic#maxArea(int[])}
  *
+ * <a href="https://leetcode-cn.com/problems/integer-to-roman/">12.整数转罗马数字</a>
+ * TODO: {@link StringHandler#intToRoman(int)}
+ *
+ * <a href="https://leetcode-cn.com/problems/roman-to-integer/">13.罗马数字转整数</a>
+ * TODO: {@link StringHandler#romanToInt(java.lang.String)}
+ *
+ * <a href="https://leetcode-cn.com/problems/longest-common-prefix/">14.最长公共前缀</a>
+ * TODO: {@link }
+ *
  * <a href="https://leetcode-cn.com/problems/3sum/">15.三数之和</a>
  * {@link NumSums#threeSum(int[])}
  *
+ * <a href="https://leetcode-cn.com/problems/3sum-closest/">16.最接近的三数之和</a>
+ * TODO: {@link }
+ *
+ * <a>17.电话号码的字母组合</a>
+ * TODO: {@link }
+ *
  * <a href="https://leetcode-cn.com/problems/4sum/">18.四数之和</a>
  * {@link NumSums#fourSum(int[], int)}
+ *
+ * <a href="https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/">19.删除链表的倒数第N个节点</a>
+ * {@link LinkedListTopic#removeNthFromEnd(com.natsumes.leetcode.list.ListNode, int)}
  *
  * <a href="https://leetcode-cn.com/problems/valid-parentheses/">20.有效的括号</a>
  * {@link StringHandler#isValid(java.lang.String)}
@@ -69,8 +87,26 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * <a href="https://leetcode-cn.com/problems/merge-k-sorted-lists/">23.合并K个升序链表</a>
  * {@link LinkedListTopic#mergeKLists(com.natsumes.leetcode.list.ListNode[])}
  *
+ * <a href="https://leetcode-cn.com/problems/swap-nodes-in-pairs/">24.两两交换链表中的节点</a>
+ * {@link LinkedListTopic#swapPairs(com.natsumes.leetcode.list.ListNode)}
+ *
  * <a href="https://leetcode-cn.com/problems/reverse-nodes-in-k-group/">25.K个一组翻转链表</a>
  * {@link LinkedListTopic#reverseKGroup(com.natsumes.leetcode.list.ListNode, int)}
+ *
+ * <a href="https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/">26.删除排序数组中的重复项</a>
+ * TODO: {@link }
+ *
+ * <a href="https://leetcode-cn.com/problems/remove-element/">27.移除元素</a>
+ * {@link LinkedListTopic#removeElement(int[], int)}
+ *
+ * <a href="https://leetcode-cn.com/problems/implement-strstr/">28.实现 strStr()</a>
+ * TODO: {@link }
+ *
+ * <a href="https://leetcode-cn.com/problems/divide-two-integers/">29.两数相除</a>
+ * TODO: {@link }
+ *
+ * <a href="https://leetcode-cn.com/problems/substring-with-concatenation-of-all-words/">30.串联所有单词的子串</a>
+ * TODO: {@link }
  *
  * <a href="https://leetcode-cn.com/problems/next-permutation/">31.下一个排列</a>
  * {@link Permute#nextPermutation(int[])}
@@ -85,8 +121,23 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * <a href="https://leetcode-cn.com/problems/find-first-and-last-position-of-element-in-sorted-array/">34.在排序数组中查找元素的第一个和最后一个位置</a>
  * {@link ArrayTopic#searchRange(int[], int)}
  *
+ * <a href="https://leetcode-cn.com/problems/search-insert-position/">35.搜索插入位置</a>
+ * TODO: {@link }
+ *
+ * <a href="https://leetcode-cn.com/problems/valid-sudoku/">36.有效的数独</a>
+ * TODO: {@link }
+ *
+ * <a href="https://leetcode-cn.com/problems/sudoku-solver/">37.解数独</a>
+ * TODO: {@link }
+ *
+ * <a href="https://leetcode-cn.com/problems/count-and-say/">38.外观数列</a>
+ * TODO: {@link }
+ *
  * <a href="https://leetcode-cn.com/problems/combination-sum/">39.组合总和</a>
  * {@link Permute#combinationSum(int[], int)}
+ *
+ * <a href="https://leetcode-cn.com/problems/combination-sum-ii/">40.组合总和 II</a>
+ * TODO: {@link }
  *
  * <a href="https://leetcode-cn.com/problems/first-missing-positive/submissions/">41.缺失的第一个正数</a>
  * {@link ArrayTopic#firstMissingPositive(int[])}
@@ -96,11 +147,29 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * {@link ArrayTopic#trap02(int[])}
  * {@link ArrayTopic#trap01(int[])}
  *
+ * <a href="https://leetcode-cn.com/problems/multiply-strings/">43.字符串相乘</a>
+ * TODO: {@link }
+ *
+ * <a href="https://leetcode-cn.com/problems/wildcard-matching/">44.通配符匹配</a>
+ * TODO: {@link }
+ *
  * <a href="https://leetcode-cn.com/problems/jump-game-ii/">45.跳跃游戏 II</a>
  * {@link DynamicProgram#jump(int[])}
  *
  * <a href="https://leetcode-cn.com/problems/permutations/">46.全排列</a>
  * {@link Permute#permute(int[])}
+ *
+ * <a href="https://leetcode-cn.com/problems/permutations-ii/">47.全排列 II</a>
+ * {@link LinkedListTopic#permuteUnique(int[])}
+ *
+ * <a href="https://leetcode-cn.com/problems/rotate-image/">48.旋转图像</a>
+ * TODO: {@link }
+ *
+ * <a href="https://leetcode-cn.com/problems/group-anagrams/">49.字母异位词分组</a>
+ * TODO: {@link }
+ *
+ * <a href="https://leetcode-cn.com/problems/powx-n/">50.Pow(x, n)</a>
+ * TODO: {@link }
  *
  * <a href="https://leetcode-cn.com/problems/n-queens/">51.N皇后</a>
  * {@link DynamicProgram#solveNQueens(int)}
@@ -290,7 +359,6 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * <a href="https://leetcode-cn.com/problems/super-pow/">372.超级次方</a>
  * {@link ArrayTopic#superPow(int, int[])}
  *
- * TODO: 复习
  * <a href="https://leetcode-cn.com/problems/decode-string/">394.字符串解码</a>
  * {@link StringHandler#decodeString(java.lang.String)}
  *
@@ -387,6 +455,9 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  *
  * <a href="https://leetcode-cn.com/problems/bricks-falling-when-hit/">803.打砖块</a>
  * {@link UnionFinder#hitBricks(int[][], int[][])}
+ *
+ * <a href="https://leetcode-cn.com/problems/flipping-an-image/">832.翻转图像</a>
+ * {@link ArrayTopic#flipAndInvertImage(int[][])}
  *
  * <a href="https://leetcode-cn.com/problems/similar-string-groups/">839.相似字符串组</a>
  * {@link UnionFinder#numSimilarGroups(java.lang.String[])}

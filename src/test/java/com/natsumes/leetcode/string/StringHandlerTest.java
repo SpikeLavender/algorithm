@@ -79,4 +79,22 @@ public class StringHandlerTest {
         Assert.assertEquals(2, sh.countHomogenous("xy"));
         Assert.assertEquals(15, sh.countHomogenous("zzzzz"));
     }
+
+    @Test
+    public void intToRoman() {
+        Assert.assertEquals("III", sh.intToRoman(3));
+        Assert.assertEquals("IV", sh.intToRoman(4));
+        Assert.assertEquals("IX", sh.intToRoman(9));
+        Assert.assertEquals("LVIII", sh.intToRoman(58));
+        Assert.assertEquals("MCMXCIV", sh.intToRoman(1994));
+    }
+
+    @Test
+    public void romanToInt() {
+        Assert.assertEquals(3, sh.romanToInt("III"));
+        Assert.assertEquals(4, sh.romanToInt("IV"));
+        Assert.assertEquals(9, sh.romanToInt("IX"));
+        Assert.assertEquals(58, sh.romanToInt("LVIII"));
+        Assert.assertEquals(1994, sh.romanToInt("MCMXCIV"));
+    }
 }

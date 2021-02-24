@@ -43,14 +43,5 @@ public class LeetCodeTest {
         System.out.println(permute);
     }
 
-    @Test
-    public void permuteUnique() {
-        int[] nums = new int[]{1, 2, 3};
 
-        List<List<Integer>> permute = lt.permuteUnique(nums);
-        System.out.println(permute);
-        nums = new int[] {1, 1, 2};
-        permute = lt.permuteUnique(nums);
-        System.out.println(permute);
-    }
 }

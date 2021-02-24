@@ -25,8 +25,20 @@ import java.util.*;
  * <a href="https://leetcode-cn.com/problems/reverse-nodes-in-k-group/">25.K 个一组翻转链表</a>
  * {@link LinkedListTopic#reverseKGroup(com.natsumes.leetcode.list.ListNode, int)}
  *
+ * <a href="https://leetcode-cn.com/problems/swap-nodes-in-pairs/">24.两两交换链表中的节点</a>
+ * {@link LinkedListTopic#swapPairs(com.natsumes.leetcode.list.ListNode)}
+ *
  * <a href="https://leetcode-cn.com/problems/merge-k-sorted-lists/">23.合并K个升序链表</a>
  * {@link LinkedListTopic#mergeKLists(com.natsumes.leetcode.list.ListNode[])}
+ *
+ * <a href="https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/">19.删除链表的倒数第N个节点</a>
+ * {@link LinkedListTopic#removeNthFromEnd(com.natsumes.leetcode.list.ListNode, int)}
+ *
+ * <a href="https://leetcode-cn.com/problems/remove-element/">27.移除元素</a>
+ * {@link LinkedListTopic#removeElement(int[], int)}
+ *
+ * <a href="https://leetcode-cn.com/problems/permutations-ii/">47.全排列 II</a>
+ * {@link LinkedListTopic#permuteUnique(int[])}
  *
  * @author hetengjiao
  */
@@ -1508,5 +1520,135 @@ public class LinkedListTopic {
             cur = tmp;
         }
         return prev;
+    }
+
+    /**
+     * 27.移除元素
+     * 给你一个数组 nums 和一个值 val，你需要 原地 移除所有数值等于 val 的元素，并返回移除后数组的新长度。
+     *
+     * 不要使用额外的数组空间，你必须仅使用 O(1) 额外空间并 原地 修改输入数组。
+     *
+     * 元素的顺序可以改变。你不需要考虑数组中超出新长度后面的元素。
+     *
+     * 示例 1:
+     *
+     * 给定 nums = [3,2,2,3], val = 3,
+     *
+     * 函数应该返回新的长度 2, 并且 nums 中的前两个元素均为 2。
+     *
+     * 你不需要考虑数组中超出新长度后面的元素。
+     * 示例 2:
+     *
+     * 给定 nums = [0,1,2,2,3,0,4,2], val = 2,
+     *
+     * 函数应该返回新的长度 5, 并且 nums 中的前五个元素为 0, 1, 3, 0, 4。
+     *
+     * 注意这五个元素可为任意顺序。
+     *
+     * 你不需要考虑数组中超出新长度后面的元素。
+     *  
+     *
+     * 说明:
+     *
+     * 为什么返回数值是整数，但输出的答案是数组呢?
+     *
+     * 请注意，输入数组是以「引用」方式传递的，这意味着在函数里修改输入数组对于调用者是可见的。
+     *
+     * 你可以想象内部操作如下:
+     *
+     * // nums 是以“引用”方式传递的。也就是说，不对实参作任何拷贝
+     * int len = removeElement(nums, val);
+     *
+     * // 在函数里修改输入数组对于调用者是可见的。
+     * // 根据你的函数返回的长度, 它会打印出数组中 该长度范围内 的所有元素。
+     * for (int i = 0; i < len; i++) {
+     *     print(nums[i]);
+     * }
+     *
+     * 作者：力扣 (LeetCode)
+     * 链接：https://leetcode-cn.com/leetbook/read/all-about-array/x9p1iv/
+     * 来源：力扣（LeetCode）
+     * 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+     */
+    public int removeElement(int[] nums, int val) {
+        int i = 0, j = nums.length - 1;
+        while (i <= j) {
+            if (nums[i] == val && nums[j] != val) {
+                nums[i] = nums[j];
+                i++;
+                j--;
+                continue;
+            }
+            if (nums[i] != val) {
+                i++;
+            }
+            if (nums[j] == val) {
+                j--;
+            }
+        }
+        return i;
+    }
+
+    /**
+     * 47. 全排列 II
+     *
+     * 给定一个可包含重复数字的序列 nums ，按任意顺序返回所有不重复的全排列。
+     *
+     * 示例 1：
+     *
+     * 输入：nums = [1,1,2]
+     * 输出：
+     * [[1,1,2],
+     *  [1,2,1],
+     *  [2,1,1]]
+     * 示例 2：
+     *
+     * 输入：nums = [1,2,3]
+     * 输出：[[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
+     *  
+     *
+     * 提示：
+     *
+     * 1 <= nums.length <= 8
+     * -10 <= nums[i] <= 10
+     *
+     * 来源：力扣（LeetCode）
+     * 链接：https://leetcode-cn.com/problems/permutations-ii
+     * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+     */
+    public List<List<Integer>> permuteUnique(int[] nums) {
+        boolean[] vis = new boolean[nums.length];
+        List<List<Integer>> res = new ArrayList<>();
+        List<Integer> track = new ArrayList<>();
+        Arrays.sort(nums);
+        backTrackUnique(nums, track, res, 0, vis);
+        return res;
+    }
+
+    /**
+     * 回溯算法(按下标回溯)
+     * @param nums          数据
+     * @param trackIndex    记录路径下标
+     * @param res           结果
+     */
+    private void backTrackUnique(int[] nums, List<Integer> trackIndex,
+                                 List<List<Integer>> res, int idx, boolean[] vis) {
+        if (idx == nums.length) {
+            res.add(new ArrayList<>(trackIndex));
+            return;
+        }
+        for (int i = 0; i < nums.length; i++) {
+            if (vis[i]) {
+                continue;
+            } else if (i > 0 && nums[i] == nums[i - 1] && !vis[i - 1]) {
+                // 保证每次访问重复元素的时候，都是按照顺序访问第一个未被访问到的元素
+                continue;
+            }
+            trackIndex.add(nums[i]);
+            vis[i] = true;
+            backTrackUnique(nums, trackIndex, res, idx + 1, vis);
+            vis[i] = false;
+            trackIndex.remove(idx);
+        }
     }
 }

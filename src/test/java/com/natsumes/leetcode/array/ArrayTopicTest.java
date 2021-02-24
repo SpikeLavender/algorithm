@@ -366,4 +366,13 @@ public class ArrayTopicTest {
         Assert.assertTrue(at.isToeplitzMatrix(new int[][]{{1, 2, 3, 4},{5, 1, 2, 3},{9, 5, 1, 2}}));
         Assert.assertFalse(at.isToeplitzMatrix(new int[][]{{1, 2},{2, 2}}));
     }
+
+    @Test
+    public void flipAndInvertImage() {
+        Assert.assertArrayEquals(new int[][]{{1, 1, 0, 0}, {0, 1, 1, 0}, {0, 0, 0, 1}, {1, 0, 1, 0}},
+                at.flipAndInvertImage(new int[][]{{1, 1, 0, 0}, {1, 0, 0, 1}, {0, 1, 1, 1}, {1, 0, 1, 0}}));
+
+        Assert.assertArrayEquals(new int[][]{{1, 0, 0}, {0, 1, 0}, {1, 1, 1}},
+                at.flipAndInvertImage(new int[][]{{1, 1, 0}, {1, 0, 1}, {0, 0, 0}}));
+    }
 }
