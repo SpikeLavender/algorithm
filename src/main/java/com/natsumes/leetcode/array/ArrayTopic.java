@@ -33,6 +33,9 @@ import java.util.*;
  * <a href="https://leetcode-cn.com/problems/find-first-and-last-position-of-element-in-sorted-array/">34.在排序数组中查找元素的第一个和最后一个位置</a>
  * {@link ArrayTopic#searchRange(int[], int)}
  *
+ * <a href="https://leetcode-cn.com/problems/powx-n/">50.Pow(x, n)</a>
+ * {@link ArrayTopic#myPow(double, int)}
+ *
  * =====================================================================================================================
  * <h4>排序</h4>
  *
@@ -2303,5 +2306,53 @@ public class ArrayTopic {
             }
         }
         return a;
+    }
+
+    /**
+     * 50. Pow(x, n)
+     * 实现 pow(x, n) ，即计算 x 的 n 次幂函数（即，xn）。
+     *
+     *
+     *
+     * 示例 1：
+     *
+     * 输入：x = 2.00000, n = 10
+     * 输出：1024.00000
+     * 示例 2：
+     *
+     * 输入：x = 2.10000, n = 3
+     * 输出：9.26100
+     * 示例 3：
+     *
+     * 输入：x = 2.00000, n = -2
+     * 输出：0.25000
+     * 解释：2^-2 = 1/2^2 = 1/4 = 0.25
+     *
+     *
+     * 提示：
+     *
+     * -100.0 < x < 100.0
+     * -231 <= n <= 231-1
+     * -104 <= xn <= 104
+     *
+     * @param x x
+     * @param n n
+     * @return double
+     */
+    public double myPow(double x, int n) {
+        return (long) n >= 0 ? quickMul(x, (long) n) : 1.0 / quickMul(x, -(long) n);
+    }
+
+    private double quickMul(double x, long n) {
+        double ans = 1.0;
+        double num = x;
+        while (n > 0) {
+            if (n % 2 == 1) {
+                ans *= num;
+            }
+            num *= num;
+            n /= 2;
+        }
+        return ans;
     }
 }

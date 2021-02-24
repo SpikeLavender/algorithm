@@ -169,7 +169,7 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * TODO: {@link }
  *
  * <a href="https://leetcode-cn.com/problems/powx-n/">50.Pow(x, n)</a>
- * TODO: {@link }
+ * {@link ArrayTopic#myPow(double, int)}
  *
  * <a href="https://leetcode-cn.com/problems/n-queens/">51.N皇后</a>
  * {@link DynamicProgram#solveNQueens(int)}

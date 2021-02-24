@@ -375,4 +375,12 @@ public class ArrayTopicTest {
         Assert.assertArrayEquals(new int[][]{{1, 0, 0}, {0, 1, 0}, {1, 1, 1}},
                 at.flipAndInvertImage(new int[][]{{1, 1, 0}, {1, 0, 1}, {0, 0, 0}}));
     }
+
+    @Test
+    public void myPow() {
+        Assert.assertEquals(0.25000, at.myPow(2.00000, -2), 0.000001);
+        Assert.assertEquals(1024.00000, at.myPow(2.00000, 10), 0.00000);
+        Assert.assertEquals(9.26100, at.myPow(2.10000, 3), 0.000001);
+        Assert.assertEquals(0.0000, at.myPow(0.00001, 2147483647), 0.000001);
+    }
 }
