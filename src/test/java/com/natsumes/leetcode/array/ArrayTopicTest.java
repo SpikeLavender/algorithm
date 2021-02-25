@@ -383,4 +383,17 @@ public class ArrayTopicTest {
         Assert.assertEquals(9.26100, at.myPow(2.10000, 3), 0.000001);
         Assert.assertEquals(0.0000, at.myPow(0.00001, 2147483647), 0.000001);
     }
+
+    @Test
+    public void rotate() {
+    }
+
+    @Test
+    public void transpose() {
+        Assert.assertArrayEquals(new int[][]{{1, 4, 7}, {2, 5, 8},{3, 6, 9}},
+                at.transpose(new int[][]{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}}));
+
+        Assert.assertArrayEquals(new int[][]{{1, 4}, {2, 5},{3, 6}},
+                at.transpose(new int[][]{{1, 2, 3}, {4, 5, 6}}));
+    }
 }

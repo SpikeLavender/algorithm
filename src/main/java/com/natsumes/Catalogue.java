@@ -462,6 +462,9 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * <a href="https://leetcode-cn.com/problems/similar-string-groups/">839.相似字符串组</a>
  * {@link UnionFinder#numSimilarGroups(java.lang.String[])}
  *
+ * <a href="https://leetcode-cn.com/problems/transpose-matrix/">867.转置矩阵</a>
+ * {@link ArrayTopic#transpose(int[][])}
+ *
  * <a href="https://leetcode-cn.com/problems/super-egg-drop/">887.鸡蛋掉落</a>
  * {@link DynamicProgram#superEggDrop(int, int) TODO: 各种方法}
  *
