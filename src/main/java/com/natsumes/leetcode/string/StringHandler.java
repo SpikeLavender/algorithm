@@ -40,7 +40,7 @@ import java.util.*;
  * {@link StringHandler#findNumOfValidWords(String[], String[])}
  *
  * <a href="https://leetcode-cn.com/problems/longest-common-prefix/">14.最长公共前缀</a>
- * TODO: {@link StringHandler#longestCommonPrefix(String[])}
+ * {@link StringHandler#longestCommonPrefix(String[])}
  *
  * @author hetengjiao
  */

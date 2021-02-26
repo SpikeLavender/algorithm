@@ -48,4 +48,10 @@ public class NumSumsTest {
         List<List<Integer>> lists = ns.fourSum(new int[]{1, 0, -1, 0, -2, 2}, 0);
         System.out.println(lists);
     }
+
+    @Test
+    public void threeSumClosest() {
+        Assert.assertEquals(0, ns.threeSumClosest(new int[] {0, 2, 1, -3}, 1));
+        Assert.assertEquals(2, ns.threeSumClosest(new int[] {-1, 2, 1, -4}, 1));
+    }
 }
