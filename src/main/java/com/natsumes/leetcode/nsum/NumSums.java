@@ -165,7 +165,7 @@ public class NumSums {
      * @param target target
      * @return <code>List<List<Integer>></code>
      */
-    public List<List<Integer>> nSumTarget(int[] nums, int n, int start, int target) {
+    private List<List<Integer>> nSumTarget(int[] nums, int n, int start, int target) {
         int sz = nums.length;
         List<List<Integer>> res = new ArrayList<>();
         if (n < 2 || sz < n) {
