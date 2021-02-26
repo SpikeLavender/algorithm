@@ -498,6 +498,9 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * <a href="https://leetcode-cn.com/problems/longest-common-subsequence/">1143.最长公共子序列</a>
  * {@link DynamicProgram#longestCommonSubsequence(java.lang.String, java.lang.String)}
  *
+ * <a href="https://leetcode-cn.com/problems/number-of-valid-words-for-each-puzzle/">1178.猜字谜</a>
+ * {@link StringHandler#findNumOfValidWords(String[], String[])}
+ *
  * <a href="https://leetcode-cn.com/problems/count-square-submatrices-with-all-ones/">1277.统计全为1的正方形子矩阵</a>
  * {@link DynamicProgram#countSquares(int[][])}
  *

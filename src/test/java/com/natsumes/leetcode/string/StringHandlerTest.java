@@ -3,6 +3,8 @@ package com.natsumes.leetcode.string;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.List;
+
 /**
  * @author hetengjiao
  */
@@ -96,5 +98,14 @@ public class StringHandlerTest {
         Assert.assertEquals(9, sh.romanToInt("IX"));
         Assert.assertEquals(58, sh.romanToInt("LVIII"));
         Assert.assertEquals(1994, sh.romanToInt("MCMXCIV"));
+    }
+
+    @Test
+    public void findNumOfValidWords() {
+        List<Integer> words = sh.findNumOfValidWords(
+                new String[]{"aaaa", "asas", "able", "ability", "actt", "actor", "access"},
+                new String[]{"aboveyz", "abrodyz", "abslute", "absoryz", "actresz", "gaswxyz"});
+        Integer[] res = new Integer[words.size()];
+        Assert.assertArrayEquals(new Integer[]{1, 1, 3, 2, 4, 0}, words.toArray(res));
     }
 }
