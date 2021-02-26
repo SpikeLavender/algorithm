@@ -108,4 +108,10 @@ public class StringHandlerTest {
         Integer[] res = new Integer[words.size()];
         Assert.assertArrayEquals(new Integer[]{1, 1, 3, 2, 4, 0}, words.toArray(res));
     }
+
+    @Test
+    public void longestCommonPrefix() {
+        Assert.assertEquals("fl", sh.longestCommonPrefix(new String[]{"flower","flow","flight"}));
+        Assert.assertEquals("", sh.longestCommonPrefix(new String[]{"dog","racecar","car"}));
+    }
 }
