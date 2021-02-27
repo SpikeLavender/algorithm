@@ -240,7 +240,7 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * <a href="https://leetcode-cn.com/problems/pascals-triangle-ii/">119.杨辉三角 II</a>
  * {@link ArrayTopic#getRow(int)}
  *
- * TODO: <a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock">121.买卖股票的最佳时机</a>
+ * <a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock">121.买卖股票的最佳时机</a>
  * {@link DynamicProgram#maxProfit01(int[])}
  * {@link DynamicProgram#maxProfitBySearch(int[])}
  *
@@ -361,6 +361,9 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  *
  * <a href="https://leetcode-cn.com/problems/decode-string/">394.字符串解码</a>
  * {@link StringHandler#decodeString(java.lang.String)}
+ *
+ * <a href="https://leetcode-cn.com/problems/longest-substring-with-at-least-k-repeating-characters/">395.至少有 K 个重复字符的最长子串</a>
+ * {@link SlidingWindow#longestSubstring(String, int)}
  *
  * <a href="https://leetcode-cn.com/problems/longest-repeating-character-replacement/">424.替换后的最长重复字符</a>
  * {@link SlidingWindow#characterReplacement(java.lang.String, int)}

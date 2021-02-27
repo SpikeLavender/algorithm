@@ -158,4 +158,10 @@ public class SlidingWindowTest {
                 3)
         );
     }
+
+    @Test
+    public void longestSubstring() {
+        Assert.assertEquals(3, sw.longestSubstring("aaabb", 3));
+        Assert.assertEquals(5, sw.longestSubstring("ababbc", 2));
+    }
 }
