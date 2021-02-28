@@ -2500,7 +2500,10 @@ public class ArrayTopic {
             if (a[i] < a[i + 1]) {
                 dec = false;
             }
+            if (!inc && !dec) {
+                return false;
+            }
         }
-        return inc || dec;
+        return true;
     }
 }
