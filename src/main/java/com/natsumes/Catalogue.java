@@ -471,6 +471,9 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * <a href="https://leetcode-cn.com/problems/super-egg-drop/">887.鸡蛋掉落</a>
  * {@link DynamicProgram#superEggDrop(int, int) TODO: 各种方法}
  *
+ * <a href="https://leetcode-cn.com/problems/monotonic-array/">896.单调数列</a>
+ * {@link ArrayTopic#isMonotonic(int[])}
+ *
  * <a href="https://leetcode-cn.com/problems/fruit-into-baskets/">904.水果成篮</a>
  * {@link SlidingWindow#totalFruit(int[])}
  *

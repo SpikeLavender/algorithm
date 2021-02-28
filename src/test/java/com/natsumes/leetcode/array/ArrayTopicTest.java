@@ -396,4 +396,14 @@ public class ArrayTopicTest {
         Assert.assertArrayEquals(new int[][]{{1, 4}, {2, 5},{3, 6}},
                 at.transpose(new int[][]{{1, 2, 3}, {4, 5, 6}}));
     }
+
+    @Test
+    public void isMonotonic() {
+        Assert.assertFalse(at.isMonotonic(new int[] {11,11,9,4,3,3,3,1,-1,-1,3,3,3,5,5,5}));
+        Assert.assertTrue(at.isMonotonic(new int[] {1, 2, 2, 3}));
+        Assert.assertTrue(at.isMonotonic(new int[] {6, 5, 4, 4}));
+        Assert.assertTrue(at.isMonotonic(new int[] {1, 1, 1}));
+        Assert.assertFalse(at.isMonotonic(new int[] {1, 3, 2}));
+        Assert.assertTrue(at.isMonotonic(new int[] {1, 2, 4, 5}));
+    }
 }
