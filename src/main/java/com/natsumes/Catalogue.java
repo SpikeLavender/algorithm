@@ -3,6 +3,7 @@ package com.natsumes;
 import com.natsumes.company.ByteDance;
 import com.natsumes.leetcode.DfsAndBinarySearch;
 import com.natsumes.leetcode.array.ArrayTopic;
+import com.natsumes.leetcode.array.PrefixSum;
 import com.natsumes.leetcode.dp.DynamicProgram;
 import com.natsumes.leetcode.graph.Graph;
 import com.natsumes.leetcode.list.LinkedListTopic;
@@ -330,7 +331,10 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * {@link DynamicProgram#removeInvalidParentheses(java.lang.String)}
  *
  * <a href="https://leetcode-cn.com/problems/range-sum-query-immutable/">303.区域和检索 - 数组不可变</a>
- * {@link ArrayTopic.NumArray}
+ * {@link PrefixSum.NumArray}
+ *
+ * <a href="https://leetcode-cn.com/problems/range-sum-query-2d-immutable/">304.二维区域和检索 - 矩阵不可变</a>
+ * {@link PrefixSum.NumMatrix}
  *
  * <a href="https://leetcode-cn.com/problems/number-of-islands-ii/">305.岛屿数量 II</a>
  * {@link UnionFinder#numIslands2(int, int, int[][])}

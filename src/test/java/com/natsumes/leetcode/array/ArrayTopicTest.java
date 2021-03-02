@@ -406,12 +406,4 @@ public class ArrayTopicTest {
         Assert.assertFalse(at.isMonotonic(new int[] {1, 3, 2}));
         Assert.assertTrue(at.isMonotonic(new int[] {1, 2, 4, 5}));
     }
-
-    @Test
-    public void numArray() {
-        ArrayTopic.NumArray numArray = new ArrayTopic.NumArray(new int[]{-2, 0, 3, -5, 2, -1});
-        Assert.assertEquals(1, numArray.sumRange(0, 2));
-        Assert.assertEquals(-1, numArray.sumRange(2, 5));
-        Assert.assertEquals(-3, numArray.sumRange(0, 5));
-    }
 }
