@@ -448,10 +448,16 @@ public class DynamicProgramTest {
 
     @Test
     public void solveNQueens() {
-        List<List<String>> lists = dp.solveNQueens(4);
+        List<List<String>> lists = dp.solveNsQueens(4);
         System.out.println(lists);
 
-        lists = dp.solveNQueens(1);
+        lists = dp.solveNsQueens(1);
         System.out.println(lists);
+    }
+
+    @Test
+    public void countBits() {
+        Assert.assertArrayEquals(new int[]{0, 1, 1}, dp.countBits(2));
+        Assert.assertArrayEquals(new int[]{0, 1, 1, 2, 1, 2}, dp.countBits(5));
     }
 }

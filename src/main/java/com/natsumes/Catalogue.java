@@ -173,7 +173,7 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * {@link ArrayTopic#myPow(double, int)}
  *
  * <a href="https://leetcode-cn.com/problems/n-queens/">51.N皇后</a>
- * {@link DynamicProgram#solveNQueens(int)}
+ * {@link DynamicProgram#solveNsQueens(int)}
  *
  * <a href="https://leetcode-cn.com/problems/maximum-subarray/">53.最大子序和</a>
  * {@link DynamicProgram#maxSubArray(int[])}
@@ -356,6 +356,9 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  *
  * <a href="https://leetcode-cn.com/problems/house-robber-iii/">337.打家劫舍 III</a>
  * {@link DynamicProgram#rob(com.natsumes.leetcode.dp.TreeNode)}
+ *
+ * <a href="https://leetcode-cn.com/problems/counting-bits/">338.比特位计数</a>
+ * {@link DynamicProgram#countBits(int)}
  *
  * <a href="https://leetcode-cn.com/problems/longest-substring-with-at-most-k-distinct-characters/">340.至多包含K个不同字符的最长子串</a>
  * {@link SlidingWindow#lengthOfLongestSubstringKsDistinct(java.lang.String, int)}
