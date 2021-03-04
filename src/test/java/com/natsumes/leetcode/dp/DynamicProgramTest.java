@@ -460,4 +460,11 @@ public class DynamicProgramTest {
         Assert.assertArrayEquals(new int[]{0, 1, 1}, dp.countBits(2));
         Assert.assertArrayEquals(new int[]{0, 1, 1, 2, 1, 2}, dp.countBits(5));
     }
+
+
+    @Test
+    public void maxEnvelopes() {
+        int[][] envelopes = {{5, 4}, {6, 4}, {6, 7}, {2, 3}};
+        Assert.assertEquals(3, dp.maxEnvelopes(envelopes));
+    }
 }

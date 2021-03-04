@@ -67,8 +67,8 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * <a href="https://leetcode-cn.com/problems/3sum-closest/">16.最接近的三数之和</a>
  * {@link NumSums#threeSumClosest(int[], int)}
  *
- * <a>17.电话号码的字母组合</a>
- * TODO: {@link }
+ * <a href="https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number/">17.电话号码的字母组合</a>
+ * {@link Permute#letterCombinations(java.lang.String)}
  *
  * <a href="https://leetcode-cn.com/problems/4sum/">18.四数之和</a>
  * {@link NumSums#fourSum(int[], int)}
@@ -365,6 +365,9 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  *
  * <a href="https://leetcode-cn.com/problems/top-k-frequent-elements/">347.前 K 个高频元素</a>
  * {@link ArrayTopic#topKsFrequent(int[], int)}
+ *
+ * <a href="https://leetcode-cn.com/problems/russian-doll-envelopes/">354.俄罗斯套娃信封问题</a>
+ * {@link DynamicProgram#maxEnvelopes(int[][])}
  *
  * <a href="https://leetcode-cn.com/problems/super-pow/">372.超级次方</a>
  * {@link ArrayTopic#superPow(int, int[])}

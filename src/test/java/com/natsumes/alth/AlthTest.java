@@ -85,9 +85,6 @@ public class AlthTest {
         int[] robs2 = {2,7,9,3,1};
         System.out.println(rob(robs2));
 
-        int[][] envelopes = {{5, 4}, {6, 4}, {6, 7}, {2, 3}};
-        System.out.println(maxEnvelopes(envelopes));
-
         System.out.println(minDistance("horse", "ros"));
         System.out.println(minDistance("intention", "execution"));
 
