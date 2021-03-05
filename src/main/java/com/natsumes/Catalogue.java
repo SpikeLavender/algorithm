@@ -4,6 +4,7 @@ import com.natsumes.company.ByteDance;
 import com.natsumes.leetcode.DfsAndBinarySearch;
 import com.natsumes.leetcode.array.ArrayTopic;
 import com.natsumes.leetcode.array.PrefixSum;
+import com.natsumes.leetcode.design.MyQueue;
 import com.natsumes.leetcode.dp.DynamicProgram;
 import com.natsumes.leetcode.graph.Graph;
 import com.natsumes.leetcode.list.LinkedListTopic;
@@ -303,6 +304,9 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  *
  * <a href="https://leetcode-cn.com/problems/maximal-square/">221.最大正方形</a>
  * {@link DynamicProgram#maximalSquare(char[][])}
+ *
+ * <a href="https://leetcode-cn.com/problems/implement-queue-using-stacks/">232.用栈实现队列</a>
+ * {@link MyQueue}
  *
  * <a href="https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-search-tree/">235.二叉搜索树的最近公共祖先</a>
  * {@link BinarySearchTreeTopic#lowestCommonAncestor(com.natsumes.leetcode.tree.TreeNode, com.natsumes.leetcode.tree.TreeNode, com.natsumes.leetcode.tree.TreeNode)}
