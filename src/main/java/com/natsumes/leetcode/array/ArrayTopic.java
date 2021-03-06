@@ -547,12 +547,12 @@ public class ArrayTopic {
         int n = nums.length;
         //单调栈
         int[] ans = new int[n];
-        Stack<Integer> s = new Stack<>();
+        Deque<Integer> s = new LinkedList<>();
         for (int i = 2 * n - 1; i >= 0; i--) {
-            while (!s.isEmpty() && s.peek() <= nums[i % n]) {
-                s.pop();
+            while (!s.isEmpty() && s.peekFirst() <= nums[i % n]) {
+                s.removeFirst();
             }
-            ans[i % n] = s.isEmpty() ? -1 : s.peek();
+            ans[i % n] = s.isEmpty() ? -1 : s.peekFirst();
             s.push(nums[i % n]);
         }
 
