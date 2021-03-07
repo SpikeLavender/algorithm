@@ -114,4 +114,10 @@ public class StringHandlerTest {
         Assert.assertEquals("fl", sh.longestCommonPrefix(new String[]{"flower","flow","flight"}));
         Assert.assertEquals("", sh.longestCommonPrefix(new String[]{"dog","racecar","car"}));
     }
+
+    @Test
+    public void partition() {
+        List<List<String>> aab = sh.partition("aab");
+        System.out.println(aab);
+    }
 }
