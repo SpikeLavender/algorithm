@@ -265,8 +265,11 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * <a href="https://leetcode-cn.com/problems/surrounded-regions/">130.被围绕的区域</a>
  * {@link UnionFinder#solve(char[][])}
  *
- * TODO: <a href="https://leetcode-cn.com/problems/palindrome-partitioning/">131.分割回文串</a>
- * {@link StringHandler#partition(java.lang.String)}
+ * <a href="https://leetcode-cn.com/problems/palindrome-partitioning/">131.分割回文串</a>
+ * {@link DynamicProgram#partition(java.lang.String)}
+ *
+ * <a href="https://leetcode-cn.com/problems/palindrome-partitioning-ii/">132.分割回文串 II</a>
+ * {@link DynamicProgram#minCut(java.lang.String)}
  *
  * <a href="https://leetcode-cn.com/problems/gas-station/">134.加油站</a>
  * {@link DynamicProgram#canCompleteCircuit(int[], int[])}

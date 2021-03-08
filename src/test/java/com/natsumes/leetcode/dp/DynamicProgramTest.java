@@ -467,4 +467,17 @@ public class DynamicProgramTest {
         int[][] envelopes = {{5, 4}, {6, 4}, {6, 7}, {2, 3}};
         Assert.assertEquals(3, dp.maxEnvelopes(envelopes));
     }
+
+    @Test
+    public void partition() {
+        List<List<String>> aab = dp.partition("aab");
+        System.out.println(aab);
+    }
+
+    @Test
+    public void minCut() {
+        Assert.assertEquals(1, dp.minCut("aab"));
+        Assert.assertEquals(0, dp.minCut("a"));
+        Assert.assertEquals(1, dp.minCut("ab"));
+    }
 }
