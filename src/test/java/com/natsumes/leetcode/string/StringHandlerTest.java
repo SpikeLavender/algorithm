@@ -142,4 +142,11 @@ public class StringHandlerTest {
         Assert.assertEquals(-1, sh.repeatedStringMatch("abc", "wxyz"));
         Assert.assertEquals(0, sh.repeatedStringMatch("abc", ""));
     }
+
+    @Test
+    public void countAndSay() {
+        Assert.assertEquals("1", sh.countAndSay(1));
+        Assert.assertEquals("1211", sh.countAndSay(4));
+        Assert.assertEquals("111221", sh.countAndSay(5));
+    }
 }

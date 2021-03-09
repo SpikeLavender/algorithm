@@ -135,7 +135,7 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * TODO: {@link }
  *
  * <a href="https://leetcode-cn.com/problems/count-and-say/">38.外观数列</a>
- * TODO: {@link }
+ * {@link StringHandler#countAndSay(int)}
  *
  * <a href="https://leetcode-cn.com/problems/combination-sum/">39.组合总和</a>
  * {@link Permute#combinationSum(int[], int)}
