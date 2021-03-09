@@ -406,4 +406,10 @@ public class ArrayTopicTest {
         Assert.assertFalse(at.isMonotonic(new int[] {1, 3, 2}));
         Assert.assertTrue(at.isMonotonic(new int[] {1, 2, 4, 5}));
     }
+
+    @Test
+    public void removeDuplicates() {
+        Assert.assertEquals(2, at.removeDuplicates(new int[]{1, 1, 2}));
+        Assert.assertEquals(5, at.removeDuplicates(new int[]{0, 0, 1, 1, 1, 2, 2, 3, 3, 4}));
+    }
 }

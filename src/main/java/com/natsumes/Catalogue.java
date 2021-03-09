@@ -96,7 +96,7 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * {@link LinkedListTopic#reverseKGroup(com.natsumes.leetcode.list.ListNode, int)}
  *
  * <a href="https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/">26.删除排序数组中的重复项</a>
- * TODO: {@link }
+ * {@link ArrayTopic#removeDuplicates(int[])}
  *
  * <a href="https://leetcode-cn.com/problems/remove-element/">27.移除元素</a>
  * {@link LinkedListTopic#removeElement(int[], int)}
