@@ -45,6 +45,14 @@ import java.util.*;
  * <a href="https://leetcode-cn.com/problems/remove-all-adjacent-duplicates-in-string/">1047.删除字符串中的所有相邻重复项</a>
  * {@link StringHandler#removeDuplicates(java.lang.String)}
  *
+ * <a href="https://leetcode-cn.com/problems/implement-strstr/">28.实现 strStr()</a>
+ * {@link StringHandler#strStr(java.lang.String, java.lang.String)}
+ * {@link StringHandler#bruteForceMatch(java.lang.String, java.lang.String)}
+ * {@link StringHandler#rabinKarpMatch(java.lang.String, java.lang.String)}
+ *
+ * <a href="https://leetcode-cn.com/problems/repeated-string-match/">686.重复叠加字符串匹配</a>
+ * {@link StringHandler#repeatedStringMatch(java.lang.String, java.lang.String)}
+ *
  * @author hetengjiao
  */
 public class StringHandler {
@@ -897,6 +905,301 @@ public class StringHandler {
             sb.append(stack.pollLast());
         }
         return sb.toString();
+    }
+
+    /**
+     * 28. 实现 strStr()
+     * 实现 strStr() 函数。
+     *
+     * 给定一个 haystack 字符串和一个 needle 字符串，在 haystack 字符串中找出 needle 字符串出现的第一个位置 (从0开始)。
+     * 如果不存在，则返回  -1。
+     *
+     * 示例 1:
+     *
+     * 输入: haystack = "hello", needle = "ll"
+     * 输出: 2
+     * 示例 2:
+     *
+     * 输入: haystack = "aaaaa", needle = "bba"
+     * 输出: -1
+     * 说明:
+     *
+     * 当 needle 是空字符串时，我们应当返回什么值呢？这是一个在面试中很好的问题。
+     *
+     * 对于本题而言，当 needle 是空字符串时我们应当返回 0 。这与C语言的 strstr() 以及 Java的 indexOf() 定义相符。
+     *
+     * @param haystack haystack
+     * @param needle needle
+     * @return index
+     */
+    public int strStr(String haystack, String needle) {
+        char[] a = haystack.toCharArray();
+        char[] b = needle.toCharArray();
+        // 主串长度
+        int n = a.length;
+        // 模式串长度
+        int m = b.length;
+
+        // 创建字典
+        int[] bc = new int[256];
+        // 构建坏字符哈希表，记录模式串中每个字符最后出现的位置
+        badCharRule(b, m, bc);
+
+        int[] suffix = new int[m];
+        boolean[] prefix = new boolean[m];
+        goodSuffixRule(b, m, suffix, prefix);
+
+        // i表示主串与模式串对齐的第一个字符
+        int i = 0;
+
+        while (i <= n - m) {
+            int j;
+            // 模式串从后往前匹配
+            for (j = m - 1; j >= 0; j--) {
+                // i+j ： 不匹配的位置
+                // 坏字符对应模式串中的下标是j
+                if (a[i + j] != b[j]) {
+                    break;
+                }
+            }
+            if (j < 0) {
+                // 匹配成功，返回主串与模式串第一个匹配的字符的位置
+                return i;
+            }
+
+            // 这里等同于将模式串往后滑动j-bc[a[i+j]]位
+            // si - xi
+            // j：si bc[a[i+j]]:xi
+            int moveWithBc = j - bc[a[i + j]];
+
+            int moveWithGs = moveWithGs(m, j, suffix, prefix);
+
+            i += Math.max(moveWithBc, moveWithGs);
+
+        }
+        return -1;
+    }
+
+    /**
+     * 处理好后缀
+     * @param b     模式串
+     * @param m     模式串长度
+     * @param suffix    用子串长度为 k 存储主串的好后缀{u} 对应的子串中 {u*} 对应的起始位置
+     * @param prefix    用子串长度为 k 存储 模式串中是否存在和好后缀相同的字符串
+     */
+    private void goodSuffixRule(char[] b, int m, int[] suffix, boolean[] prefix) {
+        Arrays.fill(suffix, -1);
+        Arrays.fill(prefix, false);
+        for (int i = 0; i < m - 1; i++) {
+            int j = i;
+            int k = 0;
+            while (j >= 0 && b[j] == b[m - k - 1]) {
+                j--;
+                k++;
+                suffix[k] = j + 1;
+            }
+            if (j == -1) {
+                prefix[k] = true;
+            }
+        }
+    }
+
+    /**
+     * 滑动
+     * @param n 模式串长度
+     * @param j 坏字符的对应的模式串的下标
+     * @param suffix    suffix
+     * @param prefix    prefix
+     * @return  int
+     */
+    private int moveWithGs(int n, int j, int[] suffix, boolean[] prefix) {
+        int k = n - j - 1;
+        if (k <= 0) {
+            return 0;
+        }
+        if (suffix[k] != -1) {
+            return j - suffix[k] + 1;
+        }
+        for (int i = k - 1; i >= 0; i--) {
+            if (prefix[i]) {
+                return n - i;
+            }
+        }
+        return n;
+    }
+
+    private void badCharRule(char[] b, int m, int[] dc) {
+        // 初始化 bc 模式串中没有的字符值都是-1
+        Arrays.fill(dc, -1);
+        //将模式串中的字符希写入到字典中
+        for (int i = 0; i < m; ++i) {
+            // 计算 b[i] 的 ASCII 值
+            dc[b[i]] = i;
+        }
+    }
+
+    /**
+     * BF 算法
+     *
+     * 暴力匹配算法，也叫朴素匹配算法
+     */
+    public int bruteForceMatch(String src, String pattern) {
+        int index = -1;
+        for (int i = 0; i <= src.length() - pattern.length(); i++) {
+            boolean isMatch = true;
+            for (int j = 0; j < pattern.length(); j++) {
+                if (src.charAt(i + j) != pattern.charAt(j)) {
+                    isMatch = false;
+                    break;
+                }
+            }
+            if (isMatch) {
+                return i;
+            }
+        }
+
+        return index;
+    }
+
+    /**
+     * RK 算法
+     *
+     * 适用于匹配串类型不多的情况，比如：字母、数字或字母加数字的组合 62 (大小写字母+数字)
+     *
+     * RK 算法的全称叫 Rabin-Karp 算法，是由它的两位发明者 Rabin 和 Karp 的名字来命名的
+     * 每次检查主串与子串是否匹配，需要依次比对每个字符，所以 BF 算法的时间复杂度就比较高，是
+     * O(n*m)。我们对朴素的字符串匹配算法稍加改造，引入哈希算法，时间复杂度立刻就会降低
+     * RK 算法的思路是这样的：我们通过哈希算法对主串中的 n-m+1 个子串分别求哈希值，然后逐个与模式
+     * 串的哈希值比较大小。如果某个子串的哈希值与模式串相等，那就说明对应的子串和模式串匹配了（这
+     * 里先不考虑哈希冲突的问题）。因为哈希值是一个数字，数字之间比较是否相等是非常快速的，所以模
+     * 式串和子串比较的效率就提高了
+     */
+    public int rabinKarpMatch(String src, String pattern) {
+        int index = -1;
+        for (int i = 0; i <= src.length() - pattern.length(); i++) {
+            String subStr = src.substring(i, i + pattern.length());
+            if (strToHash(subStr) == strToHash(pattern)) {
+                return i;
+            }
+        }
+        return index;
+    }
+
+    /**
+     * 支持 a-z 二十六进制
+     * 获得字符串的hash值
+     * @param src src
+     */
+    private int strToHash(String src) {
+        int hash = 0;
+        for (int i = 0; i < src.length(); i++) {
+            hash *= 26;
+            hash += src.charAt(i) - 'a';
+        }
+        return hash;
+    }
+
+    /**
+     * 686.重复叠加字符串匹配
+     * 给定两个字符串 a 和 b，寻找重复叠加字符串 a 的最小次数，使得字符串 b 成为叠加后的字符串 a 的子串，如果不存在则返回 -1。
+     *
+     * 注意：字符串 "abc" 重复叠加 0 次是 ""，重复叠加 1 次是 "abc"，重复叠加 2 次是 "abcabc"。
+     *
+     *  
+     *
+     * 示例 1：
+     *
+     * 输入：a = "abcd", b = "cdabcdab"
+     * 输出：3
+     * 解释：a 重复叠加三遍后为 "abcdabcdabcd", 此时 b 是其子串。
+     * 示例 2：
+     *
+     * 输入：a = "a", b = "aa"
+     * 输出：2
+     * 示例 3：
+     *
+     * 输入：a = "a", b = "a"
+     * 输出：1
+     * 示例 4：
+     *
+     * 输入：a = "abc", b = "wxyz"
+     * 输出：-1
+     *  
+     *
+     * 提示：
+     *
+     * 1 <= a.length <= 104
+     * 1 <= b.length <= 104
+     * a 和 b 由小写英文字母组成
+     *
+     * @param a a
+     * @param b b
+     * @return index
+     */
+    public int repeatedStringMatch(String a, String b) {
+        int lenA = a.length();
+        int lenB = b.length();
+
+        int k = lenB / lenA;
+        char[] aa = a.toCharArray();
+        char[] bb = b.toCharArray();
+        int max = k + 2;
+        char[] cc = new char[lenA * max];
+        for (int i = 0; i < max; i++) {
+            System.arraycopy(aa, 0, cc, i * lenA, lenA);
+        }
+
+        while (k <= max) {
+            int i = badBoyerMooreMatch(cc, bb, k * lenA);
+            if (i < 0) {
+                k++;
+            } else {
+                return k;
+            }
+        }
+        return -1;
+    }
+
+    private int badBoyerMooreMatch(char[] src, char[] pattern, int n) {
+        //int n = src.length;
+        int m = pattern.length;
+        int[] ac = new int[26];
+        ascii(pattern, m, ac);
+
+        int[] suffix = new int[m];
+        boolean[] prefix = new boolean[m];
+        goodSuffixRule(pattern, m, suffix, prefix);
+
+        int i = 0;
+        while (i <= n - m) {
+            int j;
+            for (j = m - 1; j >= 0; j--) {
+                if (src[i + j] != pattern[j]) {
+                    break;
+                }
+            }
+            if (j < 0) {
+                return i;
+            }
+
+            int moveWithBc = j - ac[src[i + j] - 'a'];
+            int moveWithGs = Integer.MIN_VALUE;
+            if (j < m - 1) {
+                moveWithGs = moveWithGs(m, j, suffix, prefix);
+            }
+
+            i += Math.max(moveWithBc, moveWithGs);
+        }
+        return -1;
+    }
+
+    private void ascii(char[] b, int m, int[] ac) {
+        for (int i = 0; i < ac.length; i++) {
+            ac[i] = -1;
+        }
+        for (int i = 0; i < m; i++) {
+            ac[b[i] - 'a'] = i;
+        }
     }
 
 }

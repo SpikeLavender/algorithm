@@ -119,4 +119,27 @@ public class StringHandlerTest {
     public void removeDuplicates() {
         Assert.assertEquals("ca", sh.removeDuplicates("abbaca"));
     }
+
+    @Test
+    public void strStr() {
+        Assert.assertEquals(2, sh.strStr("hello", "ll"));
+        Assert.assertEquals(-1, sh.strStr("aaaaa", "bba"));
+        Assert.assertEquals(0, sh.strStr("aaaaa", ""));
+    }
+
+    @Test
+    public void repeatedStringMatch() {
+        Assert.assertEquals(1, sh.repeatedStringMatch("aa", "a"));
+        Assert.assertEquals(2, sh.repeatedStringMatch("aaaaaaaaaaaaaaaaaaaaaab", "ba"));
+        Assert.assertEquals(1, sh.repeatedStringMatch("aaaaaaaaaaaaaaaaaaaaaab", "ab"));
+        Assert.assertEquals(4, sh.repeatedStringMatch("abc", "cabcabca"));
+        Assert.assertEquals(1, sh.repeatedStringMatch("abab", "aba"));
+        Assert.assertEquals(2, sh.repeatedStringMatch("abcd", "cda"));
+        Assert.assertEquals(3, sh.repeatedStringMatch("abcd", "cdabcdabc"));
+        Assert.assertEquals(2, sh.repeatedStringMatch("abcd", "cdabc"));
+        Assert.assertEquals(2, sh.repeatedStringMatch("a", "aa"));
+        Assert.assertEquals(1, sh.repeatedStringMatch("a", "a"));
+        Assert.assertEquals(-1, sh.repeatedStringMatch("abc", "wxyz"));
+        Assert.assertEquals(0, sh.repeatedStringMatch("abc", ""));
+    }
 }

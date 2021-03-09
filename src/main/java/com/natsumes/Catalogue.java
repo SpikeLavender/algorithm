@@ -102,7 +102,9 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * {@link LinkedListTopic#removeElement(int[], int)}
  *
  * <a href="https://leetcode-cn.com/problems/implement-strstr/">28.实现 strStr()</a>
- * TODO: {@link }
+ * {@link StringHandler#strStr(java.lang.String, java.lang.String)}
+ * {@link StringHandler#bruteForceMatch(java.lang.String, java.lang.String)}
+ * {@link StringHandler#rabinKarpMatch(java.lang.String, java.lang.String)}
  *
  * <a href="https://leetcode-cn.com/problems/divide-two-integers/">29.两数相除</a>
  * TODO: {@link }
@@ -441,6 +443,9 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  *
  * <a href="https://leetcode-cn.com/problems/redundant-connection/">684.冗余连接</a>
  * {@link UnionFinder#findRedundantConnection(int[][])}
+ *
+ * <a href="https://leetcode-cn.com/problems/repeated-string-match/">686.重复叠加字符串匹配</a>
+ * {@link StringHandler#repeatedStringMatch(java.lang.String, java.lang.String)}
  *
  * TODO: <a href="https://leetcode-cn.com/problems/longest-univalue-path/">687.最长同值路径</a>
  * {@link BinaryTreeTopic#longestUnivaluePath(com.natsumes.leetcode.tree.TreeNode)}

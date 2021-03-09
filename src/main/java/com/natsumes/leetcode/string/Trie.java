@@ -1,4 +1,4 @@
-package com.natsumes.string;
+package com.natsumes.leetcode.string;
 
 
 /**
