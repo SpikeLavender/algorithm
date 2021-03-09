@@ -518,6 +518,9 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * <a href="https://leetcode-cn.com/problems/max-consecutive-ones-iii/">1004.最大连续1的个数 III</a>
  * {@link SlidingWindow#longestOnes(int[], int)}
  *
+ * <a href="https://leetcode-cn.com/problems/remove-all-adjacent-duplicates-in-string/">1047.删除字符串中的所有相邻重复项</a>
+ * {@link StringHandler#removeDuplicates(java.lang.String)}
+ *
  * <a href="https://leetcode-cn.com/problems/grumpy-bookstore-owner/">1052.爱生气的书店老板</a>
  * {@link SlidingWindow#maxSatisfied(int[], int[], int)}
  *
