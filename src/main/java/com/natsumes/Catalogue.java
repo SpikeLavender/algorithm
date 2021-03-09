@@ -126,7 +126,7 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * {@link ArrayTopic#searchRange(int[], int)}
  *
  * <a href="https://leetcode-cn.com/problems/search-insert-position/">35.搜索插入位置</a>
- * TODO: {@link }
+ * {@link ArrayTopic#searchInsert(int[], int)}
  *
  * <a href="https://leetcode-cn.com/problems/valid-sudoku/">36.有效的数独</a>
  * TODO: {@link }

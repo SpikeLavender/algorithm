@@ -412,4 +412,14 @@ public class ArrayTopicTest {
         Assert.assertEquals(2, at.removeDuplicates(new int[]{1, 1, 2}));
         Assert.assertEquals(5, at.removeDuplicates(new int[]{0, 0, 1, 1, 1, 2, 2, 3, 3, 4}));
     }
+
+    @Test
+    public void searchInsert() {
+        Assert.assertEquals(1, at.searchInsert(new int[]{1, 3}, 2));
+        Assert.assertEquals(2, at.searchInsert(new int[]{1, 3, 5, 6}, 5));
+        Assert.assertEquals(1, at.searchInsert(new int[]{1, 3, 5, 6}, 2));
+        Assert.assertEquals(4, at.searchInsert(new int[]{1, 3, 5, 6}, 7));
+        Assert.assertEquals(0, at.searchInsert(new int[]{1, 3, 5, 6}, 0));
+        Assert.assertEquals(0, at.searchInsert(new int[]{1}, 1));
+    }
 }
