@@ -422,4 +422,11 @@ public class ArrayTopicTest {
         Assert.assertEquals(0, at.searchInsert(new int[]{1, 3, 5, 6}, 0));
         Assert.assertEquals(0, at.searchInsert(new int[]{1}, 1));
     }
+
+    @Test
+    public void calculate() {
+        Assert.assertEquals(2, at.calculate("1 + 1"));
+        Assert.assertEquals(3, at.calculate("2-1 + 2"));
+        Assert.assertEquals(23, at.calculate("(1+(4+5+2)-3)+(6+8)"));
+    }
 }

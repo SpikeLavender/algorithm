@@ -134,6 +134,12 @@ import java.util.*;
  * <a href="https://leetcode-cn.com/problems/search-insert-position/">35.搜索插入位置</a>
  * {@link ArrayTopic#searchInsert(int[], int)}
  *
+ * <a href="https://leetcode-cn.com/problems/basic-calculator/">224.基本计算器</a>
+ * {@link ArrayTopic#calculate(java.lang.String)}
+ *
+ * <a href="https://leetcode-cn.com/problems/basic-calculator-ii/">227.基本计算器 II</a>
+ * {@link ArrayTopic#calculate01(String)}
+ *
  * @author hetengjiao
  */
 public class ArrayTopic {
@@ -2614,5 +2620,81 @@ public class ArrayTopic {
             }
         }
         return true;
+    }
+
+    /**
+     * 224.基本计算器
+     * 实现一个基本的计算器来计算一个简单的字符串表达式 s 的值。
+     *
+     *
+     *
+     * 示例 1：
+     *
+     * 输入：s = "1 + 1"
+     * 输出：2
+     * 示例 2：
+     *
+     * 输入：s = " 2-1 + 2 "
+     * 输出：3
+     * 示例 3：
+     *
+     * 输入：s = "(1+(4+5+2)-3)+(6+8)"
+     * 输出：23
+     *
+     *
+     * 提示：
+     *
+     * 1 <= s.length <= 3 * 105
+     * s 由数字、'+'、'-'、'('、')'、和 ' ' 组成
+     * s 表示一个有效的表达式
+     *
+     * @param s s
+     * @return  ans
+     */
+    public int calculate(String s) {
+        int n = s.length();
+        Deque<Integer> nums = new LinkedList<>();
+        Deque<Character> ops = new LinkedList<>();
+        int ans = 0;
+        int i = 0;
+        return ans;
+    }
+
+    /**
+     * 227. 基本计算器 II
+     * 给你一个字符串表达式 s ，请你实现一个基本计算器来计算并返回它的值。
+     *
+     * 整数除法仅保留整数部分。
+     *
+     *
+     *
+     * 示例 1：
+     *
+     * 输入：s = "3+2*2"
+     * 输出：7
+     * 示例 2：
+     *
+     * 输入：s = " 3/2 "
+     * 输出：1
+     * 示例 3：
+     *
+     * 输入：s = " 3+5 / 2 "
+     * 输出：5
+     *
+     *
+     * 提示：
+     *
+     * 1 <= s.length <= 3 * 105
+     * s 由整数和算符 ('+', '-', '*', '/') 组成，中间由一些空格隔开
+     * s 表示一个 有效表达式
+     * 表达式中的所有整数都是非负整数，且在范围 [0, 231 - 1] 内
+     * 题目数据保证答案是一个 32-bit 整数
+     *
+     * @param s s
+     * @return ans
+     */
+    public int calculate01(String s) {
+
+        return 0;
     }
 }

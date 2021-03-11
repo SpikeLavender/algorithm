@@ -50,6 +50,9 @@ import java.util.*;
  * <a href="https://leetcode-cn.com/problems/regular-expression-matching/">10.正则表达式匹配</a>
  * {@link DynamicProgram#isMatch(String, String)}
  *
+ * <a href="https://leetcode-cn.com/problems/wildcard-matching/">44.通配符匹配</a>
+ * {@link DynamicProgram#isMatch02(java.lang.String, java.lang.String)}
+ *
  * <a href="https://leetcode-cn.com/problems/super-egg-drop/">887.鸡蛋掉落</a>
  * {@link DynamicProgram#superEggDrop(int, int)}
  *
@@ -2042,6 +2045,114 @@ public class DynamicProgram {
                 res = false;
             }
         }
+        track.put(key, res);
+        return res;
+    }
+
+    /**
+     * 44. 通配符匹配
+     * 给定一个字符串 (s) 和一个字符模式 (p) ，实现一个支持 '?' 和 '*' 的通配符匹配。
+     *
+     * '?' 可以匹配任何单个字符。
+     * '*' 可以匹配任意字符串（包括空字符串）。
+     * 两个字符串完全匹配才算匹配成功。
+     *
+     * 说明:
+     *
+     * s 可能为空，且只包含从 a-z 的小写字母。
+     * p 可能为空，且只包含从 a-z 的小写字母，以及字符 ? 和 *。
+     * 示例 1:
+     *
+     * 输入:
+     * s = "aa"
+     * p = "a"
+     * 输出: false
+     * 解释: "a" 无法匹配 "aa" 整个字符串。
+     * 示例 2:
+     *
+     * 输入:
+     * s = "aa"
+     * p = "*"
+     * 输出: true
+     * 解释: '*' 可以匹配任意字符串。
+     * 示例 3:
+     *
+     * 输入:
+     * s = "cb"
+     * p = "?a"
+     * 输出: false
+     * 解释: '?' 可以匹配 'c', 但第二个 'a' 无法匹配 'b'。
+     * 示例 4:
+     *
+     * 输入:
+     * s = "adceb"
+     * p = "*a*b"
+     * 输出: true
+     * 解释: 第一个 '*' 可以匹配空字符串, 第二个 '*' 可以匹配字符串 "dce".
+     * 示例 5:
+     *
+     * 输入:
+     * s = "acdcb"
+     * p = "a*c?b"
+     * 输出: false
+     *
+     * @param s s
+     * @param p p
+     * @return true or false
+     */
+    public boolean isMatch02(String s, String p) {
+        int m = s.length();
+        int n = p.length();
+        Map<Integer, Boolean> track = new HashMap<>();
+        return doIsMatch02(s, 0, p, 0, track, m, n);
+    }
+
+    /**
+     * s[i..] 与 p[j..]是否可以匹配
+     * @param s s
+     * @param i i
+     * @param p p
+     * @param j j
+     * @param track 记录已经计算过的结果
+     * @param m s.length
+     * @param n p.length
+     * @return true: s[i..] 与 p[j..]可以匹配, false:  s[i..] 与 p[j..]不可以匹配
+     */
+    private boolean doIsMatch02(String s, int i, String p, int j, Map<Integer, Boolean> track, int m, int n) {
+        if (j == n) {
+            return i == m;
+        }
+        //todo
+
+        if (i == m) {
+            // 如果能匹配空串, 一定是字符和'*'成对出现
+            // 检查是否为 x*y*z* 格式
+
+            for (; j + 1 < n; j++) {
+                if (p.charAt(j) != '*') {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        boolean res;
+        int key = i * n + j;
+        if (track.containsKey(key)) {
+            return track.get(key);
+        }
+
+        if (s.charAt(i) == p.charAt(j) || p.charAt(j) == '?') {
+            res = doIsMatch02(s, i + 1, p, j + 1, track, m, n);
+        } else {
+            if (p.charAt(j) != '*') {
+                if (j < p.length() - 1 && p.charAt(j + 1) == '*') {
+                    res = doIsMatch02(s, i, p, j + 1, track, m, n);
+                }
+            }
+            res = false;
+        }
+
         track.put(key, res);
         return res;
     }

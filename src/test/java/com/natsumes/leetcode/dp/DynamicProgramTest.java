@@ -336,6 +336,15 @@ public class DynamicProgramTest {
     }
 
     @Test
+    public void isMatch02() {
+        Assert.assertTrue(dp.isMatch02("adceb", "*a*b"));
+        Assert.assertFalse(dp.isMatch02("aa", "a"));
+        Assert.assertTrue(dp.isMatch02("aa", "*"));
+        Assert.assertFalse(dp.isMatch02("cb", "?a"));
+        Assert.assertFalse(dp.isMatch02("acdcb", "a*c?b"));
+    }
+
+    @Test
     public void superEggDrop() {
         Assert.assertEquals(2, dp.superEggDrop(1, 2));
         Assert.assertEquals(3, dp.superEggDrop(2, 6));
