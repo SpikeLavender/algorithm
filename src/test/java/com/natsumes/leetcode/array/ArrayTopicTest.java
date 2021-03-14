@@ -429,4 +429,11 @@ public class ArrayTopicTest {
         Assert.assertEquals(3, at.calculate("2-1 + 2"));
         Assert.assertEquals(23, at.calculate("(1+(4+5+2)-3)+(6+8)"));
     }
+
+    @Test
+    public void calculate01() {
+        Assert.assertEquals(7, at.calculate01("3+2*2"));
+        Assert.assertEquals(1, at.calculate01(" 3/2 "));
+        Assert.assertEquals(5, at.calculate01(" 3+5 / 2 "));
+    }
 }

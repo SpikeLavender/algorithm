@@ -2694,7 +2694,36 @@ public class ArrayTopic {
      * @return ans
      */
     public int calculate01(String s) {
+        int n = s.length();
+        Deque<Integer> stack = new LinkedList<>();
+        int num = 0;
+        char preSign = '+';
+        for (int i = 0; i < n; i++) {
+            if (Character.isDigit(s.charAt(i))) {
+               num = num * 10 + s.charAt(i) - '0';
+            }
+            boolean flag = !Character.isDigit(s.charAt(i)) && s.charAt(i) != ' ' || i == n - 1;
+            if (flag) {
+                if (preSign == '+') {
+                    stack.addFirst(num);
+                } else if (preSign == '-') {
+                    stack.addFirst(-num);
+                } else if (preSign == '*') {
+                    stack.addFirst(num * Objects.requireNonNull(stack.pollFirst()));
+                } else {
+                    stack.addFirst(Objects.requireNonNull(stack.pollFirst()) / num);
+                }
+                num = 0;
+                preSign = s.charAt(i);
+            }
+        }
+        int ans = 0;
+        while (!stack.isEmpty()) {
+            ans += Objects.requireNonNull(stack.pollFirst());
+        }
 
-        return 0;
+        return ans;
     }
 }
+
+
