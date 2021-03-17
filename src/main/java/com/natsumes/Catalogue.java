@@ -243,6 +243,9 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  * <a href="https://leetcode-cn.com/problems/path-sum-ii/">113.路径总和 II</a>
  * {@link BinaryTreeTopic#pathSum(com.natsumes.leetcode.tree.TreeNode, int)}
  *
+ * <a href="https://leetcode-cn.com/problems/distinct-subsequences/">115.不同的子序列</a>
+ * {@link DynamicProgram#numDistinct(java.lang.String, java.lang.String)}
+ *
  * <a href="https://leetcode-cn.com/problems/pascals-triangle-ii/">119.杨辉三角 II</a>
  * {@link ArrayTopic#getRow(int)}
  *

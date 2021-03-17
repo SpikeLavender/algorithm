@@ -489,4 +489,10 @@ public class DynamicProgramTest {
         Assert.assertEquals(0, dp.minCut("a"));
         Assert.assertEquals(1, dp.minCut("ab"));
     }
+
+    @Test
+    public void numDistinct() {
+        Assert.assertEquals(3, dp.numDistinct("rabbbit", "rabbit"));
+        Assert.assertEquals(5, dp.numDistinct("babgbag", "bag"));
+    }
 }
