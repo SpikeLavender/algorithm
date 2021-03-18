@@ -40,6 +40,9 @@ import java.util.*;
  * <a href="https://leetcode-cn.com/problems/permutations-ii/">47.全排列 II</a>
  * {@link LinkedListTopic#permuteUnique(int[])}
  *
+ * <a href="https://leetcode-cn.com/problems/reverse-linked-list-ii/">92.反转链表 II</a>
+ * {@link LinkedListTopic#reverseBetween(com.natsumes.leetcode.list.ListNode, int, int)}
+ *
  * @author hetengjiao
  */
 public class LinkedListTopic {
