@@ -7,6 +7,7 @@ import com.natsumes.leetcode.array.PrefixSum;
 import com.natsumes.leetcode.design.MyHashMap;
 import com.natsumes.leetcode.design.MyHashSet;
 import com.natsumes.leetcode.design.MyQueue;
+import com.natsumes.leetcode.design.ParkingSystem;
 import com.natsumes.leetcode.dp.DynamicProgram;
 import com.natsumes.leetcode.graph.Graph;
 import com.natsumes.leetcode.list.LinkedListTopic;
@@ -566,6 +567,9 @@ import com.natsumes.leetcode.unionfind.UnionFinder;
  *
  * <a href="https://leetcode-cn.com/problems/longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit/">1438.绝对差不超过限制的最长连续子数组</a>
  * {@link ArrayTopic#longestSubarray(int[], int)}
+ *
+ * <a href="https://leetcode-cn.com/problems/design-parking-system/">1603.设计停车系统</a>
+ * {@link ParkingSystem}
  *
  * <a href="https://leetcode-cn.com/problems/maximum-number-of-balls-in-a-box/">1742.盒子中小球的最大数量</a>
  * {@link ArrayTopic#countBalls(int, int)}
